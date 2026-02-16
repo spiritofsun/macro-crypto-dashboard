@@ -11,6 +11,7 @@ const state = {
 
 const uiState = {
   cryptoSort: { key: "market_cap", dir: "desc" },
+  cryptoCgLastFetchTs: 0,
 };
 
 const STABLES = new Set(["USDT", "USDC", "DAI", "FDUSD", "TUSD", "USDE", "USDD", "FRAX"]);
@@ -527,6 +528,86 @@ function applyHybridPricesToUniverse(priceMap) {
   });
 }
 
+async function fetchCoinGeckoMarketMap() {
+  const endpoints = [
+    "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=24h",
+    "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=2&sparkline=false&price_change_percentage=24h",
+  ];
+
+  const settled = await Promise.allSettled(endpoints.map((url) => fetchJson(url)));
+  const rows = settled
+    .filter((x) => x.status === "fulfilled" && Array.isArray(x.value))
+    .flatMap((x) => x.value);
+
+  const bySymbol = new Map();
+  const byName = new Map();
+  const byId = new Map();
+
+  rows.forEach((row) => {
+    const symbol = String(row?.symbol || "").toUpperCase();
+    const name = String(row?.name || "").trim().toLowerCase();
+    const id = String(row?.id || "").trim().toLowerCase();
+    const cap = toNumSafe(row?.market_cap) ?? -1;
+
+    if (id) byId.set(id, row);
+
+    // 중복 심볼은 시총이 더 큰 항목 우선.
+    if (symbol) {
+      const prev = bySymbol.get(symbol);
+      const prevCap = toNumSafe(prev?.market_cap) ?? -1;
+      if (!prev || cap > prevCap) bySymbol.set(symbol, row);
+    }
+
+    // 이름은 정확 매칭 1:1로 사용.
+    if (name && !byName.has(name)) byName.set(name, row);
+  });
+
+  return { bySymbol, byName, byId };
+}
+
+function applyCoinGeckoFundamentals(marketMap) {
+  if (!marketMap) return;
+  state.cryptoUniverse = state.cryptoUniverse.map((row) => {
+    const id = String(row?.coingecko_id || "").trim().toLowerCase();
+    const symbol = String(row?.ticker || "").trim().toUpperCase();
+    const name = String(row?.name || "").trim().toLowerCase();
+
+    const m = (id && marketMap.byId.get(id)) || (name && marketMap.byName.get(name)) || (symbol && marketMap.bySymbol.get(symbol));
+    if (!m) return row;
+
+    const cgPrice = toNumSafe(m.current_price);
+    const cgChange = toNumSafe(m.price_change_percentage_24h);
+    const cgCap = toNumSafe(m.market_cap);
+    const cgVol = toNumSafe(m.total_volume);
+
+    // 거래소 우선 가격 정책 유지. 단, 가격이 비어있거나 ticker feed가 비활성인 경우에만 CG 가격 보강.
+    const canPatchPrice = row.price == null || row.disable_ticker_feed === true;
+    return {
+      ...row,
+      price: canPatchPrice && cgPrice !== null ? cgPrice : row.price,
+      change_24h: canPatchPrice && cgChange !== null ? cgChange : row.change_24h,
+      market_cap: cgCap !== null ? cgCap : row.market_cap,
+      volume_24h: cgVol !== null ? cgVol : row.volume_24h,
+      market_source: "coingecko",
+    };
+  });
+}
+
+async function refreshCryptoFundamentalsIfNeeded() {
+  if (detectPageType() !== "crypto" || state.cryptoUniverse.length === 0) return;
+  const now = Date.now();
+  // 시총/거래량은 5분 주기로 보강
+  if (now - uiState.cryptoCgLastFetchTs < 5 * 60 * 1000) return;
+
+  try {
+    const map = await fetchCoinGeckoMarketMap();
+    applyCoinGeckoFundamentals(map);
+    uiState.cryptoCgLastFetchTs = now;
+  } catch (error) {
+    console.warn("coingecko fundamentals fetch failed", error);
+  }
+}
+
 async function fetchHybridPriceMapDirect(tickers) {
   const uniq = [...new Set((tickers || []).map((t) => String(t || "").trim().toUpperCase()).filter(Boolean))];
   if (uniq.length === 0) return {};
@@ -1004,8 +1085,10 @@ async function fetchLive() {
   } catch (gatewayError) {
     console.warn("gateway fetch failed, fallback to direct sources", gatewayError);
     await fetchLiveDirectFallback();
+    await refreshCryptoFundamentalsIfNeeded();
     return;
   }
+  await refreshCryptoFundamentalsIfNeeded();
   renderAll();
 }
 
