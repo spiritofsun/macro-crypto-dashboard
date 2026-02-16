@@ -7,25 +7,36 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260216d" />
+    <link rel="stylesheet" href="./styles.css?v=20260216f" />
   </head>
   <body>
-    <main class="page">
-      <header class="hero">
-        <p class="kicker">PROJECT MARK / CATEGORY 5</p>
-        <h1>AI GPT 시황분석</h1>
-        <p class="asof">매일 오전 9시 10분 자동 브리핑</p>
-        <nav class="top-nav"><a href="./index.html">메인</a><a href="./news.html">뉴스</a></nav>
-      </header>
+    <div class="app-shell">
+      <aside class="left-sidebar">
+        <a class="side-home" href="./index.html">메인</a>
+        <a class="side-link" href="./crypto.html">1. 크립토</a>
+        <a class="side-link" href="./stock-market.html">2. 주식 시장</a>
+        <a class="side-link" href="./long-short.html">3. 롱·숏 정리</a>
+        <a class="side-link" href="./funding.html">4. 펀딩비</a>
+        <a class="side-link active" href="./ai-gpt-brief.html">5. AI GPT 분석</a>
+        <a class="side-link" href="./news.html">6. 뉴스 정리</a>
+      </aside>
 
-      <section class="panel">
-        <h3 class="group-title">실행 스케줄</h3>
-        <ul class="news-list">
-          <li>브리핑 시각: 매일 오전 9:10 (KST)</li>
-          <li>범위: 매크로 + 크립토 + 주식 시황</li>
-          <li>출력: 데일리 요약 리포트</li>
-        </ul>
-      </section>
-    </main>
+      <main class="page content-page">
+        <header class="hero">
+          <p class="kicker">PROJECT MARK / CATEGORY 5</p>
+          <h1>AI GPT 시황분석</h1>
+          <p class="asof">매일 오전 9시 10분 자동 브리핑</p>
+        </header>
+
+        <section class="panel">
+          <h3 class="group-title">실행 스케줄</h3>
+          <ul class="news-list">
+            <li>브리핑 시각: 매일 오전 9:10 (KST)</li>
+            <li>범위: 매크로 + 크립토 + 주식 시황</li>
+            <li>출력: 데일리 요약 리포트</li>
+          </ul>
+        </section>
+      </main>
+    </div>
   </body>
 </html>
