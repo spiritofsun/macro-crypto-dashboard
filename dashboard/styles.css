@@ -1216,6 +1216,32 @@ body {
   cursor: pointer;
 }
 
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.source-badge {
+  border: 1px solid #2a3a2f;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 11px;
+  color: #9ec29e;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.news-list-large {
+  max-height: 680px;
+  overflow: auto;
+  padding-right: 8px;
+}
+
+.news-list-large li {
+  margin-bottom: 10px;
+}
+
 .app-shell {
   width: min(1440px, 96vw);
   margin: 16px auto 28px;

@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Crypto | Project Mark</title>
+    <title>크립토 | Project Mark</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260216j" />
+    <link rel="stylesheet" href="./styles.css?v=20260216k" />
   </head>
   <body>
     <div class="app-shell">
@@ -26,51 +26,47 @@
       <main class="page content-page">
         <header class="hero">
           <p class="kicker">카테고리 / 크립토</p>
-          <h1>크립토 시총 상위 20</h1>
+          <h1>커스텀 코인 모니터링</h1>
           <p class="asof" id="asOfText">loading...</p>
         </header>
 
         <section class="panel">
-          <h3 class="group-title">요약 카드</h3>
-          <div class="card-grid card-grid-5" id="cryptoTopSummary"></div>
+          <h3 class="group-title">요약 지표</h3>
+          <div class="card-grid card-grid-4" id="cryptoCustomSummary"></div>
         </section>
 
         <section class="panel">
           <div class="panel-head">
-            <h2>Top 20 Table</h2>
-            <p class="subhead">Market Cap 기본 정렬</p>
+            <h2>커스텀 유니버스</h2>
+            <p class="subhead">사용자 지정 리스트 기준</p>
           </div>
 
           <div class="tool-row">
-            <input class="tool-input" id="cryptoSearch" type="text" placeholder="symbol/name 검색" />
-            <label class="tool-check"><input type="checkbox" id="moversOnly" /> Movers only (|24H| &gt;= 2%)</label>
-            <label class="tool-check"><input type="checkbox" id="hideStables" /> Hide stables</label>
-            <label class="tool-check"><input type="checkbox" id="fundingOnly" /> Has funding only</label>
+            <input class="tool-input" id="cryptoSearch" type="text" placeholder="티커/이름 검색" />
+            <label class="tool-check"><input type="checkbox" id="moversOnly" /> 급등락만 (|24H| 2% 이상)</label>
+            <label class="tool-check"><input type="checkbox" id="hideStables" /> 스테이블 제외</label>
           </div>
 
           <div class="table-wrap">
-            <table class="data-table compact-table sortable-table" id="cryptoTopTable">
+            <table class="data-table compact-table sortable-table" id="cryptoCustomTable">
               <thead>
                 <tr>
-                  <th class="sortable" data-sort="rank">Rank</th>
-                  <th class="sortable" data-sort="name">Symbol / Name</th>
-                  <th class="num sortable" data-sort="price">Price</th>
-                  <th class="num sortable" data-sort="pct24h">24H %</th>
-                  <th class="num sortable" data-sort="pct7d">7D %</th>
-                  <th class="num sortable" data-sort="market_cap">Market Cap</th>
-                  <th class="num sortable" data-sort="volume_24h">Volume 24H</th>
-                  <th class="num sortable" data-sort="circulating_supply">Supply</th>
-                  <th class="num sortable" data-sort="funding">Funding</th>
-                  <th>Tags</th>
+                  <th class="sortable" data-sort="rank_in_custom">순서</th>
+                  <th class="sortable" data-sort="ticker">티커</th>
+                  <th class="sortable" data-sort="name">이름</th>
+                  <th class="num sortable" data-sort="price">가격(USD)</th>
+                  <th class="num sortable" data-sort="change_24h">24H</th>
+                  <th class="num sortable" data-sort="market_cap">시총(USD)</th>
+                  <th class="num sortable" data-sort="volume_24h">거래량(24H)</th>
                 </tr>
               </thead>
-              <tbody id="cryptoTopRows"></tbody>
+              <tbody id="cryptoCustomRows"></tbody>
             </table>
           </div>
         </section>
       </main>
     </div>
 
-    <script src="./app.js?v=20260216j"></script>
+    <script src="./app.js?v=20260216k"></script>
   </body>
 </html>

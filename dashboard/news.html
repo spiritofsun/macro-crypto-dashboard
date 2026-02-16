@@ -3,66 +3,51 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>News | Project Mark</title>
+    <title>뉴스 | Project Mark</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260216j" />
+    <link rel="stylesheet" href="./styles.css?v=20260216k" />
   </head>
   <body>
     <div class="app-shell">
       <aside class="left-sidebar">
-        <a class="side-home" href="./index.html">메인</a>
+        <a class="side-home" href="./index.html">홈</a>
         <a class="side-link" href="./crypto.html">크립토</a>
         <a class="side-link" href="./stock-market.html">주식/매크로</a>
         <a class="side-link" href="./long-short.html">롱/숏</a>
         <a class="side-link" href="./etf.html">ETF Flows</a>
         <a class="side-link" href="./funding.html">펀딩비</a>
-        <a class="side-link" href="./ai-gpt-brief.html">AI 브리핑</a>
         <a class="side-link" href="./exchanges.html">거래소별 프리미엄+가격</a>
+        <a class="side-link" href="./ai-gpt-brief.html">AI 브리핑</a>
         <a class="side-link active" href="./news.html">뉴스</a>
       </aside>
 
       <main class="page content-page">
         <header class="hero">
-          <p class="kicker">카테고리</p>
+          <p class="kicker">카테고리 / 뉴스</p>
           <h1>뉴스</h1>
           <p class="asof" id="asOfText">loading...</p>
-          <button class="back-btn" onclick="history.length > 1 ? history.back() : (location.href='./index.html')">← 뒤로가기</button>
         </header>
 
         <section class="panel">
-          <h3 class="group-title">1️⃣ 유동성 & QE 체크리스트</h3>
-          <ul id="liqChecklist" class="news-list"></ul>
-        </section>
-
-        <section class="panel">
-          <h3 class="group-title">MACRO SNAPSHOT</h3>
-          <div class="card-grid card-grid-4" id="macroCards"></div>
-        </section>
-
-        <section class="panel">
-          <h3 class="group-title">크립토 연관된 주식</h3>
-          <div class="card-grid card-grid-4" id="cryptoEquityCards"></div>
-        </section>
-
-        <section class="panel">
           <div class="panel-head">
-            <h2>뉴스 (4시간 업데이트)</h2>
+            <h2>뉴스 피드</h2>
+            <p class="subhead">4시간 업데이트</p>
           </div>
-          <div class="news-wrap">
-            <article class="news-col">
-              <h3>Macro</h3>
-              <ul id="macroNews" class="news-list"></ul>
-            </article>
-            <article class="news-col">
-              <h3>Crypto</h3>
-              <ul id="cryptoNews" class="news-list"></ul>
-            </article>
+
+          <div class="tool-row">
+            <label class="tool-check"><input type="radio" name="newsType" value="all" checked /> 전체</label>
+            <label class="tool-check"><input type="radio" name="newsType" value="macro" /> 매크로</label>
+            <label class="tool-check"><input type="radio" name="newsType" value="crypto" /> 크립토</label>
           </div>
+
+          <div class="badge-row" id="newsSourceBadges"></div>
+
+          <ul id="newsFeed" class="news-list news-list-large"></ul>
         </section>
       </main>
     </div>
-    <script src="./app.js?v=20260216j"></script>
+    <script src="./app.js?v=20260216k"></script>
   </body>
 </html>
