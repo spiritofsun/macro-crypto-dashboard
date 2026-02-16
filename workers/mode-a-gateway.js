@@ -63,6 +63,7 @@ async function fetchBinanceMap(tickers) {
     map.set(base, {
       price: toNum(row?.lastPrice),
       change_24h: toNum(row?.priceChangePercent),
+      volume_24h: toNum(row?.quoteVolume),
       source: "binance",
       pair: symbol,
     });
@@ -84,6 +85,7 @@ async function fetchBybitMap() {
     map.set(base, {
       price: toNum(row?.lastPrice),
       change_24h: pctFromBybit(row?.price24hPcnt),
+      volume_24h: toNum(row?.turnover24h),
       source: "bybit",
       pair: symbol,
     });
@@ -106,6 +108,7 @@ async function fetchOkxMap() {
     map.set(base, {
       price: toNum(row?.last),
       change_24h: pctFromOhlc(row?.last, row?.open24h),
+      volume_24h: toNum(row?.volCcy24h),
       source: "okx",
       pair: instId,
     });
@@ -224,12 +227,14 @@ async function handleCryptoPrices(url) {
       ? {
           price: v.price,
           change_24h: v.change_24h,
+          volume_24h: v.volume_24h,
           source: v.source,
           pair: v.pair,
         }
       : {
           price: null,
           change_24h: null,
+          volume_24h: null,
           source: null,
           pair: null,
         };

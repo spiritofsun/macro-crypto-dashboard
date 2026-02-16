@@ -523,16 +523,17 @@ function applyHybridPricesToUniverse(priceMap) {
       ...row,
       price: typeof live.price === "number" ? live.price : row.price,
       change_24h: typeof live.change_24h === "number" ? live.change_24h : row.change_24h,
+      volume_24h: typeof live.volume_24h === "number" ? live.volume_24h : row.volume_24h,
       price_source: live.source || row.price_source || null,
     };
   });
 }
 
 async function fetchCoinGeckoMarketMap() {
-  const endpoints = [
-    "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=24h",
-    "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=2&sparkline=false&price_change_percentage=24h",
-  ];
+  const endpoints = [1, 2, 3, 4].map(
+    (page) =>
+      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=${page}&sparkline=false&price_change_percentage=24h`,
+  );
 
   const settled = await Promise.allSettled(endpoints.map((url) => fetchJson(url)));
   const rows = settled
@@ -636,6 +637,7 @@ async function fetchHybridPriceMapDirect(tickers) {
       byTicker[t].binance = {
         price: toNumSafe(r.lastPrice),
         change_24h: toNumSafe(r.priceChangePercent),
+        volume_24h: toNumSafe(r.quoteVolume),
         source: "binance",
       };
     });
@@ -654,6 +656,7 @@ async function fetchHybridPriceMapDirect(tickers) {
       byTicker[t].bybit = {
         price: toNumSafe(r.lastPrice),
         change_24h: pct === null ? null : pct * 100,
+        volume_24h: toNumSafe(r.turnover24h),
         source: "bybit",
       };
     });
@@ -673,6 +676,7 @@ async function fetchHybridPriceMapDirect(tickers) {
       byTicker[t].okx = {
         price: last,
         change_24h: last !== null && open !== null && open !== 0 ? ((last - open) / open) * 100 : null,
+        volume_24h: toNumSafe(r.volCcy24h),
         source: "okx",
       };
     });
