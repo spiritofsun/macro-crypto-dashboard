@@ -7,52 +7,60 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260216g" />
+    <link rel="stylesheet" href="./styles.css?v=20260216h" />
   </head>
   <body>
-    <main class="page">
-      <header class="hero">
-        <p class="kicker">PROJECT MARK / LIVE CONSOLE</p>
-        <h1>거래소별 펀비 + 가격</h1>
-        <p class="asof" id="asOfText">loading...</p>
-        <nav class="top-nav">
-          <a href="./index.html">메인</a>
-          <a href="./crypto.html">CRYPTO</a>
-          <a href="./etf.html">ETF FLOWS</a>
-          <a href="./news.html">뉴스</a>
-        </nav>
-      </header>
+    <div class="app-shell">
+      <aside class="left-sidebar">
+        <a class="side-home" href="./index.html">메인</a>
+        <a class="side-link" href="./crypto.html">1. 크립토</a>
+        <a class="side-link" href="./stock-market.html">2. 주식 시장</a>
+        <a class="side-link" href="./long-short.html">3. 롱·숏 정리</a>
+        <a class="side-link" href="./etf.html">4. ETF FLOWS</a>
+        <a class="side-link" href="./funding.html">5. 펀딩비</a>
+        <a class="side-link" href="./ai-gpt-brief.html">6. AI GPT 분석</a>
+        <a class="side-link active" href="./exchanges.html">7. 거래소별 펀비 + 가격</a>
+        <a class="side-link" href="./news.html">8. 뉴스 정리</a>
+      </aside>
 
-      <section class="panel">
-        <div class="panel-head">
-          <h2>거래소별 펀비 + 가격</h2>
-          <p class="subhead">실시간 갱신: 60초 · 업비트는 KRW spot 기준</p>
-        </div>
-        <div class="table-wrap premium-table-wrap">
-          <table class="exchange-table premium-table">
-            <colgroup>
-              <col style="width: 220px" />
-              <col style="width: 160px" />
-              <col style="width: 160px" />
-              <col style="width: 160px" />
-              <col style="width: 160px" />
-              <col style="width: 160px" />
-            </colgroup>
-            <thead>
-              <tr>
-                <th>Coin</th>
-                <th>Binance</th>
-                <th>Bybit</th>
-                <th>OKX</th>
-                <th>Hyperliquid</th>
-                <th>Upbit</th>
-              </tr>
-            </thead>
-            <tbody id="exchangeRows"></tbody>
-          </table>
-        </div>
-      </section>
-    </main>
-    <script src="./app.js?v=20260216g"></script>
+      <main class="page content-page">
+        <header class="hero">
+          <p class="kicker">PROJECT MARK / LIVE CONSOLE</p>
+          <h1>거래소별 펀비 + 가격</h1>
+          <p class="asof" id="asOfText">loading...</p>
+        </header>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h2>거래소별 펀비 + 가격</h2>
+            <p class="subhead">실시간 갱신: 60초 · 업비트는 KRW spot 기준</p>
+          </div>
+          <div class="table-wrap premium-table-wrap">
+            <table class="exchange-table premium-table">
+              <colgroup>
+                <col style="width: 220px" />
+                <col style="width: 160px" />
+                <col style="width: 160px" />
+                <col style="width: 160px" />
+                <col style="width: 160px" />
+                <col style="width: 160px" />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>Coin</th>
+                  <th>Binance</th>
+                  <th>Bybit</th>
+                  <th>OKX</th>
+                  <th>Hyperliquid</th>
+                  <th>Upbit</th>
+                </tr>
+              </thead>
+              <tbody id="exchangeRows"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="./app.js?v=20260216h"></script>
   </body>
 </html>

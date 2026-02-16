@@ -81,8 +81,10 @@ function setAsOf() {
   const el = document.getElementById("asOfText");
   if (!el) return;
   const snapshotAsOf = state.snapshot?.asOf || "n/a";
-  const newsAsOf = state.news?.updated_at || "n/a";
-  const etfAsOf = state.etf?.updated_at || "n/a";
+  const newsAsOfRaw = state.news?.updated_at || "";
+  const etfAsOfRaw = state.etf?.updated_at || "";
+  const newsAsOf = newsAsOfRaw.startsWith("1970-01-01") || !newsAsOfRaw ? "수집 대기" : newsAsOfRaw;
+  const etfAsOf = etfAsOfRaw.startsWith("1970-01-01") || !etfAsOfRaw ? "수집 대기" : etfAsOfRaw;
   el.textContent = `SNAPSHOT ${snapshotAsOf} | NEWS ${newsAsOf} | ETF ${etfAsOf} | LIVE ${new Date().toLocaleTimeString()}`;
 }
 
@@ -106,7 +108,7 @@ function renderNewsList(containerId, items) {
   const list = document.getElementById(containerId);
   if (!list) return;
   if (!items || items.length === 0) {
-    list.innerHTML = "<li>데이터 없음</li>";
+    list.innerHTML = "<li>뉴스 수집 중입니다 (다음 배치 업데이트 대기)</li>";
     return;
   }
   list.innerHTML = items
