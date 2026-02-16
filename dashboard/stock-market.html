@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260216k" />
+    <link rel="stylesheet" href="./styles.css?v=20260216q" />
   </head>
   <body>
     <div class="app-shell">
@@ -31,6 +31,11 @@
         </header>
 
         <section class="panel">
+          <div class="panel-head"><h2>Top Summary</h2></div>
+          <div class="snapshot-strip" id="macroTopStrip"></div>
+        </section>
+
+        <section class="panel">
           <div class="panel-head"><h2>금리</h2></div>
           <div class="card-grid card-grid-4" id="rateCards"></div>
         </section>
@@ -45,10 +50,10 @@
           <div class="card-grid card-grid-3" id="indexCards"></div>
         </section>
 
-        <section class="panel">
-          <div class="panel-head"><h2>원자재</h2></div>
+        <details class="panel collapsible-panel">
+          <summary>원자재 (보조 지표)</summary>
           <div class="card-grid card-grid-3" id="commodityCards"></div>
-        </section>
+        </details>
 
         <section class="panel">
           <div class="panel-head"><h2>QE / 유동성</h2></div>
@@ -67,8 +72,8 @@
           </div>
         </section>
 
-        <section class="panel">
-          <div class="panel-head"><h2>빅테크 + 크립토 연관 주식</h2></div>
+        <details class="panel collapsible-panel">
+          <summary>빅테크 + 크립토 연관 주식 (보조 지표)</summary>
           <div class="table-wrap">
             <table class="data-table compact-table">
               <thead>
@@ -83,10 +88,10 @@
               <tbody id="stocksWatchRows"></tbody>
             </table>
           </div>
-        </section>
+        </details>
       </main>
     </div>
 
-    <script src="./app.js?v=20260216p"></script>
+    <script src="./app.js?v=20260216q"></script>
   </body>
 </html>

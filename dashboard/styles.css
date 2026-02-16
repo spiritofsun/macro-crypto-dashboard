@@ -18,7 +18,7 @@ body {
   font-family: "IBM Plex Sans KR", sans-serif;
   font-variant-numeric: tabular-nums;
   color: var(--text);
-  background: radial-gradient(1000px 600px at 5% -5%, #0d1a0d 0, transparent 55%), var(--bg);
+  background: #070b10;
 }
 
 .home-body {
@@ -1356,4 +1356,139 @@ body.sidebar-collapsed .left-sidebar {
   .snapshot-strip {
     grid-template-columns: 1fr;
   }
+}
+
+/* v20260216q density + hierarchy overrides */
+:root {
+  --section-gap: 20px;
+  --card-gap: 12px;
+  --card-padding: 16px;
+  --row-height: 44px;
+}
+
+.panel {
+  padding: var(--card-padding);
+  margin-bottom: var(--section-gap);
+  background: #0b1016;
+}
+
+.card-grid {
+  gap: var(--card-gap);
+}
+
+.metric-card {
+  min-height: 112px;
+  padding: var(--card-padding);
+}
+
+.metric-value {
+  font-size: clamp(26px, 2vw, 30px);
+}
+
+.metric-card.top-kpi {
+  border-color: #2a4731;
+  background: #0c141a;
+}
+
+.metric-card:not(.top-kpi) .metric-label {
+  color: #5d7a62;
+}
+
+.metric-card:not(.top-kpi) .metric-value {
+  font-size: 24px;
+  opacity: 0.88;
+}
+
+.mini-progress {
+  margin-top: 8px;
+  height: 6px;
+  border-radius: 999px;
+  background: #17222c;
+  overflow: hidden;
+}
+
+.mini-progress-fill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #2e9b4d, #66c27f);
+}
+
+.snapshot-pill {
+  padding: 10px 12px;
+  gap: 4px;
+}
+
+.snapshot-pill .value {
+  font-size: 18px;
+}
+
+.brief-preview {
+  padding: 10px 12px;
+}
+
+.left-sidebar {
+  background: #0d131a;
+}
+
+.side-link.active {
+  background: #102016;
+}
+
+.collapsible-panel summary {
+  list-style: none;
+  cursor: pointer;
+  margin: -2px 0 10px;
+  color: #9dd59d;
+  font-size: 14px;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.collapsible-panel summary::-webkit-details-marker {
+  display: none;
+}
+
+.collapsible-panel summary::before {
+  content: "▸";
+  margin-right: 8px;
+  color: #6f9872;
+}
+
+.collapsible-panel[open] summary::before {
+  content: "▾";
+}
+
+.ls-segment-table td:nth-child(2) {
+  width: 46%;
+}
+
+.segbar {
+  display: flex;
+  width: 100%;
+  height: 22px;
+  border-radius: 7px;
+  overflow: hidden;
+  background: #172129;
+}
+
+.seg-long,
+.seg-short {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-family: "JetBrains Mono", monospace;
+  white-space: nowrap;
+}
+
+.seg-long {
+  justify-content: flex-end;
+  padding-right: 6px;
+  background: #1d9f79;
+  color: #d5f7eb;
+}
+
+.seg-short {
+  justify-content: flex-start;
+  padding-left: 6px;
+  background: #b94646;
+  color: #ffe0e0;
 }

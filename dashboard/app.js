@@ -139,9 +139,10 @@ function setAsOf() {
   if (homeAsOf) homeAsOf.textContent = text;
 }
 
-function cardHTML(item) {
+function cardHTML(item, index, topCount = 4) {
+  const topClass = index < topCount ? " top-kpi" : "";
   return `
-    <article class="metric-card">
+    <article class="metric-card${topClass}">
       <p class="metric-label">${item.label}</p>
       <p class="metric-value ${item.valueClass || ""}">${item.value}</p>
       <p class="metric-delta ${toneClass(item.delta, item.neutralThreshold ?? 0.2)}">${item.deltaText ?? formatPct(item.delta)}</p>
@@ -149,10 +150,11 @@ function cardHTML(item) {
   `;
 }
 
-function renderCards(targetId, items) {
+function renderCards(targetId, items, options = {}) {
   const el = document.getElementById(targetId);
   if (!el) return;
-  el.innerHTML = items.map(cardHTML).join("");
+  const topCount = typeof options.topCount === "number" ? options.topCount : 4;
+  el.innerHTML = items.map((item, idx) => cardHTML(item, idx, topCount)).join("");
 }
 
 function setupSidebarShell() {
@@ -420,6 +422,20 @@ function renderCryptoSummary() {
     { label: "TOTAL3", value: formatBigNumber(totals.TOTAL3), delta: null, deltaText: "BTC+ETH 제외" },
     { label: "TOTAL3ES", value: formatBigNumber(totals.TOTAL3ES), delta: null, deltaText: "BTC+ETH+스테이블 제외" },
   ]);
+
+  const cards = target.querySelectorAll(".metric-card");
+  cards.forEach((card) => {
+    const label = card.querySelector(".metric-label")?.textContent?.trim();
+    if (label !== "BTC 도미넌스" && label !== "알트코인 도미넌스") return;
+    const valueText = card.querySelector(".metric-value")?.textContent || "";
+    const pct = toNumSafe(valueText.replace("%", ""));
+    if (pct === null) return;
+    if (card.querySelector(".mini-progress")) return;
+    const bar = document.createElement("div");
+    bar.className = "mini-progress";
+    bar.innerHTML = `<span class="mini-progress-fill" style="width:${Math.max(0, Math.min(100, pct)).toFixed(2)}%"></span>`;
+    card.appendChild(bar);
+  });
 }
 
 function renderDominanceHybrid() {
@@ -631,6 +647,19 @@ function setupCryptoControls() {
 function renderStockMarketPage() {
   if (!document.getElementById("rateCards")) return;
   const macro = state.macroSnapshot || fallbackMacro;
+
+  const strip = document.getElementById("macroTopStrip");
+  if (strip) {
+    const cells = [
+      { label: "NASDAQ", value: macro.indices.nasdaq.display, delta: macro.indices.nasdaq.delta },
+      { label: "DXY", value: macro.fx.dxy.display, delta: macro.fx.dxy.delta },
+      { label: "US10Y", value: macro.rates.us10y.display, delta: macro.rates.us10y.delta },
+      { label: "RRP", value: macro.liquidity.rrp.display, delta: macro.liquidity.rrp.delta },
+    ];
+    strip.innerHTML = cells
+      .map((c) => `<article class="snapshot-pill top-kpi"><span class="label">${c.label}</span><span class="value">${c.value}</span><span class="metric-delta ${toneClass(c.delta)}">${formatPct(c.delta)}</span></article>`)
+      .join("");
+  }
 
   renderCards("rateCards", [
     { label: "US10Y", value: macro.rates.us10y.display, delta: macro.rates.us10y.delta },
