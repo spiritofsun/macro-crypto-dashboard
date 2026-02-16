@@ -7,70 +7,65 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260216i" />
+    <link rel="stylesheet" href="./styles.css?v=20260216j" />
   </head>
   <body>
-    <header class="main-header">
-      <div class="main-header-inner">
-        <div class="main-brand">PROJECT MARK</div>
-        <nav class="main-tabs">
-          <a class="active" href="./index.html">메인</a>
-          <a href="./crypto.html">1. 크립토</a>
-          <a href="./stock-market.html">2. 주식 시장</a>
-          <a href="./long-short.html">3. 롱·숏 정리</a>
-          <a href="./etf.html">4. ETF FLOWS</a>
-          <a href="./funding.html">5. 펀딩비</a>
-          <a href="./ai-gpt-brief.html">6. AI GPT 분석</a>
-          <a href="./news.html">7. 뉴스 정리</a>
-        </nav>
-      </div>
-    </header>
+    <div class="app-shell">
+      <aside class="left-sidebar">
+        <a class="side-home active" href="./index.html">홈</a>
+        <a class="side-link" href="./crypto.html">크립토</a>
+        <a class="side-link" href="./stock-market.html">주식/매크로</a>
+        <a class="side-link" href="./long-short.html">롱/숏</a>
+        <a class="side-link" href="./etf.html">ETF Flows</a>
+        <a class="side-link" href="./funding.html">펀딩비</a>
+        <a class="side-link" href="./exchanges.html">거래소별 프리미엄+가격</a>
+        <a class="side-link" href="./ai-gpt-brief.html">AI 브리핑</a>
+        <a class="side-link" href="./news.html">뉴스</a>
+      </aside>
 
-    <main class="page">
-      <section class="panel">
-        <div class="panel-head">
-          <h2>Strategy Snapshot</h2>
-          <p class="subhead" id="homeAsOf">loading...</p>
-        </div>
-        <div class="snapshot-strip" id="strategySnapshot"></div>
-      </section>
+      <main class="page content-page">
+        <header class="hero">
+          <p class="kicker">HOME</p>
+          <h1>전략 허브</h1>
+          <p class="asof" id="homeAsOf">loading...</p>
+        </header>
 
-      <section class="panel">
-        <div class="panel-head">
-          <h2>Category Summary Grid</h2>
-          <p class="subhead">카테고리별 핵심 지표 요약</p>
-        </div>
-        <div class="summary-grid" id="categorySummary"></div>
-      </section>
+        <section class="panel">
+          <div class="panel-head">
+            <h2>Strategy Snapshot</h2>
+          </div>
+          <div class="snapshot-strip" id="strategySnapshot"></div>
+        </section>
 
-      <section class="panel">
-        <div class="panel-head">
-          <h2>Market Pulse Compact Table</h2>
-          <p class="subhead">핵심 자산 6종 빠른 확인</p>
-        </div>
-        <div class="table-wrap">
-          <table class="data-table compact-table">
-            <thead>
-              <tr>
-                <th>자산</th>
-                <th class="num">현재가</th>
-                <th class="num">24H</th>
-              </tr>
-            </thead>
-            <tbody id="pulseRows"></tbody>
-          </table>
-        </div>
-      </section>
+        <section class="panel">
+          <div class="panel-head">
+            <h2>Market Pulse Compact Table</h2>
+            <p class="subhead">BTC · ETH · SOL · NASDAQ · US10Y · DXY</p>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table compact-table">
+              <thead>
+                <tr>
+                  <th>자산</th>
+                  <th class="num">현재가</th>
+                  <th class="num">24H</th>
+                </tr>
+              </thead>
+              <tbody id="pulseRows"></tbody>
+            </table>
+          </div>
+        </section>
 
-      <section class="panel">
-        <div class="panel-head">
-          <h2>Latest Briefing Preview</h2>
-          <a class="mini-btn" href="./ai-gpt-brief.html">상세 보기</a>
-        </div>
-        <article class="brief-preview" id="briefPreview"></article>
-      </section>
-    </main>
+        <section class="panel">
+          <div class="panel-head">
+            <h2>Latest Briefing Preview</h2>
+            <a class="mini-btn" href="./ai-gpt-brief.html">상세 보기</a>
+          </div>
+          <article class="brief-preview" id="briefPreview"></article>
+        </section>
+      </main>
+    </div>
 
-    <script src="./app.js?v=20260216i"></script>
+    <script src="./app.js?v=20260216j"></script>
   </body>
 </html>

@@ -1,0 +1,32 @@
+{
+  "as_of": "2026-02-16 09:31 KST",
+  "rates": {
+    "us10y": {"value": 4.18, "delta": 0.97, "display": "4.18"},
+    "us2y": {"value": 3.47, "delta": 0.58, "display": "3.47"},
+    "sofr": {"value": 3.64, "delta": 0.00, "display": "3.64"},
+    "iorb": {"value": 3.65, "delta": 0.00, "display": "3.65"}
+  },
+  "fx": {
+    "dxy": {"value": 98.43, "delta": 0.16, "display": "98.43"},
+    "usdkrw": {"value": 1444, "delta": 0.22, "display": "1,444"}
+  },
+  "indices": {
+    "kospi": {"value": 5507, "delta": 2.85, "display": "5,507"},
+    "kosdaq": {"value": 1106, "delta": -0.79, "display": "1,106"},
+    "nasdaq": {"value": 22547, "delta": -2.25, "display": "22,547"},
+    "dow": {"value": 42510, "delta": -0.42, "display": "42,510"},
+    "russell2000": {"value": 2320, "delta": -0.61, "display": "2,320"},
+    "sp500": {"value": 6836, "delta": -1.52, "display": "6,836"}
+  },
+  "commodities": {
+    "gold": {"value": 5034, "delta": 0.23, "display": "$5,034/oz"},
+    "wti": {"value": 57.33, "delta": -0.16, "display": "$57.33"},
+    "copper": {"value": 5.77, "delta": -0.33, "display": "$5.77/lb"}
+  },
+  "liquidity": {
+    "rrp": {"value": 3.40, "delta": 0.12, "display": "3.40"},
+    "tga": {"value": 796148, "delta": -41158, "display": "796,148"},
+    "repo": {"value": 0.00, "delta": 0.00, "display": "0.00"},
+    "qt_status": "진행 중 (대차대조표 축소)"
+  }
+}

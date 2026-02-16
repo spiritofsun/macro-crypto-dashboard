@@ -1,0 +1,25 @@
+{
+  "as_of": "2026-02-16 09:31 KST",
+  "assets": [
+    {"rank":1,"symbol":"BTC","name":"Bitcoin","price_usd":89986.73,"pct_24h":1.41,"pct_7d":3.82,"market_cap_usd":1772000000000,"volume_24h_usd":48600000000,"circulating_supply":19630000,"funding":-0.0001,"tags":["btc","dominance"]},
+    {"rank":2,"symbol":"ETH","name":"Ethereum","price_usd":3125.32,"pct_24h":4.16,"pct_7d":7.93,"market_cap_usd":375000000000,"volume_24h_usd":23900000000,"circulating_supply":120700000,"funding":0.0002,"tags":["eth","dominance"]},
+    {"rank":3,"symbol":"USDT","name":"Tether","price_usd":1.0,"pct_24h":0.01,"pct_7d":0.01,"market_cap_usd":146800000000,"volume_24h_usd":91200000000,"circulating_supply":146800000000,"funding":null,"tags":["stablecoin"]},
+    {"rank":4,"symbol":"XRP","name":"XRP","price_usd":2.02,"pct_24h":7.54,"pct_7d":11.2,"market_cap_usd":117000000000,"volume_24h_usd":9200000000,"circulating_supply":57900000000,"funding":0.0001,"tags":[]},
+    {"rank":5,"symbol":"BNB","name":"BNB","price_usd":616.41,"pct_24h":0.88,"pct_7d":2.06,"market_cap_usd":90600000000,"volume_24h_usd":1970000000,"circulating_supply":147500000,"funding":-0.0002,"tags":[]},
+    {"rank":6,"symbol":"SOL","name":"Solana","price_usd":132.63,"pct_24h":4.63,"pct_7d":8.21,"market_cap_usd":63500000000,"volume_24h_usd":6700000000,"circulating_supply":478800000,"funding":0.0001,"tags":[]},
+    {"rank":7,"symbol":"USDC","name":"USD Coin","price_usd":1.0,"pct_24h":0.0,"pct_7d":0.0,"market_cap_usd":57800000000,"volume_24h_usd":12900000000,"circulating_supply":57800000000,"funding":null,"tags":["stablecoin"]},
+    {"rank":8,"symbol":"DOGE","name":"Dogecoin","price_usd":0.1027,"pct_24h":-1.1,"pct_7d":2.02,"market_cap_usd":15100000000,"volume_24h_usd":1230000000,"circulating_supply":147400000000,"funding":-0.0005,"tags":[]},
+    {"rank":9,"symbol":"ADA","name":"Cardano","price_usd":0.2823,"pct_24h":-0.9,"pct_7d":1.43,"market_cap_usd":10200000000,"volume_24h_usd":640000000,"circulating_supply":36200000000,"funding":-0.0004,"tags":[]},
+    {"rank":10,"symbol":"TRX","name":"TRON","price_usd":0.2807,"pct_24h":0.2,"pct_7d":3.11,"market_cap_usd":24400000000,"volume_24h_usd":560000000,"circulating_supply":86800000000,"funding":0.0013,"tags":[]},
+    {"rank":11,"symbol":"AVAX","name":"Avalanche","price_usd":29.14,"pct_24h":-0.4,"pct_7d":2.19,"market_cap_usd":12500000000,"volume_24h_usd":430000000,"circulating_supply":429000000,"funding":0.0013,"tags":[]},
+    {"rank":12,"symbol":"LINK","name":"Chainlink","price_usd":18.79,"pct_24h":-0.1,"pct_7d":2.88,"market_cap_usd":11600000000,"volume_24h_usd":690000000,"circulating_supply":617000000,"funding":0.0013,"tags":[]},
+    {"rank":13,"symbol":"SUI","name":"Sui","price_usd":0.9768,"pct_24h":-0.2,"pct_7d":3.21,"market_cap_usd":3150000000,"volume_24h_usd":260000000,"circulating_supply":3220000000,"funding":0.0004,"tags":[]},
+    {"rank":14,"symbol":"XLM","name":"Stellar","price_usd":0.1710,"pct_24h":-0.03,"pct_7d":1.7,"market_cap_usd":5140000000,"volume_24h_usd":220000000,"circulating_supply":30000000000,"funding":-0.0004,"tags":[]},
+    {"rank":15,"symbol":"TON","name":"Toncoin","price_usd":1.47,"pct_24h":0.5,"pct_7d":2.01,"market_cap_usd":5450000000,"volume_24h_usd":180000000,"circulating_supply":3710000000,"funding":0.0013,"tags":[]},
+    {"rank":16,"symbol":"HBAR","name":"Hedera","price_usd":0.0801,"pct_24h":-0.3,"pct_7d":1.09,"market_cap_usd":3210000000,"volume_24h_usd":150000000,"circulating_supply":40100000000,"funding":0.0013,"tags":[]},
+    {"rank":17,"symbol":"SHIB","name":"Shiba Inu","price_usd":0.000019,"pct_24h":-1.8,"pct_7d":2.3,"market_cap_usd":11100000000,"volume_24h_usd":530000000,"circulating_supply":589300000000000,"funding":null,"tags":["meme"]},
+    {"rank":18,"symbol":"LTC","name":"Litecoin","price_usd":73.1,"pct_24h":-0.7,"pct_7d":1.2,"market_cap_usd":5480000000,"volume_24h_usd":480000000,"circulating_supply":74800000,"funding":null,"tags":[]},
+    {"rank":19,"symbol":"DOT","name":"Polkadot","price_usd":5.2,"pct_24h":-1.6,"pct_7d":1.9,"market_cap_usd":7620000000,"volume_24h_usd":270000000,"circulating_supply":1465000000,"funding":null,"tags":[]},
+    {"rank":20,"symbol":"BCH","name":"Bitcoin Cash","price_usd":390.6,"pct_24h":0.6,"pct_7d":2.1,"market_cap_usd":7740000000,"volume_24h_usd":320000000,"circulating_supply":19800000,"funding":null,"tags":[]}
+  ]
+}
