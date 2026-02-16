@@ -3,49 +3,88 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project Mark Menu</title>
+    <title>Project Mark Market Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260216a" />
+    <link rel="stylesheet" href="./styles.css?v=20260216b" />
   </head>
-  <body>
-    <main class="page menu-page">
-      <header class="hero">
-        <p class="kicker">PROJECT MARK / LIVE CONSOLE</p>
-        <h1>Macro + Crypto Intelligence Hub</h1>
-        <p class="asof">메인 카테고리를 선택해 바로 이동하세요.</p>
-      </header>
+  <body class="home-body">
+    <div class="home-ticker" id="topTicker">
+      <span>로딩중...</span>
+    </div>
 
-      <section class="panel menu-intro">
-        <div class="intro-item"><span>실시간</span><strong>CRYPTO</strong></div>
-        <div class="intro-item"><span>일일 핵심</span><strong>ETF FLOWS</strong></div>
-        <div class="intro-item"><span>멀티 거래소</span><strong>펀비 + 가격</strong></div>
-        <div class="intro-item"><span>4시간</span><strong>NEWS</strong></div>
+    <header class="home-nav-wrap">
+      <div class="home-nav">
+        <div class="brand">KIMPGA</div>
+        <nav class="home-menu">
+          <a class="active" href="./index.html">통계/지표</a>
+          <a href="./crypto.html">시황/분석</a>
+          <a href="./news.html">뉴스</a>
+          <a href="./etf.html">ETF</a>
+          <a href="./exchanges.html">거래소비교</a>
+        </nav>
+        <div class="home-right">KR</div>
+      </div>
+      <div class="home-submenu">
+        <a href="#longshort">롱 & 숏</a>
+        <a href="#marketTable">시가총액</a>
+        <a href="#marketTable">거래소 스프레드</a>
+        <a href="#quickLinks">카테고리</a>
+      </div>
+    </header>
+
+    <main class="home-page">
+      <section class="home-hero panel">
+        <h1>오늘의 크립토 마켓 대시보드</h1>
+        <p class="asof" id="homeAsOf">As of loading...</p>
+        <div class="home-quick-stats" id="quickStats"></div>
       </section>
 
-      <section class="panel menu-panel">
-        <a class="menu-link menu-link-card" href="./crypto.html">
-          <span class="menu-order">01</span>
-          <span class="menu-title">CRYPTO</span>
-          <span class="menu-desc">BTC/ETH, 도미넌스, 프리미엄, Fear & Greed</span>
-        </a>
-        <a class="menu-link menu-link-card" href="./etf.html">
-          <span class="menu-order">02</span>
-          <span class="menu-title">ETF FLOWS</span>
-          <span class="menu-desc">BTC/ETH Spot ETF 일일 순유입/유출 추적</span>
-        </a>
-        <a class="menu-link menu-link-card" href="./exchanges.html">
-          <span class="menu-order">03</span>
-          <span class="menu-title">거래소별 펀비 + 가격</span>
-          <span class="menu-desc">Binance/Bybit/OKX/Hyperliquid/Upbit 비교</span>
-        </a>
-        <a class="menu-link menu-link-card" href="./news.html">
-          <span class="menu-order">04</span>
-          <span class="menu-title">뉴스</span>
-          <span class="menu-desc">매크로 + 크립토 뉴스, 유동성 체크리스트</span>
-        </a>
+      <section class="panel" id="longshort">
+        <div class="panel-head">
+          <h2>롱 vs 숏 포지션 비율</h2>
+          <p class="subhead">추정치 기반 실시간 갱신</p>
+        </div>
+        <div id="longShortRows" class="ls-rows"></div>
+      </section>
+
+      <section class="panel" id="marketTable">
+        <div class="panel-head">
+          <h2>거래소 비교 테이블</h2>
+          <p class="subhead">기준: Upbit KRW vs Binance USDT</p>
+        </div>
+        <div class="table-wrap">
+          <table class="exchange-table compact">
+            <thead>
+              <tr>
+                <th>이름</th>
+                <th>현재가(USDT)</th>
+                <th>김프</th>
+                <th>전일대비</th>
+                <th>고가대비</th>
+                <th>저가대비</th>
+                <th>거래액(일)</th>
+              </tr>
+            </thead>
+            <tbody id="marketRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel" id="quickLinks">
+        <div class="panel-head">
+          <h2>카테고리 바로가기</h2>
+        </div>
+        <div class="home-cards">
+          <a class="home-card" href="./crypto.html"><strong>CRYPTO</strong><span>도미넌스, 프리미엄, Fear & Greed</span></a>
+          <a class="home-card" href="./etf.html"><strong>ETF FLOWS</strong><span>BTC/ETH spot ETF 추적</span></a>
+          <a class="home-card" href="./exchanges.html"><strong>거래소별 펀비 + 가격</strong><span>멀티 거래소 비교</span></a>
+          <a class="home-card" href="./news.html"><strong>뉴스</strong><span>4시간 업데이트 매크로/크립토</span></a>
+        </div>
       </section>
     </main>
+
+    <script src="./home.js?v=20260216b"></script>
   </body>
 </html>
