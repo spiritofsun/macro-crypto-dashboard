@@ -133,14 +133,31 @@ function toneClass(value, neutralThreshold = 0.2) {
   return value > 0 ? "up" : "down";
 }
 
+function formatKstDateTime(input, fallback = "수집 대기") {
+  if (!input) return fallback;
+  if (typeof input === "string" && input.includes("KST")) return input;
+  const d = new Date(input);
+  if (Number.isNaN(d.getTime())) return fallback;
+  const text = new Intl.DateTimeFormat("sv-SE", {
+    timeZone: "Asia/Seoul",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  }).format(d);
+  return `${text} KST`;
+}
+
 function setAsOf() {
-  const snapshotAsOf = state.snapshot?.asOf || state.macroSnapshot?.as_of || "n/a";
+  const snapshotAsOf = formatKstDateTime(state.snapshot?.asOf || state.macroSnapshot?.as_of, "n/a");
   const newsAsOfRaw = state.news?.updated_at || "";
   const etfAsOfRaw = state.etf?.updated_at || "";
-  const newsAsOf = newsAsOfRaw.startsWith("1970-01-01") || !newsAsOfRaw ? "수집 대기" : newsAsOfRaw;
-  const etfAsOf = etfAsOfRaw.startsWith("1970-01-01") || !etfAsOfRaw ? "수집 대기" : etfAsOfRaw;
-
-  const liveTs = new Date().toLocaleTimeString();
+  const newsAsOf = newsAsOfRaw.startsWith("1970-01-01") || !newsAsOfRaw ? "수집 대기" : formatKstDateTime(newsAsOfRaw);
+  const etfAsOf = etfAsOfRaw.startsWith("1970-01-01") || !etfAsOfRaw ? "수집 대기" : formatKstDateTime(etfAsOfRaw);
+  const liveTs = formatKstDateTime(new Date().toISOString(), "n/a");
   const text = `SNAPSHOT ${snapshotAsOf} | NEWS ${newsAsOf} | ETF ${etfAsOf} | LIVE ${liveTs}`;
 
   const asOf = document.getElementById("asOfText");
