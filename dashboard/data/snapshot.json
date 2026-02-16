@@ -14,7 +14,8 @@
     { "label": "COIN", "value": "236.53", "delta": 10.39 },
     { "label": "MSTR", "value": "157.16", "delta": 5.21 },
     { "label": "MARA", "value": "9.91", "delta": 0.93 },
-    { "label": "RIOT", "value": "14.16", "delta": 1.49 }
+    { "label": "RIOT", "value": "14.16", "delta": 1.49 },
+    { "label": "HOOD", "value": "115.21", "delta": 2.11 }
   ],
   "commodities": [
     { "label": "Gold 🥇", "value": "$5,034/oz", "delta": 0.23 },

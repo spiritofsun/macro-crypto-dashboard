@@ -71,12 +71,13 @@ body {
 }
 
 .menu-page {
-  max-width: 760px;
+  max-width: 980px;
 }
 
 .menu-panel {
   display: grid;
   gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .menu-link {
@@ -95,6 +96,59 @@ body {
   color: #16ff6f;
   border-color: #1f3b26;
   transform: translateY(-1px);
+}
+
+.menu-intro {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.intro-item {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #0a0e13;
+  padding: 10px;
+  display: grid;
+  gap: 4px;
+}
+
+.intro-item span {
+  color: var(--muted);
+  font-size: 12px;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.intro-item strong {
+  color: #b9dbb9;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 18px;
+}
+
+.menu-link-card {
+  background: linear-gradient(160deg, rgba(11, 23, 11, 0.95), rgba(11, 23, 11, 0.45));
+  min-height: 130px;
+  display: grid;
+  gap: 8px;
+  align-content: center;
+}
+
+.menu-order {
+  color: var(--muted);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+}
+
+.menu-title {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 30px;
+  line-height: 1.05;
+  color: #c8e6c8;
+}
+
+.menu-desc {
+  color: #7fa27f;
+  font-size: 13px;
 }
 
 .panel {
@@ -347,6 +401,9 @@ body {
   .news-wrap,
   .card-grid-4 { grid-template-columns: 1fr; }
 
+  .menu-intro,
+  .menu-panel { grid-template-columns: 1fr; }
+
   .metric-value,
   .flow-main,
   .coin-name,
@@ -355,4 +412,5 @@ body {
   .group-title { font-size: 22px; }
 
   .menu-link { font-size: 22px; }
+  .menu-title { font-size: 24px; }
 }
