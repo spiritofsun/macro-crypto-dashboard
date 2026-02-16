@@ -630,6 +630,25 @@ body {
   font-size: 11px;
 }
 
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.data-table th,
+.data-table td {
+  border-bottom: 1px solid #16202a;
+  padding: 10px 10px;
+  text-align: left;
+  font-size: 13px;
+}
+
+.data-table th {
+  color: #7fa27f;
+  font-size: 12px;
+}
+
 @media (max-width: 1080px) {
   .card-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .flow-grid { grid-template-columns: 1fr; }
