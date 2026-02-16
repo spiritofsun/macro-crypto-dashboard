@@ -160,8 +160,8 @@ async function handleLive() {
   const solCgPct = toNum(simple?.solana?.usd_24h_change);
   const coinbaseBtcSpot = toNum(coinbase?.data?.amount);
   const coinbasePremiumPct =
-    coinbaseBtcSpot !== null && btcBinancePrice !== null && btcBinancePrice !== 0
-      ? ((coinbaseBtcSpot - btcBinancePrice) / btcBinancePrice) * 100
+    coinbaseBtcSpot !== null && btcCgPrice !== null && btcCgPrice !== 0
+      ? ((coinbaseBtcSpot - btcCgPrice) / btcCgPrice) * 100
       : null;
 
   return json({
@@ -193,8 +193,9 @@ async function handleLive() {
     },
     coinbase: {
       btc_usd: coinbaseBtcSpot,
+      global_avg_usd: btcCgPrice,
       premium_pct: coinbasePremiumPct,
-      source: coinbaseBtcSpot !== null ? "coinbase+binance" : null,
+      source: coinbaseBtcSpot !== null && btcCgPrice !== null ? "coinbase+coingecko-global" : null,
     },
   });
 }

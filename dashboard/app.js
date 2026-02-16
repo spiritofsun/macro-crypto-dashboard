@@ -410,7 +410,7 @@ function renderCryptoSummary() {
       label: "Coinbase Premium",
       value: typeof coinbasePremium === "number" ? formatPct(coinbasePremium, 2) : "—",
       delta: coinbasePremium,
-      deltaText: "BTC (Coinbase vs Binance)",
+      deltaText: "BTC (Coinbase vs Global Avg)",
       neutralThreshold: 0.05,
     },
     { label: "TOTAL", value: formatBigNumber(totals.TOTAL), delta: null, deltaText: "전체" },
@@ -784,19 +784,17 @@ async function fetchLiveDirectFallback() {
   const fgApi = "https://api.alternative.me/fng/?limit=1&format=json";
   const fxApi = "https://open.er-api.com/v6/latest/USD";
   const upbitBtcApi = "https://api.upbit.com/v1/ticker?markets=KRW-BTC";
-  const binanceBtcApi = "https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT";
   const coinbaseBtcApi = "https://api.coinbase.com/v2/prices/BTC-USD/spot";
 
   const prevLive = state.live || fallbackLive;
 
   try {
-    const [simpleR, globalR, fgR, fxR, upbitR, binanceBtcR, coinbaseBtcR] = await Promise.allSettled([
+    const [simpleR, globalR, fgR, fxR, upbitR, coinbaseBtcR] = await Promise.allSettled([
       fetchJson(cgSimple),
       fetchJson(cgGlobal),
       fetchJson(fgApi),
       fetchJson(fxApi),
       fetchJson(upbitBtcApi),
-      fetchJson(binanceBtcApi),
       fetchJson(coinbaseBtcApi),
     ]);
 
@@ -805,13 +803,12 @@ async function fetchLiveDirectFallback() {
     const fg = fgR.status === "fulfilled" ? fgR.value : null;
     const fx = fxR.status === "fulfilled" ? fxR.value : null;
     const upbit = upbitR.status === "fulfilled" ? upbitR.value : null;
-    const binanceBtc = binanceBtcR.status === "fulfilled" ? binanceBtcR.value : null;
     const coinbaseBtc = coinbaseBtcR.status === "fulfilled" ? coinbaseBtcR.value : null;
-    const binanceBtcPrice = toNumSafe(binanceBtc?.lastPrice);
+    const globalBtcPrice = toNumSafe(simple?.bitcoin?.usd);
     const coinbaseBtcPrice = toNumSafe(coinbaseBtc?.data?.amount);
     const coinbasePremiumPct =
-      coinbaseBtcPrice !== null && binanceBtcPrice !== null && binanceBtcPrice !== 0
-        ? ((coinbaseBtcPrice - binanceBtcPrice) / binanceBtcPrice) * 100
+      coinbaseBtcPrice !== null && globalBtcPrice !== null && globalBtcPrice !== 0
+        ? ((coinbaseBtcPrice - globalBtcPrice) / globalBtcPrice) * 100
         : prevLive.coinbasePremiumPct;
 
     state.live = {
