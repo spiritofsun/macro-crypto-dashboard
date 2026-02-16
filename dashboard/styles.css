@@ -1874,3 +1874,29 @@ body {
 .group-title .down {
   color: inherit;
 }
+
+/* macro top summary readability */
+#macroTopStrip .snapshot-pill {
+  min-height: 56px;
+  padding: 10px 12px;
+  border-color: var(--line-strong);
+}
+
+#macroTopStrip .label {
+  font-size: 11px;
+  opacity: 0.65;
+  letter-spacing: 0.4px;
+}
+
+#macroTopStrip .value {
+  font-size: 18px;
+  font-weight: 600;
+  opacity: 0.95;
+  color: var(--text);
+}
+
+#macroTopStrip .metric-delta {
+  font-size: 12px;
+  opacity: 0.9;
+  font-weight: 500;
+}
