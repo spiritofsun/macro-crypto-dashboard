@@ -60,6 +60,7 @@ const fallbackMacro = {
   },
   commodities: {
     gold: { value: 5034, delta: 0.23, display: "$5,034/oz" },
+    silver: { value: 76.34, delta: -1.94, display: "$76.34/oz" },
     wti: { value: 57.33, delta: -0.16, display: "$57.33" },
     copper: { value: 5.77, delta: -0.33, display: "$5.77/lb" },
   },
@@ -775,11 +776,24 @@ function setupCryptoControls() {
 function renderStockMarketPage() {
   if (!document.getElementById("rateCards")) return;
   const macro = state.macroSnapshot || fallbackMacro;
+  const silverFromSnapshot = (() => {
+    const list = state.snapshot?.commodities;
+    if (!Array.isArray(list)) return null;
+    const item = list.find((x) => String(x?.label || "").toLowerCase().includes("silver"));
+    if (!item) return null;
+    return {
+      value: toNumSafe(String(item.value || "").replace(/[^0-9.-]/g, "")),
+      delta: toNumSafe(item.delta),
+      display: item.value || "—",
+    };
+  })();
+  const silver = macro.commodities?.silver || silverFromSnapshot || { value: null, delta: null, display: "—" };
 
   const strip = document.getElementById("macroTopStrip");
   if (strip) {
     const cells = [
       { label: "NASDAQ", value: macro.indices.nasdaq.display, delta: macro.indices.nasdaq.delta },
+      { label: "DOW", value: macro.indices.dow.display, delta: macro.indices.dow.delta },
       { label: "DXY", value: macro.fx.dxy.display, delta: macro.fx.dxy.delta },
       { label: "US10Y", value: macro.rates.us10y.display, delta: macro.rates.us10y.delta },
       { label: "RRP", value: macro.liquidity.rrp.display, delta: macro.liquidity.rrp.delta },
@@ -825,6 +839,7 @@ function renderStockMarketPage() {
 
   renderCards("commodityCards", [
     { label: "GOLD", value: macro.commodities.gold.display, delta: macro.commodities.gold.delta },
+    { label: "SILVER", value: silver.display, delta: silver.delta },
     { label: "WTI", value: macro.commodities.wti.display, delta: macro.commodities.wti.delta },
     { label: "COPPER", value: macro.commodities.copper.display, delta: macro.commodities.copper.delta },
   ]);

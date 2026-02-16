@@ -20,6 +20,7 @@
   },
   "commodities": {
     "gold": {"value": 5034, "delta": 0.23, "display": "$5,034/oz"},
+    "silver": {"value": 76.34, "delta": -1.94, "display": "$76.34/oz"},
     "wti": {"value": 57.33, "delta": -0.16, "display": "$57.33"},
     "copper": {"value": 5.77, "delta": -0.33, "display": "$5.77/lb"}
   },
