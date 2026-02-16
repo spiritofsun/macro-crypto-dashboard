@@ -78,10 +78,12 @@ function cls(v) {
 }
 
 function setAsOf() {
+  const el = document.getElementById("asOfText");
+  if (!el) return;
   const snapshotAsOf = state.snapshot?.asOf || "n/a";
   const newsAsOf = state.news?.updated_at || "n/a";
   const etfAsOf = state.etf?.updated_at || "n/a";
-  document.getElementById("asOfText").textContent = `SNAPSHOT ${snapshotAsOf} | NEWS ${newsAsOf} | ETF ${etfAsOf} | LIVE ${new Date().toLocaleTimeString()}`;
+  el.textContent = `SNAPSHOT ${snapshotAsOf} | NEWS ${newsAsOf} | ETF ${etfAsOf} | LIVE ${new Date().toLocaleTimeString()}`;
 }
 
 function cardHTML(item) {
@@ -96,11 +98,13 @@ function cardHTML(item) {
 
 function renderCards(targetId, items) {
   const el = document.getElementById(targetId);
+  if (!el) return;
   el.innerHTML = items.map(cardHTML).join("");
 }
 
 function renderNewsList(containerId, items) {
   const list = document.getElementById(containerId);
+  if (!list) return;
   if (!items || items.length === 0) {
     list.innerHTML = "<li>데이터 없음</li>";
     return;
@@ -136,6 +140,7 @@ function pseudoFunding(seed) {
 
 function renderExchangeTable() {
   const tbody = document.getElementById("exchangeRows");
+  if (!tbody) return;
   const live = state.live || {};
   const usdKrw = state.fx?.usdKrw;
 
@@ -213,12 +218,14 @@ function flowCard({ title, date, mainFlow, assets, history }) {
 }
 
 function renderEtfFlows() {
+  const el = document.getElementById("etfFlows");
+  if (!el) return;
   const etf = state.etf || {};
   const btc = typeof etf.btc_us_spot_etf_net_inflow_usd_m === "number" ? etf.btc_us_spot_etf_net_inflow_usd_m : -410.4;
   const eth = typeof etf.eth_us_spot_etf_net_inflow_usd_m === "number" ? etf.eth_us_spot_etf_net_inflow_usd_m : -113.1;
   const date = etf.date || "n/a";
 
-  document.getElementById("etfFlows").innerHTML = [
+  el.innerHTML = [
     flowCard({
       title: "BTC Spot ETF",
       date,
