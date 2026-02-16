@@ -958,6 +958,8 @@ async function loadStatic() {
 
 async function fetchLiveDirectFallback() {
   const ids = "bitcoin,ethereum,solana";
+  const binance24h =
+    "https://api.binance.com/api/v3/ticker/24hr?symbols=%5B%22BTCUSDT%22,%22ETHUSDT%22,%22SOLUSDT%22%5D";
   const cgSimple = `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`;
   const cgGlobal = "https://api.coingecko.com/api/v3/global";
   const fgApi = "https://api.alternative.me/fng/?limit=1&format=json";
@@ -968,7 +970,8 @@ async function fetchLiveDirectFallback() {
   const prevLive = state.live || fallbackLive;
 
   try {
-    const [simpleR, globalR, fgR, fxR, upbitR, coinbaseBtcR] = await Promise.allSettled([
+    const [binanceR, simpleR, globalR, fgR, fxR, upbitR, coinbaseBtcR] = await Promise.allSettled([
+      fetchJson(binance24h),
       fetchJson(cgSimple),
       fetchJson(cgGlobal),
       fetchJson(fgApi),
@@ -977,6 +980,8 @@ async function fetchLiveDirectFallback() {
       fetchJson(coinbaseBtcApi),
     ]);
 
+    const binance = binanceR.status === "fulfilled" && Array.isArray(binanceR.value) ? binanceR.value : [];
+    const ticker = Object.fromEntries(binance.map((row) => [row?.symbol, row]));
     const simple = simpleR.status === "fulfilled" ? simpleR.value : null;
     const globalData = globalR.status === "fulfilled" ? globalR.value : null;
     const fg = fgR.status === "fulfilled" ? fgR.value : null;
@@ -984,6 +989,12 @@ async function fetchLiveDirectFallback() {
     const upbit = upbitR.status === "fulfilled" ? upbitR.value : null;
     const coinbaseBtc = coinbaseBtcR.status === "fulfilled" ? coinbaseBtcR.value : null;
     const globalBtcPrice = toNumSafe(simple?.bitcoin?.usd);
+    const btcBinancePrice = toNumSafe(ticker?.BTCUSDT?.lastPrice);
+    const btcBinancePct = toNumSafe(ticker?.BTCUSDT?.priceChangePercent);
+    const ethBinancePrice = toNumSafe(ticker?.ETHUSDT?.lastPrice);
+    const ethBinancePct = toNumSafe(ticker?.ETHUSDT?.priceChangePercent);
+    const solBinancePrice = toNumSafe(ticker?.SOLUSDT?.lastPrice);
+    const solBinancePct = toNumSafe(ticker?.SOLUSDT?.priceChangePercent);
     const coinbaseBtcPrice = toNumSafe(coinbaseBtc?.data?.amount);
     const coinbasePremiumPct =
       coinbaseBtcPrice !== null && globalBtcPrice !== null && globalBtcPrice !== 0
@@ -991,9 +1002,18 @@ async function fetchLiveDirectFallback() {
         : prevLive.coinbasePremiumPct;
 
     state.live = {
-      BTC: { price: simple?.bitcoin?.usd ?? prevLive.BTC.price, change: simple?.bitcoin?.usd_24h_change ?? prevLive.BTC.change },
-      ETH: { price: simple?.ethereum?.usd ?? prevLive.ETH.price, change: simple?.ethereum?.usd_24h_change ?? prevLive.ETH.change },
-      SOL: { price: simple?.solana?.usd ?? prevLive.SOL.price, change: simple?.solana?.usd_24h_change ?? prevLive.SOL.change },
+      BTC: {
+        price: btcBinancePrice ?? simple?.bitcoin?.usd ?? prevLive.BTC.price,
+        change: btcBinancePct ?? simple?.bitcoin?.usd_24h_change ?? prevLive.BTC.change,
+      },
+      ETH: {
+        price: ethBinancePrice ?? simple?.ethereum?.usd ?? prevLive.ETH.price,
+        change: ethBinancePct ?? simple?.ethereum?.usd_24h_change ?? prevLive.ETH.change,
+      },
+      SOL: {
+        price: solBinancePrice ?? simple?.solana?.usd ?? prevLive.SOL.price,
+        change: solBinancePct ?? simple?.solana?.usd_24h_change ?? prevLive.SOL.change,
+      },
       dominance: {
         btc: globalData?.data?.market_cap_percentage?.btc ?? prevLive.dominance.btc,
         eth: globalData?.data?.market_cap_percentage?.eth ?? prevLive.dominance.eth,
