@@ -1,0 +1,194 @@
+team:
+  name: trading-research-squad
+  total_agents: 9
+  timezone: Asia/Seoul
+  objective: "스캘핑 전략의 빠른 실험-검증-배포 루프 운영"
+  role_counts:
+    scalping_researcher: 3
+    resource_monitor: 1
+    bug_hunter: 1
+    optimization_specialist: 1
+    strategy_usability_evaluator: 1
+    backtesting_specialist: 1
+    data_pipeline_engineer: 1
+  runtime:
+    cycle: "30m"
+    standup_times:
+      - "09:00"
+      - "14:00"
+      - "21:00"
+    communication:
+      report_channel: "reports/"
+      alert_channel: "alerts/"
+    quality_gates:
+      - "버그 헌터의 blocker 이슈 0개"
+      - "백테스트 최소 표본 거래수 500건"
+      - "전략 유용성 점수 70점 이상"
+      - "리소스 임계치(CPU 85%, RAM 80%) 미만 유지"
+    escalation_rules:
+      - condition: "실현 PnL drawdown > 5%"
+        action: "모든 신규 전략 배포 중지, 원인 분석 모드 전환"
+      - condition: "데이터 결측률 > 1%"
+        action: "해당 심볼 전략 비활성화, 파이프라인 복구 우선"
+      - condition: "체결 지연 평균 > 250ms"
+        action: "최적화 전문가와 리소스 모니터 즉시 튜닝"
+  shared_artifacts:
+    - path: "reports/daily_summary.md"
+      owner: "strategy_usability_evaluator"
+    - path: "reports/scalping_candidates.csv"
+      owner: "scalping_researcher"
+    - path: "reports/backtest_results.parquet"
+      owner: "backtesting_specialist"
+    - path: "alerts/runtime_alerts.log"
+      owner: "resource_monitor"
+    - path: "alerts/bug_findings.md"
+      owner: "bug_hunter"
+    - path: "pipelines/data_quality_report.json"
+      owner: "data_pipeline_engineer"
+  role_playbooks:
+    scalping_researcher:
+      mission: "신규 스캘핑 아이디어 발굴 및 후보 전략 생성"
+      inputs:
+        - "틱/1분봉 가격 데이터"
+        - "거래량/호가 스냅샷"
+        - "전일 성과 리포트"
+      outputs:
+        - "전략 가설 문서"
+        - "후보 파라미터 세트"
+        - "위험 가정(손절/익절 규칙)"
+      cadence: "매 30분 아이디어 업데이트, 하루 3회 후보 제출"
+      kpis:
+        - "제출 후보 중 백테스트 통과율 30% 이상"
+        - "중복 전략 비율 20% 이하"
+    resource_monitor:
+      mission: "실행 환경 안정성 모니터링 및 알림"
+      inputs:
+        - "CPU/RAM/디스크/네트워크 메트릭"
+        - "주문 지연/실패율 로그"
+      outputs:
+        - "실시간 경보"
+        - "리소스 병목 원인 분석"
+      cadence: "1분 간격 모니터링, 임계치 초과 시 즉시 알림"
+      kpis:
+        - "장애 탐지 리드타임 2분 이하"
+        - "경보 오탐률 10% 이하"
+    bug_hunter:
+      mission: "전략 코드 및 실행 로직의 결함 조기 발견"
+      inputs:
+        - "전략 코드 변경분"
+        - "실행/예외 로그"
+      outputs:
+        - "재현 절차"
+        - "심각도별 버그 티켓"
+      cadence: "PR/배포 후보마다 검증"
+      kpis:
+        - "재현 가능한 버그 보고율 95% 이상"
+        - "배포 후 치명 버그 0건"
+    optimization_specialist:
+      mission: "지연시간, 체결률, 자원 효율 최적화"
+      inputs:
+        - "프로파일링 결과"
+        - "리소스/체결 성능 지표"
+      outputs:
+        - "튜닝 패치"
+        - "성능 전후 비교 리포트"
+      cadence: "하루 2회 성능 튜닝 사이클"
+      kpis:
+        - "평균 주문 지연 20% 이상 개선"
+        - "동일 하드웨어 처리량 15% 이상 향상"
+    strategy_usability_evaluator:
+      mission: "전략 실전 적용 가능성 평가 및 우선순위화"
+      inputs:
+        - "백테스트 결과"
+        - "실행 리스크/운영 비용"
+      outputs:
+        - "유용성 점수(0-100)"
+        - "배포 권고/보류 결정"
+      cadence: "후보 전략 제출 시마다 평가"
+      kpis:
+        - "배포 후 성과 예측 오차 15% 이하"
+        - "저품질 전략 사전 차단율 80% 이상"
+    backtesting_specialist:
+      mission: "전략 통계 검증 및 과최적화 방지"
+      inputs:
+        - "후보 전략 규칙/파라미터"
+        - "학습/검증 기간 분리 데이터"
+      outputs:
+        - "성과 지표(Sharpe, MDD, WinRate)"
+        - "워크포워드 검증 결과"
+      cadence: "후보 접수 후 2시간 내 1차 결과 제공"
+      kpis:
+        - "백테스트 재현성 99% 이상"
+        - "검증 누락 케이스 0건"
+    data_pipeline_engineer:
+      mission: "시장 데이터 수집/정제/공급 파이프라인 운영"
+      inputs:
+        - "원천 거래소 데이터"
+        - "데이터 품질 규칙"
+      outputs:
+        - "정제 데이터셋"
+        - "품질 리포트(결측/지연/이상치)"
+      cadence: "실시간 수집, 10분 단위 품질 점검"
+      kpis:
+        - "파이프라인 가용성 99.9% 이상"
+        - "결측률 1% 이하"
+  handoff_flow:
+    - from: "data_pipeline_engineer"
+      to: "scalping_researcher"
+      condition: "데이터 품질 기준 통과"
+      artifact: "정제 데이터 + 품질 리포트"
+    - from: "scalping_researcher"
+      to: "backtesting_specialist"
+      condition: "후보 전략 템플릿 충족"
+      artifact: "전략 규칙 + 파라미터"
+    - from: "backtesting_specialist"
+      to: "strategy_usability_evaluator"
+      condition: "통계 검증 완료"
+      artifact: "성능/리스크 지표"
+    - from: "strategy_usability_evaluator"
+      to: "bug_hunter"
+      condition: "유용성 점수 70 이상"
+      artifact: "배포 후보 전략 목록"
+    - from: "bug_hunter"
+      to: "optimization_specialist"
+      condition: "치명 버그 없음"
+      artifact: "검증 완료 코드"
+    - from: "optimization_specialist"
+      to: "resource_monitor"
+      condition: "성능 기준 충족"
+      artifact: "튜닝 완료 빌드"
+    - from: "resource_monitor"
+      to: "all"
+      condition: "운영 임계치 안정"
+      artifact: "실행 승인 신호"
+  agents:
+    - id: scalping-researcher-1
+      role: scalping_researcher
+      focus: "모멘텀 브레이크아웃"
+      shift: "09:00-18:00"
+    - id: scalping-researcher-2
+      role: scalping_researcher
+      focus: "미시구조 리버설"
+      shift: "13:00-22:00"
+    - id: scalping-researcher-3
+      role: scalping_researcher
+      focus: "변동성 확장"
+      shift: "18:00-03:00"
+    - id: resource-monitor-1
+      role: resource_monitor
+      shift: "24x7 on-call"
+    - id: bug-hunter-1
+      role: bug_hunter
+      shift: "10:00-19:00"
+    - id: optimization-specialist-1
+      role: optimization_specialist
+      shift: "11:00-20:00"
+    - id: strategy-usability-evaluator-1
+      role: strategy_usability_evaluator
+      shift: "09:00-18:00"
+    - id: backtesting-specialist-1
+      role: backtesting_specialist
+      shift: "09:00-18:00"
+    - id: data-pipeline-engineer-1
+      role: data_pipeline_engineer
+      shift: "08:00-17:00"

@@ -1,0 +1,24 @@
+[2026-02-11T10:00:28+09:00] Team bootstrap started
+Team: trading-research-squad
+Objective: 스캘핑 전략의 빠른 실험-검증-배포 루프 운영
+Task count: 9
+
+Agents launched:
+- @scalping-researcher-1 (scalping_researcher)
+- @scalping-researcher-2 (scalping_researcher)
+- @scalping-researcher-3 (scalping_researcher)
+- @resource-monitor-1 (resource_monitor)
+- @bug-hunter-1 (bug_hunter)
+- @optimization-specialist-1 (optimization_specialist)
+- @strategy-usability-evaluator-1 (strategy_usability_evaluator)
+- @backtesting-specialist-1 (backtesting_specialist)
+- @data-pipeline-engineer-1 (data_pipeline_engineer)
+
+Active workstreams:
+- Scalping strategy research
+- Resource monitoring
+- Bug review
+- Optimization review
+- Strategy usefulness evaluation
+- Backtesting correctness and methodology
+- Data pipeline integrity check

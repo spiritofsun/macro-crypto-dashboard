@@ -1,0 +1,14 @@
+{
+  "asOf": "2026-02-16 09:31 KST",
+  "indices": [
+    { "label": "S&P 500 🇺🇸", "value": "6,836", "delta": -1.52 },
+    { "label": "NASDAQ 🇺🇸", "value": "22,547", "delta": -2.25 },
+    { "label": "KOSPI 🇰🇷", "value": "5,507", "delta": 2.85 },
+    { "label": "KOSDAQ 🇰🇷", "value": "1,106", "delta": -0.79 }
+  ],
+  "commodities": [
+    { "label": "Gold 🥇", "value": "$5,034/oz", "delta": 0.23 },
+    { "label": "Silver 🥈", "value": "$76.34/oz", "delta": -1.94 },
+    { "label": "Copper 🟤", "value": "$5.77/lb", "delta": -0.33 }
+  ]
+}
