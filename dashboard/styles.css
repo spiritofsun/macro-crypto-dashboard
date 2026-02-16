@@ -649,6 +649,57 @@ body {
   font-size: 12px;
 }
 
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: linear-gradient(180deg, #10131a, #0f1218);
+  border-bottom: 1px solid #1b232d;
+}
+
+.main-header-inner {
+  width: min(1440px, 96vw);
+  margin: 0 auto;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.main-brand {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 30px;
+  font-weight: 700;
+  color: #f5c036;
+  white-space: nowrap;
+}
+
+.main-tabs {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.main-tabs a {
+  text-decoration: none;
+  color: #c0d0c0;
+  font-size: 14px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid transparent;
+}
+
+.main-tabs a.active,
+.main-tabs a:hover {
+  color: #ffd34f;
+  border-bottom-color: #f5c036;
+}
+
+.main-market-table td,
+.main-market-table th {
+  font-size: 14px;
+}
+
 .category-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -727,6 +778,24 @@ body {
   .menu-title { font-size: 24px; }
 
   .category-grid { grid-template-columns: 1fr; }
+
+  .main-header-inner {
+    height: auto;
+    padding: 10px 0;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .main-tabs {
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 4px;
+  }
+
+  .main-tabs a {
+    white-space: nowrap;
+  }
 
   .home-nav,
   .home-submenu,
