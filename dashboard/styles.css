@@ -1492,3 +1492,106 @@ body.sidebar-collapsed .left-sidebar {
   background: #b94646;
   color: #ffe0e0;
 }
+
+/* v20260216r compact institutional typography + low-contrast chrome */
+:root {
+  --section-gap: 20px;
+  --card-gap: 10px;
+  --card-padding: 16px;
+  --row-height: 32px;
+  --line: rgba(170, 190, 185, 0.18);
+}
+
+* {
+  font-variant-numeric: tabular-nums;
+}
+
+body {
+  font-size: 14px;
+}
+
+.page,
+.content-page {
+  gap: var(--section-gap);
+}
+
+.hero h1 {
+  font-size: clamp(18px, 2.2vw, 30px);
+  color: #d7dde4;
+}
+
+.kicker,
+.asof,
+.subhead {
+  font-size: 11px;
+  opacity: 0.5;
+}
+
+.panel,
+.metric-card,
+.flow-card,
+.news-col,
+.summary-link,
+.brief-preview,
+.intro-item,
+.home-card,
+.snapshot-pill,
+.category-card {
+  box-shadow: none !important;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+}
+
+.panel-head h2,
+.group-title,
+.metric-label,
+.flow-title,
+.summary-title,
+.news-col h3 {
+  color: #a8b3bd;
+}
+
+.metric-card,
+.flow-card,
+.brief-preview,
+.snapshot-pill {
+  padding: var(--card-padding);
+}
+
+.metric-value {
+  font-size: clamp(24px, 1.8vw, 28px);
+  text-align: right;
+}
+
+.metric-delta,
+.flow-main,
+.snapshot-pill .value {
+  text-align: right;
+}
+
+.data-table thead th,
+.data-table tbody td {
+  height: var(--row-height);
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.compact-table tbody tr {
+  height: var(--row-height);
+}
+
+.data-table .num,
+.exchange-table .num,
+.flow-row span:last-child {
+  text-align: right;
+}
+
+.data-table th {
+  color: #8d99a6;
+}
+
+.up,
+.down,
+.flat {
+  font-weight: 600;
+}
