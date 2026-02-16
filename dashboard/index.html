@@ -3,120 +3,65 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>오늘의 크립토 마켓 대시보드</title>
+    <title>메인 대시보드</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260216c" />
+    <link rel="stylesheet" href="./styles.css?v=20260216d" />
   </head>
   <body>
     <main class="page">
       <header class="hero">
-        <p class="kicker">PROJECT MARK / DAILY BRIEF</p>
-        <h1>오늘의 크립토 마켓 대시보드</h1>
-        <p class="asof">As of 2026-02-16</p>
-        <nav class="top-nav">
-          <a href="./crypto.html">CRYPTO</a>
-          <a href="./etf.html">ETF FLOWS</a>
-          <a href="./exchanges.html">거래소별 펀비 + 가격</a>
-          <a href="./news.html">뉴스</a>
-        </nav>
+        <p class="kicker">PROJECT MARK / MAIN</p>
+        <h1>오늘의 크립토·매크로 통합 대시보드</h1>
+        <p class="asof">카테고리별로 이동해 상세 데이터를 확인하세요.</p>
       </header>
 
       <section class="panel">
-        <h3 class="group-title">시장 지표</h3>
-        <div class="card-grid card-grid-4">
-          <article class="metric-card"><p class="metric-label">DOW JONES</p><p class="metric-value">42,510</p><p class="metric-delta flat">n/a</p></article>
-          <article class="metric-card"><p class="metric-label">S&P500</p><p class="metric-value">6,836</p><p class="metric-delta up">+0.19%</p></article>
-          <article class="metric-card"><p class="metric-label">NASDAQ</p><p class="metric-value">22,547</p><p class="metric-delta down">-0.03%</p></article>
-          <article class="metric-card"><p class="metric-label">RUSSELL 2000</p><p class="metric-value">2,396</p><p class="metric-delta flat">n/a</p></article>
-          <article class="metric-card"><p class="metric-label">DXY</p><p class="metric-value">98.43</p><p class="metric-delta up">+0.16%</p></article>
-          <article class="metric-card"><p class="metric-label">US10Y</p><p class="metric-value">4.18</p><p class="metric-delta up">+0.97%</p></article>
-          <article class="metric-card"><p class="metric-label">US2Y</p><p class="metric-value">3.47</p><p class="metric-delta up">+0.58%</p></article>
-          <article class="metric-card"><p class="metric-label">GOLD</p><p class="metric-value">$4,341.90</p><p class="metric-delta up">+0.38%</p></article>
-          <article class="metric-card"><p class="metric-label">SILVER</p><p class="metric-value">$76.34</p><p class="metric-delta down">-1.94%</p></article>
-          <article class="metric-card"><p class="metric-label">WTI</p><p class="metric-value">$57.33</p><p class="metric-delta down">-0.16%</p></article>
-          <article class="metric-card"><p class="metric-label">COPPER</p><p class="metric-value">$5.70</p><p class="metric-delta up">+1.21%</p></article>
+        <h3 class="group-title">카테고리 정리</h3>
+        <div class="category-grid">
+          <a class="category-card" href="./crypto.html">
+            <span class="category-num">1</span>
+            <strong>크립토</strong>
+            <p>코인 시세, 도미넌스, 프리미엄</p>
+          </a>
+          <a class="category-card" href="./stock-market.html">
+            <span class="category-num">2</span>
+            <strong>주식 시장</strong>
+            <p>미국 지수/금리/원자재 + 테크 프록시</p>
+          </a>
+          <a class="category-card" href="./long-short.html">
+            <span class="category-num">3</span>
+            <strong>롱·숏 정리</strong>
+            <p>코인별 포지션 비율/변화</p>
+          </a>
+          <a class="category-card" href="./funding.html">
+            <span class="category-num">4</span>
+            <strong>펀딩비</strong>
+            <p>거래소별 펀딩 상태 비교</p>
+          </a>
+          <a class="category-card" href="./ai-gpt-brief.html">
+            <span class="category-num">5</span>
+            <strong>AI GPT 시황분석</strong>
+            <p>매일 오전 9시 10분 자동 브리핑</p>
+          </a>
+          <a class="category-card" href="./news.html">
+            <span class="category-num">6</span>
+            <strong>뉴스 정리</strong>
+            <p>매크로/크립토 4시간 업데이트</p>
+          </a>
         </div>
       </section>
 
       <section class="panel">
-        <h3 class="group-title">🧩 Tech & Crypto Equity Proxy</h3>
-        <div class="table-wrap">
-          <table class="data-table">
-            <thead>
-              <tr><th>티커</th><th>종가</th><th>Δ(%)</th><th>Beta Tag</th><th>코멘트</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>AAPL</td><td>260.25</td><td class="up">0.88%</td><td>mega-tech</td><td>—</td></tr>
-              <tr><td>MSFT</td><td>477.18</td><td class="down">-2.10%</td><td>mega-tech</td><td>—</td></tr>
-              <tr><td>NVDA</td><td>184.94</td><td class="up">0.08%</td><td>mega-tech</td><td>—</td></tr>
-              <tr><td>AMZN</td><td>246.47</td><td class="down">-0.91%</td><td>mega-tech</td><td>—</td></tr>
-              <tr><td>META</td><td>641.97</td><td class="down">-11.09%</td><td>mega-tech</td><td>—</td></tr>
-              <tr><td>COIN</td><td>242.98</td><td class="up">2.20%</td><td>crypto-beta</td><td>—</td></tr>
-              <tr><td>MSTR</td><td>162.23</td><td class="up">4.90%</td><td>crypto-beta</td><td>변동성 상단 1</td></tr>
-              <tr><td>MARA</td><td>10.65</td><td class="up">0.43%</td><td>miner</td><td>—</td></tr>
-              <tr><td>RIOT</td><td>16.45</td><td class="up">1.13%</td><td>miner</td><td>—</td></tr>
-              <tr><td>HOOD</td><td>117.52</td><td class="up">2.25%</td><td>broker</td><td>변동성 상단 2</td></tr>
-              <tr><td>CLSK</td><td>11.96</td><td class="up">0.35%</td><td>miner</td><td>—</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section class="panel">
-        <h3 class="group-title">7️⃣ Volatility & Correlation</h3>
-        <ul class="news-list">
-          <li>BTC-ETH IV Spread: -16.46 (ETH High Vol)</li>
-          <li>Correlations: BTC/ETH 0.88 · BTC/SOL 0.91 · BTC/NASDAQ 0.42 · BTC/MSTR 0.74</li>
-        </ul>
-      </section>
-
-      <section class="panel">
-        <h3 class="group-title">1️⃣ 유동성 & QE 체크리스트</h3>
-
-        <h4 class="metric-label">1-1. 단기 금리 / 기준금리</h4>
-        <div class="table-wrap">
-          <table class="data-table">
-            <thead><tr><th>항목</th><th>현재</th><th>Δ</th><th>상태</th></tr></thead>
-            <tbody>
-              <tr><td>SOFR</td><td>3.64</td><td>0.00</td><td>live</td></tr>
-              <tr><td>IORB</td><td>3.65</td><td>0.00</td><td>live</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h4 class="metric-label">1-2. 레포 / 연준 유동성 운영</h4>
-        <div class="table-wrap">
-          <table class="data-table">
-            <thead><tr><th>항목</th><th>현재</th><th>Δ</th><th>판단</th></tr></thead>
-            <tbody>
-              <tr><td>REPO</td><td>0.00</td><td>0.00</td><td>보합</td></tr>
-              <tr><td>RRP</td><td>3.40</td><td>0.12</td><td>긴축 우려</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h4 class="metric-label">1-3. 미 재무부 일반계정(TGA)</h4>
-        <div class="table-wrap">
-          <table class="data-table">
-            <thead><tr><th>항목</th><th>현재</th><th>주간 Δ</th><th>해석</th></tr></thead>
-            <tbody>
-              <tr><td>TGA</td><td>796148.00</td><td>-41158.00</td><td>보합</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h4 class="metric-label">1-4. Alert Rules</h4>
-        <div class="table-wrap">
-          <table class="data-table">
-            <thead><tr><th>항목</th><th>현재 판정</th><th>지표</th><th>설명</th></tr></thead>
-            <tbody>
-              <tr><td>SOFR–IORB</td><td>보합</td><td>-0.01bp</td><td>스프레드</td></tr>
-              <tr><td>RRP</td><td>긴축 우려</td><td>0.12</td><td>차액 Δ</td></tr>
-              <tr><td>TGA</td><td>보합</td><td>-41158.00</td><td>주간 변화</td></tr>
-            </tbody>
-          </table>
+        <h3 class="group-title">빠른 실행</h3>
+        <div class="top-nav">
+          <a href="./crypto.html">CRYPTO</a>
+          <a href="./stock-market.html">주식 시장</a>
+          <a href="./long-short.html">롱·숏</a>
+          <a href="./funding.html">펀딩비</a>
+          <a href="./ai-gpt-brief.html">AI GPT 분석</a>
+          <a href="./news.html">뉴스</a>
         </div>
       </section>
     </main>
