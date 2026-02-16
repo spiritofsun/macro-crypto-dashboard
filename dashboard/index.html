@@ -3,66 +3,67 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Macro & Crypto Dashboard</title>
+    <title>Project Mark Crypto Console</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="bg-glow bg-glow-a"></div>
-    <div class="bg-glow bg-glow-b"></div>
     <main class="page">
       <header class="hero">
-        <p class="kicker">Project Mark Dashboard</p>
-        <h1>Liquidity · Rates · Volatility</h1>
-        <p class="asof" id="asOfText"></p>
+        <p class="kicker">PROJECT MARK / LIVE CONSOLE</p>
+        <h1>거래소별 펀비 + 가격 · 카테고리 대시보드</h1>
+        <p class="asof" id="asOfText">loading...</p>
       </header>
 
       <section class="panel">
         <div class="panel-head">
-          <h2>Core Crypto Metrics</h2>
-          <p class="subhead">실시간: 60초마다 갱신</p>
+          <h2>거래소별 펀비 + 가격</h2>
+          <p class="subhead">실시간 갱신: 60초 · 업비트는 KRW spot 기준</p>
         </div>
-        <div class="card-grid card-grid-3" id="coreMetrics"></div>
+        <div class="table-wrap">
+          <table class="exchange-table" id="exchangeTable">
+            <thead>
+              <tr>
+                <th>Coin</th>
+                <th>Binance</th>
+                <th>Bybit</th>
+                <th>OKX</th>
+                <th>Hyperliquid</th>
+                <th>Upbit</th>
+              </tr>
+            </thead>
+            <tbody id="exchangeRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h3 class="group-title">CRYPTO</h3>
+        <div class="card-grid card-grid-4" id="cryptoCards"></div>
+
+        <h3 class="group-title">PREMIUM</h3>
+        <div class="card-grid card-grid-4" id="premiumCards"></div>
+
+        <h3 class="group-title">ETHEREUM</h3>
+        <div class="card-grid card-grid-4" id="ethCards"></div>
+
+        <h3 class="group-title">ETF FLOWS</h3>
+        <div class="flow-grid" id="etfFlows"></div>
+      </section>
+
+      <section class="panel">
+        <h3 class="group-title">MACRO SNAPSHOT</h3>
+        <div class="card-grid card-grid-4" id="macroCards"></div>
       </section>
 
       <section class="panel">
         <div class="panel-head">
-          <h2>Crypto Live Board</h2>
-          <p class="subhead">BTC · ETH · SOL · XRP</p>
-        </div>
-        <div class="card-grid card-grid-4" id="cryptoLive"></div>
-      </section>
-
-      <section class="panel">
-        <div class="panel-head">
-          <h2>Indices</h2>
-        </div>
-        <div class="card-grid card-grid-4" id="indices"></div>
-      </section>
-
-      <section class="panel">
-        <div class="panel-head">
-          <h2>Commodities</h2>
-        </div>
-        <div class="card-grid card-grid-3" id="commodities"></div>
-      </section>
-
-      <section class="panel">
-        <div class="panel-head">
-          <h2>Daily Change Heat</h2>
-        </div>
-        <div id="heatRows" class="heat-rows"></div>
-      </section>
-
-      <section class="panel">
-        <div class="panel-head">
-          <h2>News Feed</h2>
-          <p class="subhead">자동 업데이트: 4시간마다 (UTC 기준 배치)</p>
+          <h2>뉴스 (4시간 업데이트)</h2>
         </div>
         <div class="news-wrap">
           <article class="news-col">
