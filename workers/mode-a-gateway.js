@@ -123,14 +123,16 @@ async function handleLive() {
   const fgApi = "https://api.alternative.me/fng/?limit=1&format=json";
   const fxApi = "https://open.er-api.com/v6/latest/USD";
   const upbitBtcApi = "https://api.upbit.com/v1/ticker?markets=KRW-BTC";
+  const coinbaseBtcApi = "https://api.coinbase.com/v2/prices/BTC-USD/spot";
 
-  const [binanceR, simpleR, globalR, fgR, fxR, upbitR] = await Promise.allSettled([
+  const [binanceR, simpleR, globalR, fgR, fxR, upbitR, coinbaseR] = await Promise.allSettled([
     fetchJson(binance24h),
     fetchJson(cgSimple),
     fetchJson(cgGlobal),
     fetchJson(fgApi),
     fetchJson(fxApi),
     fetchJson(upbitBtcApi),
+    fetchJson(coinbaseBtcApi),
   ]);
 
   const binance = binanceR.status === "fulfilled" && Array.isArray(binanceR.value) ? binanceR.value : [];
@@ -141,6 +143,7 @@ async function handleLive() {
   const fg = fgR.status === "fulfilled" ? fgR.value : null;
   const fx = fxR.status === "fulfilled" ? fxR.value : null;
   const upbit = upbitR.status === "fulfilled" ? upbitR.value : null;
+  const coinbase = coinbaseR.status === "fulfilled" ? coinbaseR.value : null;
 
   const btcBinancePrice = toNum(ticker?.BTCUSDT?.lastPrice);
   const btcBinancePct = toNum(ticker?.BTCUSDT?.priceChangePercent);
@@ -155,6 +158,11 @@ async function handleLive() {
   const ethCgPct = toNum(simple?.ethereum?.usd_24h_change);
   const solCgPrice = toNum(simple?.solana?.usd);
   const solCgPct = toNum(simple?.solana?.usd_24h_change);
+  const coinbaseBtcSpot = toNum(coinbase?.data?.amount);
+  const coinbasePremiumPct =
+    coinbaseBtcSpot !== null && btcBinancePrice !== null && btcBinancePrice !== 0
+      ? ((coinbaseBtcSpot - btcBinancePrice) / btcBinancePrice) * 100
+      : null;
 
   return json({
     as_of: new Date().toISOString(),
@@ -182,6 +190,11 @@ async function handleLive() {
     fear_greed: Number(fg?.data?.[0]?.value) || null,
     fx: {
       usdkrw: fx?.rates?.KRW ?? null,
+    },
+    coinbase: {
+      btc_usd: coinbaseBtcSpot,
+      premium_pct: coinbasePremiumPct,
+      source: coinbaseBtcSpot !== null ? "coinbase+binance" : null,
     },
   });
 }

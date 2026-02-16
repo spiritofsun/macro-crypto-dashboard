@@ -32,6 +32,7 @@ const fallbackLive = {
   dominance: { btc: 56.7, eth: 9.8 },
   fearGreed: 29,
   upbitBtcKrw: 102432000,
+  coinbasePremiumPct: -0.09,
 };
 
 const fallbackFx = { usdKrw: 1444, delta: 0.22 };
@@ -375,6 +376,7 @@ function renderCryptoSummary() {
   const stable = typeof state.snapshot?.stablecoin_market_cap === "number" ? state.snapshot.stablecoin_market_cap : (state.cryptoStableMcap || 0);
   const btcMcap = rows.find((r) => r.ticker === "BTC")?.market_cap || 0;
   const ethMcap = rows.find((r) => r.ticker === "ETH")?.market_cap || 0;
+  const coinbasePremium = toNumSafe(state.live?.coinbasePremiumPct);
 
   const totals = {
     TOTAL: total,
@@ -387,6 +389,13 @@ function renderCryptoSummary() {
 
   renderCards("cryptoCustomSummary", [
     { label: "Stable 시총", value: formatBigNumber(stable), delta: null, deltaText: "stablecoin" },
+    {
+      label: "Coinbase Premium",
+      value: typeof coinbasePremium === "number" ? formatPct(coinbasePremium, 2) : "—",
+      delta: coinbasePremium,
+      deltaText: "BTC (Coinbase vs Binance)",
+      neutralThreshold: 0.05,
+    },
     { label: "TOTAL", value: formatBigNumber(totals.TOTAL), delta: null, deltaText: "전체" },
     { label: "TOTALES", value: formatBigNumber(totals.TOTALES), delta: null, deltaText: "스테이블 제외" },
     { label: "TOTAL2", value: formatBigNumber(totals.TOTAL2), delta: null, deltaText: "BTC 제외" },
@@ -722,6 +731,7 @@ function normalizeGatewayPayload(payload) {
       },
       fearGreed: toNumSafe(payload?.fear_greed),
       upbitBtcKrw: toNumSafe(payload?.btc?.upbit_krw),
+      coinbasePremiumPct: toNumSafe(payload?.coinbase?.premium_pct),
     },
     fx: {
       usdKrw: toNumSafe(payload?.fx?.usdkrw),
@@ -756,16 +766,20 @@ async function fetchLiveDirectFallback() {
   const fgApi = "https://api.alternative.me/fng/?limit=1&format=json";
   const fxApi = "https://open.er-api.com/v6/latest/USD";
   const upbitBtcApi = "https://api.upbit.com/v1/ticker?markets=KRW-BTC";
+  const binanceBtcApi = "https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT";
+  const coinbaseBtcApi = "https://api.coinbase.com/v2/prices/BTC-USD/spot";
 
   const prevLive = state.live || fallbackLive;
 
   try {
-    const [simpleR, globalR, fgR, fxR, upbitR] = await Promise.allSettled([
+    const [simpleR, globalR, fgR, fxR, upbitR, binanceBtcR, coinbaseBtcR] = await Promise.allSettled([
       fetchJson(cgSimple),
       fetchJson(cgGlobal),
       fetchJson(fgApi),
       fetchJson(fxApi),
       fetchJson(upbitBtcApi),
+      fetchJson(binanceBtcApi),
+      fetchJson(coinbaseBtcApi),
     ]);
 
     const simple = simpleR.status === "fulfilled" ? simpleR.value : null;
@@ -773,6 +787,14 @@ async function fetchLiveDirectFallback() {
     const fg = fgR.status === "fulfilled" ? fgR.value : null;
     const fx = fxR.status === "fulfilled" ? fxR.value : null;
     const upbit = upbitR.status === "fulfilled" ? upbitR.value : null;
+    const binanceBtc = binanceBtcR.status === "fulfilled" ? binanceBtcR.value : null;
+    const coinbaseBtc = coinbaseBtcR.status === "fulfilled" ? coinbaseBtcR.value : null;
+    const binanceBtcPrice = toNumSafe(binanceBtc?.lastPrice);
+    const coinbaseBtcPrice = toNumSafe(coinbaseBtc?.data?.amount);
+    const coinbasePremiumPct =
+      coinbaseBtcPrice !== null && binanceBtcPrice !== null && binanceBtcPrice !== 0
+        ? ((coinbaseBtcPrice - binanceBtcPrice) / binanceBtcPrice) * 100
+        : prevLive.coinbasePremiumPct;
 
     state.live = {
       BTC: { price: simple?.bitcoin?.usd ?? prevLive.BTC.price, change: simple?.bitcoin?.usd_24h_change ?? prevLive.BTC.change },
@@ -784,6 +806,7 @@ async function fetchLiveDirectFallback() {
       },
       fearGreed: Number(fg?.data?.[0]?.value) || prevLive.fearGreed,
       upbitBtcKrw: Array.isArray(upbit) ? upbit[0]?.trade_price ?? prevLive.upbitBtcKrw : prevLive.upbitBtcKrw,
+      coinbasePremiumPct,
     };
 
     state.fx = {
@@ -831,6 +854,7 @@ async function fetchLiveFromGateway() {
     },
     fearGreed: normalized.live.fearGreed ?? prevLive.fearGreed,
     upbitBtcKrw: normalized.live.upbitBtcKrw ?? prevLive.upbitBtcKrw,
+    coinbasePremiumPct: normalized.live.coinbasePremiumPct ?? prevLive.coinbasePremiumPct,
   };
   state.fx = {
     usdKrw: normalized.fx.usdKrw ?? fallbackFx.usdKrw,
