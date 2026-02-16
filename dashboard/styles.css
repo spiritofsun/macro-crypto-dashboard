@@ -448,6 +448,28 @@ body {
   font-weight: 600;
 }
 
+.premium-table-wrap {
+  overflow: auto;
+}
+
+.premium-table {
+  table-layout: fixed;
+  min-width: 1020px;
+}
+
+.premium-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  backdrop-filter: blur(8px);
+  background: rgba(16, 22, 30, 0.86);
+}
+
+.premium-table th,
+.premium-table td {
+  white-space: nowrap;
+}
+
 .coin-cell {
   display: grid;
   gap: 2px;
@@ -468,12 +490,14 @@ body {
   font-size: 30px;
   line-height: 1;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .ex-sub {
   margin-top: 4px;
   font-size: 13px;
   color: #618064;
+  white-space: nowrap;
 }
 
 .ex-mark {
