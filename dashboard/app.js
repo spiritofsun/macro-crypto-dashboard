@@ -111,6 +111,11 @@ function formatBigNumber(value) {
   return value.toLocaleString();
 }
 
+function toNumSafe(value) {
+  const n = Number(value);
+  return Number.isFinite(n) ? n : null;
+}
+
 function toneClass(value, neutralThreshold = 0.2) {
   if (typeof value !== "number" || Number.isNaN(value)) return "flat";
   if (Math.abs(value) < neutralThreshold) return "flat";
@@ -397,8 +402,8 @@ function renderDominanceHybrid() {
   const srcEl = document.getElementById("domSource");
   if (!btcEl || !ethEl) return;
 
-  const btcDom = state.live?.dominance?.btc;
-  const ethDom = state.live?.dominance?.eth;
+  const btcDom = toNumSafe(state.live?.dominance?.btc) ?? toNumSafe(fallbackLive.dominance?.btc);
+  const ethDom = toNumSafe(state.live?.dominance?.eth) ?? toNumSafe(fallbackLive.dominance?.eth);
   btcEl.textContent = typeof btcDom === "number" ? `${btcDom.toFixed(2)}%` : "—";
   ethEl.textContent = typeof ethDom === "number" ? `${ethDom.toFixed(2)}%` : "—";
   if (srcEl) srcEl.textContent = "source: coingecko";
@@ -451,6 +456,84 @@ function applyHybridPricesToUniverse(priceMap) {
       price_source: live.source || row.price_source || null,
     };
   });
+}
+
+async function fetchHybridPriceMapDirect(tickers) {
+  const uniq = [...new Set((tickers || []).map((t) => String(t || "").trim().toUpperCase()).filter(Boolean))];
+  if (uniq.length === 0) return {};
+
+  const priceMap = {};
+  const byTicker = {};
+  uniq.forEach((t) => {
+    byTicker[t] = { binance: null, bybit: null, okx: null };
+  });
+
+  const [binanceR, bybitR, okxR] = await Promise.allSettled([
+    fetchJson("https://api.binance.com/api/v3/ticker/24hr"),
+    fetchJson("https://api.bybit.com/v5/market/tickers?category=spot"),
+    fetchJson("https://www.okx.com/api/v5/market/tickers?instType=SPOT"),
+  ]);
+
+  if (binanceR.status === "fulfilled" && Array.isArray(binanceR.value)) {
+    const binanceMap = new Map(
+      binanceR.value
+        .filter((row) => String(row?.symbol || "").endsWith("USDT"))
+        .map((row) => [String(row.symbol).slice(0, -4), row]),
+    );
+    uniq.forEach((t) => {
+      const r = binanceMap.get(t);
+      if (!r) return;
+      byTicker[t].binance = {
+        price: toNumSafe(r.lastPrice),
+        change_24h: toNumSafe(r.priceChangePercent),
+        source: "binance",
+      };
+    });
+  }
+
+  if (bybitR.status === "fulfilled" && Array.isArray(bybitR.value?.result?.list)) {
+    const bybitMap = new Map(
+      bybitR.value.result.list
+        .filter((row) => String(row?.symbol || "").endsWith("USDT"))
+        .map((row) => [String(row.symbol).slice(0, -4), row]),
+    );
+    uniq.forEach((t) => {
+      const r = bybitMap.get(t);
+      if (!r) return;
+      const pct = toNumSafe(r.price24hPcnt);
+      byTicker[t].bybit = {
+        price: toNumSafe(r.lastPrice),
+        change_24h: pct === null ? null : pct * 100,
+        source: "bybit",
+      };
+    });
+  }
+
+  if (okxR.status === "fulfilled" && Array.isArray(okxR.value?.data)) {
+    const okxMap = new Map(
+      okxR.value.data
+        .filter((row) => String(row?.instId || "").endsWith("-USDT"))
+        .map((row) => [String(row.instId).replace("-USDT", ""), row]),
+    );
+    uniq.forEach((t) => {
+      const r = okxMap.get(t);
+      if (!r) return;
+      const last = toNumSafe(r.last);
+      const open = toNumSafe(r.open24h);
+      byTicker[t].okx = {
+        price: last,
+        change_24h: last !== null && open !== null && open !== 0 ? ((last - open) / open) * 100 : null,
+        source: "okx",
+      };
+    });
+  }
+
+  uniq.forEach((t) => {
+    const picked = byTicker[t].binance || byTicker[t].bybit || byTicker[t].okx;
+    if (picked) priceMap[t] = picked;
+  });
+
+  return priceMap;
 }
 
 function renderCryptoTable() {
@@ -630,18 +713,18 @@ function normalizeGatewayPayload(payload) {
   if (!payload || typeof payload !== "object") return null;
   return {
     live: {
-      BTC: { price: payload?.btc?.price_usd ?? null, change: payload?.btc?.change_24h_pct ?? null },
-      ETH: { price: payload?.eth?.price_usd ?? null, change: payload?.eth?.change_24h_pct ?? null },
-      SOL: { price: payload?.sol?.price_usd ?? null, change: payload?.sol?.change_24h_pct ?? null },
+      BTC: { price: toNumSafe(payload?.btc?.price_usd), change: toNumSafe(payload?.btc?.change_24h_pct) },
+      ETH: { price: toNumSafe(payload?.eth?.price_usd), change: toNumSafe(payload?.eth?.change_24h_pct) },
+      SOL: { price: toNumSafe(payload?.sol?.price_usd), change: toNumSafe(payload?.sol?.change_24h_pct) },
       dominance: {
-        btc: payload?.dominance?.btc ?? null,
-        eth: payload?.dominance?.eth ?? null,
+        btc: toNumSafe(payload?.dominance?.btc),
+        eth: toNumSafe(payload?.dominance?.eth),
       },
-      fearGreed: payload?.fear_greed ?? null,
-      upbitBtcKrw: payload?.btc?.upbit_krw ?? null,
+      fearGreed: toNumSafe(payload?.fear_greed),
+      upbitBtcKrw: toNumSafe(payload?.btc?.upbit_krw),
     },
     fx: {
-      usdKrw: payload?.fx?.usdkrw ?? null,
+      usdKrw: toNumSafe(payload?.fx?.usdkrw),
       delta: fallbackFx.delta,
     },
   };
@@ -707,6 +790,12 @@ async function fetchLiveDirectFallback() {
       usdKrw: fx?.rates?.KRW ?? fallbackFx.usdKrw,
       delta: fallbackFx.delta,
     };
+
+    if (detectPageType() === "crypto" && state.cryptoUniverse.length > 0) {
+      const tickers = [...new Set(state.cryptoUniverse.map((row) => (row.ticker || "").toUpperCase()).filter(Boolean))];
+      const directMap = await fetchHybridPriceMapDirect(tickers);
+      applyHybridPricesToUniverse(directMap);
+    }
   } catch (error) {
     console.error("live fetch failed", error);
   } finally {
@@ -755,7 +844,9 @@ async function fetchLiveFromGateway() {
       const pRes = await fetchJson(pEndpoint);
       applyHybridPricesToUniverse(pRes?.prices || {});
     } catch (priceError) {
-      console.warn("crypto hybrid price fetch failed", priceError);
+      console.warn("crypto hybrid price fetch failed, fallback to direct", priceError);
+      const directMap = await fetchHybridPriceMapDirect(tickers);
+      applyHybridPricesToUniverse(directMap);
     }
   }
 }
