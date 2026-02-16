@@ -14,6 +14,16 @@ const uiState = {
 };
 
 const STABLES = new Set(["USDT", "USDC", "DAI", "FDUSD", "TUSD", "USDE", "USDD", "FRAX"]);
+const MODE_A = {
+  apiBase: window.PROJECT_MARK_API_BASE || "https://project-mark-gateway.workers.dev",
+};
+
+const POLL_INTERVAL_MS = {
+  home: 60_000,
+  crypto: 90_000,
+  stocks: 600_000,
+  default: 300_000,
+};
 
 const fallbackLive = {
   BTC: { price: 89986.73, change: 1.41 },
@@ -381,6 +391,68 @@ function renderCryptoSummary() {
   ]);
 }
 
+function renderDominanceHybrid() {
+  const btcEl = document.getElementById("btcDomNum");
+  const ethEl = document.getElementById("ethDomNum");
+  const srcEl = document.getElementById("domSource");
+  if (!btcEl || !ethEl) return;
+
+  const btcDom = state.live?.dominance?.btc;
+  const ethDom = state.live?.dominance?.eth;
+  btcEl.textContent = typeof btcDom === "number" ? `${btcDom.toFixed(2)}%` : "—";
+  ethEl.textContent = typeof ethDom === "number" ? `${ethDom.toFixed(2)}%` : "—";
+  if (srcEl) srcEl.textContent = "source: coingecko";
+
+  const host = document.getElementById("tvDominanceWidget");
+  if (!host || host.dataset.mounted === "1") return;
+
+  const container = document.createElement("div");
+  container.className = "tradingview-widget-container";
+  container.innerHTML = `
+    <div class="tradingview-widget-container__widget"></div>
+    <div class="tradingview-widget-copyright">
+      <a href="https://www.tradingview.com/" rel="noopener noreferrer" target="_blank">TradingView</a>
+    </div>
+  `;
+  host.appendChild(container);
+
+  const script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src = "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
+  script.async = true;
+  script.text = JSON.stringify({
+    autosize: true,
+    symbol: "CRYPTOCAP:BTC.D",
+    interval: "60",
+    timezone: "Asia/Seoul",
+    theme: "dark",
+    style: "1",
+    locale: "kr",
+    allow_symbol_change: true,
+    studies: ["STD;CRYPTOCAP:ETH.D"],
+    hide_side_toolbar: false,
+    withdateranges: true,
+    support_host: "https://www.tradingview.com",
+  });
+  container.appendChild(script);
+  host.dataset.mounted = "1";
+}
+
+function applyHybridPricesToUniverse(priceMap) {
+  if (!priceMap || typeof priceMap !== "object") return;
+  state.cryptoUniverse = state.cryptoUniverse.map((row) => {
+    const ticker = (row.ticker || "").toUpperCase();
+    if (!ticker || !priceMap[ticker]) return row;
+    const live = priceMap[ticker];
+    return {
+      ...row,
+      price: typeof live.price === "number" ? live.price : row.price,
+      change_24h: typeof live.change_24h === "number" ? live.change_24h : row.change_24h,
+      price_source: live.source || row.price_source || null,
+    };
+  });
+}
+
 function renderCryptoTable() {
   const tbody = document.getElementById("cryptoCustomRows");
   if (!tbody) return;
@@ -527,6 +599,7 @@ function renderAll() {
   renderHomeHub();
   renderNewsPage();
   renderCryptoSummary();
+  renderDominanceHybrid();
   renderCryptoTable();
   renderStockMarketPage();
   renderEtfFlows();
@@ -539,6 +612,39 @@ async function fetchJson(url) {
   clearTimeout(timer);
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   return response.json();
+}
+
+function detectPageType() {
+  if (document.getElementById("pulseRows")) return "home";
+  if (document.getElementById("cryptoCustomRows")) return "crypto";
+  if (document.getElementById("rateCards")) return "stocks";
+  return "default";
+}
+
+function getPollIntervalMs() {
+  const page = detectPageType();
+  return POLL_INTERVAL_MS[page] || POLL_INTERVAL_MS.default;
+}
+
+function normalizeGatewayPayload(payload) {
+  if (!payload || typeof payload !== "object") return null;
+  return {
+    live: {
+      BTC: { price: payload?.btc?.price_usd ?? null, change: payload?.btc?.change_24h_pct ?? null },
+      ETH: { price: payload?.eth?.price_usd ?? null, change: payload?.eth?.change_24h_pct ?? null },
+      SOL: { price: payload?.sol?.price_usd ?? null, change: payload?.sol?.change_24h_pct ?? null },
+      dominance: {
+        btc: payload?.dominance?.btc ?? null,
+        eth: payload?.dominance?.eth ?? null,
+      },
+      fearGreed: payload?.fear_greed ?? null,
+      upbitBtcKrw: payload?.btc?.upbit_krw ?? null,
+    },
+    fx: {
+      usdKrw: payload?.fx?.usdkrw ?? null,
+      delta: fallbackFx.delta,
+    },
+  };
 }
 
 async function loadStatic() {
@@ -560,7 +666,7 @@ async function loadStatic() {
   state.stocksWatchlist = stocks.status === "fulfilled" ? stocks.value.rows || [] : [];
 }
 
-async function fetchLive() {
+async function fetchLiveDirectFallback() {
   const ids = "bitcoin,ethereum,solana";
   const cgSimple = `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`;
   const cgGlobal = "https://api.coingecko.com/api/v3/global";
@@ -608,6 +714,63 @@ async function fetchLive() {
   }
 }
 
+async function fetchLiveFromGateway() {
+  const endpoint = `${MODE_A.apiBase}/api/live`;
+  const payload = await fetchJson(endpoint);
+  const normalized = normalizeGatewayPayload(payload);
+  if (!normalized) {
+    throw new Error("Invalid gateway payload");
+  }
+
+  const prevLive = state.live || fallbackLive;
+  state.live = {
+    BTC: {
+      price: normalized.live.BTC.price ?? prevLive.BTC.price,
+      change: normalized.live.BTC.change ?? prevLive.BTC.change,
+    },
+    ETH: {
+      price: normalized.live.ETH.price ?? prevLive.ETH.price,
+      change: normalized.live.ETH.change ?? prevLive.ETH.change,
+    },
+    SOL: {
+      price: normalized.live.SOL.price ?? prevLive.SOL.price,
+      change: normalized.live.SOL.change ?? prevLive.SOL.change,
+    },
+    dominance: {
+      btc: normalized.live.dominance.btc ?? prevLive.dominance.btc,
+      eth: normalized.live.dominance.eth ?? prevLive.dominance.eth,
+    },
+    fearGreed: normalized.live.fearGreed ?? prevLive.fearGreed,
+    upbitBtcKrw: normalized.live.upbitBtcKrw ?? prevLive.upbitBtcKrw,
+  };
+  state.fx = {
+    usdKrw: normalized.fx.usdKrw ?? fallbackFx.usdKrw,
+    delta: normalized.fx.delta ?? fallbackFx.delta,
+  };
+
+  if (detectPageType() === "crypto" && state.cryptoUniverse.length > 0) {
+    const tickers = [...new Set(state.cryptoUniverse.map((row) => (row.ticker || "").toUpperCase()).filter(Boolean))];
+    const pEndpoint = `${MODE_A.apiBase}/api/crypto-prices?tickers=${encodeURIComponent(tickers.join(","))}`;
+    try {
+      const pRes = await fetchJson(pEndpoint);
+      applyHybridPricesToUniverse(pRes?.prices || {});
+    } catch (priceError) {
+      console.warn("crypto hybrid price fetch failed", priceError);
+    }
+  }
+}
+
+async function fetchLive() {
+  try {
+    await fetchLiveFromGateway();
+  } catch (gatewayError) {
+    console.warn("gateway fetch failed, fallback to direct sources", gatewayError);
+    await fetchLiveDirectFallback();
+    return;
+  }
+  renderAll();
+}
+
 async function init() {
   state.live = fallbackLive;
   state.fx = fallbackFx;
@@ -625,7 +788,11 @@ async function init() {
 
   renderAll();
   await fetchLive();
-  setInterval(fetchLive, 60000);
+  const pollMs = getPollIntervalMs();
+  setInterval(() => {
+    if (document.hidden) return;
+    fetchLive();
+  }, pollMs);
 }
 
 init();
