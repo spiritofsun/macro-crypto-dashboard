@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260216r" />
+    <link rel="stylesheet" href="./styles.css?v=20260216s" />
   </head>
   <body>
     <div class="app-shell">
@@ -32,7 +32,11 @@
 
         <section class="panel">
           <h3 class="group-title">요약 지표</h3>
-          <div class="card-grid card-grid-4" id="cryptoCustomSummary"></div>
+          <div class="card-grid card-grid-4" id="cryptoPrimarySummary"></div>
+          <details class="panel compact-inner collapsible-panel">
+            <summary>More metrics</summary>
+            <div class="card-grid card-grid-4" id="cryptoSecondarySummary"></div>
+          </details>
         </section>
 
         <section class="panel">
@@ -67,6 +71,6 @@
       </main>
     </div>
 
-    <script src="./app.js?v=20260216q"></script>
+    <script src="./app.js?v=20260216s"></script>
   </body>
 </html>

@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260216r" />
+    <link rel="stylesheet" href="./styles.css?v=20260216s" />
   </head>
   <body>
     <div class="app-shell">
@@ -34,57 +34,8 @@
           <h3 class="group-title">롱 vs 숏 포지션 비율</h3>
           <div class="table-wrap">
             <table class="data-table compact-table ls-segment-table">
-              <thead><tr><th>코인</th><th>세그먼트</th><th class="num">델타</th><th>해석</th></tr></thead>
-              <tbody>
-                <tr>
-                  <td>BTC</td>
-                  <td>
-                    <div class="segbar"><span class="seg-long" style="width:38.57%">L 38.57%</span><span class="seg-short" style="width:61.43%">S 61.43%</span></div>
-                  </td>
-                  <td class="num down">-22.86%</td>
-                  <td>숏 우위</td>
-                </tr>
-                <tr>
-                  <td>ETH</td>
-                  <td>
-                    <div class="segbar"><span class="seg-long" style="width:34.98%">L 34.98%</span><span class="seg-short" style="width:65.02%">S 65.02%</span></div>
-                  </td>
-                  <td class="num down">-30.04%</td>
-                  <td>숏 우위</td>
-                </tr>
-                <tr>
-                  <td>XRP</td>
-                  <td>
-                    <div class="segbar"><span class="seg-long" style="width:27.28%">L 27.28%</span><span class="seg-short" style="width:72.72%">S 72.72%</span></div>
-                  </td>
-                  <td class="num down">-45.44%</td>
-                  <td>숏 우위</td>
-                </tr>
-                <tr>
-                  <td>SOL</td>
-                  <td>
-                    <div class="segbar"><span class="seg-long" style="width:25.68%">L 25.68%</span><span class="seg-short" style="width:74.32%">S 74.32%</span></div>
-                  </td>
-                  <td class="num down">-48.64%</td>
-                  <td>숏 과열 주의</td>
-                </tr>
-                <tr>
-                  <td>BNB</td>
-                  <td>
-                    <div class="segbar"><span class="seg-long" style="width:40.32%">L 40.32%</span><span class="seg-short" style="width:59.68%">S 59.68%</span></div>
-                  </td>
-                  <td class="num down">-19.36%</td>
-                  <td>중립~숏 우위</td>
-                </tr>
-                <tr>
-                  <td>DOGE</td>
-                  <td>
-                    <div class="segbar"><span class="seg-long" style="width:20.15%">L 20.15%</span><span class="seg-short" style="width:79.85%">S 79.85%</span></div>
-                  </td>
-                  <td class="num down">-59.70%</td>
-                  <td>극단 숏 우위</td>
-                </tr>
-              </tbody>
+              <thead><tr><th>Asset</th><th>Long vs Short</th><th class="num">Delta</th><th>Status</th></tr></thead>
+              <tbody id="longShortRows"></tbody>
             </table>
           </div>
           <ul class="news-list">
@@ -94,6 +45,6 @@
         </section>
       </main>
     </div>
-    <script src="./app.js?v=20260216q"></script>
+    <script src="./app.js?v=20260216s"></script>
   </body>
 </html>

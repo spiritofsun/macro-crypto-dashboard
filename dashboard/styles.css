@@ -1595,3 +1595,282 @@ body {
 .flat {
   font-weight: 600;
 }
+
+/* v20260216s Bloomberg-lite terminal system */
+:root {
+  --bg: #0e1624;
+  --panel: #0e131a;
+  --panel-2: #0e131a;
+  --text: #e6edf6;
+  --line: rgba(255, 255, 255, 0.06);
+  --line-strong: rgba(255, 255, 255, 0.08);
+  --muted: rgba(230, 237, 246, 0.4);
+  --up: #00b37e;
+  --down: #e5484d;
+  --flat: #6b7280;
+  --section-gap: 20px;
+  --card-gap: 16px;
+  --card-padding: 16px;
+  --row-height: 32px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.top-snapshot-bar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  height: 48px;
+  border-bottom: 1px solid var(--line);
+  background: #0d141f;
+  display: flex;
+  align-items: center;
+}
+
+.top-snapshot-inner {
+  width: 1440px;
+  max-width: calc(100vw - 24px);
+  margin: 0 auto;
+  padding: 0 24px;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  opacity: 0.6;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.live-dot {
+  color: var(--up);
+  opacity: 1;
+}
+
+.app-shell {
+  width: 1440px;
+  max-width: calc(100vw - 24px);
+  grid-template-columns: 220px 1fr;
+  gap: 16px;
+  margin: 16px auto 28px;
+}
+
+.left-sidebar {
+  width: 220px;
+  top: 64px;
+  border-radius: 3px;
+  background: #0e131a;
+  border: 1px solid var(--line);
+  padding: 8px;
+  min-height: calc(100vh - 84px);
+}
+
+.content-page {
+  width: 100%;
+  max-width: 1280px;
+  padding: 0 24px;
+  margin: 0 auto;
+}
+
+.side-home,
+.side-link {
+  min-height: 40px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(230, 237, 246, 0.75);
+  background: transparent;
+}
+
+.side-home {
+  margin-bottom: 2px;
+}
+
+.side-link.active,
+.side-home.active {
+  border-left: 2px solid #00b37e;
+  background: rgba(0, 179, 126, 0.08);
+  border-top-color: var(--line);
+  border-right-color: var(--line);
+  border-bottom-color: var(--line);
+  color: #e6edf6;
+}
+
+.panel {
+  border-radius: 3px;
+  box-shadow: none;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  margin-bottom: var(--section-gap);
+}
+
+.panel-head h2,
+.group-title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  opacity: 0.7;
+  color: rgba(230, 237, 246, 0.9);
+}
+
+.hero h1 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  color: #e6edf6;
+}
+
+.kicker,
+.asof,
+.subhead,
+.metric-label,
+.flow-meta,
+.brief-date,
+.news-meta {
+  font-size: 11px;
+  opacity: 0.55;
+  color: rgba(230, 237, 246, 0.75);
+}
+
+.snapshot-pill .label,
+.snapshot-pill .value {
+  font-size: 11px;
+  opacity: 0.5;
+}
+
+.metric-card,
+.flow-card,
+.news-col,
+.brief-preview,
+.summary-link {
+  border-radius: 3px;
+  box-shadow: none;
+  background: #0e131a;
+  border: 1px solid var(--line);
+}
+
+.metric-card {
+  min-height: 88px;
+}
+
+.metric-value {
+  font-size: 18px;
+  font-weight: 500;
+  color: #e6edf6;
+}
+
+.metric-card.top-kpi .metric-value {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.metric-delta {
+  font-size: 12px;
+  text-align: right;
+}
+
+.data-table {
+  font-size: 13px;
+}
+
+.data-table th,
+.data-table td {
+  height: 32px;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.data-table .num,
+.exchange-table .num,
+.metric-value,
+.metric-delta,
+.flow-main,
+.flow-row span:last-child {
+  text-align: right;
+}
+
+.data-table tbody tr:hover,
+.metric-card:hover,
+.flow-card:hover,
+.news-col:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.compact-inner {
+  margin-top: 12px;
+  padding: 12px;
+}
+
+.collapsible-panel summary {
+  color: rgba(230, 237, 246, 0.72);
+}
+
+.ls-segment-table tbody tr {
+  height: 44px;
+}
+
+.segbar {
+  position: relative;
+  height: 16px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.seg-midline {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 1px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(-0.5px);
+  z-index: 2;
+}
+
+.seg-long,
+.seg-short {
+  height: 16px;
+  font-size: 11px;
+  color: rgba(230, 237, 246, 0.88);
+}
+
+.seg-long {
+  background: #00b37e;
+}
+
+.seg-short {
+  background: #e5484d;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 68px;
+  height: 20px;
+  padding: 0 8px;
+  border-radius: 3px;
+  font-size: 11px;
+  letter-spacing: 0.3px;
+  color: #e6edf6;
+}
+
+.status-neutral {
+  background: rgba(107, 114, 128, 0.15);
+}
+
+.status-bias {
+  background: rgba(224, 160, 60, 0.15);
+}
+
+.status-extreme {
+  background: rgba(229, 72, 77, 0.2);
+}
+
+/* limit accent usage to deltas/live/active nav */
+.panel-head h2 .up,
+.panel-head h2 .down,
+.group-title .up,
+.group-title .down {
+  color: inherit;
+}

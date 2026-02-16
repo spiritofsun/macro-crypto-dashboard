@@ -91,6 +91,15 @@ const etfHistoryFallback = {
   ],
 };
 
+const longShortFallback = [
+  { asset: "BTC", long: 38.57, short: 61.43 },
+  { asset: "ETH", long: 34.98, short: 65.02 },
+  { asset: "XRP", long: 27.28, short: 72.72 },
+  { asset: "SOL", long: 25.68, short: 74.32 },
+  { asset: "BNB", long: 40.32, short: 59.68 },
+  { asset: "DOGE", long: 20.15, short: 79.85 },
+];
+
 function formatPct(value, digits = 2) {
   if (typeof value !== "number" || Number.isNaN(value)) return "—";
   return `${value >= 0 ? "+" : ""}${value.toFixed(digits)}%`;
@@ -130,13 +139,19 @@ function setAsOf() {
   const newsAsOf = newsAsOfRaw.startsWith("1970-01-01") || !newsAsOfRaw ? "수집 대기" : newsAsOfRaw;
   const etfAsOf = etfAsOfRaw.startsWith("1970-01-01") || !etfAsOfRaw ? "수집 대기" : etfAsOfRaw;
 
-  const text = `SNAPSHOT ${snapshotAsOf} | NEWS ${newsAsOf} | ETF ${etfAsOf} | LIVE ${new Date().toLocaleTimeString()}`;
+  const liveTs = new Date().toLocaleTimeString();
+  const text = `SNAPSHOT ${snapshotAsOf} | NEWS ${newsAsOf} | ETF ${etfAsOf} | LIVE ${liveTs}`;
 
   const asOf = document.getElementById("asOfText");
   if (asOf) asOf.textContent = text;
 
   const homeAsOf = document.getElementById("homeAsOf");
   if (homeAsOf) homeAsOf.textContent = text;
+
+  const top = document.getElementById("globalSnapshotText");
+  if (top) {
+    top.innerHTML = `Snapshot ${snapshotAsOf} · News ${newsAsOf} · ETF ${etfAsOf} · <span class="live-dot">●</span> Live ${liveTs}`;
+  }
 }
 
 function cardHTML(item, index, topCount = 4) {
@@ -158,6 +173,13 @@ function renderCards(targetId, items, options = {}) {
 }
 
 function setupSidebarShell() {
+  if (!document.querySelector(".top-snapshot-bar")) {
+    const bar = document.createElement("div");
+    bar.className = "top-snapshot-bar";
+    bar.innerHTML = '<div class="top-snapshot-inner" id="globalSnapshotText">Snapshot n/a · News n/a · ETF n/a · <span class="live-dot">●</span> Live n/a</div>';
+    document.body.insertBefore(bar, document.body.firstChild);
+  }
+
   const sidebar = document.querySelector(".left-sidebar");
   if (!sidebar) return;
 
@@ -373,8 +395,9 @@ function getFilteredCryptoRows() {
 }
 
 function renderCryptoSummary() {
-  const target = document.getElementById("cryptoCustomSummary");
-  if (!target) return;
+  const primaryTarget = document.getElementById("cryptoPrimarySummary");
+  const secondaryTarget = document.getElementById("cryptoSecondarySummary");
+  if (!primaryTarget && !secondaryTarget) return;
 
   const rows = state.cryptoUniverse.filter((r) => typeof r.market_cap === "number");
   const total = rows.reduce((s, r) => s + r.market_cap, 0);
@@ -394,7 +417,7 @@ function renderCryptoSummary() {
     TOTAL3ES: total - btcMcap - ethMcap - stable,
   };
 
-  renderCards("cryptoCustomSummary", [
+  const summaryCards = [
     { label: "Stable 시총", value: formatBigNumber(stable), delta: null, deltaText: "stablecoin" },
     {
       label: "BTC 도미넌스",
@@ -421,9 +444,12 @@ function renderCryptoSummary() {
     { label: "TOTAL2ES", value: formatBigNumber(totals.TOTAL2ES), delta: null, deltaText: "BTC+스테이블 제외" },
     { label: "TOTAL3", value: formatBigNumber(totals.TOTAL3), delta: null, deltaText: "BTC+ETH 제외" },
     { label: "TOTAL3ES", value: formatBigNumber(totals.TOTAL3ES), delta: null, deltaText: "BTC+ETH+스테이블 제외" },
-  ]);
+  ];
 
-  const cards = target.querySelectorAll(".metric-card");
+  renderCards("cryptoPrimarySummary", summaryCards.slice(0, 4), { topCount: 4 });
+  renderCards("cryptoSecondarySummary", summaryCards.slice(4), { topCount: 0 });
+
+  const cards = document.querySelectorAll("#cryptoPrimarySummary .metric-card, #cryptoSecondarySummary .metric-card");
   cards.forEach((card) => {
     const label = card.querySelector(".metric-label")?.textContent?.trim();
     if (label !== "BTC 도미넌스" && label !== "알트코인 도미넌스") return;
@@ -673,14 +699,27 @@ function renderStockMarketPage() {
     { label: "USD/KRW", value: macro.fx.usdkrw.display, delta: macro.fx.usdkrw.delta },
   ]);
 
-  renderCards("indexCards", [
-    { label: "KOSPI", value: macro.indices.kospi.display, delta: macro.indices.kospi.delta },
-    { label: "KOSDAQ", value: macro.indices.kosdaq.display, delta: macro.indices.kosdaq.delta },
-    { label: "NASDAQ", value: macro.indices.nasdaq.display, delta: macro.indices.nasdaq.delta },
-    { label: "DOW", value: macro.indices.dow.display, delta: macro.indices.dow.delta },
-    { label: "Russell 2000", value: macro.indices.russell2000.display, delta: macro.indices.russell2000.delta },
-    { label: "S&P500", value: macro.indices.sp500.display, delta: macro.indices.sp500.delta },
-  ]);
+  const indexRows = document.getElementById("indexRows");
+  if (indexRows) {
+    const rows = [
+      ["KOSPI", macro.indices.kospi.display, macro.indices.kospi.delta],
+      ["KOSDAQ", macro.indices.kosdaq.display, macro.indices.kosdaq.delta],
+      ["NASDAQ", macro.indices.nasdaq.display, macro.indices.nasdaq.delta],
+      ["DOW", macro.indices.dow.display, macro.indices.dow.delta],
+      ["Russell 2000", macro.indices.russell2000.display, macro.indices.russell2000.delta],
+      ["S&P500", macro.indices.sp500.display, macro.indices.sp500.delta],
+    ];
+    indexRows.innerHTML = rows.map((r) => `<tr><td>${r[0]}</td><td class="num">${r[1]}</td><td class="num ${toneClass(r[2])}">${formatPct(r[2])}</td></tr>`).join("");
+  } else {
+    renderCards("indexCards", [
+      { label: "KOSPI", value: macro.indices.kospi.display, delta: macro.indices.kospi.delta },
+      { label: "KOSDAQ", value: macro.indices.kosdaq.display, delta: macro.indices.kosdaq.delta },
+      { label: "NASDAQ", value: macro.indices.nasdaq.display, delta: macro.indices.nasdaq.delta },
+      { label: "DOW", value: macro.indices.dow.display, delta: macro.indices.dow.delta },
+      { label: "Russell 2000", value: macro.indices.russell2000.display, delta: macro.indices.russell2000.delta },
+      { label: "S&P500", value: macro.indices.sp500.display, delta: macro.indices.sp500.delta },
+    ]);
+  }
 
   renderCards("commodityCards", [
     { label: "GOLD", value: macro.commodities.gold.display, delta: macro.commodities.gold.delta },
@@ -705,6 +744,31 @@ function renderStockMarketPage() {
       .map((row) => `<tr><td>${row.group}</td><td>${row.name}</td><td>${row.ticker}</td><td class="num">${formatUsd(row.price)}</td><td class="num ${toneClass(row.change)}">${formatPct(row.change)}</td></tr>`)
       .join("");
   }
+}
+
+function renderLongShortPage() {
+  const tbody = document.getElementById("longShortRows");
+  if (!tbody) return;
+  const rows = longShortFallback.map((row) => {
+    const delta = row.long - row.short;
+    const status = row.short >= 70 ? "EXTREME" : row.short >= 60 ? "BIAS" : "NEUTRAL";
+    const badgeClass = status === "EXTREME" ? "status-extreme" : status === "BIAS" ? "status-bias" : "status-neutral";
+    return `
+      <tr>
+        <td>${row.asset}</td>
+        <td>
+          <div class="segbar">
+            <span class="seg-midline"></span>
+            <span class="seg-long" style="width:${row.long.toFixed(2)}%">${row.long.toFixed(2)}%</span>
+            <span class="seg-short" style="width:${row.short.toFixed(2)}%">${row.short.toFixed(2)}%</span>
+          </div>
+        </td>
+        <td class="num ${toneClass(delta)}">${formatPct(delta, 2)}</td>
+        <td><span class="status-badge ${badgeClass}">${status}</span></td>
+      </tr>
+    `;
+  });
+  tbody.innerHTML = rows.join("");
 }
 
 function renderEtfFlows() {
@@ -741,6 +805,7 @@ function renderAll() {
   renderDominanceHybrid();
   renderCryptoTable();
   renderStockMarketPage();
+  renderLongShortPage();
   renderEtfFlows();
 }
 
