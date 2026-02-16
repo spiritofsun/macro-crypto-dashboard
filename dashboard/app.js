@@ -6,6 +6,32 @@ const state = {
   fx: null,
 };
 
+const fallbackLive = {
+  BTC: { price: 68819, change: -1.17 },
+  ETH: { price: 1969, change: -5.07 },
+  XRP: { price: 1.48, change: -3.1 },
+  BNB: { price: 616.2, change: -0.7 },
+  SOL: { price: 86.2, change: -2.2 },
+  DOGE: { price: 0.1027, change: -1.1 },
+  ADA: { price: 0.2823, change: -0.9 },
+  TRX: { price: 0.2807, change: 0.2 },
+  AVAX: { price: 9.29, change: -1.2 },
+  LINK: { price: 8.8, change: -1.9 },
+  SUI: { price: 0.9768, change: -1.4 },
+  XLM: { price: 0.171, change: -0.5 },
+  TON: { price: 1.47, change: 0.4 },
+  HBAR: { price: 0.08, change: -1.2 },
+  dominance: { btc: 56.7, eth: 9.8 },
+  fearGreed: 12,
+  upbitBtcKrw: 102432000,
+  coinbaseBtc: 68757,
+};
+
+const fallbackFx = {
+  usdKrw: 1444,
+  delta: 0.22,
+};
+
 const exchangeCoins = ["BTC", "ETH", "XRP", "BNB", "SOL", "DOGE", "ADA", "TRX", "AVAX", "LINK", "SUI", "XLM", "TON", "HBAR"];
 
 const etfHistoryFallback = {
@@ -267,7 +293,10 @@ function renderCategoryCards() {
 }
 
 async function fetchJson(url) {
-  const r = await fetch(url, { cache: "no-store" });
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8000);
+  const r = await fetch(url, { cache: "no-store", signal: controller.signal });
+  clearTimeout(timer);
   if (!r.ok) throw new Error(`HTTP ${r.status}`);
   return r.json();
 }
@@ -365,6 +394,13 @@ async function fetchLive() {
 }
 
 async function init() {
+  state.live = fallbackLive;
+  state.fx = fallbackFx;
+  renderCategoryCards();
+  renderExchangeTable();
+  renderEtfFlows();
+  setAsOf();
+
   try {
     await loadStatic();
   } catch (e) {
