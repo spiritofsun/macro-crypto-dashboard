@@ -125,6 +125,21 @@ function renderMacroCards() {
     delta: x.delta,
   }));
   renderCards("macroCards", items);
+
+  const checklistEl = document.getElementById("liqChecklist");
+  if (checklistEl) {
+    const checklist = s.liquidity_checklist || [];
+    checklistEl.innerHTML = checklist.length > 0
+      ? checklist.map((x) => `<li>${x}</li>`).join("")
+      : "<li>데이터 없음</li>";
+  }
+
+  const equities = (s.crypto_equities || []).map((x) => ({
+    label: x.label,
+    value: x.value,
+    delta: x.delta,
+  }));
+  renderCards("cryptoEquityCards", equities);
 }
 
 function pseudoExchangePrice(base, seed) {
