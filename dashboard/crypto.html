@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260216h" />
+    <link rel="stylesheet" href="./styles.css?v=20260216i" />
   </head>
   <body>
     <div class="app-shell">
@@ -25,23 +25,55 @@
 
       <main class="page content-page">
         <header class="hero">
-          <p class="kicker">PROJECT MARK / LIVE CONSOLE</p>
-          <h1>CRYPTO</h1>
+          <p class="kicker">PROJECT MARK / CATEGORY 1</p>
+          <h1>크립토</h1>
           <p class="asof" id="asOfText">loading...</p>
+          <button class="back-btn" onclick="history.length > 1 ? history.back() : (location.href='./index.html')">← 뒤로가기</button>
         </header>
 
         <section class="panel">
-          <h3 class="group-title">CRYPTO</h3>
-          <div class="card-grid card-grid-4" id="cryptoCards"></div>
+          <h3 class="group-title">요약 카드</h3>
+          <div class="card-grid card-grid-5" id="cryptoTopSummary"></div>
+        </section>
 
-          <h3 class="group-title">PREMIUM</h3>
-          <div class="card-grid card-grid-4" id="premiumCards"></div>
+        <section class="panel">
+          <div class="panel-head">
+            <h2>상위 20 자산 모니터링</h2>
+            <p class="subhead">시총 기준 · 정렬/검색/필터 지원</p>
+          </div>
 
-          <h3 class="group-title">ETHEREUM</h3>
-          <div class="card-grid card-grid-4" id="ethCards"></div>
+          <div class="tool-row">
+            <input class="tool-input" id="cryptoSearch" type="text" placeholder="코인 검색 (예: BTC, Ethereum)" />
+            <label class="tool-check"><input type="checkbox" id="moversOnly" /> Movers only</label>
+            <select class="tool-select" id="cryptoSort">
+              <option value="market_cap">시총순</option>
+              <option value="price">가격순</option>
+              <option value="change">등락률순</option>
+              <option value="volume">거래량순</option>
+            </select>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table sortable-table compact-table" id="cryptoTopTable">
+              <thead>
+                <tr>
+                  <th>순위</th>
+                  <th>자산</th>
+                  <th class="num">현재가</th>
+                  <th class="num">24H %</th>
+                  <th class="num">시총</th>
+                  <th class="num">거래량</th>
+                  <th class="num">Funding</th>
+                  <th class="num">Dominance</th>
+                </tr>
+              </thead>
+              <tbody id="cryptoTopRows"></tbody>
+            </table>
+          </div>
         </section>
       </main>
     </div>
-    <script src="./app.js?v=20260216h"></script>
+
+    <script src="./app.js?v=20260216i"></script>
   </body>
 </html>

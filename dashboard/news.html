@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260216h" />
+    <link rel="stylesheet" href="./styles.css?v=20260216i" />
   </head>
   <body>
     <div class="app-shell">
@@ -28,6 +28,7 @@
           <p class="kicker">PROJECT MARK / LIVE CONSOLE</p>
           <h1>뉴스</h1>
           <p class="asof" id="asOfText">loading...</p>
+          <button class="back-btn" onclick="history.length > 1 ? history.back() : (location.href='./index.html')">← 뒤로가기</button>
         </header>
 
         <section class="panel">
@@ -62,6 +63,6 @@
         </section>
       </main>
     </div>
-    <script src="./app.js?v=20260216h"></script>
+    <script src="./app.js?v=20260216i"></script>
   </body>
 </html>

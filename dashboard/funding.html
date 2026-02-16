@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260216h" />
+    <link rel="stylesheet" href="./styles.css?v=20260216i" />
   </head>
   <body>
     <div class="app-shell">
@@ -28,10 +28,26 @@
           <p class="kicker">PROJECT MARK / CATEGORY 4</p>
           <h1>펀딩비</h1>
           <p class="asof">거래소별 펀딩 상태 비교</p>
+          <button class="back-btn" onclick="history.length > 1 ? history.back() : (location.href='./index.html')">← 뒤로가기</button>
         </header>
         <section class="panel">
-          <h3 class="group-title">준비중</h3>
-          <p class="asof">펀딩비 전용 테이블/알림 섹션을 붙일 수 있습니다.</p>
+          <h3 class="group-title">거래소별 펀딩비</h3>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>코인</th><th>Binance</th><th>Bybit</th><th>OKX</th><th>Hyperliquid</th><th>상태</th></tr></thead>
+              <tbody>
+                <tr><td>BTC</td><td class="up">+0.0009%</td><td class="up">+0.0036%</td><td class="up">+0.0030%</td><td class="up">+0.0013%</td><td>롱 비용 증가</td></tr>
+                <tr><td>ETH</td><td class="down">-0.0063%</td><td class="down">-0.0021%</td><td class="down">-0.0034%</td><td class="up">+0.0013%</td><td>혼조</td></tr>
+                <tr><td>SOL</td><td class="down">-0.0050%</td><td class="down">-0.0164%</td><td class="down">-0.0023%</td><td class="down">-0.0031%</td><td>숏 비용 증가</td></tr>
+                <tr><td>XRP</td><td class="down">-0.0160%</td><td class="down">-0.0322%</td><td class="down">-0.0148%</td><td class="down">-0.0042%</td><td>숏 우위</td></tr>
+                <tr><td>DOGE</td><td class="down">-0.0092%</td><td class="down">-0.0321%</td><td class="down">-0.0028%</td><td class="down">-0.0005%</td><td>숏 우위</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <ul class="news-list">
+            <li>절대값이 큰 음수 펀딩비는 숏 포지션 쏠림 신호로 해석합니다.</li>
+            <li>거래소간 펀딩 역전 구간은 단기 변동성 확대 가능성이 큽니다.</li>
+          </ul>
         </section>
       </main>
     </div>
