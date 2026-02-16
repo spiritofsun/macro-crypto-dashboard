@@ -212,6 +212,9 @@ function normalizeCustomUniverse(items) {
     "file": "Filecoin",
     "stable": "StablecoinBucket",
     "world": "World",
+    "morph": "Morpho",
+    "maple": "Maple Finance",
+    "liena": "Linea",
   };
 
   const seen = new Set();
@@ -377,6 +380,8 @@ function renderCryptoSummary() {
   const btcMcap = rows.find((r) => r.ticker === "BTC")?.market_cap || 0;
   const ethMcap = rows.find((r) => r.ticker === "ETH")?.market_cap || 0;
   const coinbasePremium = toNumSafe(state.live?.coinbasePremiumPct);
+  const btcDominance = toNumSafe(state.live?.dominance?.btc) ?? toNumSafe(fallbackLive.dominance?.btc);
+  const altDominance = typeof btcDominance === "number" ? 100 - btcDominance : null;
 
   const totals = {
     TOTAL: total,
@@ -389,6 +394,18 @@ function renderCryptoSummary() {
 
   renderCards("cryptoCustomSummary", [
     { label: "Stable 시총", value: formatBigNumber(stable), delta: null, deltaText: "stablecoin" },
+    {
+      label: "BTC 도미넌스",
+      value: typeof btcDominance === "number" ? `${btcDominance.toFixed(2)}%` : "—",
+      delta: null,
+      deltaText: "시장 점유율",
+    },
+    {
+      label: "알트코인 도미넌스",
+      value: typeof altDominance === "number" ? `${altDominance.toFixed(2)}%` : "—",
+      delta: null,
+      deltaText: "100 - BTC.D",
+    },
     {
       label: "Coinbase Premium",
       value: typeof coinbasePremium === "number" ? formatPct(coinbasePremium, 2) : "—",
@@ -455,6 +472,7 @@ function renderDominanceHybrid() {
 function applyHybridPricesToUniverse(priceMap) {
   if (!priceMap || typeof priceMap !== "object") return;
   state.cryptoUniverse = state.cryptoUniverse.map((row) => {
+    if (row?.disable_ticker_feed) return row;
     const ticker = (row.ticker || "").toUpperCase();
     if (!ticker || !priceMap[ticker]) return row;
     const live = priceMap[ticker];
@@ -815,7 +833,14 @@ async function fetchLiveDirectFallback() {
     };
 
     if (detectPageType() === "crypto" && state.cryptoUniverse.length > 0) {
-      const tickers = [...new Set(state.cryptoUniverse.map((row) => (row.ticker || "").toUpperCase()).filter(Boolean))];
+      const tickers = [
+        ...new Set(
+          state.cryptoUniverse
+            .filter((row) => !row?.disable_ticker_feed)
+            .map((row) => (row.ticker || "").toUpperCase())
+            .filter(Boolean),
+        ),
+      ];
       const directMap = await fetchHybridPriceMapDirect(tickers);
       applyHybridPricesToUniverse(directMap);
     }
@@ -862,7 +887,14 @@ async function fetchLiveFromGateway() {
   };
 
   if (detectPageType() === "crypto" && state.cryptoUniverse.length > 0) {
-    const tickers = [...new Set(state.cryptoUniverse.map((row) => (row.ticker || "").toUpperCase()).filter(Boolean))];
+    const tickers = [
+      ...new Set(
+        state.cryptoUniverse
+          .filter((row) => !row?.disable_ticker_feed)
+          .map((row) => (row.ticker || "").toUpperCase())
+          .filter(Boolean),
+      ),
+    ];
     const pEndpoint = `${MODE_A.apiBase}/api/crypto-prices?tickers=${encodeURIComponent(tickers.join(","))}`;
     try {
       const pRes = await fetchJson(pEndpoint);
