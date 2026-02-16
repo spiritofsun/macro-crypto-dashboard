@@ -294,8 +294,28 @@ async function fetchLive() {
   const fxApi = "https://open.er-api.com/v6/latest/USD";
   const upbitBtcApi = "https://api.upbit.com/v1/ticker?markets=KRW-BTC";
 
+  const map = {
+    BTC: "bitcoin",
+    ETH: "ethereum",
+    BNB: "binancecoin",
+    SOL: "solana",
+    XRP: "ripple",
+    DOGE: "dogecoin",
+    ADA: "cardano",
+    TRX: "tron",
+    AVAX: "avalanche-2",
+    LINK: "chainlink",
+    SUI: "sui",
+    XLM: "stellar",
+    TON: "toncoin",
+    HBAR: "hedera-hashgraph",
+  };
+
+  const prevLive = state.live || {};
+  const prevFx = state.fx || {};
+
   try {
-    const [simple, globalData, fg, fx, upbit] = await Promise.all([
+    const [simpleR, globalR, fgR, fxR, upbitR] = await Promise.allSettled([
       fetchJson(cgSimple),
       fetchJson(cgGlobal),
       fetchJson(fgApi),
@@ -303,51 +323,44 @@ async function fetchLive() {
       fetchJson(upbitBtcApi),
     ]);
 
-    const map = {
-      BTC: "bitcoin",
-      ETH: "ethereum",
-      BNB: "binancecoin",
-      SOL: "solana",
-      XRP: "ripple",
-      DOGE: "dogecoin",
-      ADA: "cardano",
-      TRX: "tron",
-      AVAX: "avalanche-2",
-      LINK: "chainlink",
-      SUI: "sui",
-      XLM: "stellar",
-      TON: "toncoin",
-      HBAR: "hedera-hashgraph",
-    };
+    const simple = simpleR.status === "fulfilled" ? simpleR.value : null;
+    const globalData = globalR.status === "fulfilled" ? globalR.value : null;
+    const fg = fgR.status === "fulfilled" ? fgR.value : null;
+    const fx = fxR.status === "fulfilled" ? fxR.value : null;
+    const upbit = upbitR.status === "fulfilled" ? upbitR.value : null;
 
-    const live = {};
+    const live = { ...prevLive };
     Object.entries(map).forEach(([sym, id]) => {
       live[sym] = {
-        price: simple?.[id]?.usd ?? null,
-        change: simple?.[id]?.usd_24h_change ?? null,
+        price: simple?.[id]?.usd ?? prevLive?.[sym]?.price ?? null,
+        change: simple?.[id]?.usd_24h_change ?? prevLive?.[sym]?.change ?? null,
       };
     });
 
     live.dominance = {
-      btc: globalData?.data?.market_cap_percentage?.btc ?? null,
-      eth: globalData?.data?.market_cap_percentage?.eth ?? null,
+      btc: globalData?.data?.market_cap_percentage?.btc ?? prevLive?.dominance?.btc ?? null,
+      eth: globalData?.data?.market_cap_percentage?.eth ?? prevLive?.dominance?.eth ?? null,
     };
-    live.fearGreed = Number(fg?.data?.[0]?.value) || null;
+    live.fearGreed = Number(fg?.data?.[0]?.value) || prevLive?.fearGreed || null;
 
     state.live = live;
     state.fx = {
-      usdKrw: fx?.rates?.KRW ?? null,
-      delta: null,
+      usdKrw: fx?.rates?.KRW ?? prevFx?.usdKrw ?? null,
+      delta: prevFx?.delta ?? null,
     };
-    state.live.upbitBtcKrw = Array.isArray(upbit) ? upbit[0]?.trade_price ?? null : null;
-    state.live.coinbaseBtc = live.BTC?.price ? live.BTC.price * 0.9991 : null;
-
+    state.live.upbitBtcKrw = Array.isArray(upbit)
+      ? (upbit[0]?.trade_price ?? prevLive?.upbitBtcKrw ?? null)
+      : (prevLive?.upbitBtcKrw ?? null);
+    state.live.coinbaseBtc = live.BTC?.price
+      ? live.BTC.price * 0.9991
+      : (prevLive?.coinbaseBtc ?? null);
+  } catch (e) {
+    console.error("live fetch failed", e);
+  } finally {
     renderCategoryCards();
     renderExchangeTable();
     renderEtfFlows();
     setAsOf();
-  } catch (e) {
-    console.error("live fetch failed", e);
   }
 }
 
