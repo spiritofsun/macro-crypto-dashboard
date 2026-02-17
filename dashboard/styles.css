@@ -1906,6 +1906,16 @@ body {
   font-weight: 500;
 }
 
+/* keep commodity cards same visual size as rate cards */
+#commodityCards .metric-card {
+  min-height: 88px;
+}
+
+#commodityCards .metric-value {
+  font-size: 22px;
+  font-weight: 600;
+}
+
 @media (max-width: 1200px) {
   #macroTopStrip {
     grid-template-columns: repeat(3, minmax(0, 1fr));
