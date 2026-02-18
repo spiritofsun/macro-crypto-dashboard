@@ -1,21 +1,110 @@
 {
-  "as_of": "2026-02-19 19:40 KST",
+  "as_of": "2026-02-18 20:23 KST",
   "rows": [
-    {"group":"Big Tech","name":"Apple","ticker":"AAPL","price":263.88,"change":3.17},
-    {"group":"Big Tech","name":"Microsoft","ticker":"MSFT","price":396.86,"change":0.00},
-    {"group":"Big Tech","name":"NVIDIA","ticker":"NVDA","price":184.94,"change":0.08},
-    {"group":"Big Tech","name":"Amazon","ticker":"AMZN","price":246.47,"change":-0.91},
-    {"group":"Big Tech","name":"Alphabet","ticker":"GOOGL","price":198.32,"change":-0.62},
-    {"group":"Big Tech","name":"Meta","ticker":"META","price":641.97,"change":-11.09},
-    {"group":"Big Tech","name":"Tesla","ticker":"TSLA","price":242.74,"change":-1.31},
-
-    {"group":"Crypto Related","name":"Robinhood","ticker":"HOOD","price":117.52,"change":2.25},
-    {"group":"Crypto Related","name":"Coinbase","ticker":"COIN","price":242.98,"change":2.20},
-    {"group":"Crypto Related","name":"MicroStrategy/Strategy","ticker":"MSTR","price":162.23,"change":4.90},
-    {"group":"Crypto Related","name":"Marathon Digital","ticker":"MARA","price":10.65,"change":0.43},
-    {"group":"Crypto Related","name":"Riot Platforms","ticker":"RIOT","price":16.45,"change":1.13},
-    {"group":"Crypto Related","name":"Block","ticker":"SQ","price":86.23,"change":-0.55},
-    {"group":"Crypto Related","name":"PayPal","ticker":"PYPL","price":74.18,"change":-0.22},
-    {"group":"Crypto Related","name":"CME Group","ticker":"CME","price":230.16,"change":0.31}
+    {
+      "group": "Big Tech",
+      "name": "Apple",
+      "ticker": "AAPL",
+      "price": 263.88,
+      "change": 3.17
+    },
+    {
+      "group": "Big Tech",
+      "name": "Microsoft",
+      "ticker": "MSFT",
+      "price": 396.86,
+      "change": 0.0
+    },
+    {
+      "group": "Big Tech",
+      "name": "NVIDIA",
+      "ticker": "NVDA",
+      "price": 184.94,
+      "change": 0.08
+    },
+    {
+      "group": "Big Tech",
+      "name": "Amazon",
+      "ticker": "AMZN",
+      "price": 246.47,
+      "change": -0.91
+    },
+    {
+      "group": "Big Tech",
+      "name": "Alphabet",
+      "ticker": "GOOGL",
+      "price": 198.32,
+      "change": -0.62
+    },
+    {
+      "group": "Big Tech",
+      "name": "Meta",
+      "ticker": "META",
+      "price": 641.97,
+      "change": -11.09
+    },
+    {
+      "group": "Big Tech",
+      "name": "Tesla",
+      "ticker": "TSLA",
+      "price": 242.74,
+      "change": -1.31
+    },
+    {
+      "group": "Crypto Related",
+      "name": "Robinhood",
+      "ticker": "HOOD",
+      "price": 117.52,
+      "change": 2.25
+    },
+    {
+      "group": "Crypto Related",
+      "name": "Coinbase",
+      "ticker": "COIN",
+      "price": 242.98,
+      "change": 2.2
+    },
+    {
+      "group": "Crypto Related",
+      "name": "MicroStrategy/Strategy",
+      "ticker": "MSTR",
+      "price": 162.23,
+      "change": 4.9
+    },
+    {
+      "group": "Crypto Related",
+      "name": "Marathon Digital",
+      "ticker": "MARA",
+      "price": 10.65,
+      "change": 0.43
+    },
+    {
+      "group": "Crypto Related",
+      "name": "Riot Platforms",
+      "ticker": "RIOT",
+      "price": 16.45,
+      "change": 1.13
+    },
+    {
+      "group": "Crypto Related",
+      "name": "Block",
+      "ticker": "SQ",
+      "price": 86.23,
+      "change": -0.55
+    },
+    {
+      "group": "Crypto Related",
+      "name": "PayPal",
+      "ticker": "PYPL",
+      "price": 74.18,
+      "change": -0.22
+    },
+    {
+      "group": "Crypto Related",
+      "name": "CME Group",
+      "ticker": "CME",
+      "price": 230.16,
+      "change": 0.31
+    }
   ]
 }
