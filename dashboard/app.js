@@ -65,9 +65,9 @@ const fallbackMacro = {
     copper: { value: 5.77, delta: -0.33, display: "$5.77/lb" },
   },
   liquidity: {
-    rrp: { value: 3.4, delta: 0.12, display: "3.40" },
-    tga: { value: 796148, delta: -41158, display: "796,148" },
-    repo: { value: 0.0, delta: 0.0, display: "0.00" },
+    rrp: { value: 1.048, delta: -0.737, display: "1.048" },
+    tga: { value: 915306, delta: 119158, display: "915,306" },
+    repo: { value: 0.004, delta: 0.004, display: "0.004" },
     qt_status: "진행 중 (대차대조표 축소)",
   },
 };
@@ -126,6 +126,18 @@ function formatBigNumber(value) {
 function toNumSafe(value) {
   const n = Number(value);
   return Number.isFinite(n) ? n : null;
+}
+
+function formatBnDelta(value) {
+  if (typeof value !== "number" || Number.isNaN(value)) return "-";
+  const sign = value >= 0 ? "+" : "";
+  return `${sign}${value.toFixed(3)}bn`;
+}
+
+function formatIntDelta(value) {
+  if (typeof value !== "number" || Number.isNaN(value)) return "-";
+  const sign = value >= 0 ? "+" : "";
+  return `${sign}${Math.trunc(value).toLocaleString()}`;
 }
 
 function toneClass(value, neutralThreshold = 0.2) {
@@ -796,10 +808,10 @@ function renderStockMarketPage() {
       { label: "DOW", value: macro.indices.dow.display, delta: macro.indices.dow.delta },
       { label: "DXY", value: macro.fx.dxy.display, delta: macro.fx.dxy.delta },
       { label: "US10Y", value: macro.rates.us10y.display, delta: macro.rates.us10y.delta },
-      { label: "RRP", value: macro.liquidity.rrp.display, delta: macro.liquidity.rrp.delta },
+      { label: "RRP (bn)", value: macro.liquidity.rrp.display, delta: macro.liquidity.rrp.delta, rawDelta: formatBnDelta(macro.liquidity.rrp.delta) },
     ];
     strip.innerHTML = cells
-      .map((c) => `<article class="snapshot-pill top-kpi"><span class="label">${c.label}</span><span class="value">${c.value}</span><span class="metric-delta ${toneClass(c.delta)}">${formatPct(c.delta)}</span></article>`)
+      .map((c) => `<article class="snapshot-pill top-kpi"><span class="label">${c.label}</span><span class="value">${c.value}</span><span class="metric-delta ${toneClass(c.delta)}">${c.rawDelta || formatPct(c.delta)}</span></article>`)
       .join("");
   }
 
@@ -847,9 +859,9 @@ function renderStockMarketPage() {
   const qeRows = document.getElementById("qeRows");
   if (qeRows) {
     const rows = [
-      ["RRP", macro.liquidity.rrp.display, formatPct(macro.liquidity.rrp.delta), macro.liquidity.rrp.delta > 0 ? "긴축 우려" : "완화"],
-      ["TGA", macro.liquidity.tga.display, macro.liquidity.tga.delta.toLocaleString(), "보합"],
-      ["REPO", macro.liquidity.repo.display, formatPct(macro.liquidity.repo.delta), "보합"],
+      ["RRP (bn)", macro.liquidity.rrp.display, formatBnDelta(macro.liquidity.rrp.delta), macro.liquidity.rrp.delta > 0 ? "유동성 흡수 증가" : "유동성 흡수 감소"],
+      ["TGA", macro.liquidity.tga.display, formatIntDelta(macro.liquidity.tga.delta), macro.liquidity.tga.delta > 0 ? "재무부 현금 증가" : "재무부 현금 감소"],
+      ["REPO (bn)", macro.liquidity.repo.display, formatBnDelta(macro.liquidity.repo.delta), macro.liquidity.repo.delta > 0 ? "레포 공급 증가" : "보합"],
       ["QT", macro.liquidity.qt_status, "-", "상태"],
     ];
     qeRows.innerHTML = rows.map((r) => `<tr><td>${r[0]}</td><td class="num">${r[1]}</td><td class="num">${r[2]}</td><td>${r[3]}</td></tr>`).join("");
