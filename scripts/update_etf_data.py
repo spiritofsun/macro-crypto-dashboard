@@ -36,12 +36,23 @@ def parse_value(text: str) -> Optional[float]:
         return None
 
 
+def parse_human_date(text: str) -> Optional[datetime]:
+    try:
+        return datetime.strptime(text, "%d %b %Y")
+    except ValueError:
+        return None
+
+
 def latest_total_inflow(url: str) -> Tuple[Optional[str], Optional[float]]:
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
     with urllib.request.urlopen(req, timeout=20) as resp:
         html_body = resp.read().decode("utf-8", errors="ignore")
 
     rows = re.findall(r"<tr[^>]*>(.*?)</tr>", html_body, flags=re.IGNORECASE | re.DOTALL)
+    best_date_text: Optional[str] = None
+    best_date_obj: Optional[datetime] = None
+    best_value: Optional[float] = None
+
     for row in rows:
         cells = re.findall(r"<t[dh][^>]*>(.*?)</t[dh]>", row, flags=re.IGNORECASE | re.DOTALL)
         if len(cells) < 2:
@@ -50,6 +61,11 @@ def latest_total_inflow(url: str) -> Tuple[Optional[str], Optional[float]]:
         first = clean_text(cells[0])
         date_match = DATE_RE.search(first)
         if not date_match:
+            continue
+
+        date_text = date_match.group(0)
+        date_obj = parse_human_date(date_text)
+        if not date_obj:
             continue
 
         # Farside tables have TOTAL in the last/near-last column.
@@ -61,9 +77,13 @@ def latest_total_inflow(url: str) -> Tuple[Optional[str], Optional[float]]:
             if v is not None:
                 value = v
                 break
-        return date_match.group(0), value
 
-    return None, None
+        if best_date_obj is None or date_obj > best_date_obj:
+            best_date_text = date_text
+            best_date_obj = date_obj
+            best_value = value
+
+    return best_date_text, best_value
 
 
 def main() -> int:

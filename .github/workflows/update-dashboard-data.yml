@@ -30,8 +30,8 @@ jobs:
         if: github.event_name == 'workflow_dispatch' || github.event.schedule == '0 */4 * * *'
         run: python scripts/update_news_data.py
 
-      - name: Update ETF (12:00 KST)
-        if: github.event_name == 'workflow_dispatch' || github.event.schedule == '0 3 * * *'
+      - name: Update ETF (30m + 12:00 KST)
+        if: github.event_name == 'workflow_dispatch' || github.event.schedule == '*/30 * * * *' || github.event.schedule == '0 3 * * *'
         run: python scripts/update_etf_data.py
 
       - name: Commit and push
