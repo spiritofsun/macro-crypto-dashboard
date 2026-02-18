@@ -1,8 +1,8 @@
 {
-  "as_of": "2026-02-16 09:31 KST",
+  "as_of": "2026-02-19 19:40 KST",
   "rows": [
-    {"group":"Big Tech","name":"Apple","ticker":"AAPL","price":260.25,"change":0.88},
-    {"group":"Big Tech","name":"Microsoft","ticker":"MSFT","price":477.18,"change":-2.10},
+    {"group":"Big Tech","name":"Apple","ticker":"AAPL","price":263.88,"change":3.17},
+    {"group":"Big Tech","name":"Microsoft","ticker":"MSFT","price":396.86,"change":0.00},
     {"group":"Big Tech","name":"NVIDIA","ticker":"NVDA","price":184.94,"change":0.08},
     {"group":"Big Tech","name":"Amazon","ticker":"AMZN","price":246.47,"change":-0.91},
     {"group":"Big Tech","name":"Alphabet","ticker":"GOOGL","price":198.32,"change":-0.62},

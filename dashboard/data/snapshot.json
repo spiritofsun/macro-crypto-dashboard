@@ -1,12 +1,12 @@
 {
-  "asOf": "2026-02-16 09:31 KST",
+  "asOf": "2026-02-19 19:40 KST",
   "liquidity_checklist": [
-    "S&P500 +0.19% / NASDAQ -0.03%",
+    "S&P500 +0.10% / NASDAQ +0.14%",
     "US10Y 4.18 (+0.97%) / US2Y 3.47 (+0.58%)"
   ],
   "indices": [
-    { "label": "S&P 500 🇺🇸", "value": "6,836", "delta": -1.52 },
-    { "label": "NASDAQ 🇺🇸", "value": "22,547", "delta": -2.25 },
+    { "label": "S&P 500 🇺🇸", "value": "6,843", "delta": 0.10 },
+    { "label": "NASDAQ 🇺🇸", "value": "22,578", "delta": 0.14 },
     { "label": "KOSPI 🇰🇷", "value": "5,507", "delta": 2.85 },
     { "label": "KOSDAQ 🇰🇷", "value": "1,106", "delta": -0.79 }
   ],
