@@ -12,6 +12,7 @@ const state = {
 const uiState = {
   cryptoSort: { key: "market_cap", dir: "desc" },
   cryptoCgLastFetchTs: 0,
+  staticLastFetchTs: 0,
 };
 
 const STABLES = new Set(["USDT", "USDC", "DAI", "FDUSD", "TUSD", "USDE", "USDD", "FRAX"]);
@@ -998,6 +999,7 @@ async function loadStatic() {
   state.cryptoUniverse = universe.status === "fulfilled" ? normalizeCustomUniverse(universe.value.assets || []) : [];
   state.cryptoStableMcap = universe.status === "fulfilled" ? universe.value.stablecoin_market_cap : 0;
   state.stocksWatchlist = stocks.status === "fulfilled" ? stocks.value.rows || [] : [];
+  uiState.staticLastFetchTs = Date.now();
 }
 
 async function fetchLiveDirectFallback() {
@@ -1153,9 +1155,16 @@ async function fetchLive() {
   } catch (gatewayError) {
     console.warn("gateway fetch failed, fallback to direct sources", gatewayError);
     await fetchLiveDirectFallback();
-    await refreshCryptoFundamentalsIfNeeded();
-    return;
   }
+
+  try {
+    if (!uiState.staticLastFetchTs || Date.now() - uiState.staticLastFetchTs > 5 * 60 * 1000) {
+      await loadStatic();
+    }
+  } catch (error) {
+    console.warn("periodic static refresh failed", error);
+  }
+
   await refreshCryptoFundamentalsIfNeeded();
   renderAll();
 }

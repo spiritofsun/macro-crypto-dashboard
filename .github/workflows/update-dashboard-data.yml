@@ -2,6 +2,7 @@ name: Update Dashboard Data
 
 on:
   schedule:
+    - cron: "*/30 * * * *" # stocks/macro every 30 minutes (UTC)
     - cron: "0 */4 * * *" # news every 4 hours (UTC)
     - cron: "0 3 * * *" # ETF at 12:00 KST (03:00 UTC)
   workflow_dispatch:
@@ -21,7 +22,12 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Update Stocks/Macro (30m)
+        if: github.event_name == 'workflow_dispatch' || github.event.schedule == '*/30 * * * *'
+        run: python scripts/update_macro_stocks_data.py
+
       - name: Update News (4h)
+        if: github.event_name == 'workflow_dispatch' || github.event.schedule == '0 */4 * * *'
         run: python scripts/update_news_data.py
 
       - name: Update ETF (12:00 KST)
@@ -32,7 +38,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add dashboard/data/news.json dashboard/data/etf.json
+          git add dashboard/data/news.json dashboard/data/etf.json dashboard/data/macro_snapshot.json dashboard/data/stocks_watchlist.json dashboard/data/snapshot.json dashboard/api/macro/snapshot.json
           if git diff --staged --quiet; then
             echo "No changes."
             exit 0
