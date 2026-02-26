@@ -1,15 +1,15 @@
 {
-  "as_of": "2026-02-27 06:04 KST",
+  "as_of": "2026-02-27 06:57 KST",
   "rates": {
     "us10y": {
-      "value": 4.04,
+      "value": 4.05,
       "delta": 0.009999999999999787,
-      "display": "4.04"
+      "display": "4.05"
     },
     "us2y": {
-      "value": 3.43,
-      "delta": 0.0,
-      "display": "3.43"
+      "value": 3.45,
+      "delta": 0.020000000000000018,
+      "display": "3.45"
     },
     "sofr": {
       "value": 3.67,
@@ -95,9 +95,9 @@
       "display": "3.80"
     },
     "tga": {
-      "value": 912727.0,
-      "delta": -2579.0,
-      "display": "912,727"
+      "value": 887612.0,
+      "delta": -25115.0,
+      "display": "887,612"
     },
     "repo": {
       "value": 0.0,
