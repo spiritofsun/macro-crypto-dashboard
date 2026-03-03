@@ -1,46 +1,87 @@
 {
-  "updated_at": "2026-03-02T20:28:32.582937+00:00",
+  "updated_at": "2026-03-03T01:26:22.894096+00:00",
   "macro": [
     {
+      "title": "Weekly market commentary - blackrock.com",
+      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxQLWJDTjBBalYwVHVpc0VxV1BwRE1xeUt1RWlLQ1VJdnJQRXNnb3p6MnFNbjRBV0s0TnlldW4wSVIycFRQeVNISWJ3VV9wMWdjX1ZndE1Tc24tNzc0anNYWjl0SVBsRDhSa0dVTWlyVVYxX0w5b2JhTFB0Tm9Vb2FwYVZubTU1SVJlcy0zMEpXOEM4ZlhiSU1QazdVQVlldw?oc=5",
+      "pubDate": "Mon, 02 Mar 2026 21:16:51 GMT"
+    },
+    {
+      "title": "U.S. stocks rebound from sharp losses, while oil prices leap on worries about Iran war - PBS",
+      "link": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxNYWFKUHpHdEZZVGNQdmozRlhiaFlRQzVPRGtFcFdVY3kyTjVGRTRrVmg3eGxROXEzSV9hU0cxVU9RNUx3Q3o5eWVCNmlWank2QnQ5T1VIZVU3aDVuYXFZci0zQ1A4MWhxWVdkWWtZQU9JSU16ak1faU5Sd3NoY0kxTktDNGsyVGpFQW9PTFk5eVdZV3RGakt6c3kzNHRISzBlcWZzMDJWbVBzclFwZXBqLWlhVFRwYmlLSWQ0RlBkTHZoN1HSAcMBQVVfeXFMTWFhSlB6R3RGWVRjUHZqM0ZYYmhZUUM1T0RrRXBXVWN5Mk41RkU0a1ZoN3hsUTlxM0lfYVNHMVVPUTVMd0N6OXllQjZpVmp5NkJ0OU9VSGVVN2g1bmFxWXItM0NQODFocVlXZFlrWUFPSUlNempNX2lOUndzaGNJMU5LQzRrMlRqRUFvT0xZOXlXWVd0RmpLenN5MzR0SEswZXFmczAyVm1Qc3JRcGVwai1pYVRUcGJpS0lkNEZQZEx2aDdR?oc=5",
+      "pubDate": "Mon, 02 Mar 2026 21:37:55 GMT"
+    },
+    {
+      "title": "Gold Rises, U.S. Bonds Fall in Safe-Haven Split - 조선일보",
+      "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPZHlndWNOaGxadmJ2Y1AtN1RhRTdQaVV6eTV2ZmxUblNBRXA5UHBEeWpLN1BLaWFERWpnamZTRjFidXRvSFhkSW41V21uTjBTMko0dmp6azJVUWdSQjBrekw5cW1IM1VKSUNJRWl5cXRVa1YyZjQ4MFg0NzNRTlIySG9JR2dZQ1JWOGN4MnBB?oc=5",
+      "pubDate": "Tue, 03 Mar 2026 00:31:16 GMT"
+    },
+    {
+      "title": "US stocks slip and oil prices leap as war in the Middle East raises worries about high inflation - ABC11 Raleigh-Durham",
+      "link": "https://news.google.com/rss/articles/CBMiQEFVX3lxTE9HV29HU2tCMjduZ21JbUVCNW1NUzBQd3o2cUl4bGNVb0tzTFQzTjloX0xQRk9BZnVZZkdQX0UxZG3SAZ8BQVVfeXFMTlhvdFJOTEQyMFpQODFfcGxkZXZuWHJuM2poWDFnRVpTN1ppR2x0dFp0UGthWVZCM3hTcDlOVnpFRVJDaHNENTlrXzV6V2JNaWt5WVpTZ2lYeFdJeE1JSkYxb0Z5SGdSY3NwM1FLUXQ2eWdnRFFqaW1RZVVqOGVPb2dJNlJPc25jZUtKZU55RTZzc1lzbFB3b0h6ZG90MnFJ?oc=5",
+      "pubDate": "Mon, 02 Mar 2026 13:45:14 GMT"
+    },
+    {
       "title": "Volatility Spikes as US-Iran Conflict Sends Stocks Lower. Confidence Could Be Slow to Return. - Barron's",
-      "link": "https://news.google.com/rss/articles/CBMingNBVV95cUxOMXl4M2tWbml4eWRSbjJ2ODd3N3Uxd2RVMmFpQVhIQWJZUzY1RG40VnNmZWk4dnU0Njd5MUZQTDEweUdBQ1I3ZW1EZ2pJY19DLVNEbVR4R3ByU1o4enp2QWUzZVNnQWRZQzhINGdmMms2MDhuSGZINEZuSV9LRGwzVFZGWHJSamNXZ0w1R0pQRGE0T3VJOHJiTEw2a1IxY0Q5S0J4RHhlVmZkeDNOeHZUeFVKU3RudDZobE82UHlFaE41OXZUNjU5MGUxdFc3YUlZRmd0X1dXVTlwSUpxeDZVS2ZqaWUwT1R0Zk51WURyR2pxWHZDdTFMM21aVjNVR0diV044WUtNMjQtUlRndF96WGdOTktFMUk3X1E0Zkhtek9SclFQQVg3ZGZSU28zMVFFd2FsNXJJaVk4ZTdZRThBNHJ2MjRjc280MWtsMklCOUNmbjV2QWNlQVlmVzNJc2ZPNExYS1dMS1NGemszcHY3dzFTOXEtVHNodEFuMlhCdFR3bWowblhjdk5aRWFPY2ZlcEpuSF9BbE5WdHluemc?oc=5",
+      "link": "https://news.google.com/rss/articles/CBMikwNBVV95cUxPQkt3REh2V0p5eXdjRmxoby00MThudDZjTzhRZUF0dWNYNllnZEVmRkg2dHY2TjB4WVIzcG92LS1SNWY2VXk3Nm9KZHNWLVpCd01GSE1uVHNwREF2OWw3LUpmRzZhYVhKSnUyY096MlQ2MnViYk1oUTRyS0VxaWhqM1RBY3hPNWxmcnRVbnZUeFNiRHNhbjFSY1JNQk9yOEFkYUxtZ01WX05CemxmTVdhbHFMak81czJwaWxxX3BlSGtjSkdPQTNibmtuVldKbHVzaTh4cXJWTmpPU0FEdEtpMTRpd2c4WDhkOWU0OWxxeFpDWnhPYU1PbFBvNXdCZHBDUk82QkluNUtHalEwd1Iza0w4a0R4UGcxTDFEWlVXR0h1WHRGdUo3R3h1cnBpMDBoZ0JDdVVKVF9zR2lnNklnUFRMdTRJRHFXbzA4QXg3aURjNWhSRDlFTFM0N01qYlBEZW9PNmJzdG5NZUswTFlHNklJZHRWZ0FNcG5IdnMyaUZubEhESzd3ZEZ0VEpoQVZIYng4?oc=5",
       "pubDate": "Mon, 02 Mar 2026 12:45:00 GMT"
+    },
+    {
+      "title": "Stocks Drop as Middle East Conflict Sparks Inflation Fears - Global Banking & Finance Review®",
+      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNY0tJSzJXMlplMjNkdzhuXzZsNEYtcEJnckxYaHEyaU1nb3BNWjFTcTIwRmtoSlZHY2QzU0RCLUI0NUZFMGNuZm9UWGw0V2JuTVVzODNBRnhmZEZyU0t2UC1KYS1mVVp2QVd3MTZZV1BwZzM4Y3hNcHNteVB4cVdaWGJUaWdEWlNmbDV5aGd2emU4cVNtZFJQaGxkMA?oc=5",
+      "pubDate": "Tue, 03 Mar 2026 00:57:15 GMT"
+    },
+    {
+      "title": "US stocks erase sharp losses, oil prices leap on Iran worries - CommBank",
+      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxONnNPSVRjRkFYdi00VHlveGwyME9qVFI3cDg1LXJyajJLVUNtWE5ZUXdrS3NfanJ0Qml3UUo1anRUM050aG53WVZlTFlkczhsV1pGRC00NE56UnlPdGFyZXFyQjN1V0NrT0czeGhQQ2hBaDQ2M1IwUm8zeHlsTEsydklSSU5vRUN0T0tTclhSWW4xQnNDTmpSb2w1aVZINEhGMFVCamVB?oc=5",
+      "pubDate": "Mon, 02 Mar 2026 22:30:56 GMT"
     },
     {
       "title": "Why are US stock market index futures down and Dow Jones, S&P 500 and Nasdaq in red today? Wall Street fut - The Economic Times",
       "link": "https://news.google.com/rss/articles/CBMihANBVV95cUxPZ0tVbjl5aUs3dC1lZ29hSUthYnE5SDFCX2pwYzhUU2dLVTBWUW9YUGRzYWNXazR6WjVpaVZCRDdmbTFDTk42MXVteFRqLUprd1dpWEtFRnpRWk1YbnNkYzY5WTBHV0s1YVpmWXRzdVlLNFpUS1RFajhLY3VLbkRuZVVoTTZUX01XY19EYzcwY0kzVlZVdlRDcFNlcWotQzdoMWtjclZ2cy1NYmxNR1YzYkwwZ2p6M01xS3BselVnd0dPNjdFMGkxRDZvSmI5SzdoWjRUZk4yTGJDRzhXX2xreGcxRDZFX2ZIajJtdGdfQVJRYm45SFRiZE9BMldsV0d1ZkZXYk9PbVNURzBEbGhhWnVfV0ZQSm5VY3BvZUlFNTcwbS10Qk1zRi1Uby1HTWNBVXEtVEg4SlFXMjV5U1I4OC1EWjlwclBwcEhLSm4xdkRzZ0RTajQ1VXk5Q196RmtYY3BIaTA3dEQ0QUFFeFhTRlVIMzhzN3BJR1dQV1F5ei1CcW1r0gGKA0FVX3lxTE1mX0tHNkpSZDRfUHdtelVwcVJMRGN2dWg5bzA1THJvTUN3UncyTE5KbjhsdS1ua21JLW44ek5kTGhrWEZNUlVwaEZiNG1fZUlnNzlteDA1Q2tkSGRZV0dlWWRmTEtwUUxET3phelA5SGJGWW13ZjlFZlIxeW9JYkxmZW1faHQ1bGxRMk1pSGYtak5waTlOb0EwRDBoTVRObXZxRWx2YzE0NElUdDZsQzRNTm9EMm0tTGdtUG5iVHllM09jOXJPTm8xMWNTaDd5aGU1dGFCbzZXNEU3Mk5Jd1R5UXlTREJnVDFLVW5vU1RMb2xWZVNZY0N2S2NYLU50NzREZFNFVkg5TkVNU3B5TGlQczJSakhSM21FMW12a2JTYU9DOGtsNjV4QzJKQXFvd1dNZzJ6RS1MTzU5YUhSNXpTUkRNb1NsblBEdVc2MGFNV2kxZV9Kckltem1wZFZ2RXY2cmluRFhJYzhVMm4wTWtId2RVdVVHRGJvOTdfRUYzZzFrczZ4UXdubHc?oc=5",
       "pubDate": "Mon, 02 Mar 2026 09:07:17 GMT"
-    },
-    {
-      "title": "Treasury Yields Just Fell by the Fastest Rate in 5 Months. What Comes Next? - AOL.com",
-      "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQeDZhUFFlMTRYLTM2Y3k5NGMxX3V6WnpGU0hTMlZJRXc4NVAtLUFCV3lud3R1MlpLLVQ3dm5MZmdBN1Fwa09RX3o4c3lQeDRkbVFIalZGYmxLMzRUT1NLWS1mY2wzOXBfWXBPRG1jQVNnb0pYSzZSZk5ER2FaSzdxN2pFYw?oc=5",
-      "pubDate": "Mon, 02 Mar 2026 05:16:53 GMT"
-    },
-    {
-      "title": "U.S. stocks slip and oil prices leap as war in the Middle East raises worries about high inflation - BNN Bloomberg",
-      "link": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxNTmNtVkg5Y1cwNHA5SG9peGJ5RGdoaTJsaVRUbk1XdklORTNNSDZpdVhyUjJPcmwyS3ZnOXlwMmk4M3d2amNtcmlXODZXNmtFdlN6azZlVC1NajBoSF9GZ296djRmLUY4WWJycW8yaHBqcXhTTlZ2LWVOUkN4RG5wZXV0MTJlMUdZMXh4bWNDZlZyU0JCc0NfOWZOdXIzcGZ6YlB2cU1CT1NlTHlsQjNEU083UXFLODM3MG5qMldCUGlfQldYd1R5alNrVFlWcGRqN0N5OVE1QmIwQXVL?oc=5",
-      "pubDate": "Mon, 02 Mar 2026 16:18:04 GMT"
-    },
-    {
-      "title": "US Treasury Yields Surge as Soaring Oil Prices Ignite Critical Inflation Fears - CryptoRank",
-      "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQX3lXMTFPdDZpSEszQzNVNWVpTDk1VE4tR1p4ZHc5Z0JjSWhtbm1zLU9VTUVHXy1xTC1qRkxMRi1iTkdKRG0wMXY0WG9KT2tmNDh0cFJRSzJSZUhhTldCWUFkYlBBMnFnZFlMX0N1Vk1fQ0NLT1RoQ25FaW55MDhhQm9uc0c?oc=5",
-      "pubDate": "Mon, 02 Mar 2026 05:44:48 GMT"
-    },
-    {
-      "title": "US stock market big crash today: Why Dow, S&P 500, Nasdaq in deep red today? Oil, gas and gold prices surg - The Economic Times",
-      "link": "https://news.google.com/rss/articles/CBMizAJBVV95cUxPb0pPMXJJeUd2YzVGSWZjRGk2VTdfS2czUC1hU19qYmd6VUo5UzZnVDBtcUVVbklrZjA3X3dEZFluUXFpQmVTSVFrTjZfbkItRGdBOFNYQWFLNEtHeEduODdNQUNCT01YOE5mbjY5SWNmRnFpRUgzYVFtVmFuMEV0Z0E0b2daQXNrYzZRWUI1a3UteEx2YnhKTVlTVHFYeEpJOUJjYTlUZzlQS19hV1VZeWRLcVgzZW0tU0J6akhtMHRNd1ptSS1fQl9WUTU2SUYyOC1BQXptY3BfaFRTTXJJbzFiQW5LTnZBQVVfeFJIRkhhazNESEVoTFFKaEFibnpHNVNUUkZhaTRfWGJOZ2dscjdWdDBvMFRhVUh2TXNXV0JRYV8yLVM0TC1MQVVoVkNkSzBuUXQ2RnpCamJpOGd4NzVUR2s4bk9vN1NaSdIB0gJBVV95cUxPdU9mR2pwX3haSVE0VTFKMTktanJ6SFZqWEcxTEVBcC1oemxvdmFTNjJuWlNzeXBKTFF2Z0NTUjMxMVpvWFE0THJZZV80UXRERGVzb3NORFE2dGNiUEJFUmRCYmR0UzBXYWNJRnBlWTYtb1paaERsQVJkbW9nX01HRE5JWUpYVVZOSUZHSWQ5aWlYc2JwSUlGR09jMlgxYXY5WF9qTVZBdGRYNUlJeUxMYzdKZkVDUjRPOFFfREpVYld0em1oZ1c3TG0wdzFNNm8wbllpbEYzSWlXa0s3STNEUkhYT2dxaTNhMkIxVWJPRTRKY1NFcU5mN29aMi1fWDE2RVBnNXpyTWNsM3VWeDR0dC1VZ2pYbjltVW5YQWdCZ0JuYlRqb3gweTVRSnBRTVlicUd2S0pXbkt5R0g2c0NTN1hZSEY5T2ljTjN3YV9YOXRxQQ?oc=5",
-      "pubDate": "Mon, 02 Mar 2026 14:48:54 GMT"
-    },
-    {
-      "title": "The US Federal Reserve is in need of reform: Is Trump’s appointee Kevin Warsh up to the challenge? - Mint",
-      "link": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQZE01bmtSYTdOeHFydnRBZG05NV9JUjQxdmhUVnVOMDFjMWhUTnpHbTlTN2Y4c09FZUFQN3hsNmxZV2lvMnJ1RTJ6V1pRLWJtVzJyU0tDeVpVMWZtTTg1eU5KWTFGb1p5cWpOajdnQTdPOGFjYTFwcXVubFVuVlk4bDhzRjgyX184bDZvTm5kcGlfN2JqTl9Tc0N2LUdRV3VMNDBJQkg3cnFuOTdaVTdjdTJnbU53VUlOT1JRVDk0UGViaVNKcmpWVkZUam51UVZlSHpDOWVmTVozQdIB3wFBVV95cUxObm5Zd1kzTHFOVFBwbGlKZ1ItNUNvZVpWMnBRRkxkX240cmFGVkpKUVo1aVA4RXhjUG41eWt6NFF6TEV5NV81MmdFOGlFTkhhSDFpaFZSOFJPRkxWbWo2R3ZmcTZ3eF8xSVgxRzB6eW1iWmRJNExJNXlCcG8xM18wemNBTmJQdXBreDRFdF93a0RZU2dkb3dwRnpjTUdlSkRwUjNJUDVRVGplWUJFMjkyREJRbkVTd0lsc3N2a295akhJZ0MzM0UyOGhYX2NkYzdLa3J2d2Z3UXBKTktXeGpn?oc=5",
-      "pubDate": "Mon, 02 Mar 2026 08:30:33 GMT"
-    },
-    {
-      "title": "US Stock Market Movement | Risk Aversion Rises, Gold Stocks Strengthen in Pre-market Trading, Spot Gold Surpasses $5400 - Bitget",
-      "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFB2ankxdjBqMmJjVktLb0Fxc1pnaklmUHdmbVM2b1ZDekVHdWp1MG16bGVkVlk1LW1sOEdUQmlRVzNoS21PWktGbkFnMU84b1E3b25PVjZkVmV5LWN5ZXpiZG13Y9IBY0FVX3lxTFB2ankxdjBqMmJjVktLb0Fxc1pnaklmUHdmbVM2b1ZDekVHdWp1MG16bGVkVlk1LW1sOEdUQmlRVzNoS21PWktGbkFnMU84b1E3b25PVjZkVmV5LWN5ZXpiZG13Yw?oc=5",
-      "pubDate": "Mon, 02 Mar 2026 09:23:54 GMT"
     }
   ],
-  "crypto": []
+  "crypto": [
+    {
+      "title": "Bitwise 10 Crypto Index ETF (NYSE: BITW) outlines crypto index and NAV - Stock Titan",
+      "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQdVdHbjNUZk1rSzFGcmIzUzhPWklUYURPM0hGcWVWWjl4NnAtbUd5T2d2V0NPT3g5cUF0RkhXdC1wUWd4OHIteVVJOW5BQW5tb0VBZnJYNWdjQTgwdDFwWGlGMnFYVElqS05tc0JYNk82a0FGQTFfUlEzZEEzTjRBbEl3VVExYzNhaEMtcW9FT2dKc2NRVDRUbXJmVFdjajZpOVEwd3o2dVU2M1FjMGI2UnFTU18?oc=5",
+      "pubDate": "Mon, 02 Mar 2026 21:14:05 GMT"
+    },
+    {
+      "title": "Crypto spot ETF flows diverge, a sign of investor rotation - Sherwood News",
+      "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQM2dzbnprRzhfam1Jc1hRVG82OEEtX1djRnJKWTlsVHVqSnBWLVR4Nm9yakR6NE1CeDdhSkZuYUd1YUZBaGItUTJzblJRN1BDZ19xeDk3QmYwQ08yNERETzdaVnRNdmVkVERna1hfTUxUWmNFTFhuZ05QUENEVXNpRzlBYmlDeXRiUHZoeVhIdTE?oc=5",
+      "pubDate": "Mon, 02 Mar 2026 17:16:26 GMT"
+    },
+    {
+      "title": "XRP Holds $1.30s as ETF Flows Slow and Bitcoin Correlation Stays High - Investing.com",
+      "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQVFhPdDhNR1QzR1ZQT3BuR3FTc2Z1OEFoZHlaZTlodW9RUU9DU291cWY4MkJKUmNrbDh6UHJ0TjFtR2hjZDVEdGhodWpfVUdVc2hVWVM5ZExQQ2w0U1pUa2FfQ1ExVnJVSWJ1TnAtUjNQM1pQVENweERuUkZDaU42R2VtdmJQZ08ySEJjSG5wb2Z1ajYxR2gzZV9lZG5DQk9CNDREcHE2NXN3QWJYTmR2S25B?oc=5",
+      "pubDate": "Mon, 02 Mar 2026 20:00:34 GMT"
+    },
+    {
+      "title": "Bitcoin Dropping to $60,000 Could Crush Every Stock Inside This $1.2B ETF - 24/7 Wall St.",
+      "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPLTFRM3ZHQWxJVTZnUm00QWI4d0FiblVKbTZ0MmtfZUVuR21iOUFRUWs4LWE3NDhtZTZQSVMzMmpEOFhoWTdVOTdkcUJwSGJ2Mm1MdTRTZFFnN25nTVRFM2JiLXM2clBxSkk2MGRRc2NDRy0zZmswWHBLc2xIRHQ0clZ0VTBJTW5VempnLW94TEhrRjNfaHdKSmgxLWVpbllRODRhbWQtbWJhYzZwOXNUYnYxM1o?oc=5",
+      "pubDate": "Mon, 02 Mar 2026 20:02:19 GMT"
+    },
+    {
+      "title": "Crypto Prices Mirror Turmoil In Global Markets - RTTNews",
+      "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPd3NMOUtPR2g0VkJ5QmpWa0k5ZGx0YXN2MzVXOFliRzdudUdCTEpfSWJhVW14ck1GelFXY0RUYXFiSWJHeDJPSW1tVWxwT3NVWGg5Y1k3NzN4bkNLQ2dNdlNjdUNIX2Fjako4UUlSelI1N2tCYk9PM2REYy1YOWN6TE15NmFBbzY3RDBOSTJRcVPSAZABQVVfeXFMT3dzTDlLT0doNFZCeUJqVmtJOWRsdGFzdjM1VzhZYkc3bnVHQkxKX0liYVVteHJNRnpRV2NEVGFxYkliR3gyT0ltbVVscE9zVVhoOWNZNzczeG5DS0NnTXZTY3VDSF9hY2pKOFFJUnpSNTdrQmJPTzNkRGMtWDljekxNeTZhQW82N0QwTkkyUXFT?oc=5",
+      "pubDate": "Mon, 02 Mar 2026 14:59:00 GMT"
+    },
+    {
+      "title": "3 Green Days Power Strong Crypto ETF Week as Bitcoin ETFs Add $787 Million - Bitcoin.com News",
+      "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPNEQtZGI1SFFERUZyLVQ3SG1wN3FIWlVLdU5VUEZaUFVfLUJvcEktNlhJLUM2UkxJLWQtdGpaWDhiYjJNbjF5YUpLSzV1UEtVS1NOY05uRl83X0RJWnJLalFKcFd2bmFpRDFUNmpZcmwxX3g0b09uYlpjbzQ2VHFVdkJVU1RzQTBvWWtmY2JIeTBsSUNGS0lRa0x5T1JESjU1?oc=5",
+      "pubDate": "Mon, 02 Mar 2026 21:51:09 GMT"
+    },
+    {
+      "title": "Forget Tech Stocks: The Crypto Infrastructure Play Wall Street Is Overlooking - The Motley Fool",
+      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPYXVrR0tRT3FFTGZpMi02Rng3QTFJeS1fNGtUbHVPVktHZEdEN2FRY3RHNjBhZU1vb3Vybkp1dDViaWZZbS00LWYzcWwyYTVobDhUWkotQ3JqR3VjRFE1d1F3M0dMTjN5dmZWTWZLRU5oVXdZN0ttUXdwUWRWRzd5aXRmaTRTVnBNTWwyR0duSjExeFpaQUVB?oc=5",
+      "pubDate": "Mon, 02 Mar 2026 12:27:00 GMT"
+    },
+    {
+      "title": "BlackRock’s ETF Tokenization Push Fuels Fresh XRP Speculation - DailyCoin",
+      "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNOEVDcjFTTVkyX0s2ZU5xcFdweWctMzNmT0R6YjUzMDdfM1k1ZWxrMGlsb190M05oSUkxSFh4TmlQaExQbzUwMF9uX3lJbW5mNmZZSFZ0ZzduUEJoWl9ocl9IU2pERGhZNHBzS1RWV19Ec0NVSHRXUmVKN0V2U1dMRllKdDR0enhpbVI4?oc=5",
+      "pubDate": "Mon, 02 Mar 2026 17:59:00 GMT"
+    }
+  ]
 }
