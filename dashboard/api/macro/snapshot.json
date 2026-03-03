@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-03-04 03:07 KST",
+  "as_of": "2026-03-04 04:26 KST",
   "rates": {
     "us10y": {
       "value": 3.97,
@@ -90,9 +90,9 @@
   },
   "liquidity": {
     "rrp": {
-      "value": 0.627,
-      "delta": -15.691,
-      "display": "0.63"
+      "value": 1.203,
+      "delta": 0.5760000000000001,
+      "display": "1.20"
     },
     "tga": {
       "value": 887612.0,
@@ -100,9 +100,9 @@
       "display": "887,612"
     },
     "repo": {
-      "value": 9.0,
-      "delta": 9.0,
-      "display": "9.000"
+      "value": 0.004,
+      "delta": -8.996,
+      "display": "0.004"
     },
     "qt_status": "진행 중 (대차대조표 축소)"
   }
