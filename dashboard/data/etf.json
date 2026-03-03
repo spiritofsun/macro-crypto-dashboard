@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-03-03T09:09:34.287342+00:00",
-  "date": "March 2, 2026",
+  "updated_at": "2026-03-03T10:07:45.106092+00:00",
+  "date": "02 Mar 2026",
   "btc_us_spot_etf_net_inflow_usd_m": 458.2,
   "eth_us_spot_etf_net_inflow_usd_m": 38.7,
-  "source": "defillama.com (source: farside)",
+  "source": "farside.co.uk",
   "freshness": "latest"
 }
