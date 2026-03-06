@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-03-06T04:40:53.611418+00:00",
+  "updated_at": "2026-03-06T04:57:15.406387+00:00",
   "date": "05 Mar 2026",
-  "btc_us_spot_etf_net_inflow_usd_m": -139.2,
-  "eth_us_spot_etf_net_inflow_usd_m": -121.2,
+  "btc_us_spot_etf_net_inflow_usd_m": -227.9,
+  "eth_us_spot_etf_net_inflow_usd_m": -90.9,
   "source": "farside.co.uk",
   "freshness": "latest"
 }
