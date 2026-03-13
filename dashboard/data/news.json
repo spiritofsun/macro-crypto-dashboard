@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-03-13T01:23:43.105238+00:00",
+  "updated_at": "2026-03-13T05:10:01.767236+00:00",
   "macro": [
     {
       "title": "US Stock Market Today: Dow Falls 600 Points, S&P 500 & Nasdaq Down as Oil Price Surges Amid Iran Tensions; Gold & Silver Rise; Bitcoin Steady Nears $70K - The Sunday Guardian",
@@ -7,19 +7,29 @@
       "pubDate": "Thu, 12 Mar 2026 16:28:21 GMT"
     },
     {
+      "title": "Fed to cut rates in June, economists still say, despite war inflation risks: Reuters poll - Reuters",
+      "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOVzBBMGhhM1F6SHJfTWg4RU9TdW9wdEh5UDhTbWdfVHJaOUdDNFZITHJNLXhQcFpWZjVVeVpiLXRmdzFLa0xGbDZydUZ1b2hkNnllUU51TUw3OGJJTV9oREJ6R1dNVnZEX2NfMW1lMVN2dE1EYkNFemZ6ZjVCM1V4VjU5RXpoWVZjTXh2M3IzOVBMd2JXdjdqUFJEVWRkNVoyaFN2NUFuRDRsYWpVbGNlN3hB?oc=5",
+      "pubDate": "Thu, 12 Mar 2026 14:06:03 GMT"
+    },
+    {
       "title": "Stock market update: Dow, S&P 500, and Nasdaq futures edge higher following stocks dropping to their lowest point since November - Bitget",
       "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE53MUJaMlRfcHQwQ1BkclJJRW5iaVdzNmJaLWlkU2EyZUI5VTctVWZ0c1g0WEh2QXg1SHZZRmgxSGJzWWo5c0ZNekNWTFhnR3paZVhtV2ZGMmktRGl2YklqRjVMRdIBY0FVX3lxTE53MUJaMlRfcHQwQ1BkclJJRW5iaVdzNmJaLWlkU2EyZUI5VTctVWZ0c1g0WEh2QXg1SHZZRmgxSGJzWWo5c0ZNekNWTFhnR3paZVhtV2ZGMmktRGl2YklqRjVMRQ?oc=5",
       "pubDate": "Thu, 12 Mar 2026 23:00:44 GMT"
     },
     {
-      "title": "US stock market deep in red today: Why Dow Jones, S&P 500 and Nasdaq crash again - Dow drops 600 points an - The Economic Times",
-      "link": "https://news.google.com/rss/articles/CBMipwJBVV95cUxQNmxWOWtYcDdnUEhUT3pRS0xJcVFlbklKSTVMeXd0cllkbTZ6WWQ4djFZdUI2Sy0wal9zek1TUmVibVFZWXpmc1JjS1JLZFN1QXRfZDVQTWFIVzV5MG1VRFhSNGMyTGhneWI3cDBfMHlXX0ZPbm1qRWUySFRhQVdFV0VtUnZ5eC1PQVpYSHNUd0lCRVlVWGhzSHFEbUEzYktlRnBjbDlwZVluOWwzSnVkR0ZHNEoxdVllVXVZaFNLQ0FVQVdvT3dWczB5OEZ2Y1RHbmxGakhnYzB6SXZkd0lQS3pCbmZaZ0lpX1ZMZ0J4SUxMeExLWDRzRVNBaDNaWnVfYkh0Ull2QXg0S1ZzMXZmcjlrbEJRT05IVEhsN3NwUWZCcUl6czU40gGsAkFVX3lxTE5ZR0RlVGd1NmtvRVdxVTV6aFRkWEQtN00tYndwS1RPWUFFNzJJU3R6MHVjM2tQcGltRUFmdlZtYWRldGpLaTNXTlRYWThMYml2UkVSaEFla29nZnVOcHVCdXl1TXlTVjZlSEFHME1HNXUxWURYYmhzYVhLSlJaS2d1OGpZMTBoYS1WSnhvVjd5NWw5aVloeVhVSXItVWYzZEstZzJhTE16aFk2QzNyclVCdnVIZVNnMjFLMlJISU5JWW82ZnBXV3hpU284TThCTmpQejM1dllQeldHT0pnblFqNFk5VDZyRl9yOEQzTzdaSWtxWjd6Z1NqdXNOWmhjM2FHbWVSRklqUDJWVjJiQklKRUJ3b3BpU2hmMXgzcG9sSUVCT0JQVzNOYkpZTQ?oc=5",
+      "title": "US stock market deep in red today: Why Dow Jones, S&P 500 and Nasdaq crash again - Dow drops 600 points and Nasdaq sinks over 350 - The Economic Times",
+      "link": "https://news.google.com/rss/articles/CBMipwJBVV95cUxQNmxWOWtYcDdnUEhUT3pRS0xJcVFlbklKSTVMeXd0cllkbTZ6WWQ4djFZdUI2Sy0wal9zek1TUmVibVFZWXpmc1JjS1JLZFN1QXRfZDVQTWFIVzV5MG1VRFhSNGMyTGhneWI3cDBfMHlXX0ZPbm1qRWUySFRhQVdFV0VtUnZ5eC1PQVpYSHNUd0lCRVlVWGhzSHFEbUEzYktlRnBjbDlwZVluOWwzSnVkR0ZHNEoxdVllVXVZaFNLQ0FVQVdvT3dWczB5OEZ2Y1RHbmxGakhnYzB6SXZkd0lQS3pCbmZaZ0lpX1ZMZ0J4SUxMeExLWDRzRVNBaDNaWnVfYkh0Ull2QXg0S1ZzMXZmcjlrbEJRT05IVEhsN3NwUWZCcUl6czU4?oc=5",
       "pubDate": "Thu, 12 Mar 2026 15:02:00 GMT"
     },
     {
       "title": "A Federal Reserve Double Whammy Is 2 Months Away -- and It May Mark the Tipping Point for the Stock Market - AOL.com",
       "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1uTGwtcktvYXFRc3dNUUxwUG04WXhtR2NWUTlrN1FpSHFZNnJBMVdtdW1WelRUeHhSNDhJcWJMUTdHLWVIbmlJSXNYc3FmOXhJZC1yMUlYTnFoR2plSEdHbi1Cc01HQ0xUM3FFQVV5ZlltdUdLU1hldDZXUHlDQQ?oc=5",
       "pubDate": "Thu, 12 Mar 2026 14:33:28 GMT"
+    },
+    {
+      "title": "Dow, S&P 500, Nasdaq Futures Rise After Stocks Hit Lowest Level Since November - Meyka",
+      "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNeGVwYjNOSEt3ZlNoU2twTHhYWUpBVlZLLXVJbmozWDJjT0pSUG11WHZuMEZEM0E2c0JXTWg4Rkgya3c5cEU0TmEyOFBNNlBSYUZPUFE2ZjFjb0NwUFFsTGV1aUhrZS1PQnFrcnpUa01KTVZtR25ITzZ3R3lSa0xJYVpjUG5lTzZVUWNqMUI4bTc1bFV3NFBPNHJubkZLTm00QmZudVlwYw?oc=5",
+      "pubDate": "Fri, 13 Mar 2026 04:45:51 GMT"
     },
     {
       "title": "US Federal Reserve Vice Chair for Supervision Michelle Bowman says regulators will vote on revised capital rules in coming weeks that will reduce large bank requirements by 'a small amount' - marketscreener.com",
@@ -30,16 +40,6 @@
       "title": "The 5% Threshold: Treasury Yields Surge as Oil Shock and 'Policy Trap' Rattles Wall Street - FinancialContent",
       "link": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxPeXA0SC1obVlYbGtqV3NabkUzWkdrazFEZDhxVkJuWUVZdW1xdFZLZUk4NjUyOXVCMDR0clFqcnpBbmZRbWdHaXpQR29xWWVvVWVpSDhiSzJuODFTZnljUXFON0pmSUNic1BYU1hfMnRzN3llNTFUZVdoekJxME0yb2o4UzR3eXdrNzV3WDNmWm0yQTlWcUIxekRaa05KaWdyMVZjRFkxaG1lZ1dYUGVseWc0cTZDeUcxNlN2Wks2c2JlZ0dxWjRDWlVDNy1wT2ZnY2hoYWhwY1lPZEVYM2pYSllQbTRfME1BYmduN1haOUdoR3c?oc=5",
       "pubDate": "Thu, 12 Mar 2026 18:20:00 GMT"
-    },
-    {
-      "title": "US stock market today: Dow, S&P 500 futures slip as war-driven oil surge clouds US Fed rate cut outlook - Mint",
-      "link": "https://news.google.com/rss/articles/CBMihgJBVV95cUxONGVnV2xxRmp6VUc3TVhvNHJxMXJvLWtMbWhUZXdqZElVd2tTTkpQRWJRMW5EbURBSHd2bnFSeEh5V0VyWGEzZXhUeUlZMWo4Q1RxcW4tSFptSkZQQ3k5MEc2ei11bFNWNG9hYTQzeWZ3dF8yblRMSVV3d1lJa18tY082Z2dkLWJQMkpoWUFGQnRKcXd6THc5TUdUWk5Da2lTeGZ1N0k4ZHR5VDZxSjRlazJ0aXk4LUkzcWV4VnBrc1ZlbFR0MVBDSmZ4QU0yT2FJRDY2TEhmcGRRaFh2S1dYNEczVWkxUi1UZzdnOVYtODZOdFprb1ozM0hLNlJDa1R5aVdjOVVR0gGGAkFVX3lxTE40ZWdXbHFGanpVRzdNWG80cnExcm8ta0xtaFRld2pkSVV3a1NOSlBFYlExbkRtREFId3ZucVJ4SHlXRXJYYTNleFR5SVkxajhDVHFxbi1IWm1KRlBDeTkwRzZ6LXVsU1Y0b2FhNDN5Znd0XzJuVExJVXd3WUlrXy1jTzZnZ2QtYlAySmhZQUZCdEpxd3pMdzlNR1RaTkNraVN4ZnU3SThkdHlUNnFKNGVrMnRpeTgtSTNxZXhWcGtzVmVsVHQxUENKZnhBTTJPYUlENjZMSGZwZFFoWHZLV1g0RzNVaTFSLVRnN2c5Vi04Nk50WmtvWjMzSEs2UkNrVHlpV2M5VVE?oc=5",
-      "pubDate": "Thu, 12 Mar 2026 11:58:45 GMT"
-    },
-    {
-      "title": "Canadian stock market slides amid mixed U.S. performance and higher oil prices - Western Investor",
-      "link": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxObFBhSUxlRnA3cG9TY0Q0aXJvdWpQaDJac0RsMzFsS19lNDU4a09LM3NZQVI4emViS3RZN21GeEhYbVI1eFc0ZHZQeGJDZThSd0Jod2k5S0lIVEVzRmduUkZ1QzZsQVgtU2U2c1o5cFdCazRnYVJXLVdsN2swQXRNZFhNb1hzRlBUeFZ4OGVVTjFsanBKT19TWkktblY2N04xNllHWjBmeTNvWnFCQS1uNGtYSExkNmtxX1BJUlVGRnlUMnFUSXRaSURtMzhsNjNhTzQ5VQ?oc=5",
-      "pubDate": "Thu, 12 Mar 2026 05:00:40 GMT"
     }
   ],
   "crypto": [
@@ -51,7 +51,17 @@
     {
       "title": "Cryptocurrency & Blockchain Stock News - Stock Titan",
       "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5WTlpsODdsY0RyV1gyNGp3NHZfcm1Xb0dJU2hqT24xT3RSVjFIa1JLU3JjWWpMdy1UclhlMDNReHVQUC1kTjlqaGhRbWRtNmVHYmJ5RDh3?oc=5",
-      "pubDate": "Thu, 12 Mar 2026 23:50:23 GMT"
+      "pubDate": "Fri, 13 Mar 2026 03:45:32 GMT"
+    },
+    {
+      "title": "BlackRock Debuts Staked Ethereum ETF With $15.5M Volume - BeInCrypto",
+      "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5ybUlnYnpRLTZ5TlNHZFoxYlZuTzlKd3RrSzlFVUYxcGplSHBEd24yMkxDZ2tPWHNNaTNOVnhpS2xidDFoZkJCTjFta25JRmI2VzBiTjFIOG9wcXVrZnpJWlhJenFmRHUzTE4tajhaYmg?oc=5",
+      "pubDate": "Fri, 13 Mar 2026 02:56:00 GMT"
+    },
+    {
+      "title": "BlackRock Launches Staked Ethereum ETF - thedefiant.io",
+      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPUzF6QVJjdXV6V3R0YXVPZDAxcEdsZXk0VlB4WE1HdE8zSmFrODNYVzdfMTctYXRQZUJnU3B6b1pMc3pTWUtJV1FDVkJrcHJSdVB0UDJxLUNhdGxGakpqLVNtX2NDcHVKc0pXS2tBa0FoWG5uR1E4R2RsOEZsaXB1UkJQSUxhT0U2SkwxSkJXVjhFRlE?oc=5",
+      "pubDate": "Thu, 12 Mar 2026 17:46:15 GMT"
     },
     {
       "title": "BlackRock debuts staked ether ETF as demand grows for yield in crypto funds - CoinDesk",
@@ -69,19 +79,9 @@
       "pubDate": "Thu, 12 Mar 2026 17:11:13 GMT"
     },
     {
-      "title": "BlackRock Enters Ethereum Staking ETF Race With ETHB - ETF.com",
-      "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOaFhFX2Ixb3JQaERUSnl4Z2V5N3FCSlBUdjVlZGRJeG54YTQ1VjREcW80LXJ3eWt1b3dHa1hwcXNvZWVhSHc0WGVuSDktRVpRdjZzeXJkSGJsbktNVUh6Vm9QOVFPRjhfbFZsN3JEQzBPcUxUUVZnelA4aHhoSnVjSnFsQ0dCNHJMU2I3NjRR?oc=5",
-      "pubDate": "Thu, 12 Mar 2026 17:37:28 GMT"
-    },
-    {
-      "title": "The SEC’s Revolutionized Approach to Crypto - White & Case LLP",
-      "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOVlVNTWN1dlhESUItZ3AweVlwLXg5T2lMUHlJeklVLURMR1hycld4ZlZVbTlIRXNaTEZfUWhDbURDT1NNZlNFVmZXbWs3Qi0xTzlnX1RzX2N2Ri1SWEVraDR3bEN1a2k2bzhCc25pbTQybHllZHIyMXY0alFxb1V5X19rTkNzQVdKeHc?oc=5",
-      "pubDate": "Thu, 12 Mar 2026 12:00:00 GMT"
-    },
-    {
-      "title": "The SEC finally admits what caused the mess US crypto was in before Trump took power - CryptoSlate",
-      "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNNl9xLXNPMjE2d1JGSE1lNHZNMjZ5OUZrUEFsY3h2RjFZZnBNcl94TlpkeDUyelpKQjZ3NTVVeUhCU3RJRmFwdXUyejktUHRwSXFwbDRhR2FUNUVCbzhmOHBmMWJaVzROS2dORkJnWWVlc2lCWUZRVHZ6a2lYZ1oxNDl4a0hFVmFYTFhyeGM3Vm5QbzFvSkp6bXh4Q0loTDQ5dmVPVVhCMDVJUQ?oc=5",
-      "pubDate": "Thu, 12 Mar 2026 15:05:44 GMT"
+      "title": "Is U.S. crypto regulation about to get simpler? All about the latest SEC–CFTC move - AMBCrypto",
+      "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPVHV6MDNzUXVWNFBlWTJ2NU8xT2c0RC0ySFQtS2xUbFR4cFRnWFVhLWxVOF9CNTB5YmhWcWJLb19ERWhlMjNzSG9LTUZaVTdEWjNpak9HZXJtUlN3azBZbDZ4bG9CX0NPSmJXVkZlOXpPMmh4c1puOV9DZjBnNEg1S0ZnUmhtS2tUY05WMW1BWFlXeVFzX2hmV1MzZTHSAaIBQVVfeXFMTS1GcWpyZlRfak1MOTRqemxBazU4T1g1RUFZdHpWZGNvSW40djJVekVJUlJjaDV5c21ja1pWWkR5WkhUVU5nWnUzaHFBR0dRRXpYMnJuTU1OMFVFQ01WS2dhRU1JM1FTSVZJM005RnFkaFRTUFRWRWpMdkFnV3NSQlV5Z0tZblcyM0x6ZVh5bkJYVk5OTzdHbzRlWnlGeHZKZ3Fn?oc=5",
+      "pubDate": "Fri, 13 Mar 2026 02:00:14 GMT"
     }
   ]
 }
