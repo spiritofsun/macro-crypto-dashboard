@@ -1,10 +1,15 @@
 {
-  "updated_at": "2026-03-12T20:27:00.359492+00:00",
+  "updated_at": "2026-03-13T01:23:43.105238+00:00",
   "macro": [
     {
       "title": "US Stock Market Today: Dow Falls 600 Points, S&P 500 & Nasdaq Down as Oil Price Surges Amid Iran Tensions; Gold & Silver Rise; Bitcoin Steady Nears $70K - The Sunday Guardian",
       "link": "https://news.google.com/rss/articles/CBMipgJBVV95cUxOc0FEb2NMQURKZVl5TWFPQklmM1pGNDRTN3NIM19wYmttdnllWkpEbzJfcl9FTEVDRnhZT2RQcGlhYWdjakNFSk9iT1dfaGQ4WlJtWUNXSE9yZlpnRnVfOHVyUDhUQXE0UjZqOFR2T3dGUkFEUUl0Zm9wUXVrUGhSOUJ4QTVCeXVQSW0taUZ6VDVOQmJCYm5JZC1DbURLRXh1OGlhVDh4d1lCOFRXVVJxLUVfZnYyR1ZuQ0wzSGZrUi1HZVk3b3g2cWtnNVhNN0lra2QxVEJxTGd2cTdwOTNMNkRpYnhUOGhDZXFNVUlOWVRNbEVaZktzUVpRLUpvSGROTHdBdkZydkxFclJmUlJFcjhqQmNxcTlHREdaZVc5dW9STDBXV1E?oc=5",
       "pubDate": "Thu, 12 Mar 2026 16:28:21 GMT"
+    },
+    {
+      "title": "Stock market update: Dow, S&P 500, and Nasdaq futures edge higher following stocks dropping to their lowest point since November - Bitget",
+      "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE53MUJaMlRfcHQwQ1BkclJJRW5iaVdzNmJaLWlkU2EyZUI5VTctVWZ0c1g0WEh2QXg1SHZZRmgxSGJzWWo5c0ZNekNWTFhnR3paZVhtV2ZGMmktRGl2YklqRjVMRdIBY0FVX3lxTE53MUJaMlRfcHQwQ1BkclJJRW5iaVdzNmJaLWlkU2EyZUI5VTctVWZ0c1g0WEh2QXg1SHZZRmgxSGJzWWo5c0ZNekNWTFhnR3paZVhtV2ZGMmktRGl2YklqRjVMRQ?oc=5",
+      "pubDate": "Thu, 12 Mar 2026 23:00:44 GMT"
     },
     {
       "title": "US stock market deep in red today: Why Dow Jones, S&P 500 and Nasdaq crash again - Dow drops 600 points an - The Economic Times",
@@ -17,36 +22,56 @@
       "pubDate": "Thu, 12 Mar 2026 14:33:28 GMT"
     },
     {
+      "title": "US Federal Reserve Vice Chair for Supervision Michelle Bowman says regulators will vote on revised capital rules in coming weeks that will reduce large bank requirements by 'a small amount' - marketscreener.com",
+      "link": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxQSmI5b0Z0NTMyNUgwMlBNZHE4MXN0bmZrY1duUEZmN29yc1N2Z0xjMjlfSUkzbGRqTkFFNmpOWEFObUdXZTdrNlFmRHZNMXFXNVRZTGNBUzRpcy16ZTFsOGxEUHhBTFJSX19nY2pYLVhDTlBnVU50eTJBNjBlUjhwZnE2cWxyM0pZb0M4MjNIcjBmRHFRc2VFSUV1dWZWM2sySnRHN0NBSXA2OW5mMTA1RmdQdXZadWhkd2FkbHFvWUl0SDNvUXg3YW5rbHBkME4xSUx2WlA3c182dkJaNHlIb3ZMUDNhZWVD?oc=5",
+      "pubDate": "Thu, 12 Mar 2026 15:04:46 GMT"
+    },
+    {
+      "title": "The 5% Threshold: Treasury Yields Surge as Oil Shock and 'Policy Trap' Rattles Wall Street - FinancialContent",
+      "link": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxPeXA0SC1obVlYbGtqV3NabkUzWkdrazFEZDhxVkJuWUVZdW1xdFZLZUk4NjUyOXVCMDR0clFqcnpBbmZRbWdHaXpQR29xWWVvVWVpSDhiSzJuODFTZnljUXFON0pmSUNic1BYU1hfMnRzN3llNTFUZVdoekJxME0yb2o4UzR3eXdrNzV3WDNmWm0yQTlWcUIxekRaa05KaWdyMVZjRFkxaG1lZ1dYUGVseWc0cTZDeUcxNlN2Wks2c2JlZ0dxWjRDWlVDNy1wT2ZnY2hoYWhwY1lPZEVYM2pYSllQbTRfME1BYmduN1haOUdoR3c?oc=5",
+      "pubDate": "Thu, 12 Mar 2026 18:20:00 GMT"
+    },
+    {
       "title": "US stock market today: Dow, S&P 500 futures slip as war-driven oil surge clouds US Fed rate cut outlook - Mint",
       "link": "https://news.google.com/rss/articles/CBMihgJBVV95cUxONGVnV2xxRmp6VUc3TVhvNHJxMXJvLWtMbWhUZXdqZElVd2tTTkpQRWJRMW5EbURBSHd2bnFSeEh5V0VyWGEzZXhUeUlZMWo4Q1RxcW4tSFptSkZQQ3k5MEc2ei11bFNWNG9hYTQzeWZ3dF8yblRMSVV3d1lJa18tY082Z2dkLWJQMkpoWUFGQnRKcXd6THc5TUdUWk5Da2lTeGZ1N0k4ZHR5VDZxSjRlazJ0aXk4LUkzcWV4VnBrc1ZlbFR0MVBDSmZ4QU0yT2FJRDY2TEhmcGRRaFh2S1dYNEczVWkxUi1UZzdnOVYtODZOdFprb1ozM0hLNlJDa1R5aVdjOVVR0gGGAkFVX3lxTE40ZWdXbHFGanpVRzdNWG80cnExcm8ta0xtaFRld2pkSVV3a1NOSlBFYlExbkRtREFId3ZucVJ4SHlXRXJYYTNleFR5SVkxajhDVHFxbi1IWm1KRlBDeTkwRzZ6LXVsU1Y0b2FhNDN5Znd0XzJuVExJVXd3WUlrXy1jTzZnZ2QtYlAySmhZQUZCdEpxd3pMdzlNR1RaTkNraVN4ZnU3SThkdHlUNnFKNGVrMnRpeTgtSTNxZXhWcGtzVmVsVHQxUENKZnhBTTJPYUlENjZMSGZwZFFoWHZLV1g0RzNVaTFSLVRnN2c5Vi04Nk50WmtvWjMzSEs2UkNrVHlpV2M5VVE?oc=5",
       "pubDate": "Thu, 12 Mar 2026 11:58:45 GMT"
     },
     {
-      "title": "Stock Futures Tumble as Middle East Crisis Sends Oil Prices Soaring Past $100 - Fine Day 102.3",
-      "link": "https://news.google.com/rss/articles/CBMizwFBVV95cUxNZzdYOEI5NWlEY3VQNE5qdFI1RjJ5MTBoR2RRbTJfSkNXc1A5bE90RmhSdVplcjAwdDBQSnYwMm1mYW5JMXBTaElUMjAtZVhyZEVNTzVRLXRsdkR4WUMzSng0M2FfZ2paWTdEWHlyRjRhWGlsLWRRbS1fNVpoTkxacmdGWF96emt5U2Njd3ZWVjV4R09IWm9ERm9Zay1uVHdLbTRCc2NlZEdBZWdOTUFnb1hyeHBYczloMEpIYnhBbmF5Y0lpdjVZZURBb1ZMbUE?oc=5",
-      "pubDate": "Thu, 12 Mar 2026 08:27:33 GMT"
-    },
-    {
-      "title": "US Equity Indexes Mixed as Treasury Yields Soar After Choked Hormuz Beats IEA Record Reserve Release - marketscreener.com",
-      "link": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxOMUEzSnlidDdkYmpVYTFfMWpCSTdpbEFBRE9PTzBIVzg2TGw4UVBiRUU1RW4tRllrVzNuM2FpaFhhNDczSE9scFhjMmZQTXY4NXhTTEVxZDY0YVRtajVIRmNSU2Fib1plUFJubkZBNUN3WnIyNlB5RzVkQXJVVnpDOEFRbHcxbENYTEhwa2ZuMWwwQzhfLUxEVVcya09zYXQxN2o3Q0tXQ3hNY2pVYVJ2TEF2VmFvSF9NanZCMTBXLXhjYThpaTFoSlQyNWJPVXZYdGlKMFdXbzZWRm1qbFVSd3R6Y1NCMUFF?oc=5",
-      "pubDate": "Wed, 11 Mar 2026 21:39:20 GMT"
-    },
-    {
-      "title": "Economists warn that stock market bubbles are more fragile than a repeat of the oil crisis of 50 years ago. - MEXC",
-      "link": "https://news.google.com/rss/articles/CBMiR0FVX3lxTE5xU2Y5NXRVd2ptZFJQUGx6TW9USGZjdkVLLWJMalZmcHBRU2doUG13UWl6aEhDSEhwMkdoOHFXdXMxMmphdHcw?oc=5",
-      "pubDate": "Thu, 12 Mar 2026 04:52:30 GMT"
-    },
-    {
-      "title": "US Stock Futures Fluctuate as Brent Hits $90 Again: Markets Wrap - Bloomberg",
-      "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOU1RKSWV6R3hnTzJCZHE3c3lfc3F5MWhYSnJxLVE3SkFybDVSdkhfTWtRSUMxeFB5Zk9LVjlEMUIzaXlnSEVnU0x3bXVlNzU1emVITlRUOVphQkxhbTJkTEE2a0lZRlJxTG5IbE1OTVFqbEFLOTNmejNNa1g1ekpzaUtYVjRCcFF4V0x3aWZ5TFpxZVdzV0dpSktrWnJhUmtqM2d0eG44OW84YnU5dWp4Qw?oc=5",
-      "pubDate": "Wed, 11 Mar 2026 20:54:43 GMT"
+      "title": "Canadian stock market slides amid mixed U.S. performance and higher oil prices - Western Investor",
+      "link": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxObFBhSUxlRnA3cG9TY0Q0aXJvdWpQaDJac0RsMzFsS19lNDU4a09LM3NZQVI4emViS3RZN21GeEhYbVI1eFc0ZHZQeGJDZThSd0Jod2k5S0lIVEVzRmduUkZ1QzZsQVgtU2U2c1o5cFdCazRnYVJXLVdsN2swQXRNZFhNb1hzRlBUeFZ4OGVVTjFsanBKT19TWkktblY2N04xNllHWjBmeTNvWnFCQS1uNGtYSExkNmtxX1BJUlVGRnlUMnFUSXRaSURtMzhsNjNhTzQ5VQ?oc=5",
+      "pubDate": "Thu, 12 Mar 2026 05:00:40 GMT"
     }
   ],
   "crypto": [
     {
+      "title": "Bitcoin ETF Holders Stay Steady Through Q4 Price Decline - ETF Database",
+      "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNZG12bElta2k0V2poQnV2SXNDRTJFYUNzNUYxYzdzV0dESFdRN2xiMXpGTThtUlhHQ2gyV21iNlNBS1NyMXlVS2lWSW5zb2FmZHkyT0RkZlZSY3pjbUZRcmdud3FzNGdLQ0ktNkROUVpsTm9qMzhaWjBPbVRtdWw4ZHBQeUMwSy1IX2JKbE1hSGNWeU94SlAyaXVZVkdpbDg?oc=5",
+      "pubDate": "Thu, 12 Mar 2026 20:46:27 GMT"
+    },
+    {
+      "title": "Cryptocurrency & Blockchain Stock News - Stock Titan",
+      "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5WTlpsODdsY0RyV1gyNGp3NHZfcm1Xb0dJU2hqT24xT3RSVjFIa1JLU3JjWWpMdy1UclhlMDNReHVQUC1kTjlqaGhRbWRtNmVHYmJ5RDh3?oc=5",
+      "pubDate": "Thu, 12 Mar 2026 23:50:23 GMT"
+    },
+    {
       "title": "BlackRock debuts staked ether ETF as demand grows for yield in crypto funds - CoinDesk",
       "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNd1drV1ctVkFQX0NOcG1kVFEzU3EyWnNZdHBoT1kxV016ZmJhdDhWMjc5ZlV6cS1jVE1JcWdiYWhGSWhIMGVEY0hHOGZzQzF1TV8yVEphbkxZLU1nMW40eHdXdEk0NnV0S09lcFNpaGVVUGVPaEZhYko5YkpBTDk2Y3ZvZ3REVlIxb240Uk5fTWZpWjI2NlB4dEU3aktZenVpalpzLU5ucGZjTlFXdmUyZm5vemlTLWMtcnZB?oc=5",
       "pubDate": "Thu, 12 Mar 2026 12:02:11 GMT"
+    },
+    {
+      "title": "Coinbase Expands Beyond Crypto With 24/5 Stock And ETF Trading - Yahoo Finance",
+      "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNdWNpak00UF9UTUYxQkZseElVMVdqRFRScXNGRVlZWXdJbUdTS1dDdGUtR0N1aEotTzFSN0c2U21iR0xKdnYwX2Jrdk40TG5uNHc2UXpscDVaN01wVzY4MzI0dHdlcC1uYXpXZnNQM2phN1QtTUN1MUFab2p3dk5acndtU1RNQQ?oc=5",
+      "pubDate": "Thu, 12 Mar 2026 20:10:33 GMT"
+    },
+    {
+      "title": "The Daily: SEC and CFTC sign crypto coordination pact, Ripple launches $750 million share buyback program, and more - The Block",
+      "link": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQUk0wTW03M0FNMUc4WDBSTXp3NWZXWUE3bmxBd0hCTlFabWpoQ2pkTTdPNnowaHM4bWIyOXZhdy1QWFlUOFZBc3BXVkhKUGlNVXcxY0ZHNklpODhiWTJsOGlKLVB1bE54V0RPcHZncDM1anNYNlRWOVo3OWV0QjJsRS1xQjVQNlVNcW1zeE81UXBiUU80M1ZZWjJWRUdaMEhtdVdpQjJrTUxQZUxwd1QyVFA5UzI0YlllYTZrbWM0WjNjWUdzUkRpa1JvUklVOTV4ZkdrcVNQNUVoR3pxUDZ2bQ?oc=5",
+      "pubDate": "Thu, 12 Mar 2026 17:11:13 GMT"
+    },
+    {
+      "title": "BlackRock Enters Ethereum Staking ETF Race With ETHB - ETF.com",
+      "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOaFhFX2Ixb3JQaERUSnl4Z2V5N3FCSlBUdjVlZGRJeG54YTQ1VjREcW80LXJ3eWt1b3dHa1hwcXNvZWVhSHc0WGVuSDktRVpRdjZzeXJkSGJsbktNVUh6Vm9QOVFPRjhfbFZsN3JEQzBPcUxUUVZnelA4aHhoSnVjSnFsQ0dCNHJMU2I3NjRR?oc=5",
+      "pubDate": "Thu, 12 Mar 2026 17:37:28 GMT"
     },
     {
       "title": "The SEC’s Revolutionized Approach to Crypto - White & Case LLP",
@@ -54,34 +79,9 @@
       "pubDate": "Thu, 12 Mar 2026 12:00:00 GMT"
     },
     {
-      "title": "The Daily: SEC and CFTC sign crypto coordination pact, Ripple launches $750 million share buyback program, and more - The Block",
-      "link": "https://news.google.com/rss/articles/CBMijwJBVV95cUxONXpvcUtaZUxxeFpod3pULVBhQ092WkRJMU9mSGs2V3hhbnRnbUM4cEVKVjRVT3N4V05aWV9CbHd3bUlaME84M09lM1VxNTMxV0k2VDhRQU8zMW50RjBpaG1uWEVfUkI0SkNVMXFyVHJQTmlhTFFoYnB3UE1Mc0VMQUVhR291aHdSakRXVkxUaGpBelRUZUFaNHllWmYwenRPZGVLWW9GR05NZ2pxV180bEJEWGR1bG03NkhuazNIekw2eGRQWFJWT2ZrWmVJYjM0ZXpvRzlTalN1Zy04QThYWHFiaGl6T1hKNkhDR1pnYnZDaDdOX2F1UWFlRlNGN1FBbVhYakdVak1UdlVrWFM4?oc=5",
-      "pubDate": "Thu, 12 Mar 2026 17:11:13 GMT"
-    },
-    {
-      "title": "The SEC finally admits US crypto chaos was caused by its own regulatory turf wars - CryptoRank",
-      "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOS0hUV2tlYmxYVVdvalFqX293cTQteWtLaVNtby04TFpRV3JvS3NoUmNraVdyWWZWSGU5MFozdnp5dzRmMHUyMGx2STV0VklBbk40RTRwcG12b2YyVG1DUDd4blZIbWViQXhjYUttX2RCQ19ZellYRlloSFNFeldpa18wX1VIUjZkVUJ0N2tNREctQlI0WUlTeXZqSDFmX2VYYVJJaHlycS1xMXc1ZUF5T2RvTEczWUk2dk04?oc=5",
-      "pubDate": "Thu, 12 Mar 2026 19:10:54 GMT"
-    },
-    {
-      "title": "SEC and CFTC Strike Agreement to Coordinate Crypto Oversight and Market Regulation - PYMNTS.com",
-      "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQQklZQ0l0bWhUakdESnc2Qm1SaS1xUFRDRlB6WHU0Sy1qbElwZzkwRUpxTnR1dllqajBSb2hyeno3cmZSUEx6eXF2V2VPY2RqUHIzNU1CcGxLRnlSYjI1NjhvWmRCaVIzODRRV1ZmSkJNOXdsMjUwdmZqcmh1Y0c3TUN0ZURHbHlhRTNWXzB5Umgzdnh4bng2WnlHSk1pME13ZExQRk1tcUhoVWp0ZHJLamdyTEQ5ZGs?oc=5",
-      "pubDate": "Thu, 12 Mar 2026 17:45:33 GMT"
-    },
-    {
-      "title": "Crypto ETFs Extend Inflow Streaks as Bitcoin Adds $115 Million and Ether Adds $57 Million - Bitcoin.com News",
-      "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOeHFEbExLV2R2U0ZZTVRxTlh2WTZTNWxtRHBRYWlPbVQyZkU3MzdMVVJMUzY1ZXU4SVc0YTVXVkNMcEFaemJvRG5MZEppbTZUei1EbWlrMGhrYzZRazcwT0dBbm03NWdURG8zN2NsUFRsNHhzTF9XOTVleVFLX1hCMnZjR185djRpRGZQaXpYbUMzaWxrUjNVLTBRUzhjZUhfb3h5bm9MNnVkSUdVVHR2aHNFaw?oc=5",
-      "pubDate": "Thu, 12 Mar 2026 16:57:46 GMT"
-    },
-    {
-      "title": "White House accuses banks of ‘hijacking’ crypto market structure push - CoinGeek",
-      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPSm82RzBsSWpyemdGTXhqZkdLd1V3SFBvM3ZKQzdtUDd5Q1E3U09rNGpWeWV3eE1oREw2WDBCaE5ZbXM2b3BCd3dBVjhDa05JVDlHVklrV2ZZYW5fbG9SeTdzY0tGNlVGdjR3Q1RWVm1pcXljeEMyUy05VXVrLS1rME1VdVlRbkFmdTZMWWVDSGI1MWM?oc=5",
-      "pubDate": "Thu, 12 Mar 2026 12:04:36 GMT"
-    },
-    {
-      "title": "BlackRock launches staked Ethereum ETF, expanding crypto product lineup - Cryptonews.net",
-      "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBQZ0tEN243bk1Ga0hlbWpldUpUeGFNcEwwWEdPQVFKQURudmVOTEpsTFUzU0ZRNWhfT0Y4MFJnWFNpVnVEa3l6cFQyN1Z1Nk9uSjhzMXA4LWI4QQ?oc=5",
-      "pubDate": "Thu, 12 Mar 2026 17:06:17 GMT"
+      "title": "The SEC finally admits what caused the mess US crypto was in before Trump took power - CryptoSlate",
+      "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNNl9xLXNPMjE2d1JGSE1lNHZNMjZ5OUZrUEFsY3h2RjFZZnBNcl94TlpkeDUyelpKQjZ3NTVVeUhCU3RJRmFwdXUyejktUHRwSXFwbDRhR2FUNUVCbzhmOHBmMWJaVzROS2dORkJnWWVlc2lCWUZRVHZ6a2lYZ1oxNDl4a0hFVmFYTFhyeGM3Vm5QbzFvSkp6bXh4Q0loTDQ5dmVPVVhCMDVJUQ?oc=5",
+      "pubDate": "Thu, 12 Mar 2026 15:05:44 GMT"
     }
   ]
 }
