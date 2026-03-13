@@ -1,15 +1,15 @@
 {
-  "as_of": "2026-03-13 11:46 KST",
+  "as_of": "2026-03-13 13:51 KST",
   "rates": {
     "us10y": {
-      "value": 4.12,
-      "delta": -0.03000000000000025,
-      "display": "4.12"
+      "value": 4.21,
+      "delta": 0.05999999999999961,
+      "display": "4.21"
     },
     "us2y": {
-      "value": 3.56,
-      "delta": 0.0,
-      "display": "3.56"
+      "value": 3.64,
+      "delta": 0.07000000000000028,
+      "display": "3.64"
     },
     "sofr": {
       "value": 3.64,
@@ -90,9 +90,9 @@
   },
   "liquidity": {
     "rrp": {
-      "value": 0.552,
-      "delta": 0.274,
-      "display": "0.55"
+      "value": 0.137,
+      "delta": -0.41500000000000004,
+      "display": "0.14"
     },
     "tga": {
       "value": 838186.0,
@@ -100,9 +100,9 @@
       "display": "838,186"
     },
     "repo": {
-      "value": 0.001,
-      "delta": -0.103,
-      "display": "0.001"
+      "value": 0.006,
+      "delta": 0.005,
+      "display": "0.006"
     },
     "qt_status": "진행 중 (대차대조표 축소)"
   }
