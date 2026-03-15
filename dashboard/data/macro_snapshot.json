@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-03-15 08:37 KST",
+  "as_of": "2026-03-15 12:24 KST",
   "rates": {
     "us10y": {
       "value": 4.21,
@@ -29,9 +29,9 @@
       "display": "98.43"
     },
     "usdkrw": {
-      "value": 1496.539707,
+      "value": 1495.240466,
       "delta": 0.0,
-      "display": "1,497"
+      "display": "1,495"
     }
   },
   "indices": {
