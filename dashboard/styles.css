@@ -1898,6 +1898,100 @@ body {
   background: linear-gradient(135deg, rgba(229, 72, 77, 0.14), rgba(229, 72, 77, 0.04));
 }
 
+.macro-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.macro-lead-card {
+  padding: 22px;
+  border: 1px solid rgba(245, 192, 54, 0.22);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at top left, rgba(245, 192, 54, 0.16), transparent 38%),
+    linear-gradient(180deg, rgba(13, 18, 24, 0.98), rgba(8, 11, 15, 0.98));
+}
+
+.macro-lead-kicker {
+  margin: 0 0 10px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #b4a46d;
+}
+
+.macro-lead-card h2 {
+  margin: 0;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.05;
+}
+
+.macro-lead-body {
+  margin: 14px 0 16px;
+  max-width: 54ch;
+  color: #b2c4b4;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.macro-lead-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.macro-lead-meta span {
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 12px;
+  color: #9ab29d;
+}
+
+.macro-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.macro-mini-card {
+  padding: 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.01)),
+    #0c1117;
+}
+
+.macro-mini-card p,
+.macro-mini-card strong,
+.macro-mini-card span {
+  display: block;
+}
+
+.macro-mini-card p {
+  margin: 0 0 8px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.macro-mini-card strong {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.15;
+}
+
+.macro-mini-card span {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #92a895;
+}
+
 .signal-board {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1934,6 +2028,46 @@ body {
   margin: 10px 0 0;
   font-size: 13px;
   color: var(--muted);
+}
+
+.macro-dual-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.macro-read-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.macro-read-card {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(15, 20, 27, 0.98), rgba(9, 13, 18, 0.98));
+}
+
+.macro-read-label {
+  margin: 0 0 10px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.macro-read-card strong {
+  display: block;
+  margin: 0 0 10px;
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+.macro-read-card span {
+  font-size: 13px;
+  color: #93aa97;
+  line-height: 1.5;
 }
 
 /* limit accent usage to deltas/live/active nav */
@@ -1986,6 +2120,9 @@ body {
 }
 
 @media (max-width: 1200px) {
+  .macro-hero-grid,
+  .macro-dual-grid,
+  .macro-read-grid,
   .signal-board {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1996,8 +2133,17 @@ body {
 }
 
 @media (max-width: 700px) {
+  .macro-hero-grid,
+  .macro-mini-grid,
+  .macro-dual-grid,
+  .macro-read-grid,
   .signal-board {
     grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .macro-lead-card {
+    padding: 18px;
+    border-radius: 20px;
   }
 
   #macroTopStrip {

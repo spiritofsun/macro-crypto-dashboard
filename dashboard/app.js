@@ -813,6 +813,11 @@ function renderStockMarketPage() {
   if (!document.getElementById("rateCards")) return;
   const macro = state.macroSnapshot || fallbackMacro;
   const macroAgeHours = hoursSince(macro.as_of);
+  const curve = (toNumSafe(macro.rates?.us10y?.value) ?? 0) - (toNumSafe(macro.rates?.us2y?.value) ?? 0);
+  const dxyDelta = toNumSafe(macro.fx?.dxy?.delta) ?? 0;
+  const rrpDelta = toNumSafe(macro.liquidity?.rrp?.delta) ?? 0;
+  const equityBreadth = ((toNumSafe(macro.indices?.sp500?.delta) ?? 0) + (toNumSafe(macro.indices?.nasdaq?.delta) ?? 0)) / 2;
+  const vixValue = toNumSafe(macro.indices?.vix?.value) ?? toNumSafe(macro.indices?.vix?.display) ?? 0;
   const silverFromSnapshot = (() => {
     const list = state.snapshot?.commodities;
     if (!Array.isArray(list)) return null;
@@ -826,13 +831,62 @@ function renderStockMarketPage() {
   })();
   const silver = macro.commodities?.silver || silverFromSnapshot || { value: null, delta: null, display: "—" };
 
+  const leadCard = document.getElementById("macroLeadCard");
+  if (leadCard) {
+    const regime = equityBreadth >= 0.75 ? "Risk-On Expansion" : equityBreadth <= -0.75 ? "Risk-Off Defense" : "Range-Bound Tape";
+    const regimeTone = equityBreadth >= 0.75 ? "up" : equityBreadth <= -0.75 ? "down" : "flat";
+    const regimeBody = equityBreadth >= 0.75
+      ? "미국 주가지수 모멘텀이 우세하고 변동성 압력이 상대적으로 제한적입니다."
+      : equityBreadth <= -0.75
+        ? "주가지수 모멘텀이 약하고 달러·변동성 변수에 더 민감한 구간입니다."
+        : "방향성보다 금리와 달러 변화에 따라 빠르게 바뀌는 혼조 구간입니다.";
+    leadCard.innerHTML = `
+      <p class="macro-lead-kicker">Market Regime</p>
+      <h2 class="${regimeTone}">${regime}</h2>
+      <p class="macro-lead-body">${regimeBody}</p>
+      <div class="macro-lead-meta">
+        <span>S&P500/NASDAQ 평균 ${formatPct(equityBreadth)}</span>
+        <span>VIX ${macro.indices.vix?.display || "—"}</span>
+        <span>USD/KRW ${macro.fx.usdkrw.display}</span>
+      </div>
+    `;
+  }
+
+  const miniGrid = document.getElementById("macroMiniGrid");
+  if (miniGrid) {
+    const items = [
+      {
+        label: "Volatility",
+        value: vixValue >= 24 ? "High Alert" : vixValue >= 18 ? "Elevated" : "Contained",
+        tone: vixValue >= 24 ? "down" : vixValue >= 18 ? "flat" : "up",
+        meta: `VIX ${macro.indices.vix?.display || "—"}`,
+      },
+      {
+        label: "Dollar",
+        value: dxyDelta >= 0.3 ? "Tightening" : dxyDelta <= -0.3 ? "Relief" : "Sideways",
+        tone: dxyDelta >= 0.3 ? "down" : dxyDelta <= -0.3 ? "up" : "flat",
+        meta: `DXY ${formatPct(dxyDelta)}`,
+      },
+      {
+        label: "Liquidity",
+        value: rrpDelta <= -5 ? "Improving" : rrpDelta >= 5 ? "Draining" : "Stable",
+        tone: rrpDelta <= -5 ? "up" : rrpDelta >= 5 ? "down" : "flat",
+        meta: `RRP ${formatBnDelta(rrpDelta)}`,
+      },
+      {
+        label: "Curve",
+        value: curve >= 0 ? "Positive" : "Still Inverted",
+        tone: curve >= 0 ? "up" : "down",
+        meta: `10Y-2Y ${formatSigned(curve, 2, "%p")}`,
+      },
+    ];
+    miniGrid.innerHTML = items
+      .map((item) => `<article class="macro-mini-card"><p>${item.label}</p><strong class="${item.tone}">${item.value}</strong><span>${item.meta}</span></article>`)
+      .join("");
+  }
+
   const signalBoard = document.getElementById("macroSignalBoard");
   if (signalBoard) {
-    const curve = (toNumSafe(macro.rates?.us10y?.value) ?? 0) - (toNumSafe(macro.rates?.us2y?.value) ?? 0);
-    const dxyDelta = toNumSafe(macro.fx?.dxy?.delta) ?? 0;
-    const rrpDelta = toNumSafe(macro.liquidity?.rrp?.delta) ?? 0;
-    const equityBreadth = ((toNumSafe(macro.indices?.sp500?.delta) ?? 0) + (toNumSafe(macro.indices?.nasdaq?.delta) ?? 0)) / 2;
-
     const signals = [
       {
         label: "Risk Regime",
@@ -891,6 +945,35 @@ function renderStockMarketPage() {
     ];
     strip.innerHTML = cells
       .map((c) => `<article class="snapshot-pill top-kpi"><span class="label">${c.label}</span><span class="value">${c.value}</span><span class="metric-delta ${toneClass(c.delta)}">${c.rawDelta || formatPct(c.delta)}</span></article>`)
+      .join("");
+  }
+
+  const readGrid = document.getElementById("macroReadGrid");
+  if (readGrid) {
+    const reads = [
+      {
+        label: "Equities",
+        value: equityBreadth >= 0.75 ? "Breadth improving" : equityBreadth <= -0.75 ? "Breadth deteriorating" : "Mixed participation",
+        detail: `S&P500 ${formatPct(macro.indices.sp500.delta)} / NASDAQ ${formatPct(macro.indices.nasdaq.delta)}`,
+      },
+      {
+        label: "Rates",
+        value: curve >= 0 ? "Curve re-steepening" : "Front-end still restrictive",
+        detail: `US10Y ${macro.rates.us10y.display} / US2Y ${macro.rates.us2y.display}`,
+      },
+      {
+        label: "FX",
+        value: dxyDelta >= 0.3 ? "Dollar headwind" : dxyDelta <= -0.3 ? "Dollar relief" : "FX neutral",
+        detail: `DXY ${macro.fx.dxy.display} / USDKRW ${macro.fx.usdkrw.display}`,
+      },
+      {
+        label: "Commodities",
+        value: (toNumSafe(macro.commodities.gold.delta) ?? 0) > 0 ? "Defensive bid active" : "Defensive bid fading",
+        detail: `Gold ${macro.commodities.gold.display} / WTI ${macro.commodities.wti.display}`,
+      },
+    ];
+    readGrid.innerHTML = reads
+      .map((item) => `<article class="macro-read-card"><p class="macro-read-label">${item.label}</p><strong>${item.value}</strong><span>${item.detail}</span></article>`)
       .join("");
   }
 

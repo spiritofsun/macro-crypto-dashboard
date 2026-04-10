@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260410a" />
+    <link rel="stylesheet" href="./styles.css?v=20260410b" />
   </head>
   <body>
     <div class="app-shell">
@@ -32,6 +32,11 @@
 
         <section class="data-health" id="macroDataHealth" hidden></section>
 
+        <section class="macro-hero-grid">
+          <article class="macro-lead-card" id="macroLeadCard"></article>
+          <div class="macro-mini-grid" id="macroMiniGrid"></div>
+        </section>
+
         <section class="signal-board" id="macroSignalBoard"></section>
 
         <section class="panel">
@@ -39,14 +44,21 @@
           <div class="snapshot-strip" id="macroTopStrip"></div>
         </section>
 
-        <section class="panel">
-          <div class="panel-head"><h2>금리</h2></div>
-          <div class="card-grid card-grid-4" id="rateCards"></div>
+        <section class="macro-dual-grid">
+          <section class="panel">
+            <div class="panel-head"><h2>금리</h2></div>
+            <div class="card-grid card-grid-4" id="rateCards"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head"><h2>달러/FX</h2></div>
+            <div class="card-grid card-grid-2" id="fxCards"></div>
+          </section>
         </section>
 
         <section class="panel">
-          <div class="panel-head"><h2>달러/FX</h2></div>
-          <div class="card-grid card-grid-2" id="fxCards"></div>
+          <div class="panel-head"><h2>Cross-Asset Read</h2></div>
+          <div class="macro-read-grid" id="macroReadGrid"></div>
         </section>
 
         <section class="panel">
@@ -107,6 +119,6 @@
       </main>
     </div>
 
-    <script src="./app.js?v=20260410a"></script>
+    <script src="./app.js?v=20260410b"></script>
   </body>
 </html>
