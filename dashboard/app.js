@@ -516,9 +516,8 @@ function getFilteredCryptoRows() {
 }
 
 function renderCryptoSummary() {
-  const primaryTarget = document.getElementById("cryptoPrimarySummary");
-  const secondaryTarget = document.getElementById("cryptoSecondarySummary");
-  if (!primaryTarget && !secondaryTarget) return;
+  const shell = document.getElementById("cryptoSummaryShell");
+  if (!shell) return;
 
   const rows = state.cryptoUniverse.filter((r) => typeof r.market_cap === "number");
   const total = rows.reduce((s, r) => s + r.market_cap, 0);
@@ -567,22 +566,38 @@ function renderCryptoSummary() {
     { label: "TOTAL3ES", value: formatBigNumber(totals.TOTAL3ES), delta: null, deltaText: "BTC+ETH+스테이블 제외" },
   ];
 
-  renderCards("cryptoPrimarySummary", summaryCards.slice(0, 4), { topCount: 4 });
-  renderCards("cryptoSecondarySummary", summaryCards.slice(4), { topCount: 0 });
+  const leadValue = summaryCards[0];
+  const sideValues = summaryCards.slice(1, 4);
+  const ribbonValues = summaryCards.slice(4);
 
-  const cards = document.querySelectorAll("#cryptoPrimarySummary .metric-card, #cryptoSecondarySummary .metric-card");
-  cards.forEach((card) => {
-    const label = card.querySelector(".metric-label")?.textContent?.trim();
-    if (label !== "BTC 도미넌스" && label !== "알트코인 도미넌스") return;
-    const valueText = card.querySelector(".metric-value")?.textContent || "";
-    const pct = toNumSafe(valueText.replace("%", ""));
-    if (pct === null) return;
-    if (card.querySelector(".mini-progress")) return;
-    const bar = document.createElement("div");
-    bar.className = "mini-progress";
-    bar.innerHTML = `<span class="mini-progress-fill" style="width:${Math.max(0, Math.min(100, pct)).toFixed(2)}%"></span>`;
-    card.appendChild(bar);
-  });
+  shell.innerHTML = `
+    <div class="crypto-summary-topology">
+      <article class="crypto-summary-lead">
+        <p class="crypto-summary-kicker">시장 구조</p>
+        <h3>${leadValue.label}</h3>
+        <strong>${leadValue.value}</strong>
+        <span>${leadValue.deltaText}</span>
+      </article>
+      <div class="crypto-summary-side">
+        ${sideValues.map((item, idx) => `
+          <article class="crypto-summary-node node-${idx + 1}">
+            <p>${item.label}</p>
+            <strong class="${toneClass(item.delta)}">${item.value}</strong>
+            <span>${item.deltaText}</span>
+          </article>
+        `).join("")}
+      </div>
+    </div>
+    <div class="crypto-summary-ribbon">
+      ${ribbonValues.map((item, idx) => `
+        <article class="crypto-ribbon-pill ribbon-${(idx % 3) + 1}">
+          <p>${item.label}</p>
+          <strong>${item.value}</strong>
+          <span>${item.deltaText}</span>
+        </article>
+      `).join("")}
+    </div>
+  `;
 }
 
 function renderCryptoOverview() {
@@ -847,32 +862,57 @@ async function fetchHybridPriceMapDirect(tickers) {
 }
 
 function renderCryptoTable() {
-  const tbody = document.getElementById("cryptoCustomRows");
-  if (!tbody) return;
+  const deck = document.getElementById("cryptoUniverseDeck");
+  if (!deck) return;
+  const head = document.getElementById("cryptoUniverseHead");
+  const empty = document.getElementById("cryptoUniverseEmpty");
 
   const rows = getFilteredCryptoRows();
-  if (rows.length === 0) {
-    tbody.innerHTML = "<tr><td colspan='7'>조건에 맞는 데이터가 없습니다.</td></tr>";
-    return;
+  if (head) {
+    const gainers = rows.filter((r) => typeof r.change_24h === "number" && r.change_24h > 0).length;
+    const losers = rows.filter((r) => typeof r.change_24h === "number" && r.change_24h < 0).length;
+    const movers = rows.filter((r) => typeof r.change_24h === "number" && Math.abs(r.change_24h) >= 5).length;
+    head.innerHTML = `
+      <article class="crypto-universe-stat"><p>표시 자산</p><strong>${rows.length}</strong><span>현재 필터 기준</span></article>
+      <article class="crypto-universe-stat"><p>상승 자산</p><strong class="up">${gainers}</strong><span>24시간 기준</span></article>
+      <article class="crypto-universe-stat"><p>하락 자산</p><strong class="down">${losers}</strong><span>24시간 기준</span></article>
+      <article class="crypto-universe-stat"><p>급등락</p><strong class="flat">${movers}</strong><span>|24H| 5% 이상</span></article>
+    `;
   }
 
-  tbody.innerHTML = rows
-    .map((r) => `
-      <tr class="click-row" data-symbol="${(r.ticker || r.name).toUpperCase()}">
-        <td>${r.rank_in_custom}</td>
-        <td>${r.ticker || "—"}</td>
-        <td>${r.name}</td>
-        <td class="num">${typeof r.price === "number" ? formatUsd(r.price, r.price < 1 ? 4 : 2) : "—"}</td>
-        <td class="num ${toneClass(r.change_24h)}">${formatPct(r.change_24h)}</td>
-        <td class="num">${formatBigNumber(r.market_cap)}</td>
-        <td class="num">${formatBigNumber(r.volume_24h)}</td>
-      </tr>
+  if (rows.length === 0) {
+    deck.innerHTML = "";
+    if (empty) empty.hidden = false;
+    return;
+  }
+  if (empty) empty.hidden = true;
+
+  deck.innerHTML = rows
+    .map((r, idx) => `
+      <article class="crypto-universe-card ${idx % 5 === 0 ? "feature" : idx % 3 === 0 ? "wide" : ""}" data-symbol="${(r.ticker || r.name).toUpperCase()}">
+        <div class="crypto-card-head">
+          <div>
+            <p class="crypto-card-rank">#${r.rank_in_custom}</p>
+            <h3>${r.ticker || "—"}</h3>
+            <span>${r.name}</span>
+          </div>
+          <div class="crypto-card-change ${toneClass(r.change_24h)}">${formatPct(r.change_24h)}</div>
+        </div>
+        <div class="crypto-card-main">
+          <strong>${typeof r.price === "number" ? formatUsd(r.price, r.price < 1 ? 4 : 2) : "—"}</strong>
+          <em>${formatBigNumber(r.market_cap)} 시총</em>
+        </div>
+        <div class="crypto-card-meta">
+          <span><b>거래량</b>${formatBigNumber(r.volume_24h)}</span>
+          <span><b>순위</b>${r.rank_in_custom}</span>
+        </div>
+      </article>
     `)
     .join("");
 
-  tbody.querySelectorAll("tr.click-row").forEach((row) => {
-    row.addEventListener("click", () => {
-      const symbol = row.dataset.symbol;
+  deck.querySelectorAll(".crypto-universe-card").forEach((card) => {
+    card.addEventListener("click", () => {
+      const symbol = card.dataset.symbol;
       if (!symbol) return;
       window.location.href = `/crypto/${symbol}`;
     });
@@ -880,7 +920,7 @@ function renderCryptoTable() {
 }
 
 function setupCryptoControls() {
-  ["cryptoSearch", "moversOnly", "hideStables"].forEach((id) => {
+  ["cryptoSearch", "moversOnly", "hideStables", "cryptoSortSelect"].forEach((id) => {
     const el = document.getElementById(id);
     if (!el || el.dataset.bound) return;
     el.addEventListener("input", renderCryptoTable);
@@ -888,27 +928,16 @@ function setupCryptoControls() {
     el.dataset.bound = "1";
   });
 
-  document.querySelectorAll("#cryptoCustomTable th.sortable").forEach((th) => {
-    if (th.dataset.bound) return;
-    th.addEventListener("click", () => {
-      const key = th.dataset.sort;
-      if (!key) return;
-
-      if (uiState.cryptoSort.key === key) {
-        uiState.cryptoSort.dir = uiState.cryptoSort.dir === "asc" ? "desc" : "asc";
-      } else {
-        uiState.cryptoSort.key = key;
-        uiState.cryptoSort.dir = key === "name" || key === "ticker" ? "asc" : "desc";
-      }
-
-      document.querySelectorAll("#cryptoCustomTable th.sortable").forEach((x) => {
-        x.dataset.dir = x.dataset.sort === uiState.cryptoSort.key ? uiState.cryptoSort.dir : "";
-      });
-
+  const sortSelect = document.getElementById("cryptoSortSelect");
+  if (sortSelect && !sortSelect.dataset.bound2) {
+    sortSelect.addEventListener("change", () => {
+      const [key, dir] = String(sortSelect.value || "market_cap:desc").split(":");
+      uiState.cryptoSort.key = key || "market_cap";
+      uiState.cryptoSort.dir = dir === "asc" ? "asc" : "desc";
       renderCryptoTable();
     });
-    th.dataset.bound = "1";
-  });
+    sortSelect.dataset.bound2 = "1";
+  }
 }
 
 function renderStockMarketPage() {
@@ -1229,7 +1258,7 @@ async function fetchJson(url) {
 
 function detectPageType() {
   if (document.getElementById("pulseRows")) return "home";
-  if (document.getElementById("cryptoCustomRows")) return "crypto";
+  if (document.getElementById("cryptoUniverseDeck")) return "crypto";
   if (document.getElementById("rateCards")) return "stocks";
   return "default";
 }

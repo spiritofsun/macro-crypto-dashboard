@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260410e" />
+    <link rel="stylesheet" href="./styles.css?v=20260410f" />
   </head>
   <body>
     <div class="app-shell">
@@ -39,45 +39,37 @@
 
         <section class="panel">
           <h3 class="group-title">요약 지표</h3>
-          <div class="card-grid card-grid-4" id="cryptoPrimarySummary"></div>
-          <details class="panel compact-inner collapsible-panel">
-            <summary>More metrics</summary>
-            <div class="card-grid card-grid-4" id="cryptoSecondarySummary"></div>
-          </details>
+          <div class="crypto-summary-shell" id="cryptoSummaryShell"></div>
         </section>
 
         <section class="panel">
           <div class="panel-head">
             <h2>커스텀 유니버스</h2>
-            <p class="subhead">사용자 지정 리스트 기준</p>
+            <p class="subhead">사용자 지정 리스트 기준 · 카드 뷰</p>
           </div>
 
           <div class="tool-row">
             <input class="tool-input" id="cryptoSearch" type="text" placeholder="티커/이름 검색" />
+            <select class="tool-select" id="cryptoSortSelect">
+              <option value="market_cap:desc">시총 큰 순</option>
+              <option value="change_24h:desc">상승률 높은 순</option>
+              <option value="change_24h:asc">하락률 큰 순</option>
+              <option value="volume_24h:desc">거래량 큰 순</option>
+              <option value="name:asc">이름 순</option>
+            </select>
             <label class="tool-check"><input type="checkbox" id="moversOnly" /> 급등락만 (|24H| 2% 이상)</label>
             <label class="tool-check"><input type="checkbox" id="hideStables" /> 스테이블 제외</label>
           </div>
 
-          <div class="table-wrap">
-            <table class="data-table compact-table sortable-table" id="cryptoCustomTable">
-              <thead>
-                <tr>
-                  <th class="sortable" data-sort="rank_in_custom">순서</th>
-                  <th class="sortable" data-sort="ticker">티커</th>
-                  <th class="sortable" data-sort="name">이름</th>
-                  <th class="num sortable" data-sort="price">가격(USD)</th>
-                  <th class="num sortable" data-sort="change_24h">24H</th>
-                  <th class="num sortable" data-sort="market_cap">시총(USD)</th>
-                  <th class="num sortable" data-sort="volume_24h">거래량(24H)</th>
-                </tr>
-              </thead>
-              <tbody id="cryptoCustomRows"></tbody>
-            </table>
+          <div class="crypto-universe-head" id="cryptoUniverseHead"></div>
+          <div class="crypto-universe-deck" id="cryptoUniverseDeck"></div>
+          <div class="crypto-universe-empty" id="cryptoUniverseEmpty" hidden>
+            조건에 맞는 자산이 없습니다.
           </div>
         </section>
       </main>
     </div>
 
-    <script src="./app.js?v=20260410e"></script>
+    <script src="./app.js?v=20260410f"></script>
   </body>
 </html>
