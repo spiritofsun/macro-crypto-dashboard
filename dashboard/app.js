@@ -813,11 +813,16 @@ function renderStockMarketPage() {
   if (!document.getElementById("rateCards")) return;
   const macro = state.macroSnapshot || fallbackMacro;
   const macroAgeHours = hoursSince(macro.as_of);
+  const vixMetric = (() => {
+    const live = macro.indices?.vix;
+    if ((toNumSafe(live?.value) ?? toNumSafe(live?.display)) !== null) return live;
+    return fallbackMacro.indices.vix;
+  })();
   const curve = (toNumSafe(macro.rates?.us10y?.value) ?? 0) - (toNumSafe(macro.rates?.us2y?.value) ?? 0);
   const dxyDelta = toNumSafe(macro.fx?.dxy?.delta) ?? 0;
   const rrpDelta = toNumSafe(macro.liquidity?.rrp?.delta) ?? 0;
   const equityBreadth = ((toNumSafe(macro.indices?.sp500?.delta) ?? 0) + (toNumSafe(macro.indices?.nasdaq?.delta) ?? 0)) / 2;
-  const vixValue = toNumSafe(macro.indices?.vix?.value) ?? toNumSafe(macro.indices?.vix?.display) ?? 0;
+  const vixValue = toNumSafe(vixMetric?.value) ?? toNumSafe(vixMetric?.display) ?? 0;
   const silverFromSnapshot = (() => {
     const list = state.snapshot?.commodities;
     if (!Array.isArray(list)) return null;
@@ -846,7 +851,7 @@ function renderStockMarketPage() {
       <p class="macro-lead-body">${regimeBody}</p>
       <div class="macro-lead-meta">
         <span>S&P500/NASDAQ 평균 ${formatPct(equityBreadth)}</span>
-        <span>VIX ${macro.indices.vix?.display || "—"}</span>
+        <span>VIX ${vixMetric?.display || "—"}</span>
         <span>USD/KRW ${macro.fx.usdkrw.display}</span>
       </div>
     `;
@@ -859,7 +864,7 @@ function renderStockMarketPage() {
         label: "Volatility",
         value: vixValue >= 24 ? "High Alert" : vixValue >= 18 ? "Elevated" : "Contained",
         tone: vixValue >= 24 ? "down" : vixValue >= 18 ? "flat" : "up",
-        meta: `VIX ${macro.indices.vix?.display || "—"}`,
+        meta: `VIX ${vixMetric?.display || "—"}`,
       },
       {
         label: "Dollar",
@@ -938,7 +943,7 @@ function renderStockMarketPage() {
   if (strip) {
     const cells = [
       { label: "NASDAQ", value: macro.indices.nasdaq.display, delta: macro.indices.nasdaq.delta },
-      { label: "VIX", value: macro.indices.vix?.display || "—", delta: macro.indices.vix?.delta ?? 0 },
+      { label: "VIX", value: vixMetric?.display || "—", delta: vixMetric?.delta ?? 0 },
       { label: "DXY", value: macro.fx.dxy.display, delta: macro.fx.dxy.delta },
       { label: "US10Y", value: macro.rates.us10y.display, delta: macro.rates.us10y.delta },
       { label: "RRP (bn)", value: macro.liquidity.rrp.display, delta: macro.liquidity.rrp.delta, rawDelta: formatBnDelta(macro.liquidity.rrp.delta) },
@@ -998,7 +1003,7 @@ function renderStockMarketPage() {
       ["DOW", macro.indices.dow.display, macro.indices.dow.delta],
       ["Russell 2000", macro.indices.russell2000.display, macro.indices.russell2000.delta],
       ["S&P500", macro.indices.sp500.display, macro.indices.sp500.delta],
-      ["VIX", macro.indices.vix?.display || "—", macro.indices.vix?.delta ?? 0],
+      ["VIX", vixMetric?.display || "—", vixMetric?.delta ?? 0],
     ];
     indexRows.innerHTML = rows.map((r) => `<tr><td>${r[0]}</td><td class="num">${r[1]}</td><td class="num ${toneClass(r[2])}">${formatPct(r[2])}</td></tr>`).join("");
   } else {
