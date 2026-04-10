@@ -49,12 +49,16 @@ def main() -> int:
     macro = load_json(DATA_DIR / "macro_snapshot.json")
     stocks = load_json(DATA_DIR / "stocks_watchlist.json")
     snapshot = load_json(DATA_DIR / "snapshot.json")
+    news = load_json(DATA_DIR / "news.json")
+    etf = load_json(DATA_DIR / "etf.json")
 
     errors: list[str] = []
     checks = [
         ("macro_snapshot.as_of", macro.get("as_of"), 6),
         ("stocks_watchlist.as_of", stocks.get("as_of"), 6),
         ("snapshot.asOf", snapshot.get("asOf"), 6),
+        ("news.updated_at", news.get("updated_at"), 12),
+        ("etf.updated_at", etf.get("updated_at"), 36),
     ]
 
     for label, raw, max_age_hours in checks:
@@ -62,6 +66,11 @@ def main() -> int:
             assert_fresh(label, raw, max_age_hours)
         except RuntimeError as exc:
             errors.append(str(exc))
+
+    if not isinstance(etf.get("btc_history_7d_usd_m"), list) or len(etf.get("btc_history_7d_usd_m") or []) < 3:
+        errors.append("etf.btc_history_7d_usd_m: insufficient history")
+    if not isinstance(etf.get("eth_history_7d_usd_m"), list) or len(etf.get("eth_history_7d_usd_m") or []) < 3:
+        errors.append("etf.eth_history_7d_usd_m: insufficient history")
 
     if errors:
         print("dashboard freshness check failed:", file=sys.stderr)

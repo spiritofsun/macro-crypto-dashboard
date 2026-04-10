@@ -2,6 +2,7 @@ const state = {
   snapshot: null,
   news: null,
   etf: null,
+  status: null,
   macroSnapshot: null,
   cryptoUniverse: [],
   stocksWatchlist: [],
@@ -171,6 +172,19 @@ function formatKstDateTime(input, fallback = "수집 대기") {
   return `${text} KST`;
 }
 
+function statusText(level) {
+  if (level === "danger") return "지연";
+  if (level === "warn") return "주의";
+  if (level === "missing") return "누락";
+  return "정상";
+}
+
+function statusTone(level) {
+  if (level === "danger" || level === "missing") return "down";
+  if (level === "warn") return "flat";
+  return "up";
+}
+
 function parseDashboardDate(input) {
   if (!input || typeof input !== "string") return null;
   const direct = new Date(input);
@@ -207,6 +221,26 @@ function setAsOf() {
   if (top) {
     top.innerHTML = `Snapshot ${snapshotAsOf} · News ${newsAsOf} · ETF ${etfAsOf} · <span class="live-dot">●</span> Live ${liveTs}`;
   }
+}
+
+function renderGlobalDataHealth() {
+  const host = document.getElementById("globalDataHealth");
+  if (!host) return;
+  const datasets = state.status?.datasets || {};
+  const entries = ["macro", "news", "etf"].map((key) => datasets[key]).filter(Boolean);
+  if (!entries.length) {
+    host.hidden = true;
+    host.innerHTML = "";
+    return;
+  }
+
+  host.hidden = false;
+  host.innerHTML = entries
+    .map((entry) => {
+      const age = typeof entry.age_hours === "number" ? `${Math.round(entry.age_hours)}h` : "n/a";
+      return `<article class="health-pill ${statusTone(entry.level)}"><span>${entry.label}</span><strong>${statusText(entry.level)}</strong><em>${age}</em></article>`;
+    })
+    .join("");
 }
 
 function cardHTML(item, index, topCount = 4) {
@@ -1170,6 +1204,7 @@ function renderEtfFlows() {
 
 function renderAll() {
   setAsOf();
+  renderGlobalDataHealth();
   renderHomeHub();
   renderNewsPage();
   renderNewsOverview();
@@ -1227,10 +1262,11 @@ function normalizeGatewayPayload(payload) {
 }
 
 async function loadStatic() {
-  const [snapshot, news, etf, macro, universe, stocks] = await Promise.allSettled([
+  const [snapshot, news, etf, status, macro, universe, stocks] = await Promise.allSettled([
     fetchJson("./data/snapshot.json"),
     fetchJson("./data/news.json"),
     fetchJson("./data/etf.json"),
+    fetchJson("./data/status.json"),
     fetchJson("./data/macro_snapshot.json"),
     fetchJson("./data/crypto_custom_universe.json"),
     fetchJson("./data/stocks_watchlist.json"),
@@ -1239,6 +1275,7 @@ async function loadStatic() {
   state.snapshot = snapshot.status === "fulfilled" ? snapshot.value : null;
   state.news = news.status === "fulfilled" ? news.value : { macro: [], crypto: [] };
   state.etf = etf.status === "fulfilled" ? etf.value : null;
+  state.status = status.status === "fulfilled" ? status.value : null;
   state.macroSnapshot = macro.status === "fulfilled" ? macro.value : fallbackMacro;
   state.cryptoUniverse = universe.status === "fulfilled" ? normalizeCustomUniverse(universe.value.assets || []) : [];
   state.cryptoStableMcap = universe.status === "fulfilled" ? universe.value.stablecoin_market_cap : 0;

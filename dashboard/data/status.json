@@ -1,0 +1,41 @@
+{
+  "updated_at": "2026-04-10T06:47:11.789218+00:00",
+  "overall": "ok",
+  "datasets": {
+    "macro": {
+      "label": "매크로",
+      "timestamp": "2026-04-10 15:17 KST",
+      "age_hours": 0.5,
+      "level": "ok"
+    },
+    "stocks": {
+      "label": "주식 워치",
+      "timestamp": "2026-04-10 15:17 KST",
+      "age_hours": 0.5,
+      "level": "ok"
+    },
+    "snapshot": {
+      "label": "스냅샷",
+      "timestamp": "2026-04-10 15:17 KST",
+      "age_hours": 0.5,
+      "level": "ok"
+    },
+    "news": {
+      "label": "뉴스",
+      "timestamp": "2026-04-10T05:53:36.838811+00:00",
+      "age_hours": 0.89,
+      "level": "ok",
+      "macro_count": 8,
+      "crypto_count": 8
+    },
+    "etf": {
+      "label": "ETF",
+      "timestamp": "2026-04-10T06:46:37.118799+00:00",
+      "age_hours": 0.01,
+      "level": "ok",
+      "market_date": "09 Apr 2026",
+      "freshness": "latest",
+      "has_history": true
+    }
+  }
+}

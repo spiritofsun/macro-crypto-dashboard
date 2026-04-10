@@ -34,16 +34,20 @@ jobs:
         if: github.event_name == 'workflow_dispatch' || github.event.schedule == '*/30 * * * *' || github.event.schedule == '0 3 * * *'
         run: python scripts/update_etf_data.py
 
-      - name: Verify freshness for stock/macro payloads
-        if: github.event_name == 'workflow_dispatch' || github.event.schedule == '*/30 * * * *'
+      - name: Verify freshness for dashboard payloads
+        if: github.event_name == 'workflow_dispatch' || github.event.schedule == '*/30 * * * *' || github.event.schedule == '0 */4 * * *' || github.event.schedule == '0 3 * * *'
         run: python scripts/check_dashboard_freshness.py
+
+      - name: Build dashboard status manifest
+        if: success()
+        run: python scripts/build_dashboard_status.py
 
       - name: Commit and push
         if: success()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add dashboard/data/news.json dashboard/data/etf.json dashboard/data/macro_snapshot.json dashboard/data/stocks_watchlist.json dashboard/data/snapshot.json dashboard/api/macro/snapshot.json
+          git add dashboard/data/news.json dashboard/data/etf.json dashboard/data/macro_snapshot.json dashboard/data/stocks_watchlist.json dashboard/data/snapshot.json dashboard/data/status.json dashboard/api/macro/snapshot.json
           if git diff --staged --quiet; then
             echo "No changes."
             exit 0
