@@ -1,9 +1,13 @@
 {
-  "updated_at": "2026-04-10T11:05:48.529709+00:00",
-  "date": "09 Apr 2026",
-  "btc_us_spot_etf_net_inflow_usd_m": 358.1,
-  "eth_us_spot_etf_net_inflow_usd_m": 85.2,
+  "updated_at": "2026-04-10T12:09:22.432578+00:00",
+  "date": "10 Apr 2026",
+  "btc_us_spot_etf_net_inflow_usd_m": 0.0,
+  "eth_us_spot_etf_net_inflow_usd_m": 0.0,
   "btc_history_7d_usd_m": [
+    {
+      "date": "04-10",
+      "flow": 0.0
+    },
     {
       "date": "04-09",
       "flow": 358.1
@@ -27,13 +31,13 @@
     {
       "date": "04-01",
       "flow": -173.7
-    },
-    {
-      "date": "03-31",
-      "flow": 117.5
     }
   ],
   "eth_history_7d_usd_m": [
+    {
+      "date": "04-10",
+      "flow": 0.0
+    },
     {
       "date": "04-09",
       "flow": 85.2
@@ -57,10 +61,6 @@
     {
       "date": "04-01",
       "flow": -7.1
-    },
-    {
-      "date": "03-31",
-      "flow": 31.2
     }
   ],
   "source": "farside.co.uk",
