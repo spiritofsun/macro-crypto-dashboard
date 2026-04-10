@@ -68,29 +68,39 @@
     "vix": {
       "value": null,
       "delta": 0.0,
-      "display": "—"
+      "display": "—",
+      "source": "carry",
+      "source_as_of": null
     }
   },
   "commodities": {
     "gold": {
       "value": 5034.0,
       "delta": 0.23,
-      "display": "$5,034/oz"
+      "display": "$5,034/oz",
+      "source": "unknown",
+      "source_as_of": null
     },
     "silver": {
       "value": 76.34,
       "delta": -1.94,
-      "display": "$76.34/oz"
+      "display": "$76.34/oz",
+      "source": "unknown",
+      "source_as_of": null
     },
     "wti": {
       "value": 57.33,
       "delta": -0.16,
-      "display": "$57.33"
+      "display": "$57.33",
+      "source": "carry",
+      "source_as_of": null
     },
     "copper": {
       "value": 5.77,
       "delta": -0.33,
-      "display": "$5.77/lb"
+      "display": "$5.77/lb",
+      "source": "unknown",
+      "source_as_of": null
     }
   },
   "liquidity": {
@@ -110,5 +120,18 @@
       "display": "0.006"
     },
     "qt_status": "진행 중 (대차대조표 축소)"
+  },
+  "_health": {
+    "yahoo_quotes_ok": false,
+    "carried_metrics": [
+      "commodities.wti",
+      "indices.vix"
+    ],
+    "critical_metrics": [
+      "commodities.wti",
+      "indices.vix"
+    ],
+    "issue_count": 2,
+    "critical_issue_count": 2
   }
 }

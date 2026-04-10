@@ -160,22 +160,46 @@ def get_quote_fields(quotes: Dict[str, dict], symbol: str) -> Tuple[Optional[flo
     return to_num(q.get("regularMarketPrice")), to_num(q.get("regularMarketChangePercent"))
 
 
-def read_prev_metric(prev_macro: dict, *path: str) -> Tuple[Optional[float], float, str]:
+def read_prev_metric(prev_macro: dict, *path: str) -> Tuple[Optional[float], float, str, str, Optional[str]]:
     cur: Any = prev_macro
     for p in path:
         cur = cur.get(p, {}) if isinstance(cur, dict) else {}
     if not isinstance(cur, dict):
-        return None, 0.0, "—"
+        return None, 0.0, "—", "missing", None
     val = to_num(cur.get("value"))
     delta = to_num(cur.get("delta"))
     display = cur.get("display")
-    return val, pct_or_zero(delta), display if isinstance(display, str) else "—"
+    source = cur.get("source") if isinstance(cur.get("source"), str) else "unknown"
+    source_as_of = cur.get("source_as_of") if isinstance(cur.get("source_as_of"), str) else None
+    return val, pct_or_zero(delta), display if isinstance(display, str) else "—", source, source_as_of
 
 
-def pick_value(live_val: Optional[float], live_delta: Optional[float], prev: Tuple[Optional[float], float, str], display_fn) -> Tuple[Optional[float], float, str]:
+def pick_value(
+    live_val: Optional[float],
+    live_delta: Optional[float],
+    prev: Tuple[Optional[float], float, str, str, Optional[str]],
+    display_fn,
+    *,
+    now_as_of: str,
+    metric_key: str,
+    carry_issues: List[str],
+) -> Dict[str, Any]:
     if live_val is None:
-        return prev
-    return live_val, pct_or_zero(live_delta), display_fn(live_val)
+        carry_issues.append(metric_key)
+        return {
+            "value": prev[0],
+            "delta": prev[1],
+            "display": prev[2],
+            "source": "carry",
+            "source_as_of": prev[4],
+        }
+    return {
+        "value": live_val,
+        "delta": pct_or_zero(live_delta),
+        "display": display_fn(live_val),
+        "source": "live",
+        "source_as_of": now_as_of,
+    }
 
 
 def main() -> int:
@@ -195,93 +219,139 @@ def main() -> int:
     fetched_any = quotes_ok or usdkrw_live is not None or any(x[2] for x in fred_map.values())
     as_of = datetime.now(KST).strftime("%Y-%m-%d %H:%M KST") if fetched_any else prev_macro.get("as_of", datetime.now(KST).strftime("%Y-%m-%d %H:%M KST"))
 
+    carry_issues: List[str] = []
     prev_us10y = read_prev_metric(prev_macro, "rates", "us10y")
     prev_us2y = read_prev_metric(prev_macro, "rates", "us2y")
     prev_sofr = read_prev_metric(prev_macro, "rates", "sofr")
     prev_iorb = read_prev_metric(prev_macro, "rates", "iorb")
 
-    def fred_pick(key: str, prev: Tuple[Optional[float], float, str], fn):
+    def fred_pick(key: str, prev: Tuple[Optional[float], float, str, str, Optional[str]], fn, metric_key: str):
         val, delta, ok = fred_map[key]
         if not ok or val is None:
-            return prev
-        return val, pct_or_zero(delta), fn(val)
+            carry_issues.append(metric_key)
+            return {
+                "value": prev[0],
+                "delta": prev[1],
+                "display": prev[2],
+                "source": "carry",
+                "source_as_of": prev[4],
+            }
+        return {
+            "value": val,
+            "delta": pct_or_zero(delta),
+            "display": fn(val),
+            "source": "live",
+            "source_as_of": as_of,
+        }
 
-    us10y = fred_pick("us10y", prev_us10y, fmt_2)
-    us2y = fred_pick("us2y", prev_us2y, fmt_2)
-    sofr = fred_pick("sofr", prev_sofr, fmt_2)
-    iorb = fred_pick("iorb", prev_iorb, fmt_2)
+    us10y = fred_pick("us10y", prev_us10y, fmt_2, "rates.us10y")
+    us2y = fred_pick("us2y", prev_us2y, fmt_2, "rates.us2y")
+    sofr = fred_pick("sofr", prev_sofr, fmt_2, "rates.sofr")
+    iorb = fred_pick("iorb", prev_iorb, fmt_2, "rates.iorb")
 
     prev_dxy = read_prev_metric(prev_macro, "fx", "dxy")
     dxy_price, dxy_delta_live = get_quote_fields(quotes, YAHOO_SYMBOLS["dxy"])
-    dxy = pick_value(dxy_price, dxy_delta_live, prev_dxy, fmt_2)
+    dxy = pick_value(dxy_price, dxy_delta_live, prev_dxy, fmt_2, now_as_of=as_of, metric_key="fx.dxy", carry_issues=carry_issues)
 
     prev_usdkrw = read_prev_metric(prev_macro, "fx", "usdkrw")
-    usdkrw = pick_value(usdkrw_live, 0.0, prev_usdkrw, fmt_int)
+    usdkrw = pick_value(usdkrw_live, 0.0, prev_usdkrw, fmt_int, now_as_of=as_of, metric_key="fx.usdkrw", carry_issues=carry_issues)
 
-    def y_pick(key: str, prev_path: Tuple[str, str], disp):
+    def y_pick(key: str, prev_path: Tuple[str, str], disp, metric_key: str):
         prev = read_prev_metric(prev_macro, *prev_path)
         p, d = get_quote_fields(quotes, YAHOO_SYMBOLS[key])
-        return pick_value(p, d, prev, disp)
+        return pick_value(p, d, prev, disp, now_as_of=as_of, metric_key=metric_key, carry_issues=carry_issues)
 
-    nasdaq = y_pick("nasdaq", ("indices", "nasdaq"), fmt_int)
-    dow = y_pick("dow", ("indices", "dow"), fmt_int)
-    sp500 = y_pick("sp500", ("indices", "sp500"), fmt_int)
-    russell2000 = y_pick("russell2000", ("indices", "russell2000"), fmt_int)
-    vix = y_pick("vix", ("indices", "vix"), fmt_2)
-    kospi = y_pick("kospi", ("indices", "kospi"), fmt_int)
-    kosdaq = y_pick("kosdaq", ("indices", "kosdaq"), fmt_int)
+    nasdaq = y_pick("nasdaq", ("indices", "nasdaq"), fmt_int, "indices.nasdaq")
+    dow = y_pick("dow", ("indices", "dow"), fmt_int, "indices.dow")
+    sp500 = y_pick("sp500", ("indices", "sp500"), fmt_int, "indices.sp500")
+    russell2000 = y_pick("russell2000", ("indices", "russell2000"), fmt_int, "indices.russell2000")
+    vix = y_pick("vix", ("indices", "vix"), fmt_2, "indices.vix")
+    kospi = y_pick("kospi", ("indices", "kospi"), fmt_int, "indices.kospi")
+    kosdaq = y_pick("kosdaq", ("indices", "kosdaq"), fmt_int, "indices.kosdaq")
 
-    gold = y_pick("gold", ("commodities", "gold"), lambda v: f"${fmt_int(v)}/oz")
-    silver = y_pick("silver", ("commodities", "silver"), lambda v: f"${fmt_2(v)}/oz")
-    wti = y_pick("wti", ("commodities", "wti"), lambda v: f"${fmt_2(v)}")
-    copper = y_pick("copper", ("commodities", "copper"), lambda v: f"${fmt_2(v)}/lb")
+    gold = y_pick("gold", ("commodities", "gold"), lambda v: f"${fmt_int(v)}/oz", "commodities.gold")
+    silver = y_pick("silver", ("commodities", "silver"), lambda v: f"${fmt_2(v)}/oz", "commodities.silver")
+    wti = y_pick("wti", ("commodities", "wti"), lambda v: f"${fmt_2(v)}", "commodities.wti")
+    copper = y_pick("copper", ("commodities", "copper"), lambda v: f"${fmt_2(v)}/lb", "commodities.copper")
 
     prev_tga = read_prev_metric(prev_macro, "liquidity", "tga")
     prev_rrp = read_prev_metric(prev_macro, "liquidity", "rrp")
     prev_repo = read_prev_metric(prev_macro, "liquidity", "repo")
 
-    def liq_pick(key: str, prev: Tuple[Optional[float], float, str], fn):
+    def liq_pick(key: str, prev: Tuple[Optional[float], float, str, str, Optional[str]], fn, metric_key: str):
         val, delta, ok = fred_map[key]
         if not ok or val is None:
-            return prev
-        return val, pct_or_zero(delta), fn(val)
+            carry_issues.append(metric_key)
+            return {
+                "value": prev[0],
+                "delta": prev[1],
+                "display": prev[2],
+                "source": "carry",
+                "source_as_of": prev[4],
+            }
+        return {
+            "value": val,
+            "delta": pct_or_zero(delta),
+            "display": fn(val),
+            "source": "live",
+            "source_as_of": as_of,
+        }
 
-    tga = liq_pick("tga", prev_tga, fmt_int)
-    rrp = liq_pick("rrp", prev_rrp, fmt_2)
-    repo = liq_pick("repo", prev_repo, fmt_3)
+    tga = liq_pick("tga", prev_tga, fmt_int, "liquidity.tga")
+    rrp = liq_pick("rrp", prev_rrp, fmt_2, "liquidity.rrp")
+    repo = liq_pick("repo", prev_repo, fmt_3, "liquidity.repo")
+
+    critical_metrics = [
+        metric for metric in carry_issues
+        if metric in {
+            "indices.vix",
+            "fx.dxy",
+            "commodities.gold",
+            "commodities.silver",
+            "commodities.wti",
+            "commodities.copper",
+        }
+    ]
 
     macro = {
         "as_of": as_of,
         "rates": {
-            "us10y": {"value": us10y[0], "delta": us10y[1], "display": us10y[2]},
-            "us2y": {"value": us2y[0], "delta": us2y[1], "display": us2y[2]},
-            "sofr": {"value": sofr[0], "delta": sofr[1], "display": sofr[2]},
-            "iorb": {"value": iorb[0], "delta": iorb[1], "display": iorb[2]},
+            "us10y": us10y,
+            "us2y": us2y,
+            "sofr": sofr,
+            "iorb": iorb,
         },
         "fx": {
-            "dxy": {"value": dxy[0], "delta": dxy[1], "display": dxy[2]},
-            "usdkrw": {"value": usdkrw[0], "delta": usdkrw[1], "display": usdkrw[2]},
+            "dxy": dxy,
+            "usdkrw": usdkrw,
         },
         "indices": {
-            "kospi": {"value": kospi[0], "delta": kospi[1], "display": kospi[2]},
-            "kosdaq": {"value": kosdaq[0], "delta": kosdaq[1], "display": kosdaq[2]},
-            "nasdaq": {"value": nasdaq[0], "delta": nasdaq[1], "display": nasdaq[2]},
-            "dow": {"value": dow[0], "delta": dow[1], "display": dow[2]},
-            "russell2000": {"value": russell2000[0], "delta": russell2000[1], "display": russell2000[2]},
-            "sp500": {"value": sp500[0], "delta": sp500[1], "display": sp500[2]},
-            "vix": {"value": vix[0], "delta": vix[1], "display": vix[2]},
+            "kospi": kospi,
+            "kosdaq": kosdaq,
+            "nasdaq": nasdaq,
+            "dow": dow,
+            "russell2000": russell2000,
+            "sp500": sp500,
+            "vix": vix,
         },
         "commodities": {
-            "gold": {"value": gold[0], "delta": gold[1], "display": gold[2]},
-            "silver": {"value": silver[0], "delta": silver[1], "display": silver[2]},
-            "wti": {"value": wti[0], "delta": wti[1], "display": wti[2]},
-            "copper": {"value": copper[0], "delta": copper[1], "display": copper[2]},
+            "gold": gold,
+            "silver": silver,
+            "wti": wti,
+            "copper": copper,
         },
         "liquidity": {
-            "rrp": {"value": rrp[0], "delta": rrp[1], "display": rrp[2]},
-            "tga": {"value": tga[0], "delta": tga[1], "display": tga[2]},
-            "repo": {"value": repo[0], "delta": repo[1], "display": repo[2]},
+            "rrp": rrp,
+            "tga": tga,
+            "repo": repo,
             "qt_status": prev_macro.get("liquidity", {}).get("qt_status", "진행 중 (대차대조표 축소)"),
+        },
+        "_health": {
+            "yahoo_quotes_ok": quotes_ok,
+            "carried_metrics": sorted(set(carry_issues)),
+            "critical_metrics": sorted(set(critical_metrics)),
+            "issue_count": len(sorted(set(carry_issues))),
+            "critical_issue_count": len(sorted(set(critical_metrics))),
         },
     }
 
@@ -292,12 +362,20 @@ def main() -> int:
         prev_row = prev_stock_rows.get(ticker, {})
         price = round(p_live, 2) if p_live is not None else prev_row.get("price")
         change = round(pct_or_zero(d_live), 2) if d_live is not None else pct_or_zero(to_num(prev_row.get("change")))
-        stocks_rows.append({"group": group, "name": name, "ticker": ticker, "price": price, "change": change})
+        stocks_rows.append({
+            "group": group,
+            "name": name,
+            "ticker": ticker,
+            "price": price,
+            "change": change,
+            "source": "live" if p_live is not None else "carry",
+            "source_as_of": as_of if p_live is not None else None,
+        })
 
     stocks_payload = {"as_of": as_of, "rows": stocks_rows}
 
-    def metric_value(t: Tuple[Optional[float], float, str]) -> str:
-        return t[2] if t[2] != "—" else "n/a"
+    def metric_value(t: Dict[str, Any]) -> str:
+        return t.get("display") if t.get("display") != "—" else "n/a"
 
     by_ticker = {r["ticker"]: r for r in stocks_rows}
     crypto_equities = [
@@ -308,21 +386,21 @@ def main() -> int:
     snapshot_payload = {
         "asOf": as_of,
         "liquidity_checklist": [
-            f"S&P500 {sp500[1]:+.2f}% / NASDAQ {nasdaq[1]:+.2f}%",
-            f"US10Y {metric_value(us10y)} ({us10y[1]:+,.2f}%) / US2Y {metric_value(us2y)} ({us2y[1]:+,.2f}%)",
+            f"S&P500 {sp500['delta']:+.2f}% / NASDAQ {nasdaq['delta']:+.2f}%",
+            f"US10Y {metric_value(us10y)} ({us10y['delta']:+,.2f}%) / US2Y {metric_value(us2y)} ({us2y['delta']:+,.2f}%)",
         ],
         "indices": [
-            {"label": "S&P 500 🇺🇸", "value": sp500[2], "delta": sp500[1]},
-            {"label": "NASDAQ 🇺🇸", "value": nasdaq[2], "delta": nasdaq[1]},
-            {"label": "VIX 🇺🇸", "value": vix[2], "delta": vix[1]},
-            {"label": "KOSPI 🇰🇷", "value": kospi[2], "delta": kospi[1]},
-            {"label": "KOSDAQ 🇰🇷", "value": kosdaq[2], "delta": kosdaq[1]},
+            {"label": "S&P 500 🇺🇸", "value": sp500["display"], "delta": sp500["delta"]},
+            {"label": "NASDAQ 🇺🇸", "value": nasdaq["display"], "delta": nasdaq["delta"]},
+            {"label": "VIX 🇺🇸", "value": vix["display"], "delta": vix["delta"]},
+            {"label": "KOSPI 🇰🇷", "value": kospi["display"], "delta": kospi["delta"]},
+            {"label": "KOSDAQ 🇰🇷", "value": kosdaq["display"], "delta": kosdaq["delta"]},
         ],
         "crypto_equities": crypto_equities,
         "commodities": [
-            {"label": "Gold 🥇", "value": gold[2], "delta": gold[1]},
-            {"label": "Silver 🥈", "value": silver[2], "delta": silver[1]},
-            {"label": "Copper 🟤", "value": copper[2], "delta": copper[1]},
+            {"label": "Gold 🥇", "value": gold["display"], "delta": gold["delta"]},
+            {"label": "Silver 🥈", "value": silver["display"], "delta": silver["delta"]},
+            {"label": "Copper 🟤", "value": copper["display"], "delta": copper["delta"]},
         ],
     }
 

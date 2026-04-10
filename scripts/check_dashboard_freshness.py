@@ -67,6 +67,12 @@ def main() -> int:
         except RuntimeError as exc:
             errors.append(str(exc))
 
+    macro_health = macro.get("_health")
+    if isinstance(macro_health, dict):
+        critical = macro_health.get("critical_metrics") or []
+        if critical:
+            errors.append(f"macro_snapshot._health.critical_metrics: {', '.join(str(x) for x in critical)}")
+
     if not isinstance(etf.get("btc_history_7d_usd_m"), list) or len(etf.get("btc_history_7d_usd_m") or []) < 3:
         errors.append("etf.btc_history_7d_usd_m: insufficient history")
     if not isinstance(etf.get("eth_history_7d_usd_m"), list) or len(etf.get("eth_history_7d_usd_m") or []) < 3:

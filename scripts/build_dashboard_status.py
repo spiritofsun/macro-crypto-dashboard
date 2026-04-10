@@ -75,8 +75,20 @@ def main() -> int:
     news = load_json(DATA_DIR / "news.json")
     etf = load_json(DATA_DIR / "etf.json")
 
+    macro_health = macro.get("_health") if isinstance(macro.get("_health"), dict) else {}
+    macro_entry = build_entry("매크로", macro.get("as_of"), warn_h=4, fail_h=12, extra={
+        "issue_count": int(macro_health.get("issue_count") or 0),
+        "critical_issue_count": int(macro_health.get("critical_issue_count") or 0),
+        "carried_metrics": macro_health.get("carried_metrics") or [],
+        "critical_metrics": macro_health.get("critical_metrics") or [],
+    })
+    if macro_entry["critical_issue_count"]:
+        macro_entry["level"] = "danger"
+    elif macro_entry["issue_count"] and macro_entry["level"] == "ok":
+        macro_entry["level"] = "warn"
+
     datasets = {
-      "macro": build_entry("매크로", macro.get("as_of"), warn_h=4, fail_h=12),
+      "macro": macro_entry,
       "stocks": build_entry("주식 워치", stocks.get("as_of"), warn_h=4, fail_h=12),
       "snapshot": build_entry("스냅샷", snapshot.get("asOf"), warn_h=4, fail_h=12),
       "news": build_entry("뉴스", news.get("updated_at"), warn_h=6, fail_h=18, extra={

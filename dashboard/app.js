@@ -202,6 +202,20 @@ function hoursSince(input) {
   return (Date.now() - parsed.getTime()) / 3_600_000;
 }
 
+function metricNeedsReview(metric, maxAgeHours = 6) {
+  if (!metric || typeof metric !== "object") return false;
+  if (metric.source !== "carry") return false;
+  if (!metric.source_as_of) return true;
+  const age = hoursSince(metric.source_as_of);
+  return age === null || age > maxAgeHours;
+}
+
+function metricDisplay(metric, fallback = "—", maxAgeHours = 6) {
+  if (!metric || typeof metric !== "object") return fallback;
+  if (metricNeedsReview(metric, maxAgeHours)) return "검증 필요";
+  return typeof metric.display === "string" && metric.display ? metric.display : fallback;
+}
+
 function setAsOf() {
   const snapshotAsOf = formatKstDateTime(state.snapshot?.asOf || state.macroSnapshot?.as_of, "n/a");
   const newsAsOfRaw = state.news?.updated_at || "";
@@ -237,8 +251,14 @@ function renderGlobalDataHealth() {
   host.hidden = false;
   host.innerHTML = entries
     .map((entry) => {
-      const age = typeof entry.age_hours === "number" ? `${Math.round(entry.age_hours)}h` : "n/a";
-      return `<article class="health-pill ${statusTone(entry.level)}"><span>${entry.label}</span><strong>${statusText(entry.level)}</strong><em>${age}</em></article>`;
+      const note = entry.critical_issue_count
+        ? `검증 ${entry.critical_issue_count}건`
+        : entry.issue_count
+          ? `보류 ${entry.issue_count}건`
+          : typeof entry.age_hours === "number"
+            ? `${Math.round(entry.age_hours)}h`
+            : "n/a";
+      return `<article class="health-pill ${statusTone(entry.level)}"><span>${entry.label}</span><strong>${statusText(entry.level)}</strong><em>${note}</em></article>`;
     })
     .join("");
 }
@@ -966,6 +986,12 @@ function renderStockMarketPage() {
     };
   })();
   const silver = macro.commodities?.silver || silverFromSnapshot || { value: null, delta: null, display: "—" };
+  const vixDisplay = metricDisplay(vixMetric);
+  const dxyDisplay = metricDisplay(macro.fx?.dxy);
+  const goldDisplay = metricDisplay(macro.commodities?.gold);
+  const silverDisplay = metricDisplay(macro.commodities?.silver, silver.display);
+  const wtiDisplay = metricDisplay(macro.commodities?.wti);
+  const copperDisplay = metricDisplay(macro.commodities?.copper);
 
   const leadCard = document.getElementById("macroLeadCard");
   if (leadCard) {
@@ -982,7 +1008,7 @@ function renderStockMarketPage() {
       <p class="macro-lead-body">${regimeBody}</p>
       <div class="macro-lead-meta">
         <span>S&P500/NASDAQ 평균 ${formatPct(equityBreadth)}</span>
-        <span>VIX ${vixMetric?.display || "—"}</span>
+        <span>VIX ${vixDisplay}</span>
         <span>USD/KRW ${macro.fx.usdkrw.display}</span>
       </div>
     `;
@@ -995,7 +1021,7 @@ function renderStockMarketPage() {
         label: "변동성",
         value: vixValue >= 24 ? "고변동성 경계" : vixValue >= 18 ? "주의 구간" : "안정권",
         tone: vixValue >= 24 ? "down" : vixValue >= 18 ? "flat" : "up",
-        meta: `VIX ${vixMetric?.display || "—"}`,
+        meta: `VIX ${vixDisplay}`,
       },
       {
         label: "달러",
@@ -1023,7 +1049,17 @@ function renderStockMarketPage() {
 
   const dataHealth = document.getElementById("macroDataHealth");
   if (dataHealth) {
-    if (typeof macroAgeHours === "number" && macroAgeHours >= 6) {
+    const issueCount = Number(macro?._health?.issue_count || 0);
+    const criticalIssueCount = Number(macro?._health?.critical_issue_count || 0);
+    if (criticalIssueCount > 0) {
+      dataHealth.className = "data-health danger";
+      dataHealth.hidden = false;
+      dataHealth.innerHTML = `<strong>데이터 검증 필요</strong><span>현재 매크로 데이터에 검증되지 않은 핵심 항목이 ${criticalIssueCount}개 있습니다. 원자재/변동성 수치는 실제 시세와 다를 수 있습니다.</span>`;
+    } else if (issueCount > 0) {
+      dataHealth.className = "data-health warn";
+      dataHealth.hidden = false;
+      dataHealth.innerHTML = `<strong>부분 수집 보류</strong><span>현재 매크로 데이터 일부 항목이 이전 값을 유지하고 있습니다. 세부 수치 해석 전 상태 배너를 확인해 주세요.</span>`;
+    } else if (typeof macroAgeHours === "number" && macroAgeHours >= 6) {
       const severity = macroAgeHours >= 24 ? "danger" : "warn";
       const ageText = macroAgeHours >= 48 ? `${Math.round(macroAgeHours / 24)}일` : `${Math.round(macroAgeHours)}시간`;
       dataHealth.className = `data-health ${severity}`;
@@ -1040,8 +1076,8 @@ function renderStockMarketPage() {
   if (strip) {
     const cells = [
       { label: "NASDAQ", value: macro.indices.nasdaq.display, delta: macro.indices.nasdaq.delta },
-      { label: "VIX", value: vixMetric?.display || "—", delta: vixMetric?.delta ?? 0 },
-      { label: "DXY", value: macro.fx.dxy.display, delta: macro.fx.dxy.delta },
+      { label: "VIX", value: vixDisplay, delta: vixMetric?.delta ?? 0 },
+      { label: "DXY", value: dxyDisplay, delta: macro.fx.dxy.delta },
       { label: "US10Y", value: macro.rates.us10y.display, delta: macro.rates.us10y.delta },
       { label: "RRP (bn)", value: macro.liquidity.rrp.display, delta: macro.liquidity.rrp.delta, rawDelta: formatBnDelta(macro.liquidity.rrp.delta) },
     ];
@@ -1066,12 +1102,12 @@ function renderStockMarketPage() {
       {
         label: "환율",
         value: dxyDelta >= 0.3 ? "달러 부담" : dxyDelta <= -0.3 ? "달러 완화" : "중립",
-        detail: `DXY ${macro.fx.dxy.display} / USDKRW ${macro.fx.usdkrw.display}`,
+        detail: `DXY ${dxyDisplay} / USDKRW ${macro.fx.usdkrw.display}`,
       },
       {
         label: "원자재",
         value: (toNumSafe(macro.commodities.gold.delta) ?? 0) > 0 ? "방어 수요 유지" : "방어 수요 약화",
-        detail: `Gold ${macro.commodities.gold.display} / WTI ${macro.commodities.wti.display}`,
+        detail: `Gold ${goldDisplay} / WTI ${wtiDisplay}`,
       },
     ];
     readGrid.innerHTML = reads
@@ -1087,7 +1123,7 @@ function renderStockMarketPage() {
   ]);
 
   renderCards("fxCards", [
-    { label: "DXY", value: macro.fx.dxy.display, delta: macro.fx.dxy.delta },
+    { label: "DXY", value: dxyDisplay, delta: macro.fx.dxy.delta },
     { label: "USD/KRW", value: macro.fx.usdkrw.display, delta: macro.fx.usdkrw.delta },
   ]);
 
@@ -1100,7 +1136,7 @@ function renderStockMarketPage() {
       ["DOW", macro.indices.dow.display, macro.indices.dow.delta],
       ["Russell 2000", macro.indices.russell2000.display, macro.indices.russell2000.delta],
       ["S&P500", macro.indices.sp500.display, macro.indices.sp500.delta],
-      ["VIX", vixMetric?.display || "—", vixMetric?.delta ?? 0],
+      ["VIX", vixDisplay, vixMetric?.delta ?? 0],
     ];
     indexRows.innerHTML = rows.map((r) => `<tr><td>${r[0]}</td><td class="num">${r[1]}</td><td class="num ${toneClass(r[2])}">${formatPct(r[2])}</td></tr>`).join("");
   } else {
@@ -1115,10 +1151,10 @@ function renderStockMarketPage() {
   }
 
   renderCards("commodityCards", [
-    { label: "GOLD", value: macro.commodities.gold.display, delta: macro.commodities.gold.delta },
-    { label: "SILVER", value: silver.display, delta: silver.delta },
-    { label: "WTI", value: macro.commodities.wti.display, delta: macro.commodities.wti.delta },
-    { label: "COPPER", value: macro.commodities.copper.display, delta: macro.commodities.copper.delta },
+    { label: "GOLD", value: goldDisplay, delta: macro.commodities.gold.delta },
+    { label: "SILVER", value: silverDisplay, delta: silver.delta },
+    { label: "WTI", value: wtiDisplay, delta: macro.commodities.wti.delta },
+    { label: "COPPER", value: copperDisplay, delta: macro.commodities.copper.delta },
   ]);
 
   const qeRows = document.getElementById("qeRows");
