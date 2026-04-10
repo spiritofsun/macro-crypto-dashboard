@@ -906,7 +906,7 @@ function renderStockMarketPage() {
 
   const leadCard = document.getElementById("macroLeadCard");
   if (leadCard) {
-    const regime = equityBreadth >= 0.75 ? "위험 선호 확산" : equityBreadth <= -0.75 ? "방어 국면 강화" : "박스권 혼조";
+    const regime = equityBreadth >= 0.75 ? "위험 선호 확산" : equityBreadth <= -0.75 ? "방어 국면 강화" : "방향 탐색 구간";
     const regimeTone = equityBreadth >= 0.75 ? "up" : equityBreadth <= -0.75 ? "down" : "flat";
     const regimeBody = equityBreadth >= 0.75
       ? "미국 주가지수 모멘텀이 우세하고 변동성 압력은 상대적으로 제한된 구간입니다."
@@ -930,19 +930,19 @@ function renderStockMarketPage() {
     const items = [
       {
         label: "변동성",
-        value: vixValue >= 24 ? "고변동성 경계" : vixValue >= 18 ? "경계권" : "안정권",
+        value: vixValue >= 24 ? "고변동성 경계" : vixValue >= 18 ? "주의 구간" : "안정권",
         tone: vixValue >= 24 ? "down" : vixValue >= 18 ? "flat" : "up",
         meta: `VIX ${vixMetric?.display || "—"}`,
       },
       {
         label: "달러",
-        value: dxyDelta >= 0.3 ? "긴축 압력" : dxyDelta <= -0.3 ? "완화 신호" : "횡보",
+        value: dxyDelta >= 0.3 ? "긴축 압력" : dxyDelta <= -0.3 ? "완화 신호" : "중립권",
         tone: dxyDelta >= 0.3 ? "down" : dxyDelta <= -0.3 ? "up" : "flat",
         meta: `DXY ${formatPct(dxyDelta)}`,
       },
       {
         label: "유동성",
-        value: rrpDelta <= -5 ? "개선" : rrpDelta >= 5 ? "흡수 강화" : "보합",
+        value: rrpDelta <= -5 ? "개선" : rrpDelta >= 5 ? "흡수 강화" : "안정 유지",
         tone: rrpDelta <= -5 ? "up" : rrpDelta >= 5 ? "down" : "flat",
         meta: `RRP ${formatBnDelta(rrpDelta)}`,
       },
@@ -1159,7 +1159,7 @@ function renderEtfFlows() {
       })
       .join("");
 
-    return `<article class="flow-card"><div class="flow-head"><p class="flow-title">${title}</p><p class="flow-status ${toneClass(flow)}">${flow < 0 ? "Net Outflow" : "Net Inflow"}</p></div><p class="flow-main ${toneClass(flow)}">${flow >= 0 ? "+" : ""}$${flow.toFixed(1)}M</p><p class="flow-meta">${date} | Assets: ${assets}</p><div class="flow-bars">${bars}</div></article>`;
+    return `<article class="flow-card"><div class="flow-head"><p class="flow-title">${title}</p><p class="flow-status ${toneClass(flow)}">${flow < 0 ? "순유출" : "순유입"}</p></div><p class="flow-main ${toneClass(flow)}">${flow >= 0 ? "+" : ""}$${flow.toFixed(1)}M</p><p class="flow-meta">${date} | Assets: ${assets}</p><div class="flow-bars">${bars}</div></article>`;
   };
 
   el.innerHTML = [

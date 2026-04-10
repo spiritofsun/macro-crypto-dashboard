@@ -7,7 +7,7 @@
   --muted: #5d7a62;
   --up: #16ff6f;
   --down: #ff4a4a;
-  --flat: #9fc0a2;
+  --flat: #d9c37a;
 }
 
 * { box-sizing: border-box; }
@@ -554,21 +554,23 @@ body {
 
 .metric-card {
   border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 12px;
-  min-height: 120px;
-  background: #0a0e13;
+  border-radius: 14px;
+  padding: 14px 14px 12px;
+  min-height: 108px;
+  background: linear-gradient(180deg, rgba(13, 18, 24, 0.98), rgba(9, 13, 18, 0.98));
 }
 
 .metric-label {
-  color: #66916a;
-  font-size: 13px;
+  color: #8ca48f;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   margin: 0 0 8px;
 }
 
 .metric-value {
   margin: 0;
-  font-size: 38px;
+  font-size: 32px;
   font-family: "JetBrains Mono", monospace;
   font-weight: 700;
   line-height: 1.1;
@@ -576,8 +578,9 @@ body {
 
 .metric-delta {
   margin-top: 6px;
-  font-size: 16px;
+  font-size: 13px;
   font-family: "JetBrains Mono", monospace;
+  font-weight: 600;
 }
 
 .flow-grid {
@@ -785,22 +788,24 @@ body {
 
 .snapshot-pill {
   border: 1px solid var(--line);
-  border-radius: 10px;
-  background: #0a1014;
-  padding: 12px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(11, 16, 21, 0.98), rgba(8, 12, 16, 0.98));
+  padding: 12px 14px;
   display: grid;
   gap: 6px;
 }
 
 .snapshot-pill .label {
-  color: #759675;
-  font-size: 12px;
+  color: #8ca48f;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   font-family: "JetBrains Mono", monospace;
 }
 
 .snapshot-pill .value {
   color: #d2e7d2;
-  font-size: 20px;
+  font-size: 24px;
   font-family: "JetBrains Mono", monospace;
   font-weight: 700;
 }
@@ -1906,7 +1911,7 @@ body {
 }
 
 .page-lead-card {
-  padding: 22px;
+  padding: 20px 22px;
   border: 1px solid rgba(245, 192, 54, 0.18);
   border-radius: 24px;
   background:
@@ -1924,15 +1929,16 @@ body {
 
 .page-lead-card h2 {
   margin: 0;
-  font-size: clamp(24px, 2.4vw, 36px);
-  line-height: 1.1;
+  font-size: clamp(22px, 2vw, 30px);
+  line-height: 1.18;
+  letter-spacing: -0.02em;
 }
 
 .page-lead-body {
-  margin: 14px 0 16px;
-  color: #b2c4b4;
-  font-size: 15px;
-  line-height: 1.65;
+  margin: 12px 0 14px;
+  color: #b9cabc;
+  font-size: 14px;
+  line-height: 1.58;
 }
 
 .page-lead-meta {
@@ -1957,7 +1963,7 @@ body {
 }
 
 .page-quick-card {
-  padding: 16px;
+  padding: 14px 16px 13px;
   border: 1px solid var(--line-strong);
   border-radius: 20px;
   background:
@@ -1973,22 +1979,26 @@ body {
 
 .page-quick-card p {
   margin: 0 0 8px;
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: #90a491;
 }
 
 .page-quick-card strong {
   margin: 0;
-  font-size: 22px;
-  line-height: 1.15;
+  font-size: 18px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #eef6ef;
 }
 
 .page-quick-card span {
-  margin-top: 10px;
-  font-size: 13px;
-  color: #92a895;
+  margin-top: 8px;
+  font-size: 15px;
+  font-family: "JetBrains Mono", monospace;
+  color: #cfdacf;
+  font-weight: 600;
 }
 
 .macro-hero-grid {
@@ -1999,7 +2009,7 @@ body {
 }
 
 .macro-lead-card {
-  padding: 22px;
+  padding: 20px 22px;
   border: 1px solid rgba(245, 192, 54, 0.22);
   border-radius: 24px;
   background:
@@ -2017,16 +2027,17 @@ body {
 
 .macro-lead-card h2 {
   margin: 0;
-  font-size: clamp(28px, 3vw, 42px);
-  line-height: 1.05;
+  font-size: clamp(24px, 2.2vw, 34px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 .macro-lead-body {
-  margin: 14px 0 16px;
+  margin: 12px 0 14px;
   max-width: 54ch;
-  color: #b2c4b4;
-  font-size: 15px;
-  line-height: 1.65;
+  color: #b9cabc;
+  font-size: 14px;
+  line-height: 1.58;
 }
 
 .macro-lead-meta {
@@ -2051,7 +2062,7 @@ body {
 }
 
 .macro-mini-card {
-  padding: 16px;
+  padding: 14px 16px 13px;
   border: 1px solid var(--line-strong);
   border-radius: 20px;
   background:
@@ -2067,22 +2078,26 @@ body {
 
 .macro-mini-card p {
   margin: 0 0 8px;
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: #90a491;
 }
 
 .macro-mini-card strong {
   margin: 0;
-  font-size: 24px;
-  line-height: 1.15;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #eef6ef;
 }
 
 .macro-mini-card span {
-  margin-top: 10px;
-  font-size: 13px;
-  color: #92a895;
+  margin-top: 8px;
+  font-size: 15px;
+  font-family: "JetBrains Mono", monospace;
+  color: #cfdacf;
+  font-weight: 600;
 }
 
 .signal-board {
@@ -2136,31 +2151,53 @@ body {
 }
 
 .macro-read-card {
-  padding: 16px;
+  padding: 14px 16px 13px;
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: 20px;
   background: linear-gradient(180deg, rgba(15, 20, 27, 0.98), rgba(9, 13, 18, 0.98));
 }
 
 .macro-read-label {
   margin: 0 0 10px;
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: #90a491;
 }
 
 .macro-read-card strong {
   display: block;
-  margin: 0 0 10px;
-  font-size: 20px;
+  margin: 0 0 8px;
+  font-size: 18px;
   line-height: 1.25;
+  color: #eef6ef;
 }
 
 .macro-read-card span {
-  font-size: 13px;
-  color: #93aa97;
+  font-size: 14px;
+  font-family: "JetBrains Mono", monospace;
+  color: #cfdacf;
   line-height: 1.5;
+}
+
+.page-quick-card strong.flat,
+.macro-mini-card strong.flat,
+.macro-read-card strong.flat,
+.metric-delta.flat,
+.snapshot-pill .metric-delta.flat {
+  color: #f0d889;
+}
+
+.page-quick-card strong.up,
+.macro-mini-card strong.up,
+.macro-read-card strong.up {
+  color: #37e08b;
+}
+
+.page-quick-card strong.down,
+.macro-mini-card strong.down,
+.macro-read-card strong.down {
+  color: #ff7373;
 }
 
 /* limit accent usage to deltas/live/active nav */
@@ -2184,31 +2221,32 @@ body {
 }
 
 #macroTopStrip .label {
-  font-size: 11px;
-  opacity: 0.65;
-  letter-spacing: 0.4px;
+  font-size: 10px;
+  opacity: 0.8;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 #macroTopStrip .value {
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 600;
-  opacity: 0.95;
+  opacity: 1;
   color: var(--text);
 }
 
 #macroTopStrip .metric-delta {
-  font-size: 12px;
-  opacity: 0.9;
-  font-weight: 500;
+  font-size: 13px;
+  opacity: 1;
+  font-weight: 600;
 }
 
 /* keep commodity cards same visual size as rate cards */
 #commodityCards .metric-card {
-  min-height: 88px;
+  min-height: 104px;
 }
 
 #commodityCards .metric-value {
-  font-size: 22px;
+  font-size: 28px;
   font-weight: 600;
 }
 

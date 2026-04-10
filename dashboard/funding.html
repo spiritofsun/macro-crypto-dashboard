@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260410d" />
+    <link rel="stylesheet" href="./styles.css?v=20260410e" />
   </head>
   <body>
     <div class="app-shell">
@@ -30,6 +30,40 @@
           <p class="asof">거래소별 펀딩 상태 비교</p>
           <button class="back-btn" onclick="history.length > 1 ? history.back() : (location.href='./index.html')">← 뒤로가기</button>
         </header>
+        <section class="page-overview">
+          <article class="page-lead-card">
+            <p class="page-lead-kicker">펀딩비 해석</p>
+            <h2>양수는 롱 비용, 음수는 숏 비용이라는 기본 축으로 보면 됩니다</h2>
+            <p class="page-lead-body">절대값이 커질수록 한쪽 포지션 쏠림이 강하다는 의미에 가깝고, 거래소 간 부호가 갈리면 단기 변동성 확대 가능성을 같이 봐야 합니다.</p>
+            <div class="page-lead-meta">
+              <span>양수 = 롱 비용</span>
+              <span>음수 = 숏 비용</span>
+              <span>거래소 간 역전 구간 주의</span>
+            </div>
+          </article>
+          <div class="page-quick-grid">
+            <article class="page-quick-card">
+              <p>BTC</p>
+              <strong class="up">롱 비용</strong>
+              <span>주요 거래소 양수</span>
+            </article>
+            <article class="page-quick-card">
+              <p>ETH</p>
+              <strong class="flat">혼조</strong>
+              <span>거래소별 부호 분산</span>
+            </article>
+            <article class="page-quick-card">
+              <p>SOL</p>
+              <strong class="down">숏 우세</strong>
+              <span>음수 유지</span>
+            </article>
+            <article class="page-quick-card">
+              <p>활용 방식</p>
+              <strong class="up">과열 탐지</strong>
+              <span>추세 확정 신호 아님</span>
+            </article>
+          </div>
+        </section>
         <section class="panel">
           <h3 class="group-title">거래소별 펀딩비</h3>
           <div class="table-wrap">
@@ -51,6 +85,6 @@
         </section>
       </main>
     </div>
-    <script src="./app.js?v=20260410d"></script>
+    <script src="./app.js?v=20260410e"></script>
   </body>
 </html>
