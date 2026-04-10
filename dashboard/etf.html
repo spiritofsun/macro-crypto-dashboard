@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260410c" />
+    <link rel="stylesheet" href="./styles.css?v=20260410d" />
   </head>
   <body>
     <div class="app-shell">
@@ -25,16 +25,21 @@
       <main class="page content-page">
         <header class="hero">
           <p class="kicker">카테고리</p>
-          <h1>ETF FLOWS</h1>
+          <h1>ETF 자금 흐름</h1>
           <p class="asof" id="asOfText">loading...</p>
           <button class="back-btn" onclick="history.length > 1 ? history.back() : (location.href='./index.html')">← 뒤로가기</button>
         </header>
+
+        <section class="page-overview">
+          <article class="page-lead-card" id="etfLeadCard"></article>
+          <div class="page-quick-grid" id="etfQuickStrip"></div>
+        </section>
 
         <section class="panel">
           <div class="flow-grid" id="etfFlows"></div>
         </section>
       </main>
     </div>
-    <script src="./app.js?v=20260410c"></script>
+    <script src="./app.js?v=20260410d"></script>
   </body>
 </html>

@@ -1898,6 +1898,99 @@ body {
   background: linear-gradient(135deg, rgba(229, 72, 77, 0.14), rgba(229, 72, 77, 0.04));
 }
 
+.page-overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.page-lead-card {
+  padding: 22px;
+  border: 1px solid rgba(245, 192, 54, 0.18);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at top left, rgba(245, 192, 54, 0.12), transparent 36%),
+    linear-gradient(180deg, rgba(13, 18, 24, 0.98), rgba(8, 11, 15, 0.98));
+}
+
+.page-lead-kicker {
+  margin: 0 0 10px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #b4a46d;
+}
+
+.page-lead-card h2 {
+  margin: 0;
+  font-size: clamp(24px, 2.4vw, 36px);
+  line-height: 1.1;
+}
+
+.page-lead-body {
+  margin: 14px 0 16px;
+  color: #b2c4b4;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.page-lead-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.page-lead-meta span {
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 12px;
+  color: #9ab29d;
+}
+
+.page-quick-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.page-quick-card {
+  padding: 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.01)),
+    #0c1117;
+}
+
+.page-quick-card p,
+.page-quick-card strong,
+.page-quick-card span {
+  display: block;
+}
+
+.page-quick-card p {
+  margin: 0 0 8px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.page-quick-card strong {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.15;
+}
+
+.page-quick-card span {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #92a895;
+}
+
 .macro-hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
@@ -2120,6 +2213,7 @@ body {
 }
 
 @media (max-width: 1200px) {
+  .page-overview,
   .macro-hero-grid,
   .macro-dual-grid,
   .macro-read-grid,
@@ -2133,6 +2227,8 @@ body {
 }
 
 @media (max-width: 700px) {
+  .page-overview,
+  .page-quick-grid,
   .macro-hero-grid,
   .macro-mini-grid,
   .macro-dual-grid,
@@ -2141,6 +2237,7 @@ body {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 
+  .page-lead-card,
   .macro-lead-card {
     padding: 18px;
     border-radius: 20px;

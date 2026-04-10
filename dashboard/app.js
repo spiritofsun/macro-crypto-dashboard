@@ -396,6 +396,38 @@ function renderNewsPage() {
   }
 }
 
+function renderNewsOverview() {
+  const lead = document.getElementById("newsLeadCard");
+  const quick = document.getElementById("newsQuickStrip");
+  if (!lead && !quick) return;
+
+  const macro = Array.isArray(state.news?.macro) ? state.news.macro : [];
+  const crypto = Array.isArray(state.news?.crypto) ? state.news.crypto : [];
+  const top = macro[0] || crypto[0];
+
+  if (lead) {
+    lead.innerHTML = `
+      <p class="page-lead-kicker">뉴스 브리핑</p>
+      <h2>${top ? "가장 최근 업데이트가 반영된 상태입니다" : "뉴스 수집 대기 중입니다"}</h2>
+      <p class="page-lead-body">${top ? top.title : "Google News 수집이 완료되면 매크로와 크립토 주요 헤드라인이 여기에 요약됩니다."}</p>
+      <div class="page-lead-meta">
+        <span>매크로 ${macro.length}건</span>
+        <span>크립토 ${crypto.length}건</span>
+      </div>
+    `;
+  }
+
+  if (quick) {
+    const items = [
+      { label: "업데이트 상태", value: state.news?.updated_at ? "정상" : "대기", meta: formatKstDateTime(state.news?.updated_at, "수집 대기") },
+      { label: "매크로 헤드라인", value: `${macro.length}건`, meta: macro[0]?.pubDate || "최근 기사 없음" },
+      { label: "크립토 헤드라인", value: `${crypto.length}건`, meta: crypto[0]?.pubDate || "최근 기사 없음" },
+      { label: "소스 구성", value: `${new Set([...macro, ...crypto].map((n) => { try { return new URL(n.link).hostname.replace("www.", ""); } catch { return "source"; } })).size || 0}개`, meta: "도메인 기준" },
+    ];
+    quick.innerHTML = items.map((item) => `<article class="page-quick-card"><p>${item.label}</p><strong>${item.value}</strong><span>${item.meta}</span></article>`).join("");
+  }
+}
+
 function setupNewsControls() {
   document.querySelectorAll('input[name="newsType"]').forEach((input) => {
     if (input.dataset.bound) return;
@@ -517,6 +549,42 @@ function renderCryptoSummary() {
     bar.innerHTML = `<span class="mini-progress-fill" style="width:${Math.max(0, Math.min(100, pct)).toFixed(2)}%"></span>`;
     card.appendChild(bar);
   });
+}
+
+function renderCryptoOverview() {
+  const lead = document.getElementById("cryptoLeadCard");
+  const quick = document.getElementById("cryptoQuickStrip");
+  if (!lead && !quick) return;
+
+  const rows = state.cryptoUniverse.filter((r) => typeof r.market_cap === "number");
+  const btc = rows.find((r) => r.ticker === "BTC");
+  const eth = rows.find((r) => r.ticker === "ETH");
+  const btcDom = toNumSafe(state.live?.dominance?.btc) ?? toNumSafe(fallbackLive.dominance?.btc);
+  const fearGreed = toNumSafe(state.live?.fearGreed) ?? toNumSafe(fallbackLive.fearGreed);
+  const regime = typeof fearGreed === "number" && fearGreed < 30 ? "방어적 심리 우세" : typeof fearGreed === "number" && fearGreed > 60 ? "위험 선호 우세" : "중립 구간";
+
+  if (lead) {
+    lead.innerHTML = `
+      <p class="page-lead-kicker">크립토 체온계</p>
+      <h2>${regime}</h2>
+      <p class="page-lead-body">커스텀 유니버스와 도미넌스, 스테이블 시총, 프리미엄 지표를 한 화면에서 읽을 수 있게 정리했습니다.</p>
+      <div class="page-lead-meta">
+        <span>BTC ${typeof btc?.price === "number" ? formatUsd(btc.price, 0) : "—"}</span>
+        <span>ETH ${typeof eth?.price === "number" ? formatUsd(eth.price, 0) : "—"}</span>
+        <span>BTC.D ${typeof btcDom === "number" ? `${btcDom.toFixed(2)}%` : "—"}</span>
+      </div>
+    `;
+  }
+
+  if (quick) {
+    const items = [
+      { label: "심리 지수", value: typeof fearGreed === "number" ? `${fearGreed}` : "—", meta: "Fear & Greed" },
+      { label: "BTC 도미넌스", value: typeof btcDom === "number" ? `${btcDom.toFixed(2)}%` : "—", meta: "시장 점유율" },
+      { label: "유니버스 규모", value: `${state.cryptoUniverse.length}종`, meta: "커스텀 리스트" },
+      { label: "코인베이스 프리미엄", value: formatPct(toNumSafe(state.live?.coinbasePremiumPct), 2), meta: "BTC 기준" },
+    ];
+    quick.innerHTML = items.map((item) => `<article class="page-quick-card"><p>${item.label}</p><strong>${item.value}</strong><span>${item.meta}</span></article>`).join("");
+  }
 }
 
 function renderDominanceHybrid() {
@@ -838,15 +906,15 @@ function renderStockMarketPage() {
 
   const leadCard = document.getElementById("macroLeadCard");
   if (leadCard) {
-    const regime = equityBreadth >= 0.75 ? "Risk-On Expansion" : equityBreadth <= -0.75 ? "Risk-Off Defense" : "Range-Bound Tape";
+    const regime = equityBreadth >= 0.75 ? "위험 선호 확산" : equityBreadth <= -0.75 ? "방어 국면 강화" : "박스권 혼조";
     const regimeTone = equityBreadth >= 0.75 ? "up" : equityBreadth <= -0.75 ? "down" : "flat";
     const regimeBody = equityBreadth >= 0.75
-      ? "미국 주가지수 모멘텀이 우세하고 변동성 압력이 상대적으로 제한적입니다."
+      ? "미국 주가지수 모멘텀이 우세하고 변동성 압력은 상대적으로 제한된 구간입니다."
       : equityBreadth <= -0.75
-        ? "주가지수 모멘텀이 약하고 달러·변동성 변수에 더 민감한 구간입니다."
-        : "방향성보다 금리와 달러 변화에 따라 빠르게 바뀌는 혼조 구간입니다.";
+        ? "주가지수 모멘텀이 약하고 달러와 변동성 변수에 더 민감한 구간입니다."
+        : "방향성보다 금리와 달러 변화에 따라 해석이 빠르게 바뀌는 혼조 구간입니다.";
     leadCard.innerHTML = `
-      <p class="macro-lead-kicker">Market Regime</p>
+      <p class="macro-lead-kicker">시장 국면</p>
       <h2 class="${regimeTone}">${regime}</h2>
       <p class="macro-lead-body">${regimeBody}</p>
       <div class="macro-lead-meta">
@@ -861,66 +929,32 @@ function renderStockMarketPage() {
   if (miniGrid) {
     const items = [
       {
-        label: "Volatility",
-        value: vixValue >= 24 ? "High Alert" : vixValue >= 18 ? "Elevated" : "Contained",
+        label: "변동성",
+        value: vixValue >= 24 ? "고변동성 경계" : vixValue >= 18 ? "경계권" : "안정권",
         tone: vixValue >= 24 ? "down" : vixValue >= 18 ? "flat" : "up",
         meta: `VIX ${vixMetric?.display || "—"}`,
       },
       {
-        label: "Dollar",
-        value: dxyDelta >= 0.3 ? "Tightening" : dxyDelta <= -0.3 ? "Relief" : "Sideways",
+        label: "달러",
+        value: dxyDelta >= 0.3 ? "긴축 압력" : dxyDelta <= -0.3 ? "완화 신호" : "횡보",
         tone: dxyDelta >= 0.3 ? "down" : dxyDelta <= -0.3 ? "up" : "flat",
         meta: `DXY ${formatPct(dxyDelta)}`,
       },
       {
-        label: "Liquidity",
-        value: rrpDelta <= -5 ? "Improving" : rrpDelta >= 5 ? "Draining" : "Stable",
+        label: "유동성",
+        value: rrpDelta <= -5 ? "개선" : rrpDelta >= 5 ? "흡수 강화" : "보합",
         tone: rrpDelta <= -5 ? "up" : rrpDelta >= 5 ? "down" : "flat",
         meta: `RRP ${formatBnDelta(rrpDelta)}`,
       },
       {
-        label: "Curve",
-        value: curve >= 0 ? "Positive" : "Still Inverted",
+        label: "금리곡선",
+        value: curve >= 0 ? "정상화" : "역전 지속",
         tone: curve >= 0 ? "up" : "down",
         meta: `10Y-2Y ${formatSigned(curve, 2, "%p")}`,
       },
     ];
     miniGrid.innerHTML = items
       .map((item) => `<article class="macro-mini-card"><p>${item.label}</p><strong class="${item.tone}">${item.value}</strong><span>${item.meta}</span></article>`)
-      .join("");
-  }
-
-  const signalBoard = document.getElementById("macroSignalBoard");
-  if (signalBoard) {
-    const signals = [
-      {
-        label: "Risk Regime",
-        value: equityBreadth >= 0.75 ? "Risk On" : equityBreadth <= -0.75 ? "Risk Off" : "Neutral",
-        tone: equityBreadth >= 0.75 ? "up" : equityBreadth <= -0.75 ? "down" : "flat",
-        meta: `S&P500/NASDAQ 평균 ${formatPct(equityBreadth)}`,
-      },
-      {
-        label: "Rates Curve",
-        value: curve >= 0 ? "Steepening" : "Inverted",
-        tone: curve >= 0 ? "up" : "down",
-        meta: `10Y-2Y ${formatSigned(curve, 2, "%p")}`,
-      },
-      {
-        label: "Dollar Pressure",
-        value: dxyDelta >= 0.3 ? "Strong USD" : dxyDelta <= -0.3 ? "USD Cooling" : "Range",
-        tone: dxyDelta >= 0.3 ? "down" : dxyDelta <= -0.3 ? "up" : "flat",
-        meta: `DXY ${formatPct(dxyDelta)}`,
-      },
-      {
-        label: "Liquidity Pulse",
-        value: rrpDelta <= -5 ? "Loosening" : rrpDelta >= 5 ? "Draining" : "Stable",
-        tone: rrpDelta <= -5 ? "up" : rrpDelta >= 5 ? "down" : "flat",
-        meta: `RRP ${formatBnDelta(rrpDelta)}`,
-      },
-    ];
-
-    signalBoard.innerHTML = signals
-      .map((item) => `<article class="signal-card"><p class="signal-label">${item.label}</p><p class="signal-value ${item.tone}">${item.value}</p><p class="signal-meta">${item.meta}</p></article>`)
       .join("");
   }
 
@@ -957,23 +991,23 @@ function renderStockMarketPage() {
   if (readGrid) {
     const reads = [
       {
-        label: "Equities",
-        value: equityBreadth >= 0.75 ? "Breadth improving" : equityBreadth <= -0.75 ? "Breadth deteriorating" : "Mixed participation",
+        label: "주식",
+        value: equityBreadth >= 0.75 ? "지수 참여도 개선" : equityBreadth <= -0.75 ? "지수 참여도 둔화" : "혼조 참여",
         detail: `S&P500 ${formatPct(macro.indices.sp500.delta)} / NASDAQ ${formatPct(macro.indices.nasdaq.delta)}`,
       },
       {
-        label: "Rates",
-        value: curve >= 0 ? "Curve re-steepening" : "Front-end still restrictive",
+        label: "금리",
+        value: curve >= 0 ? "장단기 금리차 재확대" : "단기 금리 부담 지속",
         detail: `US10Y ${macro.rates.us10y.display} / US2Y ${macro.rates.us2y.display}`,
       },
       {
-        label: "FX",
-        value: dxyDelta >= 0.3 ? "Dollar headwind" : dxyDelta <= -0.3 ? "Dollar relief" : "FX neutral",
+        label: "환율",
+        value: dxyDelta >= 0.3 ? "달러 부담" : dxyDelta <= -0.3 ? "달러 완화" : "중립",
         detail: `DXY ${macro.fx.dxy.display} / USDKRW ${macro.fx.usdkrw.display}`,
       },
       {
-        label: "Commodities",
-        value: (toNumSafe(macro.commodities.gold.delta) ?? 0) > 0 ? "Defensive bid active" : "Defensive bid fading",
+        label: "원자재",
+        value: (toNumSafe(macro.commodities.gold.delta) ?? 0) > 0 ? "방어 수요 유지" : "방어 수요 약화",
         detail: `Gold ${macro.commodities.gold.display} / WTI ${macro.commodities.wti.display}`,
       },
     ];
@@ -1043,6 +1077,40 @@ function renderStockMarketPage() {
   }
 }
 
+function renderEtfOverview() {
+  const lead = document.getElementById("etfLeadCard");
+  const quick = document.getElementById("etfQuickStrip");
+  if (!lead && !quick) return;
+
+  const btc = typeof state.etf?.btc_us_spot_etf_net_inflow_usd_m === "number" ? state.etf.btc_us_spot_etf_net_inflow_usd_m : -410.4;
+  const eth = typeof state.etf?.eth_us_spot_etf_net_inflow_usd_m === "number" ? state.etf.eth_us_spot_etf_net_inflow_usd_m : -113.1;
+  const date = state.etf?.date || "n/a";
+  const combined = btc + eth;
+
+  if (lead) {
+    lead.innerHTML = `
+      <p class="page-lead-kicker">ETF 흐름 요약</p>
+      <h2>${combined >= 0 ? "현물 ETF 자금 유입 우세" : "현물 ETF 자금 유출 우세"}</h2>
+      <p class="page-lead-body">BTC와 ETH 현물 ETF의 최신 순유입 흐름을 한 장에서 비교하도록 정리했습니다.</p>
+      <div class="page-lead-meta">
+        <span>기준일 ${date}</span>
+        <span>BTC ${btc >= 0 ? "+" : ""}$${btc.toFixed(1)}M</span>
+        <span>ETH ${eth >= 0 ? "+" : ""}$${eth.toFixed(1)}M</span>
+      </div>
+    `;
+  }
+
+  if (quick) {
+    const items = [
+      { label: "BTC 흐름", value: `${btc >= 0 ? "+" : ""}$${btc.toFixed(1)}M`, meta: btc >= 0 ? "순유입" : "순유출" },
+      { label: "ETH 흐름", value: `${eth >= 0 ? "+" : ""}$${eth.toFixed(1)}M`, meta: eth >= 0 ? "순유입" : "순유출" },
+      { label: "합산 흐름", value: `${combined >= 0 ? "+" : ""}$${combined.toFixed(1)}M`, meta: "BTC + ETH" },
+      { label: "상태", value: state.etf?.freshness === "latest" ? "최신" : "보강값", meta: state.etf?.source || "source" },
+    ];
+    quick.innerHTML = items.map((item) => `<article class="page-quick-card"><p>${item.label}</p><strong>${item.value}</strong><span>${item.meta}</span></article>`).join("");
+  }
+}
+
 function renderLongShortPage() {
   const tbody = document.getElementById("longShortRows");
   if (!tbody) return;
@@ -1104,11 +1172,14 @@ function renderAll() {
   setAsOf();
   renderHomeHub();
   renderNewsPage();
+  renderNewsOverview();
   renderCryptoSummary();
+  renderCryptoOverview();
   renderDominanceHybrid();
   renderCryptoTable();
   renderStockMarketPage();
   renderLongShortPage();
+  renderEtfOverview();
   renderEtfFlows();
 }
 
