@@ -9,7 +9,7 @@ import pathlib
 import re
 import urllib.request
 from datetime import datetime, timezone
-from typing import Optional, Tuple
+from typing import Any, Optional, Tuple
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 OUT = ROOT / "dashboard" / "data" / "etf.json"
@@ -59,20 +59,26 @@ def parse_any_date(text: str) -> Optional[datetime]:
     return None
 
 
-def latest_total_inflow(url: str) -> Tuple[Optional[str], Optional[float]]:
+def parse_farside_rows(url: str) -> list[dict[str, Any]]:
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
     with urllib.request.urlopen(req, timeout=20) as resp:
         html_body = resp.read().decode("utf-8", errors="ignore")
 
     rows = re.findall(r"<tr[^>]*>(.*?)</tr>", html_body, flags=re.IGNORECASE | re.DOTALL)
-    best_date_text: Optional[str] = None
-    best_date_obj: Optional[datetime] = None
-    best_value: Optional[float] = None
+    parsed_rows: list[dict[str, Any]] = []
+    total_idx: Optional[int] = None
 
     for row in rows:
         cells = re.findall(r"<t[dh][^>]*>(.*?)</t[dh]>", row, flags=re.IGNORECASE | re.DOTALL)
         if len(cells) < 2:
             continue
+
+        if total_idx is None:
+            headers = [clean_text(c).upper() for c in cells]
+            for i, h in enumerate(headers):
+                if h in {"TOTAL", "NET FLOW TOTAL", "NET FLOW"}:
+                    total_idx = i
+                    break
 
         first = clean_text(cells[0])
         date_match = DATE_RE.search(first)
@@ -84,22 +90,30 @@ def latest_total_inflow(url: str) -> Tuple[Optional[str], Optional[float]]:
         if not date_obj:
             continue
 
-        # Farside tables have TOTAL in the last/near-last column.
-        # We scan from right to left and use the first parseable number.
         value: Optional[float] = None
-        for c in reversed(cells):
-            t = clean_text(c)
-            v = parse_value(t)
-            if v is not None:
-                value = v
-                break
+        if total_idx is not None and total_idx < len(cells):
+            value = parse_value(clean_text(cells[total_idx]))
+        if value is None:
+            for c in reversed(cells):
+                t = clean_text(c)
+                v = parse_value(t)
+                if v is not None:
+                    value = v
+                    break
+        if value is None:
+            continue
 
-        if best_date_obj is None or date_obj > best_date_obj:
-            best_date_text = date_text
-            best_date_obj = date_obj
-            best_value = value
+        parsed_rows.append(
+            {
+                "date_obj": date_obj,
+                "date_text": date_text,
+                "date_mmdd": date_obj.strftime("%m-%d"),
+                "flow": value,
+            }
+        )
 
-    return best_date_text, best_value
+    parsed_rows.sort(key=lambda r: r["date_obj"], reverse=True)
+    return parsed_rows
 
 
 def latest_defillama_etf_flows() -> Tuple[Optional[str], Optional[float], Optional[float]]:
@@ -148,6 +162,20 @@ def pick_fresher(
     return (cur_date or prev_date_text or "n/a"), cur_btc if cur_btc is not None else prev_btc, cur_eth if cur_eth is not None else prev_eth, "latest"
 
 
+def normalize_history(entries: Any) -> list[dict[str, float | str]]:
+    if not isinstance(entries, list):
+        return []
+    out: list[dict[str, float | str]] = []
+    for e in entries:
+        if not isinstance(e, dict):
+            continue
+        d = e.get("date")
+        f = e.get("flow")
+        if isinstance(d, str) and isinstance(f, (int, float)):
+            out.append({"date": d, "flow": float(f)})
+    return out[:7]
+
+
 def main() -> int:
     prev_payload = {}
     if OUT.exists():
@@ -156,13 +184,21 @@ def main() -> int:
         except json.JSONDecodeError:
             prev_payload = {}
 
+    btc_history: list[dict[str, float | str]] = []
+    eth_history: list[dict[str, float | str]] = []
     try:
-        btc_date, btc_flow = latest_total_inflow("https://farside.co.uk/btc/")
+        btc_rows = parse_farside_rows("https://farside.co.uk/btc/")
+        btc_date = btc_rows[0]["date_text"] if btc_rows else None
+        btc_flow = float(btc_rows[0]["flow"]) if btc_rows else None
+        btc_history = [{"date": r["date_mmdd"], "flow": float(r["flow"])} for r in btc_rows[:7]]
     except Exception as e:
         print(f"warn: farside btc fetch failed ({e})")
         btc_date, btc_flow = None, None
     try:
-        eth_date, eth_flow = latest_total_inflow("https://farside.co.uk/eth/")
+        eth_rows = parse_farside_rows("https://farside.co.uk/eth/")
+        eth_date = eth_rows[0]["date_text"] if eth_rows else None
+        eth_flow = float(eth_rows[0]["flow"]) if eth_rows else None
+        eth_history = [{"date": r["date_mmdd"], "flow": float(r["flow"])} for r in eth_rows[:7]]
     except Exception as e:
         print(f"warn: farside eth fetch failed ({e})")
         eth_date, eth_flow = None, None
@@ -183,11 +219,17 @@ def main() -> int:
             print(f"warn: defillama fetch failed ({e})")
 
     ref_date, btc_flow, eth_flow, freshness = pick_fresher(ref_date, btc_flow, eth_flow, prev_payload)
+    if not btc_history:
+        btc_history = normalize_history(prev_payload.get("btc_history_7d_usd_m"))
+    if not eth_history:
+        eth_history = normalize_history(prev_payload.get("eth_history_7d_usd_m"))
     payload = {
         "updated_at": datetime.now(timezone.utc).isoformat(),
         "date": ref_date,
         "btc_us_spot_etf_net_inflow_usd_m": btc_flow,
         "eth_us_spot_etf_net_inflow_usd_m": eth_flow,
+        "btc_history_7d_usd_m": btc_history,
+        "eth_history_7d_usd_m": eth_history,
         "source": source,
         "freshness": freshness,
     }

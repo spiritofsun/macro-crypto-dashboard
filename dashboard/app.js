@@ -58,6 +58,7 @@ const fallbackMacro = {
     dow: { value: 42510, delta: -0.42, display: "42,510" },
     russell2000: { value: 2320, delta: -0.61, display: "2,320" },
     sp500: { value: 6836, delta: -1.52, display: "6,836" },
+    vix: { value: 21.34, delta: 4.18, display: "21.34" },
   },
   commodities: {
     gold: { value: 5034, delta: 0.23, display: "$5,034/oz" },
@@ -141,6 +142,11 @@ function formatIntDelta(value) {
   return `${sign}${Math.trunc(value).toLocaleString()}`;
 }
 
+function formatSigned(value, digits = 2, suffix = "") {
+  if (typeof value !== "number" || Number.isNaN(value)) return "—";
+  return `${value >= 0 ? "+" : ""}${value.toFixed(digits)}${suffix}`;
+}
+
 function toneClass(value, neutralThreshold = 0.2) {
   if (typeof value !== "number" || Number.isNaN(value)) return "flat";
   if (Math.abs(value) < neutralThreshold) return "flat";
@@ -163,6 +169,23 @@ function formatKstDateTime(input, fallback = "수집 대기") {
     hour12: false,
   }).format(d);
   return `${text} KST`;
+}
+
+function parseDashboardDate(input) {
+  if (!input || typeof input !== "string") return null;
+  const direct = new Date(input);
+  if (!Number.isNaN(direct.getTime())) return direct;
+
+  const kstMatch = input.match(/^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}) KST$/);
+  if (!kstMatch) return null;
+  const [, year, month, day, hour, minute] = kstMatch;
+  return new Date(`${year}-${month}-${day}T${hour}:${minute}:00+09:00`);
+}
+
+function hoursSince(input) {
+  const parsed = parseDashboardDate(input);
+  if (!parsed) return null;
+  return (Date.now() - parsed.getTime()) / 3_600_000;
 }
 
 function setAsOf() {
@@ -789,6 +812,7 @@ function setupCryptoControls() {
 function renderStockMarketPage() {
   if (!document.getElementById("rateCards")) return;
   const macro = state.macroSnapshot || fallbackMacro;
+  const macroAgeHours = hoursSince(macro.as_of);
   const silverFromSnapshot = (() => {
     const list = state.snapshot?.commodities;
     if (!Array.isArray(list)) return null;
@@ -802,11 +826,65 @@ function renderStockMarketPage() {
   })();
   const silver = macro.commodities?.silver || silverFromSnapshot || { value: null, delta: null, display: "—" };
 
+  const signalBoard = document.getElementById("macroSignalBoard");
+  if (signalBoard) {
+    const curve = (toNumSafe(macro.rates?.us10y?.value) ?? 0) - (toNumSafe(macro.rates?.us2y?.value) ?? 0);
+    const dxyDelta = toNumSafe(macro.fx?.dxy?.delta) ?? 0;
+    const rrpDelta = toNumSafe(macro.liquidity?.rrp?.delta) ?? 0;
+    const equityBreadth = ((toNumSafe(macro.indices?.sp500?.delta) ?? 0) + (toNumSafe(macro.indices?.nasdaq?.delta) ?? 0)) / 2;
+
+    const signals = [
+      {
+        label: "Risk Regime",
+        value: equityBreadth >= 0.75 ? "Risk On" : equityBreadth <= -0.75 ? "Risk Off" : "Neutral",
+        tone: equityBreadth >= 0.75 ? "up" : equityBreadth <= -0.75 ? "down" : "flat",
+        meta: `S&P500/NASDAQ 평균 ${formatPct(equityBreadth)}`,
+      },
+      {
+        label: "Rates Curve",
+        value: curve >= 0 ? "Steepening" : "Inverted",
+        tone: curve >= 0 ? "up" : "down",
+        meta: `10Y-2Y ${formatSigned(curve, 2, "%p")}`,
+      },
+      {
+        label: "Dollar Pressure",
+        value: dxyDelta >= 0.3 ? "Strong USD" : dxyDelta <= -0.3 ? "USD Cooling" : "Range",
+        tone: dxyDelta >= 0.3 ? "down" : dxyDelta <= -0.3 ? "up" : "flat",
+        meta: `DXY ${formatPct(dxyDelta)}`,
+      },
+      {
+        label: "Liquidity Pulse",
+        value: rrpDelta <= -5 ? "Loosening" : rrpDelta >= 5 ? "Draining" : "Stable",
+        tone: rrpDelta <= -5 ? "up" : rrpDelta >= 5 ? "down" : "flat",
+        meta: `RRP ${formatBnDelta(rrpDelta)}`,
+      },
+    ];
+
+    signalBoard.innerHTML = signals
+      .map((item) => `<article class="signal-card"><p class="signal-label">${item.label}</p><p class="signal-value ${item.tone}">${item.value}</p><p class="signal-meta">${item.meta}</p></article>`)
+      .join("");
+  }
+
+  const dataHealth = document.getElementById("macroDataHealth");
+  if (dataHealth) {
+    if (typeof macroAgeHours === "number" && macroAgeHours >= 6) {
+      const severity = macroAgeHours >= 24 ? "danger" : "warn";
+      const ageText = macroAgeHours >= 48 ? `${Math.round(macroAgeHours / 24)}일` : `${Math.round(macroAgeHours)}시간`;
+      dataHealth.className = `data-health ${severity}`;
+      dataHealth.hidden = false;
+      dataHealth.innerHTML = `<strong>데이터 갱신 지연</strong><span>마지막 매크로 스냅샷은 ${macro.as_of} 기준입니다. 현재 시점 대비 약 ${ageText} 지연되어 보일 수 있습니다.</span>`;
+    } else {
+      dataHealth.hidden = true;
+      dataHealth.className = "data-health";
+      dataHealth.textContent = "";
+    }
+  }
+
   const strip = document.getElementById("macroTopStrip");
   if (strip) {
     const cells = [
       { label: "NASDAQ", value: macro.indices.nasdaq.display, delta: macro.indices.nasdaq.delta },
-      { label: "DOW", value: macro.indices.dow.display, delta: macro.indices.dow.delta },
+      { label: "VIX", value: macro.indices.vix?.display || "—", delta: macro.indices.vix?.delta ?? 0 },
       { label: "DXY", value: macro.fx.dxy.display, delta: macro.fx.dxy.delta },
       { label: "US10Y", value: macro.rates.us10y.display, delta: macro.rates.us10y.delta },
       { label: "RRP (bn)", value: macro.liquidity.rrp.display, delta: macro.liquidity.rrp.delta, rawDelta: formatBnDelta(macro.liquidity.rrp.delta) },
@@ -837,6 +915,7 @@ function renderStockMarketPage() {
       ["DOW", macro.indices.dow.display, macro.indices.dow.delta],
       ["Russell 2000", macro.indices.russell2000.display, macro.indices.russell2000.delta],
       ["S&P500", macro.indices.sp500.display, macro.indices.sp500.delta],
+      ["VIX", macro.indices.vix?.display || "—", macro.indices.vix?.delta ?? 0],
     ];
     indexRows.innerHTML = rows.map((r) => `<tr><td>${r[0]}</td><td class="num">${r[1]}</td><td class="num ${toneClass(r[2])}">${formatPct(r[2])}</td></tr>`).join("");
   } else {
@@ -908,6 +987,12 @@ function renderEtfFlows() {
   const btc = typeof state.etf?.btc_us_spot_etf_net_inflow_usd_m === "number" ? state.etf.btc_us_spot_etf_net_inflow_usd_m : -410.4;
   const eth = typeof state.etf?.eth_us_spot_etf_net_inflow_usd_m === "number" ? state.etf.eth_us_spot_etf_net_inflow_usd_m : -113.1;
   const date = state.etf?.date || "n/a";
+  const btcHistory = Array.isArray(state.etf?.btc_history_7d_usd_m) && state.etf.btc_history_7d_usd_m.length
+    ? state.etf.btc_history_7d_usd_m
+    : etfHistoryFallback.btc;
+  const ethHistory = Array.isArray(state.etf?.eth_history_7d_usd_m) && state.etf.eth_history_7d_usd_m.length
+    ? state.etf.eth_history_7d_usd_m
+    : etfHistoryFallback.eth;
 
   const card = ({ title, flow, assets, history }) => {
     const maxAbs = Math.max(...history.map((h) => Math.abs(h.flow)), 1);
@@ -922,8 +1007,8 @@ function renderEtfFlows() {
   };
 
   el.innerHTML = [
-    card({ title: "BTC Spot ETF", flow: btc, assets: "$82.86B", history: etfHistoryFallback.btc }),
-    card({ title: "ETH Spot ETF", flow: eth, assets: "$10.97B", history: etfHistoryFallback.eth }),
+    card({ title: "BTC Spot ETF", flow: btc, assets: "$82.86B", history: btcHistory }),
+    card({ title: "ETH Spot ETF", flow: eth, assets: "$10.97B", history: ethHistory }),
   ].join("");
 }
 

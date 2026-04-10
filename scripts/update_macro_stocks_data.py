@@ -29,6 +29,7 @@ YAHOO_SYMBOLS = {
     "dow": "^DJI",
     "sp500": "^GSPC",
     "russell2000": "^RUT",
+    "vix": "^VIX",
     "kospi": "^KS11",
     "kosdaq": "^KQ11",
     "dxy": "DX-Y.NYB",
@@ -226,6 +227,7 @@ def main() -> int:
     dow = y_pick("dow", ("indices", "dow"), fmt_int)
     sp500 = y_pick("sp500", ("indices", "sp500"), fmt_int)
     russell2000 = y_pick("russell2000", ("indices", "russell2000"), fmt_int)
+    vix = y_pick("vix", ("indices", "vix"), fmt_2)
     kospi = y_pick("kospi", ("indices", "kospi"), fmt_int)
     kosdaq = y_pick("kosdaq", ("indices", "kosdaq"), fmt_int)
 
@@ -267,6 +269,7 @@ def main() -> int:
             "dow": {"value": dow[0], "delta": dow[1], "display": dow[2]},
             "russell2000": {"value": russell2000[0], "delta": russell2000[1], "display": russell2000[2]},
             "sp500": {"value": sp500[0], "delta": sp500[1], "display": sp500[2]},
+            "vix": {"value": vix[0], "delta": vix[1], "display": vix[2]},
         },
         "commodities": {
             "gold": {"value": gold[0], "delta": gold[1], "display": gold[2]},
@@ -311,6 +314,7 @@ def main() -> int:
         "indices": [
             {"label": "S&P 500 🇺🇸", "value": sp500[2], "delta": sp500[1]},
             {"label": "NASDAQ 🇺🇸", "value": nasdaq[2], "delta": nasdaq[1]},
+            {"label": "VIX 🇺🇸", "value": vix[2], "delta": vix[1]},
             {"label": "KOSPI 🇰🇷", "value": kospi[2], "delta": kospi[1]},
             {"label": "KOSDAQ 🇰🇷", "value": kosdaq[2], "delta": kosdaq[1]},
         ],
