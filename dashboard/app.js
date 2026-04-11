@@ -125,10 +125,12 @@ function formatUsd(value, digits = 2) {
 
 function formatBigNumber(value) {
   if (typeof value !== "number" || Number.isNaN(value)) return "—";
-  if (value >= 1e12) return `$${(value / 1e12).toFixed(2)}T`;
-  if (value >= 1e9) return `$${(value / 1e9).toFixed(2)}B`;
-  if (value >= 1e6) return `$${(value / 1e6).toFixed(2)}M`;
-  return value.toLocaleString();
+  const sign = value < 0 ? "-" : "";
+  const abs = Math.abs(value);
+  if (abs >= 1e12) return `${sign}$${(abs / 1e12).toFixed(2)}T`;
+  if (abs >= 1e9) return `${sign}$${(abs / 1e9).toFixed(2)}B`;
+  if (abs >= 1e6) return `${sign}$${(abs / 1e6).toFixed(2)}M`;
+  return `${sign}${abs.toLocaleString()}`;
 }
 
 function toNumSafe(value) {
@@ -277,15 +279,18 @@ function getCryptoMarketValue(path) {
 }
 
 function getBtcDominance() {
-  return toNumSafe(state.live?.dominance?.btc) ?? getCryptoMarketValue(["global", "btc_dominance"]);
+  const live = toNumSafe(state.live?.dominance?.btc);
+  return live !== null && live > 0 ? live : getCryptoMarketValue(["global", "btc_dominance"]);
 }
 
 function getEthDominance() {
-  return toNumSafe(state.live?.dominance?.eth) ?? getCryptoMarketValue(["global", "eth_dominance"]);
+  const live = toNumSafe(state.live?.dominance?.eth);
+  return live !== null && live > 0 ? live : getCryptoMarketValue(["global", "eth_dominance"]);
 }
 
 function getTotalMarketCapUsd() {
-  return toNumSafe(state.live?.totalMarketCapUsd) ?? getCryptoMarketValue(["global", "total_market_cap_usd"]);
+  const live = toNumSafe(state.live?.totalMarketCapUsd);
+  return live !== null && live > 0 ? live : getCryptoMarketValue(["global", "total_market_cap_usd"]);
 }
 
 function getFearGreedValue() {
@@ -817,7 +822,8 @@ function renderCryptoSummary() {
   const fallbackTotal = rows.reduce((s, r) => s + r.market_cap, 0);
   const btcDominance = getBtcDominance();
   const ethDominance = getEthDominance();
-  const total = getTotalMarketCapUsd() ?? fallbackTotal;
+  const liveTotal = getTotalMarketCapUsd();
+  const total = liveTotal ?? (fallbackTotal > 0 ? fallbackTotal : null);
   const stable =
     toNumSafe(state.stablecoinSummary?.total) ??
     (typeof state.snapshot?.stablecoin_market_cap === "number" ? state.snapshot.stablecoin_market_cap : (state.cryptoStableMcap || 0));
@@ -838,11 +844,11 @@ function renderCryptoSummary() {
 
   const totals = {
     TOTAL: total,
-    TOTALES: total - stable,
-    TOTAL2: total - btcMcap,
-    TOTAL2ES: total - btcMcap - stable,
-    TOTAL3: total - btcMcap - ethMcap,
-    TOTAL3ES: total - btcMcap - ethMcap - stable,
+    TOTALES: total !== null ? total - stable : null,
+    TOTAL2: total !== null ? total - btcMcap : null,
+    TOTAL2ES: total !== null ? total - btcMcap - stable : null,
+    TOTAL3: total !== null ? total - btcMcap - ethMcap : null,
+    TOTAL3ES: total !== null ? total - btcMcap - ethMcap - stable : null,
   };
 
   const summaryRows = [
