@@ -163,6 +163,55 @@ function escapeHtml(value) {
     .replaceAll("'", "&#39;");
 }
 
+function newsSourceFromLink(link) {
+  try {
+    return new URL(link).hostname.replace("www.", "");
+  } catch {
+    return "source";
+  }
+}
+
+function stripNewsSource(title) {
+  return String(title || "")
+    .replace(/\s+-\s+[^-]+$/g, "")
+    .replace(/\s+–\s+[^–]+$/g, "")
+    .trim();
+}
+
+function localizeNewsTitle(title, type = "") {
+  const text = stripNewsSource(title);
+  const lower = text.toLowerCase();
+
+  if (lower.includes("oil") && lower.includes("iran")) return "유가, 미국-이란 휴전 이슈를 주시하며 상승 출발";
+  if (lower.includes("treasury") && lower.includes("cpi")) return "미 국채금리, 낮아진 근원 CPI와 2026년 1회 인하 기대 속 보합";
+  if (lower.includes("inflation") && lower.includes("stock market")) return "물가 흐름, 주식시장 부담 요인으로 재부각";
+  if (lower.includes("quantitative easing") || lower.includes("qe")) return "양적완화가 금속·원자재 시장에 미치는 영향 점검";
+  if (lower.includes("cybersecurity") || lower.includes("anthropic")) return "미 재무부와 연준, AI 관련 사이버보안 위협 논의";
+  if (lower.includes("crowdstrike")) return "크라우드스트라이크 주가 약세, 기술주 투자심리 점검 필요";
+  if (lower.includes("sgov") || lower.includes("hike rates")) return "연준 금리 인상 가능성에 단기국채 ETF 관심";
+  if (lower.includes("inflation report")) return "물가 발표를 앞두고 증시 변동성 경계";
+  if (lower.includes("crypto miners") || lower.includes("miners")) return "AI 확산 속 크립토 채굴주 재평가 가능성";
+  if (lower.includes("morgan stanley") && lower.includes("bitcoin")) return "모건스탠리, 비트코인 ETF 시장 진입 확대";
+  if (lower.includes("bitcoin institutional") || lower.includes("institutional demand")) return "시장 불안 속 비트코인 기관 수요 확대";
+  if (lower.includes("crypto etfs") || lower.includes("crypto trends")) return "크립토 ETF 시장의 핵심 트렌드 점검";
+  if (lower.includes("cautious optimism")) return "크립토 시장, 신중한 낙관론 유지";
+  if (lower.includes("crypto brief") || lower.includes("newsletter")) return "크립토 규제와 시장 주요 이슈 브리프";
+  if (lower.includes("bitcoin etf")) return "비트코인 ETF 관련 신규 흐름 점검";
+  if (type === "크립토") return `크립토 뉴스: ${text}`;
+  if (type === "매크로") return `매크로 뉴스: ${text}`;
+  return text || "제목 없음";
+}
+
+function newsImpactText(title, type = "") {
+  const lower = String(title || "").toLowerCase();
+  if (lower.includes("oil") || lower.includes("iran")) return "유가와 인플레이션 기대를 통해 금리·위험자산에 영향을 줄 수 있습니다.";
+  if (lower.includes("treasury") || lower.includes("fed") || lower.includes("cpi") || lower.includes("inflation")) return "금리 경로와 달러 방향성이 핵심 확인 변수입니다.";
+  if (lower.includes("bitcoin etf") || lower.includes("crypto etf") || lower.includes("institutional")) return "BTC 수급과 ETF 플로우 변화로 연결되는지 확인해야 합니다.";
+  if (lower.includes("miners") || lower.includes("ai")) return "AI 테마와 크립토 관련주의 동조화 여부를 점검합니다.";
+  if (type === "크립토") return "BTC·ETH 가격 반응과 도미넌스 변화를 함께 봐야 합니다.";
+  return "지수, 금리, 달러가 같은 방향으로 반응하는지 확인합니다.";
+}
+
 function formatKstDateTime(input, fallback = "수집 대기") {
   if (!input) return fallback;
   if (typeof input === "string" && input.includes("KST")) return input;
@@ -500,19 +549,19 @@ function renderAiBriefPage() {
     const datasets = state.status?.datasets || {};
     const rows = [
       {
-        label: "매크로",
+        label: "매크로 온도",
         value: statusText(datasets.macro?.level),
         tone: statusTone(datasets.macro?.level),
         meta: datasets.macro?.timestamp || "수집 대기",
       },
       {
-        label: "뉴스",
+        label: "뉴스 온도",
         value: statusText(datasets.news?.level),
         tone: statusTone(datasets.news?.level),
-        meta: `Macro ${datasets.news?.macro_count ?? 0} / Crypto ${datasets.news?.crypto_count ?? 0}`,
+        meta: `매크로 ${datasets.news?.macro_count ?? 0} / 크립토 ${datasets.news?.crypto_count ?? 0}`,
       },
       {
-        label: "ETF Flow",
+        label: "ETF 온도",
         value: statusText(datasets.etf?.level),
         tone: statusTone(datasets.etf?.level),
         meta: datasets.etf?.market_date ? `시장일 ${datasets.etf.market_date}` : "시장일 확인 중",
@@ -548,18 +597,15 @@ function renderAiBriefPage() {
       featured.length > 0
         ? featured
             .map((item, index) => {
-              const source = (() => {
-                try {
-                  return new URL(item.link).hostname.replace("www.", "");
-                } catch {
-                  return "source";
-                }
-              })();
+              const source = newsSourceFromLink(item.link);
+              const koTitle = localizeNewsTitle(item.title, item.type);
+              const impact = newsImpactText(item.title, item.type);
               return `
                 <a class="ai-news-feature" href="${escapeHtml(item.link || "#")}" target="_blank" rel="noopener noreferrer">
                   <p>${index === 0 ? "메인 뉴스" : "보조 뉴스"} · ${item.type}</p>
-                  <strong>${escapeHtml(item.title || "제목 없음")}</strong>
-                  <span>${escapeHtml(source)} · ${escapeHtml(formatKstDateTime(item.pubDate, "시간 미확인"))}</span>
+                  <strong>${escapeHtml(koTitle)}</strong>
+                  <span>${escapeHtml(impact)}</span>
+                  <em>${escapeHtml(source)} · ${escapeHtml(formatKstDateTime(item.pubDate, "시간 미확인"))}</em>
                 </a>
               `;
             })
@@ -575,8 +621,9 @@ function renderAiBriefPage() {
               (item) => `
                 <li>
                   <span>${item.type}</span>
-                  <a href="${escapeHtml(item.link || "#")}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.title || "제목 없음")}</a>
-                  <em>${escapeHtml(formatKstDateTime(item.pubDate, "시간 미확인"))}</em>
+                  <a href="${escapeHtml(item.link || "#")}" target="_blank" rel="noopener noreferrer">${escapeHtml(localizeNewsTitle(item.title, item.type))}</a>
+                  <small>${escapeHtml(newsImpactText(item.title, item.type))}</small>
+                  <em>${escapeHtml(newsSourceFromLink(item.link))} · ${escapeHtml(formatKstDateTime(item.pubDate, "시간 미확인"))}</em>
                 </li>
               `,
             )

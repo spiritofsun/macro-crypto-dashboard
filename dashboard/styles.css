@@ -3225,3 +3225,56 @@ body {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 }
+
+/* v20260411g AI briefing temperature + Korean headlines */
+.ai-temperature-panel {
+  padding: 14px;
+}
+
+.ai-temperature-panel .panel-head h2 {
+  font-size: 14px;
+}
+
+.ai-temperature-panel .ai-status-grid {
+  gap: 10px;
+}
+
+.ai-temperature-panel .market-metric-card {
+  min-height: 76px;
+  padding: 12px 14px;
+  border-radius: 18px;
+}
+
+.ai-temperature-panel .market-metric-card p {
+  margin-bottom: 6px;
+  font-size: 10px;
+}
+
+.ai-temperature-panel .market-metric-card strong {
+  font-size: clamp(18px, 1.45vw, 24px);
+}
+
+.ai-temperature-panel .market-metric-card span {
+  margin-top: 6px;
+  font-size: 12px;
+}
+
+.ai-news-feature span {
+  color: #cbd8cc;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.ai-news-feature em {
+  color: #90a491;
+  font-style: normal;
+  font-size: 12px;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.ai-catalyst-list small {
+  color: #b9cabc;
+  font-size: 13px;
+  line-height: 1.5;
+}
