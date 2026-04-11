@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import pathlib
+import subprocess
 import urllib.request
 from datetime import datetime, timezone
 from typing import Any
@@ -14,10 +15,24 @@ OUT = ROOT / "dashboard" / "data" / "crypto_market.json"
 USER_AGENT = "project-mark-dashboard/1.0"
 
 
+def fetch_text(url: str, timeout: int = 20) -> str:
+    try:
+        result = subprocess.run(
+            ["curl", "-sS", "--http1.1", "--max-time", str(timeout), "-A", USER_AGENT, url],
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=timeout + 2,
+        )
+        return result.stdout
+    except Exception:
+        req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            return resp.read().decode("utf-8")
+
+
 def fetch_json(url: str, timeout: int = 20) -> dict[str, Any]:
-    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-    with urllib.request.urlopen(req, timeout=timeout) as resp:
-        return json.loads(resp.read().decode("utf-8"))
+    return json.loads(fetch_text(url, timeout))
 
 
 def to_num(value: Any) -> float | None:
@@ -31,6 +46,8 @@ def to_num(value: Any) -> float | None:
 
 def main() -> int:
     cg = fetch_json("https://api.coingecko.com/api/v3/global")
+    btc_simple = fetch_json("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd")
+    coinbase_btc = fetch_json("https://api.coinbase.com/v2/prices/BTC-USD/spot")
     fng = fetch_json("https://api.alternative.me/fng/?limit=1&format=json")
     stables = fetch_json("https://stablecoins.llama.fi/stablecoins?includePrices=true")
 
@@ -46,6 +63,13 @@ def main() -> int:
     usdc_market_cap = to_num((usdc.get("circulating") or {}).get("peggedUSD"))
 
     fg_row = (fng.get("data") or [{}])[0] if isinstance(fng.get("data"), list) else {}
+    cg_btc_price = to_num(((btc_simple.get("bitcoin") or {}).get("usd")))
+    coinbase_btc_price = to_num(((coinbase_btc.get("data") or {}).get("amount")))
+    coinbase_premium = (
+        ((coinbase_btc_price - cg_btc_price) / cg_btc_price * 100)
+        if coinbase_btc_price is not None and cg_btc_price not in (None, 0)
+        else None
+    )
 
     payload = {
         "as_of": datetime.now(timezone.utc).isoformat(),
@@ -61,6 +85,12 @@ def main() -> int:
             "value": to_num(fg_row.get("value")),
             "classification": fg_row.get("value_classification"),
             "timestamp": fg_row.get("timestamp"),
+        },
+        "coinbase_premium": {
+            "source": "Coinbase BTC spot vs CoinGecko BTC",
+            "pct": coinbase_premium,
+            "coinbase_btc_usd": coinbase_btc_price,
+            "coingecko_btc_usd": cg_btc_price,
         },
         "stablecoins": {
             "source": "DefiLlama stablecoins",

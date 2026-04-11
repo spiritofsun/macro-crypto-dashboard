@@ -292,6 +292,10 @@ function getFearGreedValue() {
   return toNumSafe(state.live?.fearGreed) ?? getCryptoMarketValue(["fear_greed", "value"]);
 }
 
+function getCoinbasePremiumPct() {
+  return toNumSafe(state.live?.coinbasePremiumPct) ?? getCryptoMarketValue(["coinbase_premium", "pct"]);
+}
+
 function formatKstDateTime(input, fallback = "수집 대기") {
   if (!input) return fallback;
   if (typeof input === "string" && input.includes("KST")) return input;
@@ -348,9 +352,23 @@ function metricNeedsReview(metric, maxAgeHours = 6) {
   return age === null || age > maxAgeHours;
 }
 
+function metricIsCarry(metric) {
+  return !!metric && typeof metric === "object" && metric.source === "carry";
+}
+
 function metricDisplay(metric, fallback = "—", maxAgeHours = 6) {
   if (!metric || typeof metric !== "object") return fallback;
   return typeof metric.display === "string" && metric.display ? metric.display : fallback;
+}
+
+function verifiedMetricDisplay(metric, fallback = "—") {
+  if (metricIsCarry(metric)) return "검증 필요";
+  return metricDisplay(metric, fallback);
+}
+
+function verifiedMetricDelta(metric, fallback = 0) {
+  if (metricIsCarry(metric)) return null;
+  return typeof metric?.delta === "number" && Number.isFinite(metric.delta) ? metric.delta : fallback;
 }
 
 function setAsOf() {
@@ -811,8 +829,12 @@ function renderCryptoSummary() {
     typeof total === "number" && typeof ethDominance === "number"
       ? total * (ethDominance / 100)
       : rows.find((r) => r.ticker === "ETH")?.market_cap || 0;
-  const coinbasePremium = toNumSafe(state.live?.coinbasePremiumPct);
-  const altDominance = typeof btcDominance === "number" ? 100 - btcDominance : null;
+  const coinbasePremium = getCoinbasePremiumPct();
+  const btcExcludedShare = typeof btcDominance === "number" ? 100 - btcDominance : null;
+  const exStableAltShare =
+    typeof total === "number" && typeof stable === "number" && typeof btcMcap === "number" && total > stable
+      ? ((total - stable - btcMcap) / (total - stable)) * 100
+      : null;
 
   const totals = {
     TOTAL: total,
@@ -826,14 +848,15 @@ function renderCryptoSummary() {
   const summaryRows = [
     ["Stable 시총", formatBigNumber(stable), state.stablecoinSummary ? "DefiLlama live" : "정적 데이터"],
     ["BTC 도미넌스", typeof btcDominance === "number" ? `${btcDominance.toFixed(2)}%` : "—", "CoinGecko global"],
-    ["알트코인 도미넌스", typeof altDominance === "number" ? `${altDominance.toFixed(2)}%` : "—", "100 - BTC.D"],
-    ["Coinbase Premium", typeof coinbasePremium === "number" ? formatPct(coinbasePremium, 2) : "—", "BTC Coinbase vs 글로벌 평균"],
+    ["BTC 제외 비중", typeof btcExcludedShare === "number" ? `${btcExcludedShare.toFixed(2)}%` : "—", "100 - BTC.D, 스테이블 포함"],
+    ["스테이블 제외 알트 비중", typeof exStableAltShare === "number" ? `${exStableAltShare.toFixed(2)}%` : "—", "(TOTAL - BTC - Stable) / (TOTAL - Stable)"],
+    ["Coinbase Premium", typeof coinbasePremium === "number" ? formatPct(coinbasePremium, 2) : "—", "Coinbase BTC spot vs CoinGecko BTC"],
     ["TOTAL", formatBigNumber(totals.TOTAL), toNumSafe(state.live?.totalMarketCapUsd) ? "CoinGecko global" : "유니버스 합계"],
-    ["TOTALES", formatBigNumber(totals.TOTALES), "스테이블 제외"],
-    ["TOTAL2", formatBigNumber(totals.TOTAL2), "BTC 제외"],
-    ["TOTAL2ES", formatBigNumber(totals.TOTAL2ES), "BTC + 스테이블 제외"],
-    ["TOTAL3", formatBigNumber(totals.TOTAL3), "BTC + ETH 제외"],
-    ["TOTAL3ES", formatBigNumber(totals.TOTAL3ES), "BTC + ETH + 스테이블 제외"],
+    ["TOTALES", formatBigNumber(totals.TOTALES), "CoinGecko TOTAL - DefiLlama Stable"],
+    ["TOTAL2", formatBigNumber(totals.TOTAL2), "CoinGecko TOTAL - BTC 추정 시총"],
+    ["TOTAL2ES", formatBigNumber(totals.TOTAL2ES), "CoinGecko TOTAL - BTC - DefiLlama Stable"],
+    ["TOTAL3", formatBigNumber(totals.TOTAL3), "CoinGecko TOTAL - BTC - ETH 추정 시총"],
+    ["TOTAL3ES", formatBigNumber(totals.TOTAL3ES), "CoinGecko TOTAL - BTC - ETH - DefiLlama Stable"],
   ];
 
   const html = summaryRows
@@ -1184,17 +1207,12 @@ function renderStockMarketPage() {
   if (!document.getElementById("rateCards")) return;
   const macro = state.macroSnapshot || fallbackMacro;
   const macroAgeHours = hoursSince(macro.as_of);
-  const vixMetric = (() => {
-    const live = macro.indices?.vix;
-    const liveValue = toNumSafe(live?.value) ?? toNumSafe(live?.display);
-    if (liveValue !== null && live?.source !== "carry") return live;
-    return fallbackMacro.indices.vix;
-  })();
+  const vixMetric = macro.indices?.vix || fallbackMacro.indices.vix;
   const curve = (toNumSafe(macro.rates?.us10y?.value) ?? 0) - (toNumSafe(macro.rates?.us2y?.value) ?? 0);
   const dxyDelta = toNumSafe(macro.fx?.dxy?.delta) ?? 0;
   const rrpDelta = toNumSafe(macro.liquidity?.rrp?.delta) ?? 0;
   const equityBreadth = ((toNumSafe(macro.indices?.sp500?.delta) ?? 0) + (toNumSafe(macro.indices?.nasdaq?.delta) ?? 0)) / 2;
-  const vixValue = toNumSafe(vixMetric?.value) ?? toNumSafe(vixMetric?.display) ?? 0;
+  const vixValue = metricIsCarry(vixMetric) ? null : (toNumSafe(vixMetric?.value) ?? toNumSafe(vixMetric?.display));
   const silverFromSnapshot = (() => {
     const list = state.snapshot?.commodities;
     if (!Array.isArray(list)) return null;
@@ -1207,12 +1225,14 @@ function renderStockMarketPage() {
     };
   })();
   const silver = macro.commodities?.silver || silverFromSnapshot || { value: null, delta: null, display: "—" };
-  const vixDisplay = metricDisplay(vixMetric);
-  const dxyDisplay = metricDisplay(macro.fx?.dxy);
-  const goldDisplay = metricDisplay(macro.commodities?.gold);
-  const silverDisplay = metricDisplay(macro.commodities?.silver, silver.display);
-  const wtiDisplay = metricDisplay(macro.commodities?.wti);
-  const copperDisplay = metricDisplay(macro.commodities?.copper);
+  const vixDisplay = verifiedMetricDisplay(vixMetric);
+  const dxyDisplay = verifiedMetricDisplay(macro.fx?.dxy);
+  const goldDisplay = verifiedMetricDisplay(macro.commodities?.gold);
+  const silverDisplay = verifiedMetricDisplay(macro.commodities?.silver, silver.display);
+  const wtiDisplay = verifiedMetricDisplay(macro.commodities?.wti);
+  const copperDisplay = verifiedMetricDisplay(macro.commodities?.copper);
+  const vixDelta = verifiedMetricDelta(vixMetric);
+  const wtiDelta = verifiedMetricDelta(macro.commodities?.wti);
   const marketCard = (item) => `
     <article class="macro-mini-card market-metric-card">
       <p>${item.label}</p>
@@ -1252,8 +1272,8 @@ function renderStockMarketPage() {
     const items = [
       {
         label: "변동성",
-        value: vixValue >= 24 ? "고변동성 경계" : vixValue >= 18 ? "주의 구간" : "안정권",
-        tone: vixValue >= 24 ? "down" : vixValue >= 18 ? "flat" : "up",
+        value: vixValue === null ? "검증 필요" : vixValue >= 24 ? "고변동성 경계" : vixValue >= 18 ? "주의 구간" : "안정권",
+        tone: vixValue === null ? "flat" : vixValue >= 24 ? "down" : vixValue >= 18 ? "flat" : "up",
         meta: `VIX ${vixDisplay}`,
       },
       {
@@ -1299,7 +1319,7 @@ function renderStockMarketPage() {
   if (strip) {
     const cells = [
       { label: "NASDAQ", value: macro.indices.nasdaq.display, delta: macro.indices.nasdaq.delta },
-      { label: "VIX", value: vixDisplay, delta: vixMetric?.delta ?? 0 },
+      { label: "VIX", value: vixDisplay, delta: vixDelta },
       { label: "DXY", value: dxyDisplay, delta: macro.fx.dxy.delta },
       { label: "US10Y", value: macro.rates.us10y.display, delta: macro.rates.us10y.delta },
       { label: "RRP (bn)", value: macro.liquidity.rrp.display, delta: macro.liquidity.rrp.delta, rawDelta: formatBnDelta(macro.liquidity.rrp.delta) },
@@ -1357,7 +1377,7 @@ function renderStockMarketPage() {
       ["DOW", macro.indices.dow.display, macro.indices.dow.delta],
       ["Russell 2000", macro.indices.russell2000.display, macro.indices.russell2000.delta],
       ["S&P500", macro.indices.sp500.display, macro.indices.sp500.delta],
-      ["VIX", vixDisplay, vixMetric?.delta ?? 0],
+      ["VIX", vixDisplay, vixDelta],
     ];
     indexRows.innerHTML = rows.map((r) => `<tr><td>${r[0]}</td><td class="num">${r[1]}</td><td class="num ${toneClass(r[2])}">${formatPct(r[2])}</td></tr>`).join("");
   } else {
@@ -1374,7 +1394,7 @@ function renderStockMarketPage() {
   renderCards("commodityCards", [
     { label: "GOLD", value: goldDisplay, delta: macro.commodities.gold.delta },
     { label: "SILVER", value: silverDisplay, delta: silver.delta },
-    { label: "WTI", value: wtiDisplay, delta: macro.commodities.wti.delta },
+    { label: "WTI", value: wtiDisplay, delta: wtiDelta },
     { label: "COPPER", value: copperDisplay, delta: macro.commodities.copper.delta },
   ]);
 

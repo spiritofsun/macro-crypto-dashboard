@@ -102,6 +102,10 @@ def audit_macro(rows: list[dict[str, str]], macro: dict[str, Any], snapshot: dic
     else:
         add(rows, "OK", "macro", "critical carry metrics", "none")
 
+    carried = [str(x) for x in (health.get("carried_metrics") or []) if str(x) not in {str(y) for y in critical}]
+    if carried:
+        add(rows, "WARN", "macro", "non-critical carry metrics", ", ".join(carried))
+
     for path in [("indices", "vix"), ("commodities", "wti")]:
         metric = macro
         for part in path:
@@ -121,6 +125,8 @@ def audit_macro(rows: list[dict[str, str]], macro: dict[str, Any], snapshot: dic
 def audit_crypto_live(rows: list[dict[str, str]], crypto_market: dict[str, Any]) -> None:
     try:
         cg = fetch_json("https://api.coingecko.com/api/v3/global")
+        btc_simple = fetch_json("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd")
+        coinbase_btc = fetch_json("https://api.coinbase.com/v2/prices/BTC-USD/spot")
         fng = fetch_json("https://api.alternative.me/fng/?limit=1&format=json")
         stables = fetch_json("https://stablecoins.llama.fi/stablecoins?includePrices=true")
     except Exception as exc:
@@ -136,6 +142,50 @@ def audit_crypto_live(rows: list[dict[str, str]], crypto_market: dict[str, Any])
     else:
         add(rows, "OK", "crypto", "BTC dominance", f"file={file_btc_d}, live={live_btc_d}")
 
+    total = to_num((crypto_market.get("global") or {}).get("total_market_cap_usd"))
+    eth_d = to_num((crypto_market.get("global") or {}).get("eth_dominance"))
+    stable_file = to_num((crypto_market.get("stablecoins") or {}).get("total_market_cap_usd"))
+    if total is not None and file_btc_d is not None and eth_d is not None and stable_file is not None:
+        btc_mcap = total * file_btc_d / 100
+        eth_mcap = total * eth_d / 100
+        total_es = total - stable_file
+        total2 = total - btc_mcap
+        total2es = total - btc_mcap - stable_file
+        total3 = total - btc_mcap - eth_mcap
+        total3es = total - btc_mcap - eth_mcap - stable_file
+        ex_btc_share = 100 - file_btc_d
+        ex_stable_alt_share = ((total - stable_file - btc_mcap) / (total - stable_file) * 100) if total > stable_file else None
+        add(
+            rows,
+            "OK",
+            "crypto",
+            "derived totals",
+            (
+                f"BTC 제외={ex_btc_share:.2f}%, "
+                f"스테이블 제외 알트={ex_stable_alt_share:.2f}%, "
+                f"TOTALES={total_es:.0f}, TOTAL2={total2:.0f}, TOTAL2ES={total2es:.0f}, "
+                f"TOTAL3={total3:.0f}, TOTAL3ES={total3es:.0f}"
+            ),
+        )
+    else:
+        add(rows, "FAIL", "crypto", "derived totals", "missing total, dominance, or stablecoin input")
+
+    cg_btc_price = to_num(((btc_simple.get("bitcoin") or {}).get("usd")))
+    coinbase_btc_price = to_num(((coinbase_btc.get("data") or {}).get("amount")))
+    live_premium = (
+        ((coinbase_btc_price - cg_btc_price) / cg_btc_price * 100)
+        if coinbase_btc_price is not None and cg_btc_price not in (None, 0)
+        else None
+    )
+    file_premium = to_num((crypto_market.get("coinbase_premium") or {}).get("pct"))
+    premium_drift = None if live_premium is None or file_premium is None else abs(file_premium - live_premium)
+    if file_premium is None or live_premium is None:
+        add(rows, "FAIL", "crypto", "Coinbase Premium", f"file={file_premium}, live={live_premium}")
+    elif premium_drift > 0.2:
+        add(rows, "WARN", "crypto", "Coinbase Premium", f"file={file_premium:.4f}%, live={live_premium:.4f}%, drift={premium_drift:.4f}p")
+    else:
+        add(rows, "OK", "crypto", "Coinbase Premium", f"file={file_premium:.4f}%, live={live_premium:.4f}%")
+
     fg_live = to_num(((fng.get("data") or [{}])[0] or {}).get("value"))
     fg_file = to_num((crypto_market.get("fear_greed") or {}).get("value"))
     if fg_file != fg_live:
@@ -145,7 +195,6 @@ def audit_crypto_live(rows: list[dict[str, str]], crypto_market: dict[str, Any])
 
     assets = stables.get("peggedAssets") if isinstance(stables.get("peggedAssets"), list) else []
     stable_live = sum(to_num((a.get("circulating") or {}).get("peggedUSD")) or 0 for a in assets if isinstance(a, dict))
-    stable_file = to_num((crypto_market.get("stablecoins") or {}).get("total_market_cap_usd"))
     diff = pct_diff(stable_file, stable_live)
     if diff is not None and diff > 0.5:
         add(rows, "FAIL", "crypto", "stablecoin market cap", f"file={stable_file:.0f}, live={stable_live:.0f}, drift={diff:.2f}%")

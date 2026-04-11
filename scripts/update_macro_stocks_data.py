@@ -6,8 +6,10 @@ from __future__ import annotations
 import csv
 import json
 import pathlib
+import subprocess
 import urllib.parse
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
 from zoneinfo import ZoneInfo
@@ -62,6 +64,8 @@ FRED_SERIES = {
     "us2y": "DGS2",
     "sofr": "SOFR",
     "iorb": "IORB",
+    "vix": "VIXCLS",        # CBOE VIX close
+    "wti": "DCOILWTICO",    # WTI spot, Cushing OK
     "tga": "WTREGEN",      # Millions USD
     "rrp": "RRPONTSYD",    # Billions USD
     "repo": "RPTTLD",      # Billions USD
@@ -75,13 +79,36 @@ def read_json(path: pathlib.Path, default: dict) -> dict:
         return default
 
 
-def fetch_json(url: str, timeout: int = 20) -> Optional[dict]:
+def fetch_text(url: str, timeout: int = 6) -> Optional[str]:
+    try:
+        result = subprocess.run(
+            ["curl", "-sS", "--http1.1", "--max-time", str(timeout), "-A", USER_AGENT, url],
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=timeout + 2,
+        )
+        return result.stdout
+    except Exception as e:
+        print(f"warn: curl fetch failed: {url} ({e})")
+
     try:
         req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            return json.loads(resp.read().decode("utf-8"))
+        with urllib.request.urlopen(req, timeout=min(timeout, 4)) as resp:
+            return resp.read().decode("utf-8", errors="ignore")
     except Exception as e:
-        print(f"warn: fetch_json failed: {url} ({e})")
+        print(f"warn: urllib fetch failed: {url} ({e})")
+        return None
+
+
+def fetch_json(url: str, timeout: int = 6) -> Optional[dict]:
+    text = fetch_text(url, timeout)
+    if not text:
+        return None
+    try:
+        return json.loads(text)
+    except Exception as e:
+        print(f"warn: json parse failed: {url} ({e})")
         return None
 
 
@@ -104,33 +131,48 @@ def to_num(value: Any) -> Optional[float]:
         return None
 
 
-def fetch_fred_latest(series_id: str) -> Tuple[Optional[float], Optional[float], bool]:
+def fetch_fred_latest(series_id: str) -> Tuple[Optional[float], Optional[float], bool, Optional[str]]:
     url = f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={series_id}"
+    text = None
     try:
-        req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-        with urllib.request.urlopen(req, timeout=20) as resp:
-            text = resp.read().decode("utf-8", errors="ignore")
+        result = subprocess.run(
+            ["curl", "-s", "--max-time", "15", url],
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=17,
+        )
+        text = result.stdout
     except Exception as e:
-        print(f"warn: fetch_fred failed: {series_id} ({e})")
-        return None, None, False
+        print(f"warn: fred curl failed: {series_id} ({e})")
+        text = fetch_text(url, 6)
+    if not text:
+        print(f"warn: fetch_fred failed: {series_id}")
+        return None, None, False, None
 
-    rows: List[float] = []
+    rows: List[Tuple[str, float]] = []
     reader = csv.DictReader(text.splitlines())
     for row in reader:
+        obs_date = row.get("observation_date") or row.get("DATE") or ""
+        try:
+            if obs_date and datetime.fromisoformat(obs_date).date() > datetime.now(KST).date():
+                continue
+        except ValueError:
+            pass
         raw = (row.get(series_id) or row.get("VALUE") or "").strip()
         if not raw or raw == ".":
             continue
         try:
-            rows.append(float(raw))
+            rows.append((obs_date, float(raw)))
         except ValueError:
             continue
 
     if not rows:
-        return None, None, False
+        return None, None, False, None
 
-    latest = rows[-1]
-    prev = rows[-2] if len(rows) >= 2 else rows[-1]
-    return latest, latest - prev, True
+    latest_date, latest = rows[-1]
+    _, prev = rows[-2] if len(rows) >= 2 else rows[-1]
+    return latest, latest - prev, True, latest_date or None
 
 
 def pct_or_zero(value: Optional[float]) -> float:
@@ -212,9 +254,9 @@ def main() -> int:
     usdkrw_data = fetch_json("https://open.er-api.com/v6/latest/USD")
     usdkrw_live = to_num((usdkrw_data or {}).get("rates", {}).get("KRW"))
 
-    fred_map: Dict[str, Tuple[Optional[float], Optional[float], bool]] = {
-        key: fetch_fred_latest(series_id) for key, series_id in FRED_SERIES.items()
-    }
+    with ThreadPoolExecutor(max_workers=min(8, len(FRED_SERIES))) as pool:
+        fred_results = pool.map(lambda item: (item[0], fetch_fred_latest(item[1])), FRED_SERIES.items())
+    fred_map: Dict[str, Tuple[Optional[float], Optional[float], bool, Optional[str]]] = dict(fred_results)
 
     fetched_any = quotes_ok or usdkrw_live is not None or any(x[2] for x in fred_map.values())
     as_of = datetime.now(KST).strftime("%Y-%m-%d %H:%M KST") if fetched_any else prev_macro.get("as_of", datetime.now(KST).strftime("%Y-%m-%d %H:%M KST"))
@@ -226,7 +268,7 @@ def main() -> int:
     prev_iorb = read_prev_metric(prev_macro, "rates", "iorb")
 
     def fred_pick(key: str, prev: Tuple[Optional[float], float, str, str, Optional[str]], fn, metric_key: str):
-        val, delta, ok = fred_map[key]
+        val, delta, ok, source_date = fred_map[key]
         if not ok or val is None:
             carry_issues.append(metric_key)
             return {
@@ -240,8 +282,8 @@ def main() -> int:
             "value": val,
             "delta": pct_or_zero(delta),
             "display": fn(val),
-            "source": "live",
-            "source_as_of": as_of,
+            "source": f"fred:{FRED_SERIES[key]}",
+            "source_as_of": source_date or as_of,
         }
 
     us10y = fred_pick("us10y", prev_us10y, fmt_2, "rates.us10y")
@@ -256,22 +298,24 @@ def main() -> int:
     prev_usdkrw = read_prev_metric(prev_macro, "fx", "usdkrw")
     usdkrw = pick_value(usdkrw_live, 0.0, prev_usdkrw, fmt_int, now_as_of=as_of, metric_key="fx.usdkrw", carry_issues=carry_issues)
 
-    def y_pick(key: str, prev_path: Tuple[str, str], disp, metric_key: str):
+    def y_pick(key: str, prev_path: Tuple[str, str], disp, metric_key: str, fred_fallback: Optional[str] = None):
         prev = read_prev_metric(prev_macro, *prev_path)
         p, d = get_quote_fields(quotes, YAHOO_SYMBOLS[key])
+        if p is None and fred_fallback:
+            return fred_pick(fred_fallback, prev, disp, metric_key)
         return pick_value(p, d, prev, disp, now_as_of=as_of, metric_key=metric_key, carry_issues=carry_issues)
 
     nasdaq = y_pick("nasdaq", ("indices", "nasdaq"), fmt_int, "indices.nasdaq")
     dow = y_pick("dow", ("indices", "dow"), fmt_int, "indices.dow")
     sp500 = y_pick("sp500", ("indices", "sp500"), fmt_int, "indices.sp500")
     russell2000 = y_pick("russell2000", ("indices", "russell2000"), fmt_int, "indices.russell2000")
-    vix = y_pick("vix", ("indices", "vix"), fmt_2, "indices.vix")
+    vix = y_pick("vix", ("indices", "vix"), fmt_2, "indices.vix", "vix")
     kospi = y_pick("kospi", ("indices", "kospi"), fmt_int, "indices.kospi")
     kosdaq = y_pick("kosdaq", ("indices", "kosdaq"), fmt_int, "indices.kosdaq")
 
     gold = y_pick("gold", ("commodities", "gold"), lambda v: f"${fmt_int(v)}/oz", "commodities.gold")
     silver = y_pick("silver", ("commodities", "silver"), lambda v: f"${fmt_2(v)}/oz", "commodities.silver")
-    wti = y_pick("wti", ("commodities", "wti"), lambda v: f"${fmt_2(v)}", "commodities.wti")
+    wti = y_pick("wti", ("commodities", "wti"), lambda v: f"${fmt_2(v)}", "commodities.wti", "wti")
     copper = y_pick("copper", ("commodities", "copper"), lambda v: f"${fmt_2(v)}/lb", "commodities.copper")
 
     prev_tga = read_prev_metric(prev_macro, "liquidity", "tga")
@@ -279,7 +323,7 @@ def main() -> int:
     prev_repo = read_prev_metric(prev_macro, "liquidity", "repo")
 
     def liq_pick(key: str, prev: Tuple[Optional[float], float, str, str, Optional[str]], fn, metric_key: str):
-        val, delta, ok = fred_map[key]
+        val, delta, ok, source_date = fred_map[key]
         if not ok or val is None:
             carry_issues.append(metric_key)
             return {
@@ -293,8 +337,8 @@ def main() -> int:
             "value": val,
             "delta": pct_or_zero(delta),
             "display": fn(val),
-            "source": "live",
-            "source_as_of": as_of,
+            "source": f"fred:{FRED_SERIES[key]}",
+            "source_as_of": source_date or as_of,
         }
 
     tga = liq_pick("tga", prev_tga, fmt_int, "liquidity.tga")
@@ -305,11 +349,7 @@ def main() -> int:
         metric for metric in carry_issues
         if metric in {
             "indices.vix",
-            "fx.dxy",
-            "commodities.gold",
-            "commodities.silver",
             "commodities.wti",
-            "commodities.copper",
         }
     ]
 

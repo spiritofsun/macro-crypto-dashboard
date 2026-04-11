@@ -1,59 +1,64 @@
 {
-  "updated_at": "2026-04-11T03:53:04.818274+00:00",
+  "updated_at": "2026-04-11T23:09:57.180422+00:00",
   "overall": "danger",
   "datasets": {
     "macro": {
       "label": "매크로",
-      "timestamp": "2026-04-11 09:03 KST",
-      "age_hours": 3.83,
-      "level": "danger",
-      "issue_count": 2,
-      "critical_issue_count": 2,
+      "timestamp": "2026-04-12 08:09 KST",
+      "age_hours": 0.02,
+      "level": "warn",
+      "issue_count": 10,
+      "critical_issue_count": 0,
       "carried_metrics": [
-        "commodities.wti",
-        "indices.vix"
+        "commodities.copper",
+        "commodities.gold",
+        "commodities.silver",
+        "fx.dxy",
+        "indices.dow",
+        "indices.kosdaq",
+        "indices.kospi",
+        "indices.nasdaq",
+        "indices.russell2000",
+        "indices.sp500"
       ],
-      "critical_metrics": [
-        "commodities.wti",
-        "indices.vix"
-      ]
+      "critical_metrics": []
     },
     "stocks": {
       "label": "주식 워치",
-      "timestamp": "2026-04-11 09:03 KST",
-      "age_hours": 3.83,
+      "timestamp": "2026-04-12 08:09 KST",
+      "age_hours": 0.02,
       "level": "ok"
     },
     "snapshot": {
       "label": "스냅샷",
-      "timestamp": "2026-04-11 09:03 KST",
-      "age_hours": 3.83,
+      "timestamp": "2026-04-12 08:09 KST",
+      "age_hours": 0.02,
       "level": "ok"
     },
     "news": {
       "label": "뉴스",
       "timestamp": "2026-04-10T20:27:17.310857+00:00",
-      "age_hours": 7.43,
-      "level": "warn",
+      "age_hours": 26.71,
+      "level": "danger",
       "macro_count": 8,
       "crypto_count": 8
     },
     "etf": {
       "label": "ETF",
       "timestamp": "2026-04-11T00:03:58.390018+00:00",
-      "age_hours": 3.82,
-      "level": "ok",
+      "age_hours": 23.1,
+      "level": "warn",
       "market_date": "10 Apr 2026",
       "freshness": "latest",
       "has_history": true
     },
     "crypto_market": {
       "label": "크립토 마켓",
-      "timestamp": "2026-04-11T03:49:47.601712+00:00",
-      "age_hours": 0.05,
+      "timestamp": "2026-04-11T22:44:18.117449+00:00",
+      "age_hours": 0.43,
       "level": "ok",
-      "btc_dominance": 57.264256127364455,
-      "stablecoin_market_cap": 317715052074.3343
+      "btc_dominance": 57.16155483693448,
+      "stablecoin_market_cap": 318048026615.43976
     }
   }
 }
