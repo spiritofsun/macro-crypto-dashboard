@@ -2742,3 +2742,194 @@ body {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 }
+
+/* v20260411c unified card system */
+:root {
+  --bg: #0e1624;
+  --panel: #0c1117;
+  --panel-2: #080c10;
+  --line: rgba(255, 255, 255, 0.07);
+  --line-strong: rgba(245, 192, 54, 0.16);
+  --text: #e6edf6;
+  --muted: #90a491;
+  --up: #37e08b;
+  --down: #ff7373;
+  --flat: #f0d889;
+}
+
+body {
+  background:
+    radial-gradient(circle at 16% -10%, rgba(245, 192, 54, 0.08), transparent 30%),
+    linear-gradient(180deg, #0e1624 0%, #0b111a 45%, #080d13 100%);
+}
+
+.left-sidebar,
+.panel,
+.page-lead-card,
+.macro-lead-card,
+.macro-mini-card,
+.market-metric-card,
+.page-quick-card,
+.metric-card,
+.snapshot-pill,
+.flow-card,
+.news-col,
+.brief-preview,
+.summary-link,
+.category-card,
+.home-card,
+.menu-link,
+.intro-item {
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(circle at top left, rgba(245, 192, 54, 0.08), transparent 34%),
+    linear-gradient(180deg, rgba(13, 18, 24, 0.98), rgba(8, 11, 15, 0.98));
+  box-shadow: none;
+}
+
+.panel {
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.panel-head h2,
+.group-title {
+  color: #d7e7d8;
+  opacity: 0.82;
+  font-size: 15px;
+  letter-spacing: 0.03em;
+}
+
+.hero h1 {
+  color: #e8f2e9;
+  font-size: clamp(22px, 2.2vw, 32px);
+  letter-spacing: -0.02em;
+}
+
+.kicker,
+.asof,
+.subhead,
+.metric-label,
+.flow-meta,
+.brief-date,
+.news-meta {
+  color: #90a491;
+  opacity: 0.78;
+}
+
+.page-lead-card,
+.macro-lead-card {
+  border-color: rgba(245, 192, 54, 0.2);
+}
+
+.page-lead-card h2,
+.macro-lead-card h2 {
+  color: #edf6ee;
+}
+
+.page-quick-card,
+.macro-mini-card,
+.market-metric-card,
+.metric-card,
+.snapshot-pill,
+.flow-card {
+  min-height: 96px;
+  padding: 16px 18px;
+}
+
+.page-quick-card p,
+.macro-mini-card p,
+.metric-label,
+.snapshot-pill .label,
+.flow-title {
+  color: #90a491;
+  opacity: 0.95;
+}
+
+.page-quick-card strong,
+.macro-mini-card strong,
+.metric-value,
+.snapshot-pill .value,
+.flow-main {
+  color: #eef6ef;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.metric-value,
+.snapshot-pill .value,
+.flow-main {
+  font-size: clamp(24px, 2vw, 34px);
+}
+
+.metric-delta,
+.page-quick-card span,
+.macro-mini-card span,
+.flow-status,
+.flow-row {
+  font-family: "JetBrains Mono", monospace;
+}
+
+.data-table,
+.exchange-table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.data-table th,
+.exchange-table th {
+  color: #90a491;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.data-table td,
+.exchange-table td,
+.data-table th,
+.exchange-table th {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+}
+
+.data-table tbody tr:hover,
+.exchange-table tbody tr:hover,
+.metric-card:hover,
+.flow-card:hover,
+.news-col:hover,
+.page-quick-card:hover,
+.macro-mini-card:hover,
+.summary-link:hover,
+.category-card:hover {
+  background:
+    radial-gradient(circle at top left, rgba(245, 192, 54, 0.1), transparent 34%),
+    linear-gradient(180deg, rgba(15, 21, 28, 1), rgba(9, 13, 18, 1));
+  border-color: rgba(245, 192, 54, 0.22);
+  transform: translateY(-1px);
+}
+
+.tool-input,
+.tool-select,
+.tool-check,
+.mini-btn,
+.back-btn {
+  border-radius: 999px;
+  border-color: rgba(245, 192, 54, 0.14);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.left-sidebar {
+  border-radius: 24px;
+  min-height: auto;
+}
+
+.side-home,
+.side-link {
+  border-radius: 16px;
+}
+
+.side-link.active,
+.side-home.active {
+  border-left: 1px solid rgba(245, 192, 54, 0.24);
+  border-color: rgba(245, 192, 54, 0.24);
+  background: rgba(245, 192, 54, 0.08);
+}
