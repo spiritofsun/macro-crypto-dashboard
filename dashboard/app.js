@@ -4,6 +4,7 @@ const state = {
   etf: null,
   status: null,
   macroSnapshot: null,
+  cryptoMarket: null,
   cryptoUniverse: [],
   stocksWatchlist: [],
   stablecoinSummary: null,
@@ -35,9 +36,9 @@ const fallbackLive = {
   BTC: { price: 89986.73, change: 1.41 },
   ETH: { price: 3125.32, change: 4.16 },
   SOL: { price: 132.63, change: 4.63 },
-  dominance: { btc: 56.7, eth: 9.8 },
+  dominance: { btc: null, eth: null },
   totalMarketCapUsd: null,
-  fearGreed: 29,
+  fearGreed: null,
   upbitBtcKrw: 102432000,
   coinbasePremiumPct: -0.09,
 };
@@ -265,6 +266,32 @@ function sentimentMeta(value) {
   };
 }
 
+function getCryptoMarketValue(path) {
+  if (!state.cryptoMarket || typeof state.cryptoMarket !== "object") return null;
+  let cur = state.cryptoMarket;
+  for (const key of path) {
+    cur = cur?.[key];
+    if (cur === undefined || cur === null) return null;
+  }
+  return toNumSafe(cur);
+}
+
+function getBtcDominance() {
+  return toNumSafe(state.live?.dominance?.btc) ?? getCryptoMarketValue(["global", "btc_dominance"]);
+}
+
+function getEthDominance() {
+  return toNumSafe(state.live?.dominance?.eth) ?? getCryptoMarketValue(["global", "eth_dominance"]);
+}
+
+function getTotalMarketCapUsd() {
+  return toNumSafe(state.live?.totalMarketCapUsd) ?? getCryptoMarketValue(["global", "total_market_cap_usd"]);
+}
+
+function getFearGreedValue() {
+  return toNumSafe(state.live?.fearGreed) ?? getCryptoMarketValue(["fear_greed", "value"]);
+}
+
 function formatKstDateTime(input, fallback = "수집 대기") {
   if (!input) return fallback;
   if (typeof input === "string" && input.includes("KST")) return input;
@@ -482,7 +509,7 @@ function renderHomeHub() {
   const snapshotStrip = document.getElementById("strategySnapshot");
   if (!snapshotStrip) return;
 
-  const fg = state.live?.fearGreed;
+  const fg = getFearGreedValue();
   const vol = Math.abs(state.live?.BTC?.change || 0) + Math.abs(state.live?.ETH?.change || 0);
   const volText = vol > 8 ? "높음" : vol > 4 ? "보통" : "낮음";
   const riskText = typeof fg === "number" && fg < 25 ? "경고" : "정상";
@@ -642,7 +669,7 @@ function renderAiBriefPage() {
   }
 
   if (sentimentHost) {
-    const value = toNumSafe(state.live?.fearGreed) ?? toNumSafe(fallbackLive.fearGreed);
+    const value = getFearGreedValue();
     const meta = sentimentMeta(value);
     const displayValue = typeof value === "number" ? Math.round(value) : "—";
     const needle = Math.max(0, Math.min(100, meta.position));
@@ -770,9 +797,9 @@ function renderCryptoSummary() {
 
   const rows = state.cryptoUniverse.filter((r) => typeof r.market_cap === "number");
   const fallbackTotal = rows.reduce((s, r) => s + r.market_cap, 0);
-  const btcDominance = toNumSafe(state.live?.dominance?.btc) ?? toNumSafe(fallbackLive.dominance?.btc);
-  const ethDominance = toNumSafe(state.live?.dominance?.eth) ?? toNumSafe(fallbackLive.dominance?.eth);
-  const total = toNumSafe(state.live?.totalMarketCapUsd) ?? fallbackTotal;
+  const btcDominance = getBtcDominance();
+  const ethDominance = getEthDominance();
+  const total = getTotalMarketCapUsd() ?? fallbackTotal;
   const stable =
     toNumSafe(state.stablecoinSummary?.total) ??
     (typeof state.snapshot?.stablecoin_market_cap === "number" ? state.snapshot.stablecoin_market_cap : (state.cryptoStableMcap || 0));
@@ -830,8 +857,8 @@ function renderCryptoOverview() {
   const rows = state.cryptoUniverse.filter((r) => typeof r.market_cap === "number");
   const btc = rows.find((r) => r.ticker === "BTC");
   const eth = rows.find((r) => r.ticker === "ETH");
-  const btcDom = toNumSafe(state.live?.dominance?.btc) ?? toNumSafe(fallbackLive.dominance?.btc);
-  const fearGreed = toNumSafe(state.live?.fearGreed) ?? toNumSafe(fallbackLive.fearGreed);
+  const btcDom = getBtcDominance();
+  const fearGreed = getFearGreedValue();
   const regime = typeof fearGreed === "number" && fearGreed < 30 ? "방어적 심리 우세" : typeof fearGreed === "number" && fearGreed > 60 ? "위험 선호 우세" : "중립 구간";
 
   if (lead) {
@@ -864,8 +891,8 @@ function renderDominanceHybrid() {
   const srcEl = document.getElementById("domSource");
   if (!btcEl || !ethEl) return;
 
-  const btcDom = toNumSafe(state.live?.dominance?.btc) ?? toNumSafe(fallbackLive.dominance?.btc);
-  const ethDom = toNumSafe(state.live?.dominance?.eth) ?? toNumSafe(fallbackLive.dominance?.eth);
+  const btcDom = getBtcDominance();
+  const ethDom = getEthDominance();
   btcEl.textContent = typeof btcDom === "number" ? `${btcDom.toFixed(2)}%` : "—";
   ethEl.textContent = typeof ethDom === "number" ? `${ethDom.toFixed(2)}%` : "—";
   if (srcEl) srcEl.textContent = "source: coingecko";
@@ -1525,7 +1552,7 @@ function normalizeGatewayPayload(payload) {
 }
 
 async function loadStatic() {
-  const [snapshot, news, etf, status, macro, universe, stocks] = await Promise.allSettled([
+  const [snapshot, news, etf, status, macro, universe, stocks, cryptoMarket] = await Promise.allSettled([
     fetchJson("./data/snapshot.json"),
     fetchJson("./data/news.json"),
     fetchJson("./data/etf.json"),
@@ -1533,6 +1560,7 @@ async function loadStatic() {
     fetchJson("./data/macro_snapshot.json"),
     fetchJson("./data/crypto_custom_universe.json"),
     fetchJson("./data/stocks_watchlist.json"),
+    fetchJson("./data/crypto_market.json"),
   ]);
 
   state.snapshot = snapshot.status === "fulfilled" ? snapshot.value : null;
@@ -1543,6 +1571,15 @@ async function loadStatic() {
   state.cryptoUniverse = universe.status === "fulfilled" ? normalizeCustomUniverse(universe.value.assets || []) : [];
   state.cryptoStableMcap = universe.status === "fulfilled" ? universe.value.stablecoin_market_cap : 0;
   state.stocksWatchlist = stocks.status === "fulfilled" ? stocks.value.rows || [] : [];
+  state.cryptoMarket = cryptoMarket.status === "fulfilled" ? cryptoMarket.value : null;
+  if (!state.stablecoinSummary && state.cryptoMarket?.stablecoins) {
+    state.stablecoinSummary = {
+      total: toNumSafe(state.cryptoMarket.stablecoins.total_market_cap_usd),
+      usdtMarketCap: toNumSafe(state.cryptoMarket.stablecoins.usdt_market_cap_usd),
+      usdtDominance: toNumSafe(state.cryptoMarket.stablecoins.usdt_dominance),
+      source: state.cryptoMarket.stablecoins.source || "DefiLlama",
+    };
+  }
   uiState.staticLastFetchTs = Date.now();
 }
 

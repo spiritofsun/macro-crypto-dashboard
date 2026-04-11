@@ -74,6 +74,7 @@ def main() -> int:
     snapshot = load_json(DATA_DIR / "snapshot.json")
     news = load_json(DATA_DIR / "news.json")
     etf = load_json(DATA_DIR / "etf.json")
+    crypto_market = load_json(DATA_DIR / "crypto_market.json")
 
     macro_health = macro.get("_health") if isinstance(macro.get("_health"), dict) else {}
     macro_entry = build_entry("매크로", macro.get("as_of"), warn_h=4, fail_h=12, extra={
@@ -99,6 +100,11 @@ def main() -> int:
           "market_date": etf.get("date"),
           "freshness": etf.get("freshness"),
           "has_history": bool(etf.get("btc_history_7d_usd_m")) and bool(etf.get("eth_history_7d_usd_m")),
+      }),
+      "crypto_market": build_entry("크립토 마켓", crypto_market.get("as_of"), warn_h=2, fail_h=6, extra={
+          "btc_dominance": ((crypto_market.get("global") or {}).get("btc_dominance")),
+          "stablecoin_market_cap": ((crypto_market.get("stablecoins") or {}).get("total_market_cap_usd")),
+          "usdt_dominance": ((crypto_market.get("stablecoins") or {}).get("usdt_dominance")),
       }),
     }
 

@@ -1,41 +1,60 @@
 {
-  "updated_at": "2026-04-11T00:03:58.473642+00:00",
-  "overall": "ok",
+  "updated_at": "2026-04-11T03:51:18.588167+00:00",
+  "overall": "danger",
   "datasets": {
     "macro": {
       "label": "매크로",
       "timestamp": "2026-04-11 09:03 KST",
-      "age_hours": 0.02,
-      "level": "ok"
+      "age_hours": 3.81,
+      "level": "danger",
+      "issue_count": 2,
+      "critical_issue_count": 2,
+      "carried_metrics": [
+        "commodities.wti",
+        "indices.vix"
+      ],
+      "critical_metrics": [
+        "commodities.wti",
+        "indices.vix"
+      ]
     },
     "stocks": {
       "label": "주식 워치",
       "timestamp": "2026-04-11 09:03 KST",
-      "age_hours": 0.02,
+      "age_hours": 3.81,
       "level": "ok"
     },
     "snapshot": {
       "label": "스냅샷",
       "timestamp": "2026-04-11 09:03 KST",
-      "age_hours": 0.02,
+      "age_hours": 3.81,
       "level": "ok"
     },
     "news": {
       "label": "뉴스",
       "timestamp": "2026-04-10T20:27:17.310857+00:00",
-      "age_hours": 3.61,
-      "level": "ok",
+      "age_hours": 7.4,
+      "level": "warn",
       "macro_count": 8,
       "crypto_count": 8
     },
     "etf": {
       "label": "ETF",
       "timestamp": "2026-04-11T00:03:58.390018+00:00",
-      "age_hours": 0.0,
+      "age_hours": 3.79,
       "level": "ok",
       "market_date": "10 Apr 2026",
       "freshness": "latest",
       "has_history": true
+    },
+    "crypto_market": {
+      "label": "크립토 마켓",
+      "timestamp": "2026-04-11T03:49:47.601712+00:00",
+      "age_hours": 0.03,
+      "level": "ok",
+      "btc_dominance": 57.264256127364455,
+      "stablecoin_market_cap": 317715052074.3343,
+      "usdt_dominance": 58.009301326345685
     }
   }
 }

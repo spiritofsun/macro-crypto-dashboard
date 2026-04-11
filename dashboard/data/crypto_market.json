@@ -1,0 +1,24 @@
+{
+  "as_of": "2026-04-11T03:49:47.601712+00:00",
+  "global": {
+    "source": "CoinGecko global",
+    "total_market_cap_usd": 2552984816286.9893,
+    "btc_dominance": 57.264256127364455,
+    "eth_dominance": 10.624022107570363,
+    "usdt_dominance_market": 7.222457372083977
+  },
+  "fear_greed": {
+    "source": "alternative.me",
+    "value": 15.0,
+    "classification": "Extreme Fear",
+    "timestamp": "1775865600"
+  },
+  "stablecoins": {
+    "source": "DefiLlama stablecoins",
+    "total_market_cap_usd": 317715052074.3343,
+    "usdt_market_cap_usd": 184304281916.9567,
+    "usdc_market_cap_usd": 79556532178.26201,
+    "usdt_dominance": 58.009301326345685,
+    "usdc_dominance": 25.04021501620532
+  }
+}

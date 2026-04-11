@@ -51,6 +51,7 @@ def main() -> int:
     snapshot = load_json(DATA_DIR / "snapshot.json")
     news = load_json(DATA_DIR / "news.json")
     etf = load_json(DATA_DIR / "etf.json")
+    crypto_market = load_json(DATA_DIR / "crypto_market.json")
 
     errors: list[str] = []
     checks = [
@@ -59,6 +60,7 @@ def main() -> int:
         ("snapshot.asOf", snapshot.get("asOf"), 6),
         ("news.updated_at", news.get("updated_at"), 12),
         ("etf.updated_at", etf.get("updated_at"), 36),
+        ("crypto_market.as_of", crypto_market.get("as_of"), 2),
     ]
 
     for label, raw, max_age_hours in checks:
