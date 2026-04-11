@@ -104,7 +104,6 @@ def main() -> int:
       "crypto_market": build_entry("크립토 마켓", crypto_market.get("as_of"), warn_h=2, fail_h=6, extra={
           "btc_dominance": ((crypto_market.get("global") or {}).get("btc_dominance")),
           "stablecoin_market_cap": ((crypto_market.get("stablecoins") or {}).get("total_market_cap_usd")),
-          "usdt_dominance": ((crypto_market.get("stablecoins") or {}).get("usdt_dominance")),
       }),
     }
 

@@ -813,7 +813,6 @@ function renderCryptoSummary() {
       : rows.find((r) => r.ticker === "ETH")?.market_cap || 0;
   const coinbasePremium = toNumSafe(state.live?.coinbasePremiumPct);
   const altDominance = typeof btcDominance === "number" ? 100 - btcDominance : null;
-  const usdtDominance = toNumSafe(state.stablecoinSummary?.usdtDominance);
 
   const totals = {
     TOTAL: total,
@@ -826,7 +825,6 @@ function renderCryptoSummary() {
 
   const summaryRows = [
     ["Stable 시총", formatBigNumber(stable), state.stablecoinSummary ? "DefiLlama live" : "정적 데이터"],
-    ["USDT 도미넌스", typeof usdtDominance === "number" ? `${usdtDominance.toFixed(2)}%` : "—", "USDT / 전체 스테이블"],
     ["BTC 도미넌스", typeof btcDominance === "number" ? `${btcDominance.toFixed(2)}%` : "—", "CoinGecko global"],
     ["알트코인 도미넌스", typeof altDominance === "number" ? `${altDominance.toFixed(2)}%` : "—", "100 - BTC.D"],
     ["Coinbase Premium", typeof coinbasePremium === "number" ? formatPct(coinbasePremium, 2) : "—", "BTC Coinbase vs 글로벌 평균"],
