@@ -2359,6 +2359,46 @@ body {
   color: #9fb1a1;
 }
 
+
+.crypto-summary-table .strong-num,
+#cryptoCustomTable td.num {
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
+  color: #eef6ef;
+}
+
+.crypto-filter-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.crypto-filter-summary span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 12px;
+  color: #b8c9ba;
+}
+
+.crypto-filter-summary b {
+  font-family: "JetBrains Mono", monospace;
+  color: #eef6ef;
+}
+
+#cryptoCustomTable tbody tr {
+  cursor: pointer;
+}
+
+#cryptoCustomTable tbody tr:hover {
+  background: rgba(245, 192, 54, 0.045);
+}
+
 .macro-hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);

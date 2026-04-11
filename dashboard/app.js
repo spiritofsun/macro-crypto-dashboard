@@ -536,8 +536,9 @@ function getFilteredCryptoRows() {
 }
 
 function renderCryptoSummary() {
+  const tbody = document.getElementById("cryptoSummaryRows");
   const shell = document.getElementById("cryptoSummaryShell");
-  if (!shell) return;
+  if (!tbody && !shell) return;
 
   const rows = state.cryptoUniverse.filter((r) => typeof r.market_cap === "number");
   const total = rows.reduce((s, r) => s + r.market_cap, 0);
@@ -557,67 +558,28 @@ function renderCryptoSummary() {
     TOTAL3ES: total - btcMcap - ethMcap - stable,
   };
 
-  const summaryCards = [
-    { label: "Stable 시총", value: formatBigNumber(stable), delta: null, deltaText: "stablecoin" },
-    {
-      label: "BTC 도미넌스",
-      value: typeof btcDominance === "number" ? `${btcDominance.toFixed(2)}%` : "—",
-      delta: null,
-      deltaText: "시장 점유율",
-    },
-    {
-      label: "알트코인 도미넌스",
-      value: typeof altDominance === "number" ? `${altDominance.toFixed(2)}%` : "—",
-      delta: null,
-      deltaText: "100 - BTC.D",
-    },
-    {
-      label: "Coinbase Premium",
-      value: typeof coinbasePremium === "number" ? formatPct(coinbasePremium, 2) : "—",
-      delta: coinbasePremium,
-      deltaText: "BTC (Coinbase vs Global Avg)",
-      neutralThreshold: 0.05,
-    },
-    { label: "TOTAL", value: formatBigNumber(totals.TOTAL), delta: null, deltaText: "전체" },
-    { label: "TOTALES", value: formatBigNumber(totals.TOTALES), delta: null, deltaText: "스테이블 제외" },
-    { label: "TOTAL2", value: formatBigNumber(totals.TOTAL2), delta: null, deltaText: "BTC 제외" },
-    { label: "TOTAL2ES", value: formatBigNumber(totals.TOTAL2ES), delta: null, deltaText: "BTC+스테이블 제외" },
-    { label: "TOTAL3", value: formatBigNumber(totals.TOTAL3), delta: null, deltaText: "BTC+ETH 제외" },
-    { label: "TOTAL3ES", value: formatBigNumber(totals.TOTAL3ES), delta: null, deltaText: "BTC+ETH+스테이블 제외" },
+  const summaryRows = [
+    ["Stable 시총", formatBigNumber(stable), "스테이블코인 유동성"],
+    ["BTC 도미넌스", typeof btcDominance === "number" ? `${btcDominance.toFixed(2)}%` : "—", "비트코인 시장 점유율"],
+    ["알트코인 도미넌스", typeof altDominance === "number" ? `${altDominance.toFixed(2)}%` : "—", "100 - BTC.D"],
+    ["Coinbase Premium", typeof coinbasePremium === "number" ? formatPct(coinbasePremium, 2) : "—", "BTC Coinbase vs 글로벌 평균"],
+    ["TOTAL", formatBigNumber(totals.TOTAL), "전체 시총"],
+    ["TOTALES", formatBigNumber(totals.TOTALES), "스테이블 제외"],
+    ["TOTAL2", formatBigNumber(totals.TOTAL2), "BTC 제외"],
+    ["TOTAL2ES", formatBigNumber(totals.TOTAL2ES), "BTC + 스테이블 제외"],
+    ["TOTAL3", formatBigNumber(totals.TOTAL3), "BTC + ETH 제외"],
+    ["TOTAL3ES", formatBigNumber(totals.TOTAL3ES), "BTC + ETH + 스테이블 제외"],
   ];
 
-  const leadValue = summaryCards[0];
-  const sideValues = summaryCards.slice(1, 4);
-  const ribbonValues = summaryCards.slice(4);
+  const html = summaryRows
+    .map(([label, value, note]) => `<tr><td>${label}</td><td class="num strong-num">${value}</td><td>${note}</td></tr>`)
+    .join("");
 
-  shell.innerHTML = `
-    <div class="crypto-summary-topology">
-      <article class="crypto-summary-lead">
-        <p class="crypto-summary-kicker">시장 구조</p>
-        <h3>${leadValue.label}</h3>
-        <strong>${leadValue.value}</strong>
-        <span>${leadValue.deltaText}</span>
-      </article>
-      <div class="crypto-summary-side">
-        ${sideValues.map((item, idx) => `
-          <article class="crypto-summary-node node-${idx + 1}">
-            <p>${item.label}</p>
-            <strong class="${toneClass(item.delta)}">${item.value}</strong>
-            <span>${item.deltaText}</span>
-          </article>
-        `).join("")}
-      </div>
-    </div>
-    <div class="crypto-summary-ribbon">
-      ${ribbonValues.map((item, idx) => `
-        <article class="crypto-ribbon-pill ribbon-${(idx % 3) + 1}">
-          <p>${item.label}</p>
-          <strong>${item.value}</strong>
-          <span>${item.deltaText}</span>
-        </article>
-      `).join("")}
-    </div>
-  `;
+  if (tbody) {
+    tbody.innerHTML = html;
+  } else {
+    shell.innerHTML = `<div class="table-wrap"><table class="data-table compact-table crypto-summary-table"><tbody>${html}</tbody></table></div>`;
+  }
 }
 
 function renderCryptoOverview() {
@@ -882,8 +844,8 @@ async function fetchHybridPriceMapDirect(tickers) {
 }
 
 function renderCryptoTable() {
-  const deck = document.getElementById("cryptoUniverseDeck");
-  if (!deck) return;
+  const tbody = document.getElementById("cryptoCustomRows");
+  if (!tbody) return;
   const head = document.getElementById("cryptoUniverseHead");
   const empty = document.getElementById("cryptoUniverseEmpty");
 
@@ -893,46 +855,39 @@ function renderCryptoTable() {
     const losers = rows.filter((r) => typeof r.change_24h === "number" && r.change_24h < 0).length;
     const movers = rows.filter((r) => typeof r.change_24h === "number" && Math.abs(r.change_24h) >= 5).length;
     head.innerHTML = `
-      <article class="crypto-universe-stat"><p>표시 자산</p><strong>${rows.length}</strong><span>현재 필터 기준</span></article>
-      <article class="crypto-universe-stat"><p>상승 자산</p><strong class="up">${gainers}</strong><span>24시간 기준</span></article>
-      <article class="crypto-universe-stat"><p>하락 자산</p><strong class="down">${losers}</strong><span>24시간 기준</span></article>
-      <article class="crypto-universe-stat"><p>급등락</p><strong class="flat">${movers}</strong><span>|24H| 5% 이상</span></article>
+      <div class="crypto-filter-summary">
+        <span>표시 <b>${rows.length}</b></span>
+        <span>상승 <b class="up">${gainers}</b></span>
+        <span>하락 <b class="down">${losers}</b></span>
+        <span>급등락 <b class="flat">${movers}</b></span>
+      </div>
     `;
   }
 
   if (rows.length === 0) {
-    deck.innerHTML = "";
+    tbody.innerHTML = "";
     if (empty) empty.hidden = false;
     return;
   }
   if (empty) empty.hidden = true;
 
-  deck.innerHTML = rows
-    .map((r, idx) => `
-      <article class="crypto-universe-card ${idx % 5 === 0 ? "feature" : idx % 3 === 0 ? "wide" : ""}" data-symbol="${(r.ticker || r.name).toUpperCase()}">
-        <div class="crypto-card-head">
-          <div>
-            <p class="crypto-card-rank">#${r.rank_in_custom}</p>
-            <h3>${r.ticker || "—"}</h3>
-            <span>${r.name}</span>
-          </div>
-          <div class="crypto-card-change ${toneClass(r.change_24h)}">${formatPct(r.change_24h)}</div>
-        </div>
-        <div class="crypto-card-main">
-          <strong>${typeof r.price === "number" ? formatUsd(r.price, r.price < 1 ? 4 : 2) : "—"}</strong>
-          <em>${formatBigNumber(r.market_cap)} 시총</em>
-        </div>
-        <div class="crypto-card-meta">
-          <span><b>거래량</b>${formatBigNumber(r.volume_24h)}</span>
-          <span><b>순위</b>${r.rank_in_custom}</span>
-        </div>
-      </article>
+  tbody.innerHTML = rows
+    .map((r) => `
+      <tr class="click-row" data-symbol="${(r.ticker || r.name).toUpperCase()}">
+        <td>${r.rank_in_custom}</td>
+        <td><strong>${r.ticker || "—"}</strong></td>
+        <td>${r.name}</td>
+        <td class="num">${typeof r.price === "number" ? formatUsd(r.price, r.price < 1 ? 4 : 2) : "—"}</td>
+        <td class="num ${toneClass(r.change_24h)}">${formatPct(r.change_24h)}</td>
+        <td class="num">${formatBigNumber(r.market_cap)}</td>
+        <td class="num">${formatBigNumber(r.volume_24h)}</td>
+      </tr>
     `)
     .join("");
 
-  deck.querySelectorAll(".crypto-universe-card").forEach((card) => {
-    card.addEventListener("click", () => {
-      const symbol = card.dataset.symbol;
+  tbody.querySelectorAll("tr.click-row").forEach((row) => {
+    row.addEventListener("click", () => {
+      const symbol = row.dataset.symbol;
       if (!symbol) return;
       window.location.href = `/crypto/${symbol}`;
     });
@@ -1294,7 +1249,7 @@ async function fetchJson(url) {
 
 function detectPageType() {
   if (document.getElementById("pulseRows")) return "home";
-  if (document.getElementById("cryptoUniverseDeck")) return "crypto";
+  if (document.getElementById("cryptoCustomRows")) return "crypto";
   if (document.getElementById("rateCards")) return "stocks";
   return "default";
 }
