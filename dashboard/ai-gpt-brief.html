@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260411g" />
+    <link rel="stylesheet" href="./styles.css?v=20260411h" />
   </head>
   <body>
     <div class="app-shell">
@@ -31,17 +31,12 @@
         </header>
 
         <section class="page-lead-card ai-brief-lead">
-          <p class="macro-lead-kicker">Daily Briefing Desk</p>
-          <h2>뉴스에서 출발하는 시장 리포트</h2>
+          <p class="macro-lead-kicker">Crypto Sentiment</p>
+          <h2>크립토 심리 지수</h2>
           <p class="macro-lead-body">
-            AI 시황분석은 먼저 핵심 뉴스를 소개하고, 그 다음 가격·금리·달러·ETF 플로우를 연결해
-            시장이 어떤 재료에 반응하는지 정리하는 구조가 맞습니다.
+            시장의 공포와 탐욕 강도를 먼저 확인하고, 주요 뉴스가 이 심리에 어떤 영향을 주는지 연결해서 봅니다.
           </p>
-          <div class="macro-lead-meta">
-            <span>생성 09:10 KST</span>
-            <span>우선순위 뉴스 소개</span>
-            <span>해석 매크로 + 크립토 + ETF</span>
-          </div>
+          <div class="ai-sentiment-gauge" id="aiSentimentGauge"></div>
         </section>
 
         <section class="panel ai-news-panel">
@@ -58,88 +53,8 @@
           </ul>
         </section>
 
-        <section class="panel ai-temperature-panel">
-          <div class="panel-head"><h2>시장 온도</h2></div>
-          <div class="ai-status-grid" id="aiBriefStatus">
-            <article class="market-metric-card"><p>상태</p><strong class="flat">확인 중</strong><span>데이터 로딩</span></article>
-          </div>
-        </section>
-
-        <section class="panel">
-          <div class="panel-head"><h2>뉴스 해석 기준</h2></div>
-          <div class="ai-report-grid">
-            <article class="page-quick-card">
-              <p>1단계</p>
-              <strong>무슨 뉴스인가</strong>
-              <span>정책, 물가, 금리, 유가, ETF, 규제 등 시장 재료를 구분</span>
-            </article>
-            <article class="page-quick-card">
-              <p>2단계</p>
-              <strong>어느 자산에 영향인가</strong>
-              <span>주식, 금리, 달러, BTC, ETH, 원자재 영향 범위 확인</span>
-            </article>
-            <article class="page-quick-card">
-              <p>3단계</p>
-              <strong>가격이 반응했는가</strong>
-              <span>NASDAQ, VIX, DXY, US10Y, BTC 움직임과 연결</span>
-            </article>
-            <article class="page-quick-card">
-              <p>4단계</p>
-              <strong>오늘의 리스크</strong>
-              <span>추격보다 확인해야 할 조건과 무효화 기준 정리</span>
-            </article>
-          </div>
-        </section>
-
-        <section class="macro-dual-grid">
-          <section class="panel">
-            <div class="panel-head"><h2>분석 범위</h2></div>
-            <div class="ai-scope-grid">
-              <article class="macro-read-card">
-                <p class="macro-read-label">Macro</p>
-                <strong>금리와 달러</strong>
-                <span>US10Y, 2Y, DXY, USD/KRW로 위험자산 압력을 확인합니다.</span>
-              </article>
-              <article class="macro-read-card">
-                <p class="macro-read-label">Crypto</p>
-                <strong>BTC 중심성</strong>
-                <span>BTC, ETH, SOL, 도미넌스, 김프와 거래소 프리미엄을 같이 봅니다.</span>
-              </article>
-              <article class="macro-read-card">
-                <p class="macro-read-label">Liquidity</p>
-                <strong>ETF와 유동성</strong>
-                <span>Spot ETF 순유입/순유출과 RRP, 곡선 변화를 점검합니다.</span>
-              </article>
-              <article class="macro-read-card">
-                <p class="macro-read-label">Catalyst</p>
-                <strong>뉴스 이벤트</strong>
-                <span>매크로/크립토 헤드라인 중 시세에 영향을 줄 항목만 추립니다.</span>
-              </article>
-            </div>
-          </section>
-
-          <section class="panel ai-brief-note">
-            <div class="panel-head"><h2>리포트 작성 방식</h2></div>
-            <p>
-              뉴스 제목을 단순 나열하지 않고, 금리·달러·변동성·ETF Flow와 연결해
-              “시장에 실제로 영향을 줄 수 있는지”를 확인하는 방식으로 정리합니다.
-            </p>
-          </section>
-        </section>
-
-        <section class="panel ai-action-panel">
-          <div>
-            <h2>최신 브리핑 확인</h2>
-            <p>자동 생성된 최신 Markdown 리포트를 열어 상세 시황과 근거 뉴스 링크를 확인합니다.</p>
-          </div>
-          <div class="ai-action-row">
-            <a class="mini-btn" href="../reports/daily_auto_briefing_latest.md">최신 리포트 열기</a>
-            <a class="mini-btn" href="./stock-market.html">주식/매크로 보기</a>
-            <a class="mini-btn" href="./news.html">뉴스 보기</a>
-          </div>
-        </section>
       </main>
     </div>
-    <script src="./app.js?v=20260411g"></script>
+    <script src="./app.js?v=20260411h"></script>
   </body>
 </html>

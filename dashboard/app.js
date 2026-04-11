@@ -212,6 +212,55 @@ function newsImpactText(title, type = "") {
   return "지수, 금리, 달러가 같은 방향으로 반응하는지 확인합니다.";
 }
 
+function sentimentMeta(value) {
+  if (typeof value !== "number" || Number.isNaN(value)) {
+    return {
+      label: "수집 대기",
+      tone: "flat",
+      summary: "심리 지수 데이터를 불러오는 중입니다.",
+      position: 50,
+    };
+  }
+  if (value <= 24) {
+    return {
+      label: "극단적 공포",
+      tone: "down",
+      summary: "공포가 강한 구간입니다. 반등보다 변동성 관리가 우선입니다.",
+      position: value,
+    };
+  }
+  if (value <= 44) {
+    return {
+      label: "공포",
+      tone: "down",
+      summary: "방어 심리가 우세합니다. BTC 지지선과 ETF 플로우 확인이 필요합니다.",
+      position: value,
+    };
+  }
+  if (value <= 55) {
+    return {
+      label: "중립",
+      tone: "flat",
+      summary: "방향성이 뚜렷하지 않습니다. 뉴스와 금리 변화에 민감한 구간입니다.",
+      position: value,
+    };
+  }
+  if (value <= 75) {
+    return {
+      label: "탐욕",
+      tone: "up",
+      summary: "위험선호가 우세합니다. 추세 지속 여부는 거래량과 ETF 수급이 중요합니다.",
+      position: value,
+    };
+  }
+  return {
+    label: "극단적 탐욕",
+    tone: "up",
+    summary: "과열 가능성이 커진 구간입니다. 추격보다 리스크 관리가 필요합니다.",
+    position: value,
+  };
+}
+
 function formatKstDateTime(input, fallback = "수집 대기") {
   if (!input) return fallback;
   if (typeof input === "string" && input.includes("KST")) return input;
@@ -541,9 +590,10 @@ function renderNewsOverview() {
 
 function renderAiBriefPage() {
   const statusHost = document.getElementById("aiBriefStatus");
+  const sentimentHost = document.getElementById("aiSentimentGauge");
   const newsBriefHost = document.getElementById("aiNewsBriefGrid");
   const catalystHost = document.getElementById("aiCatalystList");
-  if (!statusHost && !newsBriefHost && !catalystHost) return;
+  if (!statusHost && !sentimentHost && !newsBriefHost && !catalystHost) return;
 
   if (statusHost) {
     const datasets = state.status?.datasets || {};
@@ -585,6 +635,30 @@ function renderAiBriefPage() {
         `,
       )
       .join("");
+  }
+
+  if (sentimentHost) {
+    const value = toNumSafe(state.live?.fearGreed) ?? toNumSafe(fallbackLive.fearGreed);
+    const meta = sentimentMeta(value);
+    const displayValue = typeof value === "number" ? Math.round(value) : "—";
+    const needle = Math.max(0, Math.min(100, meta.position));
+    sentimentHost.innerHTML = `
+      <div class="ai-gauge-card">
+        <div class="ai-gauge-arc" style="--score:${needle}">
+          <span class="ai-gauge-dot"></span>
+          <div class="ai-gauge-center">
+            <strong>${displayValue}</strong>
+            <span class="${meta.tone}">${meta.label}</span>
+          </div>
+        </div>
+        <p>${meta.summary}</p>
+        <div class="ai-gauge-scale">
+          <span>공포</span>
+          <span>중립</span>
+          <span>탐욕</span>
+        </div>
+      </div>
+    `;
   }
 
   const macro = Array.isArray(state.news?.macro) ? state.news.macro.map((n) => ({ ...n, type: "매크로" })) : [];
