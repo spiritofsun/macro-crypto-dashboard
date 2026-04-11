@@ -492,8 +492,9 @@ function renderNewsOverview() {
 
 function renderAiBriefPage() {
   const statusHost = document.getElementById("aiBriefStatus");
+  const newsBriefHost = document.getElementById("aiNewsBriefGrid");
   const catalystHost = document.getElementById("aiCatalystList");
-  if (!statusHost && !catalystHost) return;
+  if (!statusHost && !newsBriefHost && !catalystHost) return;
 
   if (statusHost) {
     const datasets = state.status?.datasets || {};
@@ -537,11 +538,36 @@ function renderAiBriefPage() {
       .join("");
   }
 
-  if (catalystHost) {
-    const macro = Array.isArray(state.news?.macro) ? state.news.macro.slice(0, 3).map((n) => ({ ...n, type: "매크로" })) : [];
-    const crypto = Array.isArray(state.news?.crypto) ? state.news.crypto.slice(0, 3).map((n) => ({ ...n, type: "크립토" })) : [];
-    const items = [...macro, ...crypto].slice(0, 5);
+  const macro = Array.isArray(state.news?.macro) ? state.news.macro.map((n) => ({ ...n, type: "매크로" })) : [];
+  const crypto = Array.isArray(state.news?.crypto) ? state.news.crypto.map((n) => ({ ...n, type: "크립토" })) : [];
+  const items = [...macro.slice(0, 4), ...crypto.slice(0, 4)].slice(0, 8);
 
+  if (newsBriefHost) {
+    const featured = items.slice(0, 2);
+    newsBriefHost.innerHTML =
+      featured.length > 0
+        ? featured
+            .map((item, index) => {
+              const source = (() => {
+                try {
+                  return new URL(item.link).hostname.replace("www.", "");
+                } catch {
+                  return "source";
+                }
+              })();
+              return `
+                <a class="ai-news-feature" href="${escapeHtml(item.link || "#")}" target="_blank" rel="noopener noreferrer">
+                  <p>${index === 0 ? "메인 뉴스" : "보조 뉴스"} · ${item.type}</p>
+                  <strong>${escapeHtml(item.title || "제목 없음")}</strong>
+                  <span>${escapeHtml(source)} · ${escapeHtml(formatKstDateTime(item.pubDate, "시간 미확인"))}</span>
+                </a>
+              `;
+            })
+            .join("")
+        : '<article class="ai-news-feature"><p>뉴스 대기</p><strong>수집된 뉴스가 없습니다.</strong><span>다음 업데이트 대기</span></article>';
+  }
+
+  if (catalystHost) {
     catalystHost.innerHTML =
       items.length > 0
         ? items
@@ -549,7 +575,7 @@ function renderAiBriefPage() {
               (item) => `
                 <li>
                   <span>${item.type}</span>
-                  <strong>${escapeHtml(item.title || "제목 없음")}</strong>
+                  <a href="${escapeHtml(item.link || "#")}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.title || "제목 없음")}</a>
                   <em>${escapeHtml(formatKstDateTime(item.pubDate, "시간 미확인"))}</em>
                 </li>
               `,
