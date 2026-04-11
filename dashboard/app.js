@@ -6,6 +6,7 @@ const state = {
   macroSnapshot: null,
   cryptoUniverse: [],
   stocksWatchlist: [],
+  stablecoinSummary: null,
   live: null,
   fx: null,
 };
@@ -13,6 +14,8 @@ const state = {
 const uiState = {
   cryptoSort: { key: "market_cap", dir: "desc" },
   cryptoCgLastFetchTs: 0,
+  globalCryptoLastFetchTs: 0,
+  stablecoinLastFetchTs: 0,
   staticLastFetchTs: 0,
 };
 
@@ -33,6 +36,7 @@ const fallbackLive = {
   ETH: { price: 3125.32, change: 4.16 },
   SOL: { price: 132.63, change: 4.63 },
   dominance: { btc: 56.7, eth: 9.8 },
+  totalMarketCapUsd: null,
   fearGreed: 29,
   upbitBtcKrw: 102432000,
   coinbasePremiumPct: -0.09,
@@ -765,13 +769,24 @@ function renderCryptoSummary() {
   if (!tbody && !shell) return;
 
   const rows = state.cryptoUniverse.filter((r) => typeof r.market_cap === "number");
-  const total = rows.reduce((s, r) => s + r.market_cap, 0);
-  const stable = typeof state.snapshot?.stablecoin_market_cap === "number" ? state.snapshot.stablecoin_market_cap : (state.cryptoStableMcap || 0);
-  const btcMcap = rows.find((r) => r.ticker === "BTC")?.market_cap || 0;
-  const ethMcap = rows.find((r) => r.ticker === "ETH")?.market_cap || 0;
-  const coinbasePremium = toNumSafe(state.live?.coinbasePremiumPct);
+  const fallbackTotal = rows.reduce((s, r) => s + r.market_cap, 0);
   const btcDominance = toNumSafe(state.live?.dominance?.btc) ?? toNumSafe(fallbackLive.dominance?.btc);
+  const ethDominance = toNumSafe(state.live?.dominance?.eth) ?? toNumSafe(fallbackLive.dominance?.eth);
+  const total = toNumSafe(state.live?.totalMarketCapUsd) ?? fallbackTotal;
+  const stable =
+    toNumSafe(state.stablecoinSummary?.total) ??
+    (typeof state.snapshot?.stablecoin_market_cap === "number" ? state.snapshot.stablecoin_market_cap : (state.cryptoStableMcap || 0));
+  const btcMcap =
+    typeof total === "number" && typeof btcDominance === "number"
+      ? total * (btcDominance / 100)
+      : rows.find((r) => r.ticker === "BTC")?.market_cap || 0;
+  const ethMcap =
+    typeof total === "number" && typeof ethDominance === "number"
+      ? total * (ethDominance / 100)
+      : rows.find((r) => r.ticker === "ETH")?.market_cap || 0;
+  const coinbasePremium = toNumSafe(state.live?.coinbasePremiumPct);
   const altDominance = typeof btcDominance === "number" ? 100 - btcDominance : null;
+  const usdtDominance = toNumSafe(state.stablecoinSummary?.usdtDominance);
 
   const totals = {
     TOTAL: total,
@@ -783,11 +798,12 @@ function renderCryptoSummary() {
   };
 
   const summaryRows = [
-    ["Stable 시총", formatBigNumber(stable), "스테이블코인 유동성"],
-    ["BTC 도미넌스", typeof btcDominance === "number" ? `${btcDominance.toFixed(2)}%` : "—", "비트코인 시장 점유율"],
+    ["Stable 시총", formatBigNumber(stable), state.stablecoinSummary ? "DefiLlama live" : "정적 데이터"],
+    ["USDT 도미넌스", typeof usdtDominance === "number" ? `${usdtDominance.toFixed(2)}%` : "—", "USDT / 전체 스테이블"],
+    ["BTC 도미넌스", typeof btcDominance === "number" ? `${btcDominance.toFixed(2)}%` : "—", "CoinGecko global"],
     ["알트코인 도미넌스", typeof altDominance === "number" ? `${altDominance.toFixed(2)}%` : "—", "100 - BTC.D"],
     ["Coinbase Premium", typeof coinbasePremium === "number" ? formatPct(coinbasePremium, 2) : "—", "BTC Coinbase vs 글로벌 평균"],
-    ["TOTAL", formatBigNumber(totals.TOTAL), "전체 시총"],
+    ["TOTAL", formatBigNumber(totals.TOTAL), toNumSafe(state.live?.totalMarketCapUsd) ? "CoinGecko global" : "유니버스 합계"],
     ["TOTALES", formatBigNumber(totals.TOTALES), "스테이블 제외"],
     ["TOTAL2", formatBigNumber(totals.TOTAL2), "BTC 제외"],
     ["TOTAL2ES", formatBigNumber(totals.TOTAL2ES), "BTC + 스테이블 제외"],
@@ -1496,6 +1512,7 @@ function normalizeGatewayPayload(payload) {
         btc: toNumSafe(payload?.dominance?.btc),
         eth: toNumSafe(payload?.dominance?.eth),
       },
+      totalMarketCapUsd: toNumSafe(payload?.market?.total_market_cap_usd) ?? toNumSafe(payload?.total_market_cap_usd),
       fearGreed: toNumSafe(payload?.fear_greed),
       upbitBtcKrw: toNumSafe(payload?.btc?.upbit_krw),
       coinbasePremiumPct: toNumSafe(payload?.coinbase?.premium_pct),
@@ -1591,10 +1608,12 @@ async function fetchLiveDirectFallback() {
         btc: globalData?.data?.market_cap_percentage?.btc ?? prevLive.dominance.btc,
         eth: globalData?.data?.market_cap_percentage?.eth ?? prevLive.dominance.eth,
       },
+      totalMarketCapUsd: toNumSafe(globalData?.data?.total_market_cap?.usd) ?? prevLive.totalMarketCapUsd,
       fearGreed: Number(fg?.data?.[0]?.value) || prevLive.fearGreed,
       upbitBtcKrw: Array.isArray(upbit) ? upbit[0]?.trade_price ?? prevLive.upbitBtcKrw : prevLive.upbitBtcKrw,
       coinbasePremiumPct,
     };
+    if (globalR.status === "fulfilled") uiState.globalCryptoLastFetchTs = Date.now();
 
     state.fx = {
       usdKrw: fx?.rates?.KRW ?? fallbackFx.usdKrw,
@@ -1617,6 +1636,45 @@ async function fetchLiveDirectFallback() {
     console.error("live fetch failed", error);
   } finally {
     renderAll();
+  }
+}
+
+async function refreshStablecoinSummaryIfNeeded() {
+  if (uiState.stablecoinLastFetchTs && Date.now() - uiState.stablecoinLastFetchTs < 15 * 60 * 1000) return;
+  try {
+    const payload = await fetchJson("https://stablecoins.llama.fi/stablecoins?includePrices=true");
+    const assets = Array.isArray(payload?.peggedAssets) ? payload.peggedAssets : [];
+    const total = assets.reduce((sum, asset) => sum + (toNumSafe(asset?.circulating?.peggedUSD) || 0), 0);
+    const usdt = assets.find((asset) => String(asset?.symbol || "").toUpperCase() === "USDT");
+    const usdtMarketCap = toNumSafe(usdt?.circulating?.peggedUSD);
+    state.stablecoinSummary = {
+      total,
+      usdtMarketCap,
+      usdtDominance: total > 0 && typeof usdtMarketCap === "number" ? (usdtMarketCap / total) * 100 : null,
+      source: "DefiLlama",
+    };
+    uiState.stablecoinLastFetchTs = Date.now();
+  } catch (error) {
+    console.warn("stablecoin summary fetch failed", error);
+  }
+}
+
+async function refreshGlobalCryptoStatsIfNeeded() {
+  if (uiState.globalCryptoLastFetchTs && Date.now() - uiState.globalCryptoLastFetchTs < 5 * 60 * 1000) return;
+  try {
+    const payload = await fetchJson("https://api.coingecko.com/api/v3/global");
+    const prevLive = state.live || fallbackLive;
+    state.live = {
+      ...prevLive,
+      dominance: {
+        btc: toNumSafe(payload?.data?.market_cap_percentage?.btc) ?? prevLive.dominance?.btc,
+        eth: toNumSafe(payload?.data?.market_cap_percentage?.eth) ?? prevLive.dominance?.eth,
+      },
+      totalMarketCapUsd: toNumSafe(payload?.data?.total_market_cap?.usd) ?? prevLive.totalMarketCapUsd,
+    };
+    uiState.globalCryptoLastFetchTs = Date.now();
+  } catch (error) {
+    console.warn("global crypto stats fetch failed", error);
   }
 }
 
@@ -1646,6 +1704,7 @@ async function fetchLiveFromGateway() {
       btc: normalized.live.dominance.btc ?? prevLive.dominance.btc,
       eth: normalized.live.dominance.eth ?? prevLive.dominance.eth,
     },
+    totalMarketCapUsd: normalized.live.totalMarketCapUsd ?? prevLive.totalMarketCapUsd,
     fearGreed: normalized.live.fearGreed ?? prevLive.fearGreed,
     upbitBtcKrw: normalized.live.upbitBtcKrw ?? prevLive.upbitBtcKrw,
     coinbasePremiumPct: normalized.live.coinbasePremiumPct ?? prevLive.coinbasePremiumPct,
@@ -1683,6 +1742,9 @@ async function fetchLive() {
     console.warn("gateway fetch failed, fallback to direct sources", gatewayError);
     await fetchLiveDirectFallback();
   }
+
+  await refreshStablecoinSummaryIfNeeded();
+  await refreshGlobalCryptoStatsIfNeeded();
 
   try {
     if (!uiState.staticLastFetchTs || Date.now() - uiState.staticLastFetchTs > 5 * 60 * 1000) {
