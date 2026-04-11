@@ -2468,6 +2468,16 @@ body {
     #0c1117;
 }
 
+.market-metric-card {
+  min-height: 96px;
+  padding: 16px 18px;
+  border-radius: 22px;
+  border-color: rgba(245, 192, 54, 0.14);
+  background:
+    radial-gradient(circle at top left, rgba(245, 192, 54, 0.1), transparent 34%),
+    linear-gradient(180deg, rgba(13, 18, 24, 0.98), rgba(8, 11, 15, 0.98));
+}
+
 .macro-mini-card p,
 .macro-mini-card strong,
 .macro-mini-card span {
@@ -2614,6 +2624,7 @@ body {
 }
 
 #macroTopStrip {
+  display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 12px;
 }

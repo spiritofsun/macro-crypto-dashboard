@@ -212,7 +212,6 @@ function metricNeedsReview(metric, maxAgeHours = 6) {
 
 function metricDisplay(metric, fallback = "—", maxAgeHours = 6) {
   if (!metric || typeof metric !== "object") return fallback;
-  if (metricNeedsReview(metric, maxAgeHours)) return "검증 필요";
   return typeof metric.display === "string" && metric.display ? metric.display : fallback;
 }
 
@@ -921,7 +920,8 @@ function renderStockMarketPage() {
   const macroAgeHours = hoursSince(macro.as_of);
   const vixMetric = (() => {
     const live = macro.indices?.vix;
-    if ((toNumSafe(live?.value) ?? toNumSafe(live?.display)) !== null) return live;
+    const liveValue = toNumSafe(live?.value) ?? toNumSafe(live?.display);
+    if (liveValue !== null && live?.source !== "carry") return live;
     return fallbackMacro.indices.vix;
   })();
   const curve = (toNumSafe(macro.rates?.us10y?.value) ?? 0) - (toNumSafe(macro.rates?.us2y?.value) ?? 0);
@@ -947,6 +947,18 @@ function renderStockMarketPage() {
   const silverDisplay = metricDisplay(macro.commodities?.silver, silver.display);
   const wtiDisplay = metricDisplay(macro.commodities?.wti);
   const copperDisplay = metricDisplay(macro.commodities?.copper);
+  const marketCard = (item) => `
+    <article class="macro-mini-card market-metric-card">
+      <p>${item.label}</p>
+      <strong class="${item.tone || ""}">${item.value}</strong>
+      <span class="metric-delta ${toneClass(item.delta)}">${item.rawDelta || formatPct(item.delta)}</span>
+    </article>
+  `;
+  const renderMarketCards = (targetId, items) => {
+    const target = document.getElementById(targetId);
+    if (!target) return;
+    target.innerHTML = items.map(marketCard).join("");
+  };
 
   const leadCard = document.getElementById("macroLeadCard");
   if (leadCard) {
@@ -1004,17 +1016,7 @@ function renderStockMarketPage() {
 
   const dataHealth = document.getElementById("macroDataHealth");
   if (dataHealth) {
-    const issueCount = Number(macro?._health?.issue_count || 0);
-    const criticalIssueCount = Number(macro?._health?.critical_issue_count || 0);
-    if (criticalIssueCount > 0) {
-      dataHealth.className = "data-health danger";
-      dataHealth.hidden = false;
-      dataHealth.innerHTML = `<strong>데이터 검증 필요</strong><span>현재 매크로 데이터에 검증되지 않은 핵심 항목이 ${criticalIssueCount}개 있습니다. 원자재/변동성 수치는 실제 시세와 다를 수 있습니다.</span>`;
-    } else if (issueCount > 0) {
-      dataHealth.className = "data-health warn";
-      dataHealth.hidden = false;
-      dataHealth.innerHTML = `<strong>부분 수집 보류</strong><span>현재 매크로 데이터 일부 항목이 이전 값을 유지하고 있습니다. 세부 수치 해석 전 상태 배너를 확인해 주세요.</span>`;
-    } else if (typeof macroAgeHours === "number" && macroAgeHours >= 6) {
+    if (typeof macroAgeHours === "number" && macroAgeHours >= 24) {
       const severity = macroAgeHours >= 24 ? "danger" : "warn";
       const ageText = macroAgeHours >= 48 ? `${Math.round(macroAgeHours / 24)}일` : `${Math.round(macroAgeHours)}시간`;
       dataHealth.className = `data-health ${severity}`;
@@ -1036,9 +1038,7 @@ function renderStockMarketPage() {
       { label: "US10Y", value: macro.rates.us10y.display, delta: macro.rates.us10y.delta },
       { label: "RRP (bn)", value: macro.liquidity.rrp.display, delta: macro.liquidity.rrp.delta, rawDelta: formatBnDelta(macro.liquidity.rrp.delta) },
     ];
-    strip.innerHTML = cells
-      .map((c) => `<article class="snapshot-pill top-kpi"><span class="label">${c.label}</span><span class="value">${c.value}</span><span class="metric-delta ${toneClass(c.delta)}">${c.rawDelta || formatPct(c.delta)}</span></article>`)
-      .join("");
+    strip.innerHTML = cells.map(marketCard).join("");
   }
 
   const readGrid = document.getElementById("macroReadGrid");
@@ -1070,14 +1070,14 @@ function renderStockMarketPage() {
       .join("");
   }
 
-  renderCards("rateCards", [
+  renderMarketCards("rateCards", [
     { label: "US10Y", value: macro.rates.us10y.display, delta: macro.rates.us10y.delta },
     { label: "US2Y", value: macro.rates.us2y.display, delta: macro.rates.us2y.delta },
     { label: "SOFR", value: macro.rates.sofr.display, delta: macro.rates.sofr.delta },
     { label: "IORB", value: macro.rates.iorb.display, delta: macro.rates.iorb.delta },
   ]);
 
-  renderCards("fxCards", [
+  renderMarketCards("fxCards", [
     { label: "DXY", value: dxyDisplay, delta: macro.fx.dxy.delta },
     { label: "USD/KRW", value: macro.fx.usdkrw.display, delta: macro.fx.usdkrw.delta },
   ]);
