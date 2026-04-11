@@ -154,6 +154,15 @@ function toneClass(value, neutralThreshold = 0.2) {
   return value > 0 ? "up" : "down";
 }
 
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
 function formatKstDateTime(input, fallback = "수집 대기") {
   if (!input) return fallback;
   if (typeof input === "string" && input.includes("KST")) return input;
@@ -478,6 +487,75 @@ function renderNewsOverview() {
       { label: "소스 구성", value: `${new Set([...macro, ...crypto].map((n) => { try { return new URL(n.link).hostname.replace("www.", ""); } catch { return "source"; } })).size || 0}개`, meta: "도메인 기준" },
     ];
     quick.innerHTML = items.map((item) => `<article class="page-quick-card"><p>${item.label}</p><strong>${item.value}</strong><span>${item.meta}</span></article>`).join("");
+  }
+}
+
+function renderAiBriefPage() {
+  const statusHost = document.getElementById("aiBriefStatus");
+  const catalystHost = document.getElementById("aiCatalystList");
+  if (!statusHost && !catalystHost) return;
+
+  if (statusHost) {
+    const datasets = state.status?.datasets || {};
+    const rows = [
+      {
+        label: "매크로",
+        value: statusText(datasets.macro?.level),
+        tone: statusTone(datasets.macro?.level),
+        meta: datasets.macro?.timestamp || "수집 대기",
+      },
+      {
+        label: "뉴스",
+        value: statusText(datasets.news?.level),
+        tone: statusTone(datasets.news?.level),
+        meta: `Macro ${datasets.news?.macro_count ?? 0} / Crypto ${datasets.news?.crypto_count ?? 0}`,
+      },
+      {
+        label: "ETF Flow",
+        value: statusText(datasets.etf?.level),
+        tone: statusTone(datasets.etf?.level),
+        meta: datasets.etf?.market_date ? `시장일 ${datasets.etf.market_date}` : "시장일 확인 중",
+      },
+      {
+        label: "브리핑",
+        value: state.status?.overall === "ok" ? "생성 가능" : "점검 필요",
+        tone: state.status?.overall === "ok" ? "up" : "flat",
+        meta: formatKstDateTime(state.status?.updated_at, "상태 대기"),
+      },
+    ];
+
+    statusHost.innerHTML = rows
+      .map(
+        (item) => `
+          <article class="market-metric-card ai-status-card">
+            <p>${item.label}</p>
+            <strong class="${item.tone}">${item.value}</strong>
+            <span>${item.meta}</span>
+          </article>
+        `,
+      )
+      .join("");
+  }
+
+  if (catalystHost) {
+    const macro = Array.isArray(state.news?.macro) ? state.news.macro.slice(0, 3).map((n) => ({ ...n, type: "매크로" })) : [];
+    const crypto = Array.isArray(state.news?.crypto) ? state.news.crypto.slice(0, 3).map((n) => ({ ...n, type: "크립토" })) : [];
+    const items = [...macro, ...crypto].slice(0, 5);
+
+    catalystHost.innerHTML =
+      items.length > 0
+        ? items
+            .map(
+              (item) => `
+                <li>
+                  <span>${item.type}</span>
+                  <strong>${escapeHtml(item.title || "제목 없음")}</strong>
+                  <em>${escapeHtml(formatKstDateTime(item.pubDate, "시간 미확인"))}</em>
+                </li>
+              `,
+            )
+            .join("")
+        : "<li>뉴스 데이터 수집 대기 중입니다.</li>";
   }
 }
 
@@ -1228,6 +1306,7 @@ function renderAll() {
   renderHomeHub();
   renderNewsPage();
   renderNewsOverview();
+  renderAiBriefPage();
   renderCryptoSummary();
   renderCryptoOverview();
   renderDominanceHybrid();

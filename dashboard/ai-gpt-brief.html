@@ -7,40 +7,124 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260411d" />
+    <link rel="stylesheet" href="./styles.css?v=20260411e" />
   </head>
   <body>
     <div class="app-shell">
       <aside class="left-sidebar">
-        <a class="side-home" href="./index.html">메인</a>
+        <a class="side-home" href="./index.html">홈</a>
         <a class="side-link" href="./crypto.html">크립토</a>
         <a class="side-link" href="./stock-market.html">주식/매크로</a>
         <a class="side-link" href="./long-short.html">롱/숏</a>
         <a class="side-link" href="./etf.html">ETF Flows</a>
         <a class="side-link" href="./funding.html">펀딩비</a>
-        <a class="side-link active" href="./ai-gpt-brief.html">AI 브리핑</a>
         <a class="side-link" href="./exchanges.html">거래소별 프리미엄+가격</a>
+        <a class="side-link active" href="./ai-gpt-brief.html">AI 브리핑</a>
         <a class="side-link" href="./news.html">뉴스</a>
       </aside>
 
-      <main class="page content-page">
+      <main class="page content-page ai-brief-page">
         <header class="hero">
           <p class="kicker">카테고리 / AI 브리핑</p>
           <h1>AI GPT 시황분석</h1>
-          <p class="asof">매일 오전 9시 10분 자동 브리핑</p>
-          <button class="back-btn" onclick="history.length > 1 ? history.back() : (location.href='./index.html')">← 뒤로가기</button>
+          <p class="asof">매일 09:10 KST 기준으로 매크로, 크립토, 주식, ETF 흐름을 한 번에 점검합니다.</p>
         </header>
 
+        <section class="page-lead-card ai-brief-lead">
+          <p class="macro-lead-kicker">Daily Briefing Desk</p>
+          <h2>오늘 시장을 읽기 위한 실행형 요약</h2>
+          <p class="macro-lead-body">
+            가격, 금리, 달러, 뉴스, ETF 플로우를 따로 보지 않고 하나의 시황 판단 흐름으로 정리합니다.
+            핵심은 방향성보다 확인해야 할 변수와 리스크를 빠르게 좁히는 것입니다.
+          </p>
+          <div class="macro-lead-meta">
+            <span>생성 09:10 KST</span>
+            <span>범위 매크로 + 크립토 + 주식</span>
+            <span>출력 Markdown 리포트</span>
+          </div>
+        </section>
+
         <section class="panel">
-          <h3 class="group-title">실행 스케줄</h3>
-          <ul class="news-list">
-            <li>브리핑 시각: 매일 오전 9:10 (KST)</li>
-            <li>범위: 매크로 + 크립토 + 주식 시황</li>
-            <li>출력: 데일리 요약 리포트</li>
-          </ul>
+          <div class="panel-head"><h2>브리핑 데이터 상태</h2></div>
+          <div class="ai-status-grid" id="aiBriefStatus">
+            <article class="market-metric-card"><p>상태</p><strong class="flat">확인 중</strong><span>데이터 로딩</span></article>
+          </div>
+        </section>
+
+        <section class="macro-dual-grid">
+          <section class="panel">
+            <div class="panel-head"><h2>분석 범위</h2></div>
+            <div class="ai-scope-grid">
+              <article class="macro-read-card">
+                <p class="macro-read-label">Macro</p>
+                <strong>금리와 달러</strong>
+                <span>US10Y, 2Y, DXY, USD/KRW로 위험자산 압력을 확인합니다.</span>
+              </article>
+              <article class="macro-read-card">
+                <p class="macro-read-label">Crypto</p>
+                <strong>BTC 중심성</strong>
+                <span>BTC, ETH, SOL, 도미넌스, 김프와 거래소 프리미엄을 같이 봅니다.</span>
+              </article>
+              <article class="macro-read-card">
+                <p class="macro-read-label">Liquidity</p>
+                <strong>ETF와 유동성</strong>
+                <span>Spot ETF 순유입/순유출과 RRP, 곡선 변화를 점검합니다.</span>
+              </article>
+              <article class="macro-read-card">
+                <p class="macro-read-label">Catalyst</p>
+                <strong>뉴스 이벤트</strong>
+                <span>매크로/크립토 헤드라인 중 시세에 영향을 줄 항목만 추립니다.</span>
+              </article>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head"><h2>오늘 확인할 헤드라인</h2></div>
+            <ul class="ai-catalyst-list" id="aiCatalystList">
+              <li>뉴스 데이터 로딩 중입니다.</li>
+            </ul>
+          </section>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head"><h2>리포트 구성</h2></div>
+          <div class="ai-report-grid">
+            <article class="page-quick-card">
+              <p>1단계</p>
+              <strong>시장 온도</strong>
+              <span>위험 선호, 변동성, 달러/금리 압력 요약</span>
+            </article>
+            <article class="page-quick-card">
+              <p>2단계</p>
+              <strong>핵심 이벤트</strong>
+              <span>뉴스 중 가격 반응 가능성이 높은 재료 정리</span>
+            </article>
+            <article class="page-quick-card">
+              <p>3단계</p>
+              <strong>크립토 체크</strong>
+              <span>BTC/ETH/SOL, 도미넌스, 프리미엄, ETF 흐름 확인</span>
+            </article>
+            <article class="page-quick-card">
+              <p>4단계</p>
+              <strong>리스크 메모</strong>
+              <span>진입보다 관찰해야 할 가격/금리/뉴스 조건 정리</span>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel ai-action-panel">
+          <div>
+            <h2>최신 브리핑 확인</h2>
+            <p>자동 생성된 최신 Markdown 리포트를 열어 상세 시황과 근거 뉴스 링크를 확인합니다.</p>
+          </div>
+          <div class="ai-action-row">
+            <a class="mini-btn" href="../reports/daily_auto_briefing_latest.md">최신 리포트 열기</a>
+            <a class="mini-btn" href="./stock-market.html">주식/매크로 보기</a>
+            <a class="mini-btn" href="./news.html">뉴스 보기</a>
+          </div>
         </section>
       </main>
     </div>
-    <script src="./app.js?v=20260411d"></script>
+    <script src="./app.js?v=20260411e"></script>
   </body>
 </html>

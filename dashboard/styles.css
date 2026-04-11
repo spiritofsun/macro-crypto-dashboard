@@ -3003,3 +3003,134 @@ body {
     min-height: 96px;
   }
 }
+
+/* v20260411e AI briefing page */
+.ai-brief-page {
+  display: grid;
+  gap: 16px;
+}
+
+.ai-brief-lead {
+  padding: 24px;
+}
+
+.ai-brief-lead h2 {
+  max-width: 760px;
+  font-size: clamp(28px, 3vw, 44px);
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+
+.ai-status-grid,
+.ai-scope-grid,
+.ai-report-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.ai-status-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.ai-scope-grid,
+.ai-report-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ai-status-card strong {
+  font-size: clamp(24px, 2vw, 34px);
+}
+
+.ai-status-card span {
+  color: #cddace;
+}
+
+.ai-catalyst-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ai-catalyst-list li {
+  display: grid;
+  gap: 6px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.ai-catalyst-list span {
+  width: fit-content;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: rgba(245, 192, 54, 0.09);
+  color: #f0d889;
+  font-size: 11px;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
+}
+
+.ai-catalyst-list strong {
+  color: #edf6ee;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.ai-catalyst-list em {
+  color: #90a491;
+  font-style: normal;
+  font-size: 12px;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.ai-action-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.ai-action-panel h2 {
+  margin: 0 0 8px;
+  color: #edf6ee;
+  font-size: 22px;
+}
+
+.ai-action-panel p {
+  margin: 0;
+  color: #b9cabc;
+  line-height: 1.55;
+}
+
+.ai-action-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+@media (max-width: 1200px) {
+  .ai-status-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .ai-status-grid,
+  .ai-scope-grid,
+  .ai-report-grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .ai-action-panel {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .ai-action-row {
+    justify-content: flex-start;
+  }
+}
