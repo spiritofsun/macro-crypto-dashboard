@@ -7,79 +7,155 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260424a" />
+    <link rel="stylesheet" href="./styles.css?v=20260425a" />
   </head>
-  <body>
-    <div class="app-shell">
-      <aside class="left-sidebar">
-        <a class="side-home" href="./index.html">홈</a>
-        <a class="side-link active" href="./crypto.html">크립토</a>
-        <a class="side-link" href="./stock-market.html">주식/매크로</a>
-        <a class="side-link" href="./long-short.html">롱/숏</a>
-        <a class="side-link" href="./etf.html">ETF Flows</a>
-        <a class="side-link" href="./funding.html">펀딩비</a>
-        <a class="side-link" href="./exchanges.html">거래소별 프리미엄+가격</a>
-        <a class="side-link" href="./ai-gpt-brief.html">AI 브리핑</a>
-        <a class="side-link" href="./news.html">뉴스</a>
+  <body class="crypto-portal-body">
+    <header class="crypto-topbar">
+      <a class="crypto-brand" href="./index.html">Project Mark</a>
+      <nav class="crypto-nav">
+        <a class="active" href="./crypto.html">크립토브리핑</a>
+        <a href="./stock-market.html">주식/매크로</a>
+        <a href="./etf.html">ETF</a>
+        <a href="./news.html">뉴스</a>
+      </nav>
+      <a class="crypto-search-pill" href="./ai-gpt-brief.html">AI 브리핑</a>
+    </header>
+
+    <div class="crypto-portal-shell">
+      <aside class="crypto-side-rail">
+        <section class="portal-card crypto-clock-card">
+          <p id="cryptoClockDate">날짜 확인 중</p>
+          <strong id="cryptoClock">-- -- --</strong>
+          <span>SNAPSHOT <b id="asOfText">loading...</b></span>
+        </section>
+
+        <section class="portal-card">
+          <div class="portal-card-head">
+            <h3>인기 코인</h3>
+            <span>24H</span>
+          </div>
+          <div class="side-rank-list" id="cryptoSideHot"></div>
+        </section>
+
+        <section class="portal-card">
+          <div class="portal-card-head">
+            <h3>태그</h3>
+          </div>
+          <div class="tag-cloud" id="cryptoTagCloud"></div>
+        </section>
+
+        <section class="portal-card">
+          <div class="portal-card-head">
+            <h3>실시간 뉴스</h3>
+          </div>
+          <div class="side-news-list" id="cryptoSideNews"></div>
+        </section>
       </aside>
 
-      <main class="page content-page">
-        <header class="hero crypto-brief-header">
-          <div>
-            <p class="kicker">카테고리 / 크립토</p>
-            <h1>크립토 브리핑</h1>
-          </div>
-          <p class="asof" id="asOfText">loading...</p>
-        </header>
-
+      <main class="crypto-main-brief">
         <section class="global-data-health" id="globalDataHealth" hidden></section>
 
-        <section class="crypto-brief-layout">
-          <article class="crypto-brief-lead" id="cryptoLeadCard"></article>
-          <div class="crypto-brief-metrics" id="cryptoQuickStrip"></div>
-        </section>
-
-        <section class="crypto-brief-grid">
-          <article class="briefing-panel">
-            <div class="panel-head compact">
-              <h2>시장 요약</h2>
-              <p class="subhead">검증된 핵심 지표</p>
-            </div>
-            <div class="table-wrap">
-              <table class="data-table compact-table crypto-summary-table">
-                <thead>
-                  <tr>
-                    <th>구분</th>
-                    <th class="num">값</th>
-                    <th>해석</th>
-                  </tr>
-                </thead>
-                <tbody id="cryptoSummaryRows"></tbody>
-              </table>
-            </div>
-          </article>
-
-          <article class="briefing-panel">
-            <div class="panel-head compact">
-              <h2>오늘의 흐름</h2>
-              <p class="subhead">가격 움직임과 주요 뉴스</p>
-            </div>
-            <div class="crypto-flow-list" id="cryptoFlowList"></div>
-          </article>
-        </section>
-
-        <section class="briefing-panel">
-          <div class="panel-head compact">
-            <h2>트렌딩 유니버스</h2>
-            <p class="subhead">커스텀 리스트 상위 움직임</p>
+        <header class="crypto-article-head">
+          <p>Daily Crypto Briefing</p>
+          <h1>크립토 브리핑</h1>
+          <div class="crypto-article-meta">
+            <span id="cryptoPrevDay">← 2026-04-24</span>
+            <span>최신글</span>
+            <span id="cryptoRefreshText">메시지 갱신</span>
           </div>
-          <div class="crypto-trend-strip" id="cryptoTrendStrip"></div>
+          <div class="crypto-tabs">
+            <a href="#overview">시장개요</a>
+            <a href="#sentiment">심리지표</a>
+            <a href="#trending">트렌딩</a>
+            <a href="#smartmoney">스마트머니</a>
+            <a href="#universe">유니버스</a>
+          </div>
+        </header>
+
+        <section class="crypto-market-section" id="overview">
+          <div class="portal-section-title">
+            <h2>전체 시장 개요</h2>
+            <span>검증된 라이브 지표</span>
+          </div>
+          <div class="portal-metric-grid" id="cryptoQuickStrip"></div>
+          <div class="portal-insight" id="cryptoLeadCard"></div>
+          <div class="portal-market-table">
+            <div class="portal-market-head">
+              <span>코인</span>
+              <span>가격</span>
+              <span>24h</span>
+              <span>시가총액</span>
+            </div>
+            <div id="cryptoMarketRows"></div>
+          </div>
         </section>
 
-        <section class="briefing-panel">
-          <div class="panel-head compact">
+        <section class="crypto-market-section" id="sentiment">
+          <div class="portal-section-title">
+            <h2>시장 심리 & 자금 흐름</h2>
+            <span>체크 점수</span>
+          </div>
+          <div class="portal-gauge-grid" id="cryptoSentimentCards"></div>
+        </section>
+
+        <section class="crypto-market-section" id="trending">
+          <div class="portal-section-title">
+            <h2>오늘의 트렌딩 코인</h2>
+            <span>커스텀 유니버스</span>
+          </div>
+          <div class="portal-trending-grid" id="cryptoTrendStrip"></div>
+        </section>
+
+        <section class="crypto-market-section" id="smartmoney">
+          <div class="portal-section-title">
+            <h2>스마트머니 동향</h2>
+            <span>순매수 · 순매도 · 선물</span>
+          </div>
+          <div class="smart-money-tabs" id="smartMoneyTabs">
+            <button class="active" type="button" data-smart-tab="buy">매집 <span id="smartBuyCount">0개</span></button>
+            <button type="button" data-smart-tab="sell">배분 <span id="smartSellCount">0개</span></button>
+            <button type="button" data-smart-tab="futures">선물 <span id="smartFuturesCount">0개</span></button>
+          </div>
+          <div class="smart-money-table" id="cryptoSmartMoney"></div>
+        </section>
+
+        <section class="crypto-market-section two-col">
+          <article>
+            <div class="portal-section-title">
+              <h2>실시간 인기 예측 시장</h2>
+              <span>참고용</span>
+            </div>
+            <div class="prediction-list" id="cryptoPredictionList"></div>
+          </article>
+          <article>
+            <div class="portal-section-title">
+              <h2>수익률 TOP/BOTTOM</h2>
+              <span>시총 250위 내 24h</span>
+            </div>
+            <div class="top-bottom-grid" id="cryptoTopBottom"></div>
+          </article>
+        </section>
+
+        <section class="crypto-market-section">
+          <div class="portal-section-title">
+            <h2>RSI 산점도</h2>
+            <span>24H 변동성 기반 참고 점수</span>
+          </div>
+          <div class="rsi-map" id="cryptoRsiMap"></div>
+        </section>
+
+        <section class="crypto-market-section">
+          <div class="portal-section-title">
+            <h2>체인별 자금흐름</h2>
+            <span>커스텀 유니버스 분포</span>
+          </div>
+          <div class="chain-flow-card" id="cryptoChainFlow"></div>
+        </section>
+
+        <section class="crypto-market-section" id="universe">
+          <div class="portal-section-title">
             <h2>커스텀 유니버스</h2>
-            <p class="subhead">사용자 지정 리스트 기준 · 표 뷰</p>
+            <span>표 뷰</span>
           </div>
 
           <div class="tool-row">
@@ -91,7 +167,7 @@
               <option value="volume_24h:desc">거래량 큰 순</option>
               <option value="name:asc">이름 순</option>
             </select>
-            <label class="tool-check"><input type="checkbox" id="moversOnly" /> 급등락만 (|24H| 2% 이상)</label>
+            <label class="tool-check"><input type="checkbox" id="moversOnly" /> 급등락만</label>
             <label class="tool-check"><input type="checkbox" id="hideStables" /> 스테이블 제외</label>
           </div>
 
@@ -112,13 +188,29 @@
               <tbody id="cryptoCustomRows"></tbody>
             </table>
           </div>
-          <div class="crypto-universe-empty" id="cryptoUniverseEmpty" hidden>
-            조건에 맞는 자산이 없습니다.
-          </div>
+          <div class="crypto-universe-empty" id="cryptoUniverseEmpty" hidden>조건에 맞는 자산이 없습니다.</div>
         </section>
       </main>
+
+      <aside class="crypto-right-rail">
+        <section class="portal-card ticker-card">
+          <div class="portal-card-head">
+            <h3>시세</h3>
+            <span>live</span>
+          </div>
+          <div id="cryptoRightTicker"></div>
+        </section>
+
+        <section class="portal-card right-news-card">
+          <div class="portal-card-head">
+            <h3>주인장 관심 뉴스</h3>
+            <span>crypto</span>
+          </div>
+          <div id="cryptoRightNews"></div>
+        </section>
+      </aside>
     </div>
 
-    <script src="./app.js?v=20260424a"></script>
+    <script src="./app.js?v=20260425a"></script>
   </body>
 </html>

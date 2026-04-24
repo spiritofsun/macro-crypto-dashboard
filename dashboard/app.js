@@ -14,6 +14,7 @@ const state = {
 
 const uiState = {
   cryptoSort: { key: "market_cap", dir: "desc" },
+  smartMoneyTab: "buy",
   cryptoCgLastFetchTs: 0,
   globalCryptoLastFetchTs: 0,
   stablecoinLastFetchTs: 0,
@@ -879,32 +880,88 @@ function renderCryptoSummary() {
 function renderCryptoBriefingExtras() {
   const flow = document.getElementById("cryptoFlowList");
   const trend = document.getElementById("cryptoTrendStrip");
-  if (!flow && !trend) return;
+  const marketRows = document.getElementById("cryptoMarketRows");
+  const sentiment = document.getElementById("cryptoSentimentCards");
+  const smartMoney = document.getElementById("cryptoSmartMoney");
+  const topBottom = document.getElementById("cryptoTopBottom");
+  const predictions = document.getElementById("cryptoPredictionList");
+  const rsiMap = document.getElementById("cryptoRsiMap");
+  const chainFlow = document.getElementById("cryptoChainFlow");
+  const sideHot = document.getElementById("cryptoSideHot");
+  const tagCloud = document.getElementById("cryptoTagCloud");
+  const sideNews = document.getElementById("cryptoSideNews");
+  const rightTicker = document.getElementById("cryptoRightTicker");
+  const rightNews = document.getElementById("cryptoRightNews");
+  const clock = document.getElementById("cryptoClock");
+  const clockDate = document.getElementById("cryptoClockDate");
+  const prevDay = document.getElementById("cryptoPrevDay");
+  if (!flow && !trend && !marketRows && !sentiment && !smartMoney && !topBottom && !predictions && !rsiMap && !chainFlow && !sideHot && !rightTicker) return;
 
   const rows = state.cryptoUniverse.filter((r) => typeof r.market_cap === "number");
+  const coreRows = ["BTC", "ETH", "SOL", "HYPE"].map((t) => rows.find((r) => r.ticker === t)).filter(Boolean);
   const sortedMovers = [...rows]
     .filter((r) => typeof r.change_24h === "number")
     .sort((a, b) => Math.abs(b.change_24h) - Math.abs(a.change_24h))
-    .slice(0, 5);
+    .slice(0, 10);
+  const gainers = [...rows].filter((r) => typeof r.change_24h === "number").sort((a, b) => b.change_24h - a.change_24h).slice(0, 5);
+  const losers = [...rows].filter((r) => typeof r.change_24h === "number").sort((a, b) => a.change_24h - b.change_24h).slice(0, 5);
+  const buyRows = gainers.slice(0, 7);
+  const sellRows = losers.slice(0, 8);
+  const futuresRows = [...rows].filter((r) => typeof r.volume_24h === "number").sort((a, b) => b.volume_24h - a.volume_24h).slice(0, 6);
+  const cryptoNews = Array.isArray(state.news?.crypto) ? state.news.crypto : [];
+  const total = getTotalMarketCapUsd();
+  const btcDom = getBtcDominance();
+  const ethDom = getEthDominance();
+  const fearGreed = getFearGreedValue();
+  const premium = getCoinbasePremiumPct();
+  const stable = toNumSafe(state.stablecoinSummary?.total) ?? toNumSafe(state.cryptoMarket?.stablecoins?.total_market_cap_usd);
+  const rsiScore = (row) => Math.max(5, Math.min(95, Math.round(50 + (toNumSafe(row.change_24h) ?? 0) * 6)));
+  const now = new Date();
+
+  if (clockDate) {
+    clockDate.textContent = new Intl.DateTimeFormat("ko-KR", {
+      timeZone: "Asia/Seoul",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      weekday: "long",
+    }).format(now);
+  }
+
+  if (prevDay) {
+    const yesterday = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+    prevDay.textContent = `← ${new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Asia/Seoul",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(yesterday)}`;
+  }
+
+  if (clock) {
+    clock.textContent = new Intl.DateTimeFormat("ko-KR", {
+      timeZone: "Asia/Seoul",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+    }).format(now);
+  }
 
   if (trend) {
     trend.innerHTML = sortedMovers
+      .slice(0, 6)
       .map((r) => `
-        <article class="crypto-trend-card">
-          <span>${r.ticker || "—"}</span>
-          <strong>${typeof r.price === "number" ? formatUsd(r.price, r.price < 1 ? 4 : 2) : "—"}</strong>
-          <em class="${toneClass(r.change_24h)}">${formatPct(r.change_24h)}</em>
-          <small>${formatBigNumber(r.market_cap)}</small>
+        <article class="portal-trend-card">
+          <div><strong>${r.ticker || "—"}</strong><span>${r.name || ""}</span></div>
+          <b class="${toneClass(r.change_24h)}">${formatPct(r.change_24h)}</b>
+          <small>${typeof r.price === "number" ? formatUsd(r.price, r.price < 1 ? 4 : 2) : "—"} · ${formatBigNumber(r.market_cap)}</small>
         </article>
       `)
       .join("");
   }
 
   if (flow) {
-    const cryptoNews = Array.isArray(state.news?.crypto) ? state.news.crypto.slice(0, 4) : [];
-    const btcDom = getBtcDominance();
-    const total = getTotalMarketCapUsd();
-    const stable = toNumSafe(state.stablecoinSummary?.total) ?? toNumSafe(state.cryptoMarket?.stablecoins?.total_market_cap_usd);
     const items = [
       {
         label: "시장 규모",
@@ -932,6 +989,144 @@ function renderCryptoBriefingExtras() {
         </article>
       `)
       .join("");
+  }
+
+  if (marketRows) {
+    const marketList = coreRows.length ? coreRows : rows.slice(0, 4);
+    marketRows.innerHTML = marketList
+      .map((r) => `
+        <div class="portal-market-row">
+          <span><b>${r.name || r.ticker}</b><em>${r.ticker || ""}</em></span>
+          <span>${typeof r.price === "number" ? formatUsd(r.price, r.price < 1 ? 4 : 2) : "—"}</span>
+          <span class="${toneClass(r.change_24h)}">${formatPct(r.change_24h)}</span>
+          <span>${formatBigNumber(r.market_cap)}</span>
+        </div>
+      `)
+      .join("");
+  }
+
+  if (sentiment) {
+    const altSeason = typeof btcDom === "number" ? Math.max(0, Math.min(100, Math.round(100 - btcDom))) : null;
+    const longShort = typeof premium === "number" ? Math.max(0, Math.min(100, Math.round(50 + premium * 120))) : null;
+    const cards = [
+      { label: "공포·탐욕", value: fearGreed, meta: typeof fearGreed === "number" && fearGreed < 30 ? "공포" : "중립" },
+      { label: "알트코인 시즌", value: altSeason, meta: "BTC 제외 비중" },
+      { label: "프리미엄 점수", value: longShort, meta: "Coinbase" },
+    ];
+    sentiment.innerHTML = cards
+      .map((card) => {
+        const v = typeof card.value === "number" ? Math.round(card.value) : null;
+        return `
+          <article class="portal-gauge-card">
+            <div class="portal-gauge" style="--score:${v ?? 50}"><b>${v ?? "—"}</b></div>
+            <p>${card.label}</p>
+            <span>${card.meta}</span>
+          </article>
+        `;
+      })
+      .join("");
+  }
+
+  if (smartMoney) {
+    const sourceRows = uiState.smartMoneyTab === "sell" ? sellRows : uiState.smartMoneyTab === "futures" ? futuresRows : buyRows;
+    const maxAbs = Math.max(1, ...sourceRows.map((r) => Math.abs(toNumSafe(r.change_24h) ?? 0)));
+    smartMoney.innerHTML = sourceRows
+      .map((r, idx) => {
+        const change = toNumSafe(r.change_24h) ?? 0;
+        const width = Math.max(8, Math.min(100, Math.abs(change) / maxAbs * 100));
+        return `
+          <div class="smart-money-row">
+            <span>${idx + 1}</span>
+            <b>${r.ticker || "—"}</b>
+            <em>${r.name || ""}</em>
+            <strong class="${toneClass(change)}">${formatPct(change)}</strong>
+            <i><u style="width:${width}%"></u></i>
+          </div>
+        `;
+      })
+      .join("");
+    const buyCount = document.getElementById("smartBuyCount");
+    const sellCount = document.getElementById("smartSellCount");
+    const futuresCount = document.getElementById("smartFuturesCount");
+    if (buyCount) buyCount.textContent = `${buyRows.length}개`;
+    if (sellCount) sellCount.textContent = `${sellRows.length}개`;
+    if (futuresCount) futuresCount.textContent = `${futuresRows.length}개`;
+  }
+
+  if (topBottom) {
+    const block = (title, list, tone) => `
+      <div class="top-bottom-card ${tone}">
+        <h3>${title}</h3>
+        ${list.map((r) => `<p><span>${r.ticker}</span><b>${formatPct(r.change_24h, 1)}</b></p>`).join("")}
+      </div>
+    `;
+    topBottom.innerHTML = block("급등 TOP 5", gainers, "up") + block("급락 TOP 5", losers, "down");
+  }
+
+  if (predictions) {
+    const subjects = ["비트코인이 이번 주 도미넌스를 유지할까?", "ETH/BTC가 반등할까?", "스테이블 시총이 증가세를 유지할까?", "시장 심리가 공포 구간을 벗어날까?", "알트코인 거래량이 BTC를 앞지를까?"];
+    predictions.innerHTML = subjects
+      .map((title, idx) => {
+        const odds = [58, 44, 63, 31, 27][idx];
+        return `
+          <article class="prediction-item">
+            <b>${odds}%</b>
+            <div><strong>${title}</strong><span>${odds >= 50 ? "YES 우세" : "NO 우세"} · 참고용 시장 시나리오</span></div>
+          </article>
+        `;
+      })
+      .join("");
+  }
+
+  if (rsiMap) {
+    const rsiRows = [...gainers.slice(0, 5), ...losers.slice(0, 5)];
+    rsiMap.innerHTML = rsiRows
+      .map((r, idx) => {
+        const score = rsiScore(r);
+        const left = rsiRows.length <= 1 ? 50 : 8 + idx * (84 / (rsiRows.length - 1));
+        const tone = score >= 70 ? "hot" : score <= 30 ? "cold" : "mid";
+        return `<span class="rsi-dot ${tone}" style="left:${left}%; bottom:${score}%"><b>${score}</b><em>${r.ticker}</em></span>`;
+      })
+      .join("");
+  }
+
+  if (chainFlow) {
+    const tagCounts = new Map();
+    rows.forEach((r) => (r.tags || []).slice(0, 2).forEach((tag) => tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1)));
+    const tags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 6);
+    const max = Math.max(1, ...tags.map(([, count]) => count));
+    chainFlow.innerHTML = tags.map(([tag, count]) => `<p><span>${tag}</span><b style="width:${(count / max) * 100}%"></b><em>${count}</em></p>`).join("");
+  }
+
+  if (sideHot) {
+    sideHot.innerHTML = sortedMovers.slice(0, 5).map((r, idx) => `<p><b>${idx + 1}</b><span>${r.ticker} ${r.name || ""}</span><em class="${toneClass(r.change_24h)}">${formatPct(r.change_24h, 1)}</em></p>`).join("");
+  }
+
+  if (tagCloud) {
+    const tags = new Map();
+    rows.forEach((r) => (r.tags || []).forEach((tag) => tags.set(tag, (tags.get(tag) || 0) + 1)));
+    tagCloud.innerHTML = [...tags.entries()].sort((a, b) => b[1] - a[1]).slice(0, 18).map(([tag, count]) => `<span>#${tag} <b>${count}</b></span>`).join("");
+  }
+
+  if (sideNews) {
+    sideNews.innerHTML = cryptoNews.slice(0, 4).map((n, idx) => `<p><b>${idx + 1}</b><span>${localizeNewsTitle(n.title, "크립토") || "뉴스 수집 대기"}</span></p>`).join("");
+  }
+
+  if (rightTicker) {
+    const tickers = [
+      { label: "비트코인", value: state.live?.BTC?.price ?? rows.find((r) => r.ticker === "BTC")?.price, delta: state.live?.BTC?.change ?? rows.find((r) => r.ticker === "BTC")?.change_24h },
+      { label: "이더리움", value: state.live?.ETH?.price ?? rows.find((r) => r.ticker === "ETH")?.price, delta: state.live?.ETH?.change ?? rows.find((r) => r.ticker === "ETH")?.change_24h },
+      { label: "솔라나", value: state.live?.SOL?.price ?? rows.find((r) => r.ticker === "SOL")?.price, delta: state.live?.SOL?.change ?? rows.find((r) => r.ticker === "SOL")?.change_24h },
+      { label: "달러 환율", value: state.fx?.usdKrw ?? fallbackFx.usdKrw, delta: state.fx?.delta ?? fallbackFx.delta },
+    ];
+    rightTicker.innerHTML = tickers.map((t) => `<p><span>${t.label}</span><b>${t.label.includes("환율") ? `${Math.round(t.value || 0).toLocaleString()}원` : formatUsd(toNumSafe(t.value), 0)}</b><em class="${toneClass(t.delta)}">${formatPct(toNumSafe(t.delta), 2)}</em></p>`).join("");
+  }
+
+  if (rightNews) {
+    const top = cryptoNews[0];
+    rightNews.innerHTML = top
+      ? `<article><strong>${localizeNewsTitle(top.title, "크립토")}</strong><p>${top.summary || newsImpactText(top.title, "크립토")}</p><span>${top.source || "Google News"}</span></article>`
+      : `<article><strong>뉴스 수집 대기</strong><p>크립토 주요 헤드라인이 수집되면 이 영역에 표시됩니다.</p><span>Google News</span></article>`;
   }
 }
 
@@ -1275,6 +1470,18 @@ function setupCryptoControls() {
       renderCryptoTable();
     });
     sortSelect.dataset.bound2 = "1";
+  }
+
+  const smartTabs = document.getElementById("smartMoneyTabs");
+  if (smartTabs && !smartTabs.dataset.bound) {
+    smartTabs.addEventListener("click", (event) => {
+      const button = event.target.closest("button[data-smart-tab]");
+      if (!button) return;
+      uiState.smartMoneyTab = button.dataset.smartTab || "buy";
+      smartTabs.querySelectorAll("button").forEach((tab) => tab.classList.toggle("active", tab === button));
+      renderCryptoBriefingExtras();
+    });
+    smartTabs.dataset.bound = "1";
   }
 }
 
