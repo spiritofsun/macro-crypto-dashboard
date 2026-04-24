@@ -876,6 +876,65 @@ function renderCryptoSummary() {
   }
 }
 
+function renderCryptoBriefingExtras() {
+  const flow = document.getElementById("cryptoFlowList");
+  const trend = document.getElementById("cryptoTrendStrip");
+  if (!flow && !trend) return;
+
+  const rows = state.cryptoUniverse.filter((r) => typeof r.market_cap === "number");
+  const sortedMovers = [...rows]
+    .filter((r) => typeof r.change_24h === "number")
+    .sort((a, b) => Math.abs(b.change_24h) - Math.abs(a.change_24h))
+    .slice(0, 5);
+
+  if (trend) {
+    trend.innerHTML = sortedMovers
+      .map((r) => `
+        <article class="crypto-trend-card">
+          <span>${r.ticker || "—"}</span>
+          <strong>${typeof r.price === "number" ? formatUsd(r.price, r.price < 1 ? 4 : 2) : "—"}</strong>
+          <em class="${toneClass(r.change_24h)}">${formatPct(r.change_24h)}</em>
+          <small>${formatBigNumber(r.market_cap)}</small>
+        </article>
+      `)
+      .join("");
+  }
+
+  if (flow) {
+    const cryptoNews = Array.isArray(state.news?.crypto) ? state.news.crypto.slice(0, 4) : [];
+    const btcDom = getBtcDominance();
+    const total = getTotalMarketCapUsd();
+    const stable = toNumSafe(state.stablecoinSummary?.total) ?? toNumSafe(state.cryptoMarket?.stablecoins?.total_market_cap_usd);
+    const items = [
+      {
+        label: "시장 규모",
+        value: formatBigNumber(total),
+        note: `BTC.D ${typeof btcDom === "number" ? `${btcDom.toFixed(2)}%` : "—"} · Stable ${formatBigNumber(stable)}`,
+      },
+      {
+        label: "프리미엄",
+        value: formatPct(getCoinbasePremiumPct(), 2),
+        note: "Coinbase BTC spot vs CoinGecko BTC",
+      },
+      ...cryptoNews.map((item) => ({
+        label: "뉴스",
+        value: item.title || "헤드라인 수집 대기",
+        note: item.source || "Google News",
+      })),
+    ].slice(0, 6);
+
+    flow.innerHTML = items
+      .map((item) => `
+        <article class="crypto-flow-item">
+          <p>${item.label}</p>
+          <strong>${item.value}</strong>
+          <span>${item.note}</span>
+        </article>
+      `)
+      .join("");
+  }
+}
+
 function renderCryptoOverview() {
   const lead = document.getElementById("cryptoLeadCard");
   const quick = document.getElementById("cryptoQuickStrip");
@@ -885,14 +944,22 @@ function renderCryptoOverview() {
   const btc = rows.find((r) => r.ticker === "BTC");
   const eth = rows.find((r) => r.ticker === "ETH");
   const btcDom = getBtcDominance();
+  const ethDom = getEthDominance();
   const fearGreed = getFearGreedValue();
+  const total = getTotalMarketCapUsd();
+  const premium = getCoinbasePremiumPct();
   const regime = typeof fearGreed === "number" && fearGreed < 30 ? "방어적 심리 우세" : typeof fearGreed === "number" && fearGreed > 60 ? "위험 선호 우세" : "중립 구간";
+  const regimeBody = typeof fearGreed === "number" && fearGreed < 30
+    ? "심리 지표는 방어 구간입니다. 반등 신호보다 유동성, ETF 수급, BTC 도미넌스 변화를 먼저 확인하는 구간입니다."
+    : typeof fearGreed === "number" && fearGreed > 60
+      ? "위험 선호가 살아난 구간입니다. 추세 지속 여부는 거래량과 스테이블 시총 흐름으로 확인합니다."
+      : "방향성은 중립입니다. BTC 주도권과 알트 확산 여부를 함께 확인해야 합니다.";
 
   if (lead) {
     lead.innerHTML = `
-      <p class="page-lead-kicker">크립토 체온계</p>
+      <p class="page-lead-kicker">Daily Crypto Briefing</p>
       <h2>${regime}</h2>
-      <p class="page-lead-body">커스텀 유니버스와 도미넌스, 스테이블 시총, 프리미엄 지표를 한 화면에서 읽을 수 있게 정리했습니다.</p>
+      <p class="page-lead-body">${regimeBody}</p>
       <div class="page-lead-meta">
         <span>BTC ${typeof btc?.price === "number" ? formatUsd(btc.price, 0) : "—"}</span>
         <span>ETH ${typeof eth?.price === "number" ? formatUsd(eth.price, 0) : "—"}</span>
@@ -903,13 +970,15 @@ function renderCryptoOverview() {
 
   if (quick) {
     const items = [
+      { label: "TOTAL", value: formatBigNumber(total), meta: "CoinGecko global" },
       { label: "심리 지수", value: typeof fearGreed === "number" ? `${fearGreed}` : "—", meta: "Fear & Greed" },
-      { label: "BTC 도미넌스", value: typeof btcDom === "number" ? `${btcDom.toFixed(2)}%` : "—", meta: "시장 점유율" },
-      { label: "유니버스 규모", value: `${state.cryptoUniverse.length}종`, meta: "커스텀 리스트" },
-      { label: "코인베이스 프리미엄", value: formatPct(toNumSafe(state.live?.coinbasePremiumPct), 2), meta: "BTC 기준" },
+      { label: "BTC 도미넌스", value: typeof btcDom === "number" ? `${btcDom.toFixed(2)}%` : "—", meta: `ETH.D ${typeof ethDom === "number" ? `${ethDom.toFixed(2)}%` : "—"}` },
+      { label: "코인베이스 프리미엄", value: formatPct(premium, 2), meta: "BTC 기준" },
     ];
     quick.innerHTML = items.map((item) => `<article class="page-quick-card"><p>${item.label}</p><strong>${item.value}</strong><span>${item.meta}</span></article>`).join("");
   }
+
+  renderCryptoBriefingExtras();
 }
 
 function renderDominanceHybrid() {

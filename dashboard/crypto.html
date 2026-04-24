@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260412b" />
+    <link rel="stylesheet" href="./styles.css?v=20260424a" />
   </head>
   <body>
     <div class="app-shell">
@@ -24,37 +24,60 @@
       </aside>
 
       <main class="page content-page">
-        <header class="hero">
-          <p class="kicker">카테고리 / 크립토</p>
-          <h1>커스텀 코인 모니터링</h1>
+        <header class="hero crypto-brief-header">
+          <div>
+            <p class="kicker">카테고리 / 크립토</p>
+            <h1>크립토 브리핑</h1>
+          </div>
           <p class="asof" id="asOfText">loading...</p>
         </header>
 
         <section class="global-data-health" id="globalDataHealth" hidden></section>
 
-        <section class="page-overview">
-          <article class="page-lead-card" id="cryptoLeadCard"></article>
-          <div class="page-quick-grid" id="cryptoQuickStrip"></div>
+        <section class="crypto-brief-layout">
+          <article class="crypto-brief-lead" id="cryptoLeadCard"></article>
+          <div class="crypto-brief-metrics" id="cryptoQuickStrip"></div>
         </section>
 
-        <section class="panel">
-          <h3 class="group-title">요약 지표</h3>
-          <div class="table-wrap">
-            <table class="data-table compact-table crypto-summary-table">
-              <thead>
-                <tr>
-                  <th>구분</th>
-                  <th class="num">값</th>
-                  <th>해석</th>
-                </tr>
-              </thead>
-              <tbody id="cryptoSummaryRows"></tbody>
-            </table>
+        <section class="crypto-brief-grid">
+          <article class="briefing-panel">
+            <div class="panel-head compact">
+              <h2>시장 요약</h2>
+              <p class="subhead">검증된 핵심 지표</p>
+            </div>
+            <div class="table-wrap">
+              <table class="data-table compact-table crypto-summary-table">
+                <thead>
+                  <tr>
+                    <th>구분</th>
+                    <th class="num">값</th>
+                    <th>해석</th>
+                  </tr>
+                </thead>
+                <tbody id="cryptoSummaryRows"></tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="briefing-panel">
+            <div class="panel-head compact">
+              <h2>오늘의 흐름</h2>
+              <p class="subhead">가격 움직임과 주요 뉴스</p>
+            </div>
+            <div class="crypto-flow-list" id="cryptoFlowList"></div>
+          </article>
+        </section>
+
+        <section class="briefing-panel">
+          <div class="panel-head compact">
+            <h2>트렌딩 유니버스</h2>
+            <p class="subhead">커스텀 리스트 상위 움직임</p>
           </div>
+          <div class="crypto-trend-strip" id="cryptoTrendStrip"></div>
         </section>
 
-        <section class="panel">
-          <div class="panel-head">
+        <section class="briefing-panel">
+          <div class="panel-head compact">
             <h2>커스텀 유니버스</h2>
             <p class="subhead">사용자 지정 리스트 기준 · 표 뷰</p>
           </div>
@@ -96,6 +119,6 @@
       </main>
     </div>
 
-    <script src="./app.js?v=20260412b"></script>
+    <script src="./app.js?v=20260424a"></script>
   </body>
 </html>
