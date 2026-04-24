@@ -1,64 +1,834 @@
 {
-  "as_of": "2026-02-16 09:31 KST",
+  "as_of": "2026-04-25T08:41+09:00",
   "assets": [
-    {"rank_in_custom":1,"ticker":"BTC","name":"Bitcoin","price":89986.73,"change_24h":1.41,"market_cap":1772000000000,"volume_24h":48600000000,"tags":["major"]},
-    {"rank_in_custom":2,"ticker":"ETH","name":"Ethereum","price":3125.32,"change_24h":4.16,"market_cap":375000000000,"volume_24h":23900000000,"tags":["major"]},
-    {"rank_in_custom":3,"ticker":"XRP","name":"XRP","price":2.02,"change_24h":7.54,"market_cap":117000000000,"volume_24h":9200000000,"tags":["major"]},
-    {"rank_in_custom":4,"ticker":"BNB","name":"BNB","price":616.41,"change_24h":0.88,"market_cap":90600000000,"volume_24h":1970000000,"tags":["major"]},
-    {"rank_in_custom":5,"ticker":"SOL","name":"Solana","price":132.63,"change_24h":4.63,"market_cap":63500000000,"volume_24h":6700000000,"tags":["major"]},
-    {"rank_in_custom":6,"ticker":"TRX","name":"TRON","price":0.2807,"change_24h":0.20,"market_cap":24400000000,"volume_24h":560000000,"tags":["major"]},
-    {"rank_in_custom":7,"ticker":"DOGE","name":"Dogecoin","price":0.1027,"change_24h":-1.10,"market_cap":15100000000,"volume_24h":1230000000,"tags":["major"]},
-    {"rank_in_custom":8,"ticker":"BCH","name":"Bitcoin Cash","price":390.6,"change_24h":0.60,"market_cap":7740000000,"volume_24h":320000000,"tags":["major"]},
-    {"rank_in_custom":9,"ticker":"ADA","name":"Cardano","price":0.2823,"change_24h":-0.90,"market_cap":10200000000,"volume_24h":640000000,"tags":["major"]},
-    {"rank_in_custom":10,"ticker":"LINK","name":"Chainlink","price":18.79,"change_24h":-0.10,"market_cap":11600000000,"volume_24h":690000000,"tags":["major"]},
-    {"rank_in_custom":11,"ticker":"AVAX","name":"Avalanche","price":29.14,"change_24h":-0.40,"market_cap":12500000000,"volume_24h":430000000,"tags":["major"]},
-    {"rank_in_custom":12,"ticker":"UNI","name":"Uniswap","price":8.90,"change_24h":0.40,"market_cap":5300000000,"volume_24h":190000000,"tags":["major"]},
-    {"rank_in_custom":13,"ticker":"AAVE","name":"Aave","price":97.4,"change_24h":1.70,"market_cap":1500000000,"volume_24h":120000000,"tags":["major"]},
-    {"rank_in_custom":14,"ticker":"NEAR","name":"NEAR","price":3.18,"change_24h":0.90,"market_cap":3400000000,"volume_24h":260000000,"tags":["major"]},
-    {"rank_in_custom":15,"ticker":"ONDO","name":"Ondo","price":1.02,"change_24h":1.20,"market_cap":3200000000,"volume_24h":210000000,"tags":["major"]},
-    {"rank_in_custom":16,"ticker":"SUI","name":"Sui","price":0.9768,"change_24h":-0.20,"market_cap":3150000000,"volume_24h":260000000,"tags":["major"]},
-    {"rank_in_custom":17,"ticker":"TON","name":"Toncoin","price":1.47,"change_24h":0.50,"market_cap":5450000000,"volume_24h":180000000,"tags":["major"]},
-    {"rank_in_custom":18,"ticker":"XLM","name":"Stellar","price":0.1710,"change_24h":-0.03,"market_cap":5140000000,"volume_24h":220000000,"tags":["major"]},
-    {"rank_in_custom":19,"ticker":"XMR","name":"Monero","price":169.5,"change_24h":0.30,"market_cap":3120000000,"volume_24h":140000000,"tags":["major"]},
-    {"rank_in_custom":20,"ticker":"MNT","name":"Mantle","price":0.78,"change_24h":1.30,"market_cap":2600000000,"volume_24h":98000000,"tags":["major"]},
-
-    {"rank_in_custom":21,"ticker":"HYPE","name":"Hyperliquid","price":2.80,"change_24h":3.20,"market_cap":980000000,"volume_24h":120000000,"tags":["watch"]},
-    {"rank_in_custom":22,"ticker":"ENA","name":"Ethena","price":0.52,"change_24h":-2.10,"market_cap":1450000000,"volume_24h":180000000,"tags":["watch"]},
-    {"rank_in_custom":23,"ticker":"POL","name":"Polygon","price":0.61,"change_24h":-0.50,"market_cap":5400000000,"volume_24h":220000000,"tags":["watch"]},
-    {"rank_in_custom":24,"ticker":"APT","name":"Aptos","price":9.42,"change_24h":1.20,"market_cap":4200000000,"volume_24h":250000000,"tags":["watch"]},
-    {"rank_in_custom":25,"ticker":"ARB","name":"Arbitrum","price":1.15,"change_24h":0.90,"market_cap":3700000000,"volume_24h":280000000,"tags":["watch"]},
-    {"rank_in_custom":26,"ticker":"OP","name":"Optimism","price":2.80,"change_24h":1.10,"market_cap":3100000000,"volume_24h":190000000,"tags":["watch"]},
-    {"rank_in_custom":27,"ticker":"CRV","name":"Curve","price":0.74,"change_24h":-0.80,"market_cap":930000000,"volume_24h":120000000,"tags":["watch"]},
-    {"rank_in_custom":28,"ticker":"ZRO","name":"LayerZero","price":4.10,"change_24h":1.80,"market_cap":780000000,"volume_24h":86000000,"tags":["watch"]},
-    {"rank_in_custom":29,"ticker":"PYTH","name":"Pyth","price":0.43,"change_24h":-0.40,"market_cap":1500000000,"volume_24h":98000000,"tags":["watch"]},
-    {"rank_in_custom":30,"ticker":"GRT","name":"The Graph","price":0.29,"change_24h":0.20,"market_cap":2800000000,"volume_24h":150000000,"tags":["watch"]},
-    {"rank_in_custom":31,"ticker":"LDO","name":"Lido","price":2.23,"change_24h":-0.30,"market_cap":2000000000,"volume_24h":90000000,"tags":["watch"]},
-    {"rank_in_custom":32,"ticker":"AERO","name":"Aerodrome","price":1.49,"change_24h":2.20,"market_cap":880000000,"volume_24h":70000000,"tags":["watch"]},
-    {"rank_in_custom":33,"ticker":"STRK","name":"Starknet","price":1.74,"change_24h":0.50,"market_cap":1200000000,"volume_24h":85000000,"tags":["watch"]},
-    {"rank_in_custom":34,"ticker":"ZK","name":"ZKsync","price":0.45,"change_24h":-1.40,"market_cap":980000000,"volume_24h":72000000,"tags":["watch"]},
-    {"rank_in_custom":35,"ticker":"PENDLE","name":"Pendle","price":3.22,"change_24h":1.90,"market_cap":790000000,"volume_24h":64000000,"tags":["watch"]},
-    {"rank_in_custom":36,"ticker":"SAND","name":"The Sandbox","price":0.64,"change_24h":0.10,"market_cap":1500000000,"volume_24h":110000000,"tags":["watch"]},
-    {"rank_in_custom":37,"ticker":"BERA","name":"Berachain","price":1.24,"change_24h":0.00,"market_cap":410000000,"volume_24h":34000000,"tags":["watch"]},
-    {"rank_in_custom":38,"ticker":"BEAM","name":"Beam","price":0.026,"change_24h":-0.60,"market_cap":1300000000,"volume_24h":54000000,"tags":["watch"]},
-    {"rank_in_custom":39,"ticker":"FRAX","name":"Frax","price":1.0,"change_24h":0.00,"market_cap":860000000,"volume_24h":21000000,"tags":["stablecoin","watch"]},
-    {"rank_in_custom":40,"ticker":"LTC","name":"Litecoin","price":73.1,"change_24h":-0.70,"market_cap":5480000000,"volume_24h":480000000,"tags":["major"]},
-    {"rank_in_custom":41,"ticker":"ICP","name":"Internet Computer","price":12.4,"change_24h":0.80,"market_cap":5900000000,"volume_24h":210000000,"tags":["major"]},
-
-    {"rank_in_custom":42,"ticker":"CC","name":"Canto Network","price":null,"change_24h":null,"market_cap":null,"volume_24h":null,"tags":["project_tracking"]},
-    {"rank_in_custom":43,"ticker":"MORPHO","name":"Morpho","price":null,"change_24h":null,"market_cap":null,"volume_24h":null,"tags":["project_tracking"]},
-    {"rank_in_custom":44,"ticker":"LIT","name":"Lighter","price":1.61,"change_24h":null,"market_cap":404000000,"volume_24h":null,"disable_ticker_feed":true,"tags":["project_tracking"]},
-    {"rank_in_custom":45,"ticker":"IP","name":"Story","price":null,"change_24h":null,"market_cap":null,"volume_24h":null,"tags":["project_tracking"]},
-    {"rank_in_custom":46,"ticker":"SYRUP","name":"Maple Finance","price":null,"change_24h":null,"market_cap":null,"volume_24h":null,"tags":["project_tracking"]},
-    {"rank_in_custom":47,"ticker":"2Z","name":"DoubleZero","price":null,"change_24h":null,"market_cap":null,"volume_24h":null,"tags":["project_tracking"]},
-    {"rank_in_custom":48,"ticker":"MON","name":"Monad","price":null,"change_24h":null,"market_cap":null,"volume_24h":null,"tags":["project_tracking"]},
-    {"rank_in_custom":49,"ticker":"0G","name":"0G","price":null,"change_24h":null,"market_cap":null,"volume_24h":null,"tags":["project_tracking"]},
-    {"rank_in_custom":50,"ticker":"EIGEN","name":"EigenCloud","price":null,"change_24h":null,"market_cap":null,"volume_24h":null,"tags":["project_tracking"]},
-    {"rank_in_custom":51,"ticker":"LINEA","name":"Linea","price":null,"change_24h":null,"market_cap":null,"volume_24h":null,"tags":["project_tracking"]},
-    {"rank_in_custom":52,"ticker":"WLD","name":"World","price":2.30,"change_24h":0.90,"market_cap":2900000000,"volume_24h":180000000,"tags":["project_tracking"]},
-    {"rank_in_custom":53,"ticker":"OKB","name":"OKB","price":56.2,"change_24h":0.40,"market_cap":3400000000,"volume_24h":15000000,"tags":["project_tracking"]},
-    {"rank_in_custom":54,"ticker":"SKY","name":"Sky","price":null,"change_24h":null,"market_cap":null,"volume_24h":null,"tags":["project_tracking"]},
-    {"rank_in_custom":55,"ticker":"WLFI","name":"Liberty Financial","price":null,"change_24h":null,"market_cap":null,"volume_24h":null,"tags":["project_tracking"]},
-    {"rank_in_custom":56,"ticker":"FIL","name":"Filecoin","price":6.12,"change_24h":-0.70,"market_cap":3600000000,"volume_24h":160000000,"tags":["project_tracking"]}
+    {
+      "rank_in_custom": 1,
+      "ticker": "BTC",
+      "name": "Bitcoin",
+      "price": 77444.0,
+      "change_24h": -1.0558,
+      "market_cap": 1550499876665.0,
+      "volume_24h": 33618346541.0,
+      "tags": [
+        "major"
+      ],
+      "coingecko_id": "bitcoin",
+      "market_source": "coingecko",
+      "funding": -9.56e-06
+    },
+    {
+      "rank_in_custom": 2,
+      "ticker": "ETH",
+      "name": "Ethereum",
+      "price": 2315.66,
+      "change_24h": -0.6736,
+      "market_cap": 279521417566.0,
+      "volume_24h": 13649597915.0,
+      "tags": [
+        "major"
+      ],
+      "coingecko_id": "ethereum",
+      "market_source": "coingecko",
+      "funding": -4.68e-05
+    },
+    {
+      "rank_in_custom": 3,
+      "ticker": "XRP",
+      "name": "XRP",
+      "price": 1.43,
+      "change_24h": -0.3138,
+      "market_cap": 88399677116.0,
+      "volume_24h": 2175775393.0,
+      "tags": [
+        "major"
+      ],
+      "coingecko_id": "ripple",
+      "market_source": "coingecko",
+      "funding": 4.868e-05
+    },
+    {
+      "rank_in_custom": 4,
+      "ticker": "BNB",
+      "name": "BNB",
+      "price": 636.5,
+      "change_24h": -0.3462,
+      "market_cap": 85798117546.0,
+      "volume_24h": 834785552.0,
+      "tags": [
+        "major"
+      ],
+      "coingecko_id": "binancecoin",
+      "market_source": "coingecko",
+      "funding": 3.455e-05
+    },
+    {
+      "rank_in_custom": 5,
+      "ticker": "SOL",
+      "name": "Solana",
+      "price": 86.23,
+      "change_24h": 0.1446,
+      "market_cap": 49649224694.0,
+      "volume_24h": 2943075415.0,
+      "tags": [
+        "major"
+      ],
+      "coingecko_id": "solana",
+      "market_source": "coingecko",
+      "funding": 5.183e-05
+    },
+    {
+      "rank_in_custom": 6,
+      "ticker": "TRX",
+      "name": "TRON",
+      "price": 0.323731,
+      "change_24h": -1.5908,
+      "market_cap": 30681384831.0,
+      "volume_24h": 634373897.0,
+      "tags": [
+        "major"
+      ],
+      "coingecko_id": "tron",
+      "market_source": "coingecko",
+      "funding": -0.00072748
+    },
+    {
+      "rank_in_custom": 7,
+      "ticker": "DOGE",
+      "name": "Dogecoin",
+      "price": 0.098219,
+      "change_24h": 0.9986,
+      "market_cap": 15124080321.0,
+      "volume_24h": 1487938405.0,
+      "tags": [
+        "major"
+      ],
+      "coingecko_id": "dogecoin",
+      "market_source": "coingecko",
+      "funding": 0.0001
+    },
+    {
+      "rank_in_custom": 8,
+      "ticker": "BCH",
+      "name": "Bitcoin Cash",
+      "price": 456.16,
+      "change_24h": -0.9489,
+      "market_cap": 9133803359.0,
+      "volume_24h": 150176825.0,
+      "tags": [
+        "major"
+      ],
+      "coingecko_id": "bitcoin-cash",
+      "market_source": "coingecko",
+      "funding": 5.179e-05
+    },
+    {
+      "rank_in_custom": 9,
+      "ticker": "ADA",
+      "name": "Cardano",
+      "price": 0.250435,
+      "change_24h": 0.1328,
+      "market_cap": 9258644079.0,
+      "volume_24h": 296672963.0,
+      "tags": [
+        "major"
+      ],
+      "coingecko_id": "cardano",
+      "market_source": "coingecko",
+      "funding": 0.0001
+    },
+    {
+      "rank_in_custom": 10,
+      "ticker": "LINK",
+      "name": "Chainlink",
+      "price": 9.38,
+      "change_24h": 0.2992,
+      "market_cap": 6819588044.0,
+      "volume_24h": 210792796.0,
+      "tags": [
+        "major"
+      ],
+      "coingecko_id": "chainlink",
+      "market_source": "coingecko",
+      "funding": 0.0001
+    },
+    {
+      "rank_in_custom": 11,
+      "ticker": "AVAX",
+      "name": "Avalanche",
+      "price": 9.4,
+      "change_24h": 0.1179,
+      "market_cap": 4056827224.0,
+      "volume_24h": 159090403.0,
+      "tags": [
+        "major"
+      ],
+      "coingecko_id": "avalanche-2",
+      "market_source": "coingecko",
+      "funding": 0.0001
+    },
+    {
+      "rank_in_custom": 12,
+      "ticker": "UNI",
+      "name": "Uniswap",
+      "price": 3.25,
+      "change_24h": -1.1845,
+      "market_cap": 2060270758.0,
+      "volume_24h": 129090328.0,
+      "tags": [
+        "major"
+      ],
+      "coingecko_id": "uniswap",
+      "market_source": "coingecko",
+      "funding": 3.374e-05
+    },
+    {
+      "rank_in_custom": 13,
+      "ticker": "AAVE",
+      "name": "Aave",
+      "price": 94.05,
+      "change_24h": -0.2486,
+      "market_cap": 1427340244.0,
+      "volume_24h": 316704265.0,
+      "tags": [
+        "major"
+      ],
+      "coingecko_id": "aave",
+      "market_source": "coingecko",
+      "funding": 0.0001
+    },
+    {
+      "rank_in_custom": 14,
+      "ticker": "NEAR",
+      "name": "NEAR Protocol",
+      "price": 1.41,
+      "change_24h": 0.0852,
+      "market_cap": 1819892750.0,
+      "volume_24h": 123412032.0,
+      "tags": [
+        "major"
+      ],
+      "coingecko_id": "near",
+      "market_source": "coingecko",
+      "funding": -7.438e-05
+    },
+    {
+      "rank_in_custom": 15,
+      "ticker": "ONDO",
+      "name": "Ondo",
+      "price": 0.262212,
+      "change_24h": 0.1451,
+      "market_cap": 1277051176.0,
+      "volume_24h": 41827781.0,
+      "tags": [
+        "major"
+      ],
+      "coingecko_id": "ondo-finance",
+      "market_source": "coingecko",
+      "funding": 5e-05
+    },
+    {
+      "rank_in_custom": 16,
+      "ticker": "SUI",
+      "name": "Sui",
+      "price": 0.945848,
+      "change_24h": 0.1658,
+      "market_cap": 3739404957.0,
+      "volume_24h": 232992811.0,
+      "tags": [
+        "major"
+      ],
+      "coingecko_id": "sui",
+      "market_source": "coingecko",
+      "funding": -6.225e-05
+    },
+    {
+      "rank_in_custom": 17,
+      "ticker": "TON",
+      "name": "Toncoin",
+      "price": 1.34,
+      "change_24h": 0.2177,
+      "market_cap": 3333635939.0,
+      "volume_24h": 143064852.0,
+      "tags": [
+        "major"
+      ],
+      "coingecko_id": "the-open-network",
+      "market_source": "coingecko",
+      "funding": -8.661e-05
+    },
+    {
+      "rank_in_custom": 18,
+      "ticker": "XLM",
+      "name": "Stellar",
+      "price": 0.173201,
+      "change_24h": -1.4784,
+      "market_cap": 5764234477.0,
+      "volume_24h": 100407519.0,
+      "tags": [
+        "major"
+      ],
+      "coingecko_id": "stellar",
+      "market_source": "coingecko",
+      "funding": 3.45e-06
+    },
+    {
+      "rank_in_custom": 19,
+      "ticker": "XMR",
+      "name": "Monero",
+      "price": 368.28,
+      "change_24h": -2.8832,
+      "market_cap": 6792918381.0,
+      "volume_24h": 115312557.0,
+      "tags": [
+        "major"
+      ],
+      "coingecko_id": "monero",
+      "market_source": "coingecko",
+      "funding": 0.00062218
+    },
+    {
+      "rank_in_custom": 20,
+      "ticker": "MNT",
+      "name": "Mantle",
+      "price": 0.647198,
+      "change_24h": 0.0008,
+      "market_cap": 2121466264.0,
+      "volume_24h": 42087952.0,
+      "tags": [
+        "major"
+      ],
+      "coingecko_id": "mantle",
+      "market_source": "coingecko"
+    },
+    {
+      "rank_in_custom": 21,
+      "ticker": "HYPE",
+      "name": "Hyperliquid",
+      "price": 41.14,
+      "change_24h": -0.2902,
+      "market_cap": 9810354133.0,
+      "volume_24h": 187237017.0,
+      "tags": [
+        "watch"
+      ],
+      "coingecko_id": "hyperliquid",
+      "market_source": "coingecko",
+      "funding": 5e-05
+    },
+    {
+      "rank_in_custom": 22,
+      "ticker": "ENA",
+      "name": "Ethena",
+      "price": 0.108281,
+      "change_24h": -1.295,
+      "market_cap": 948823139.0,
+      "volume_24h": 75653398.0,
+      "tags": [
+        "watch"
+      ],
+      "coingecko_id": "ethena",
+      "market_source": "coingecko",
+      "funding": 2.511e-05
+    },
+    {
+      "rank_in_custom": 23,
+      "ticker": "POL",
+      "name": "POL (ex-MATIC)",
+      "price": 0.092435,
+      "change_24h": -2.1083,
+      "market_cap": 983238575.0,
+      "volume_24h": 48882813.0,
+      "tags": [
+        "watch"
+      ],
+      "coingecko_id": "polygon-ecosystem-token",
+      "market_source": "coingecko",
+      "funding": -0.00012229
+    },
+    {
+      "rank_in_custom": 24,
+      "ticker": "APT",
+      "name": "Aptos",
+      "price": 0.984165,
+      "change_24h": 3.219,
+      "market_cap": 793967183.0,
+      "volume_24h": 55884857.0,
+      "tags": [
+        "watch"
+      ],
+      "coingecko_id": "aptos",
+      "market_source": "coingecko",
+      "funding": 0.0001
+    },
+    {
+      "rank_in_custom": 25,
+      "ticker": "ARB",
+      "name": "Arbitrum",
+      "price": 0.128885,
+      "change_24h": 0.216,
+      "market_cap": 793015176.0,
+      "volume_24h": 81661310.0,
+      "tags": [
+        "watch"
+      ],
+      "coingecko_id": "arbitrum",
+      "market_source": "coingecko",
+      "funding": 4.48e-06
+    },
+    {
+      "rank_in_custom": 26,
+      "ticker": "OP",
+      "name": "Optimism",
+      "price": 0.125158,
+      "change_24h": 2.8388,
+      "market_cap": 269217075.0,
+      "volume_24h": 49409304.0,
+      "tags": [
+        "watch"
+      ],
+      "coingecko_id": "optimism",
+      "market_source": "coingecko",
+      "funding": 9.031e-05
+    },
+    {
+      "rank_in_custom": 27,
+      "ticker": "CRV",
+      "name": "Curve DAO",
+      "price": 0.224548,
+      "change_24h": 0.9019,
+      "market_cap": 338202496.0,
+      "volume_24h": 41358364.0,
+      "tags": [
+        "watch"
+      ],
+      "coingecko_id": "curve-dao-token",
+      "market_source": "coingecko",
+      "funding": 0.0001
+    },
+    {
+      "rank_in_custom": 28,
+      "ticker": "ZRO",
+      "name": "LayerZero",
+      "price": 1.57,
+      "change_24h": -1.6814,
+      "market_cap": 397353580.0,
+      "volume_24h": 34630462.0,
+      "tags": [
+        "watch"
+      ],
+      "coingecko_id": "layerzero",
+      "market_source": "coingecko",
+      "funding": -2.001e-05
+    },
+    {
+      "rank_in_custom": 29,
+      "ticker": "PYTH",
+      "name": "Pyth Network",
+      "price": 0.050593,
+      "change_24h": -1.6905,
+      "market_cap": 290906441.0,
+      "volume_24h": 26539339.0,
+      "tags": [
+        "watch"
+      ],
+      "coingecko_id": "pyth-network",
+      "market_source": "coingecko",
+      "funding": 5e-05
+    },
+    {
+      "rank_in_custom": 30,
+      "ticker": "GRT",
+      "name": "The Graph",
+      "price": 0.02481926,
+      "change_24h": 0.7481,
+      "market_cap": 268017970.0,
+      "volume_24h": 16890480.0,
+      "tags": [
+        "watch"
+      ],
+      "coingecko_id": "the-graph",
+      "market_source": "coingecko",
+      "funding": 0.0001
+    },
+    {
+      "rank_in_custom": 31,
+      "ticker": "LDO",
+      "name": "Lido DAO",
+      "price": 0.379384,
+      "change_24h": -2.0924,
+      "market_cap": 322173797.0,
+      "volume_24h": 28692143.0,
+      "tags": [
+        "watch"
+      ],
+      "coingecko_id": "lido-dao",
+      "market_source": "coingecko",
+      "funding": 3.408e-05
+    },
+    {
+      "rank_in_custom": 32,
+      "ticker": "AERO",
+      "name": "Aerodrome Finance",
+      "price": 0.423299,
+      "change_24h": -2.5428,
+      "market_cap": 392041095.0,
+      "volume_24h": 13624194.0,
+      "tags": [
+        "watch"
+      ],
+      "coingecko_id": "aerodrome-finance",
+      "market_source": "coingecko",
+      "funding": -8.2e-07
+    },
+    {
+      "rank_in_custom": 33,
+      "ticker": "STRK",
+      "name": "Starknet",
+      "price": 0.04079042,
+      "change_24h": -4.3641,
+      "market_cap": 238776876.0,
+      "volume_24h": 40704778.0,
+      "tags": [
+        "watch"
+      ],
+      "coingecko_id": "starknet",
+      "market_source": "coingecko",
+      "funding": 5e-05
+    },
+    {
+      "rank_in_custom": 34,
+      "ticker": "ZK",
+      "name": "ZKsync",
+      "price": 0.01715097,
+      "change_24h": 4.5828,
+      "market_cap": 166422236.0,
+      "volume_24h": 15409356.0,
+      "tags": [
+        "watch"
+      ],
+      "coingecko_id": "zksync",
+      "market_source": "coingecko",
+      "funding": -1.785e-05
+    },
+    {
+      "rank_in_custom": 35,
+      "ticker": "PENDLE",
+      "name": "Pendle",
+      "price": 1.29,
+      "change_24h": -1.1156,
+      "market_cap": 215548320.0,
+      "volume_24h": 27986001.0,
+      "tags": [
+        "watch"
+      ],
+      "coingecko_id": "pendle",
+      "market_source": "coingecko",
+      "funding": -0.00013496
+    },
+    {
+      "rank_in_custom": 36,
+      "ticker": "SAND",
+      "name": "The Sandbox",
+      "price": 0.078781,
+      "change_24h": 2.8036,
+      "market_cap": 210140224.0,
+      "volume_24h": 32329531.0,
+      "tags": [
+        "watch"
+      ],
+      "coingecko_id": "the-sandbox",
+      "market_source": "coingecko",
+      "funding": 0.0001
+    },
+    {
+      "rank_in_custom": 37,
+      "ticker": "BERA",
+      "name": "Berachain",
+      "price": 0.395398,
+      "change_24h": -0.8316,
+      "market_cap": 97150916.0,
+      "volume_24h": 18555932.0,
+      "tags": [
+        "watch"
+      ],
+      "coingecko_id": "berachain-bera",
+      "market_source": "coingecko",
+      "funding": -0.00011759
+    },
+    {
+      "rank_in_custom": 38,
+      "ticker": "BEAM",
+      "name": "Beam",
+      "price": 0.00200445,
+      "change_24h": 0.1631,
+      "market_cap": 102840434.0,
+      "volume_24h": 4476424.0,
+      "tags": [
+        "watch"
+      ],
+      "coingecko_id": "beam-2",
+      "market_source": "coingecko"
+    },
+    {
+      "rank_in_custom": 39,
+      "ticker": "FRAX",
+      "name": "Legacy Frax Dollar",
+      "price": 0.993297,
+      "change_24h": 0.0021,
+      "market_cap": 274080951.0,
+      "volume_24h": 453723.0,
+      "tags": [
+        "stablecoin",
+        "watch"
+      ],
+      "coingecko_id": "frax",
+      "market_source": "coingecko",
+      "funding": 5e-05
+    },
+    {
+      "rank_in_custom": 40,
+      "ticker": "LTC",
+      "name": "Litecoin",
+      "price": 56.47,
+      "change_24h": 0.5016,
+      "market_cap": 4353840775.0,
+      "volume_24h": 310725732.0,
+      "tags": [
+        "major"
+      ],
+      "coingecko_id": "litecoin",
+      "market_source": "coingecko",
+      "funding": 6.248e-05
+    },
+    {
+      "rank_in_custom": 41,
+      "ticker": "ICP",
+      "name": "Internet Computer",
+      "price": 2.46,
+      "change_24h": -1.1549,
+      "market_cap": 1355541011.0,
+      "volume_24h": 29779275.0,
+      "tags": [
+        "major"
+      ],
+      "coingecko_id": "internet-computer",
+      "market_source": "coingecko",
+      "funding": -5.962e-05
+    },
+    {
+      "rank_in_custom": 42,
+      "ticker": "CC",
+      "name": "CANTO",
+      "price": 0.00135793,
+      "change_24h": null,
+      "market_cap": 826255.0,
+      "volume_24h": 10.86,
+      "tags": [
+        "project_tracking"
+      ],
+      "coingecko_id": "canto",
+      "market_source": "coingecko",
+      "funding": 5e-05
+    },
+    {
+      "rank_in_custom": 43,
+      "ticker": "MORPHO",
+      "name": "Morpho",
+      "price": 1.85,
+      "change_24h": -3.2888,
+      "market_cap": 1085257930.0,
+      "volume_24h": 12316349.0,
+      "tags": [
+        "project_tracking"
+      ],
+      "coingecko_id": "morpho",
+      "market_source": "coingecko",
+      "funding": -8.41e-05
+    },
+    {
+      "rank_in_custom": 44,
+      "ticker": "LIT",
+      "name": "Lighter",
+      "price": 1.61,
+      "change_24h": null,
+      "market_cap": 404000000,
+      "volume_24h": null,
+      "disable_ticker_feed": true,
+      "tags": [
+        "project_tracking"
+      ],
+      "funding": 5e-05
+    },
+    {
+      "rank_in_custom": 45,
+      "ticker": "IP",
+      "name": "Story",
+      "price": 0.53538,
+      "change_24h": 2.4976,
+      "market_cap": 189083817.0,
+      "volume_24h": 32031634.0,
+      "tags": [
+        "project_tracking"
+      ],
+      "coingecko_id": "story-2",
+      "market_source": "coingecko",
+      "funding": 5e-05
+    },
+    {
+      "rank_in_custom": 46,
+      "ticker": "SYRUP",
+      "name": "Maple Finance",
+      "price": null,
+      "change_24h": null,
+      "market_cap": null,
+      "volume_24h": null,
+      "tags": [
+        "project_tracking"
+      ],
+      "coingecko_id": "maple-finance",
+      "funding": 5e-05
+    },
+    {
+      "rank_in_custom": 47,
+      "ticker": "2Z",
+      "name": "DoubleZero",
+      "price": null,
+      "change_24h": null,
+      "market_cap": null,
+      "volume_24h": null,
+      "tags": [
+        "project_tracking"
+      ],
+      "funding": -8.275e-05
+    },
+    {
+      "rank_in_custom": 48,
+      "ticker": "MON",
+      "name": "Monad",
+      "price": null,
+      "change_24h": null,
+      "market_cap": null,
+      "volume_24h": null,
+      "tags": [
+        "project_tracking"
+      ],
+      "funding": 5e-05
+    },
+    {
+      "rank_in_custom": 49,
+      "ticker": "0G",
+      "name": "0G",
+      "price": null,
+      "change_24h": null,
+      "market_cap": null,
+      "volume_24h": null,
+      "tags": [
+        "project_tracking"
+      ],
+      "funding": 5e-05
+    },
+    {
+      "rank_in_custom": 50,
+      "ticker": "EIGEN",
+      "name": "EigenCloud (prev. EigenLayer)",
+      "price": 0.181994,
+      "change_24h": -0.7357,
+      "market_cap": 125730419.0,
+      "volume_24h": 14725371.0,
+      "tags": [
+        "project_tracking"
+      ],
+      "coingecko_id": "eigenlayer",
+      "market_source": "coingecko",
+      "funding": -1.19e-06
+    },
+    {
+      "rank_in_custom": 51,
+      "ticker": "LINEA",
+      "name": "Linea",
+      "price": 0.0034317,
+      "change_24h": 2.0644,
+      "market_cap": 85542557.0,
+      "volume_24h": 13179460.0,
+      "tags": [
+        "project_tracking"
+      ],
+      "coingecko_id": "linea",
+      "market_source": "coingecko",
+      "funding": 2.967e-05
+    },
+    {
+      "rank_in_custom": 52,
+      "ticker": "WLD",
+      "name": "Worldcoin",
+      "price": 0.261525,
+      "change_24h": -0.8472,
+      "market_cap": 861315158.0,
+      "volume_24h": 67452526.0,
+      "tags": [
+        "project_tracking"
+      ],
+      "coingecko_id": "worldcoin-wld",
+      "market_source": "coingecko",
+      "funding": -0.00017265
+    },
+    {
+      "rank_in_custom": 53,
+      "ticker": "OKB",
+      "name": "OKB",
+      "price": 83.83,
+      "change_24h": -0.1675,
+      "market_cap": 1760457427.0,
+      "volume_24h": 10490224.0,
+      "tags": [
+        "project_tracking"
+      ],
+      "coingecko_id": "okb",
+      "market_source": "coingecko"
+    },
+    {
+      "rank_in_custom": 54,
+      "ticker": "SKY",
+      "name": "Sky",
+      "price": 0.084397,
+      "change_24h": -0.8003,
+      "market_cap": 1958139755.0,
+      "volume_24h": 9833004.0,
+      "tags": [
+        "project_tracking"
+      ],
+      "coingecko_id": "sky",
+      "market_source": "coingecko",
+      "funding": 5e-05
+    },
+    {
+      "rank_in_custom": 55,
+      "ticker": "WLFI",
+      "name": "Liberty Financial",
+      "price": null,
+      "change_24h": null,
+      "market_cap": null,
+      "volume_24h": null,
+      "tags": [
+        "project_tracking"
+      ],
+      "funding": -0.0002188
+    },
+    {
+      "rank_in_custom": 56,
+      "ticker": "FIL",
+      "name": "Filecoin",
+      "price": 0.942389,
+      "change_24h": 1.2653,
+      "market_cap": 728797436.0,
+      "volume_24h": 69882595.0,
+      "tags": [
+        "project_tracking"
+      ],
+      "coingecko_id": "filecoin",
+      "market_source": "coingecko",
+      "funding": 0.0001
+    }
   ],
-  "stablecoin_market_cap": 205400000000
+  "stablecoin_market_cap": 318805198667.7561
 }

@@ -41,6 +41,25 @@ YAHOO_SYMBOLS = {
     "copper": "HG=F",
 }
 
+STOOQ_SYMBOLS = {
+    "nasdaq": "^ndq",
+    "dow": "^dji",
+    "sp500": "^spx",
+    "russell2000": "^rut",
+    "vix": "^vix",
+    "kospi": "^kospi",
+    "dxy": "dx.f",
+    "gold": "gc.f",
+    "silver": "si.f",
+    "wti": "cl.f",
+    "copper": "hg.f",
+}
+
+STOOQ_PRICE_SCALE = {
+    "silver": 0.01,
+    "copper": 0.01,
+}
+
 WATCHLIST = [
     ("Big Tech", "Apple", "AAPL"),
     ("Big Tech", "Microsoft", "MSFT"),
@@ -58,6 +77,8 @@ WATCHLIST = [
     ("Crypto Related", "PayPal", "PYPL"),
     ("Crypto Related", "CME Group", "CME"),
 ]
+
+WATCHLIST_STOOQ_SYMBOLS = {ticker: f"{ticker.lower()}.us" for _, _, ticker in WATCHLIST}
 
 FRED_SERIES = {
     "us10y": "DGS10",
@@ -120,6 +141,48 @@ def fetch_yahoo_quotes(symbols: List[str]) -> Tuple[Dict[str, dict], bool]:
         return {}, False
     results = data.get("quoteResponse", {}).get("result", [])
     return ({item.get("symbol"): item for item in results if item.get("symbol")}, True)
+
+
+def parse_stooq_latest(text: str) -> Optional[dict]:
+    rows = [line.strip() for line in (text or "").splitlines() if line.strip()]
+    if not rows:
+        return None
+    row = next((line for line in rows if not line.lower().startswith("symbol,")), rows[0])
+    parts = next(csv.reader([row]))
+    if len(parts) < 7 or any(part == "N/D" for part in parts[:7]):
+        return None
+    symbol, date, time, open_, high, low, close = parts[:7]
+    price = to_num(close)
+    open_price = to_num(open_)
+    if price is None:
+        return None
+    change = ((price - open_price) / open_price * 100) if open_price not in (None, 0) else None
+    return {
+        "symbol": symbol,
+        "price": price,
+        "change_pct": change,
+        "source_as_of": f"{date} {time}".strip(),
+    }
+
+
+def fetch_stooq_quote(symbol: str) -> Optional[dict]:
+    encoded = urllib.parse.quote(symbol)
+    text = fetch_text(f"https://stooq.com/q/l/?s={encoded}&i=d", timeout=14)
+    if not text:
+        text = fetch_text(f"https://stooq.com/q/l/?s={encoded}&i=d", timeout=14)
+    return parse_stooq_latest(text or "")
+
+
+def fetch_stooq_quotes(symbols: Dict[str, str]) -> Dict[str, dict]:
+    if not symbols:
+        return {}
+    with ThreadPoolExecutor(max_workers=min(5, len(symbols))) as pool:
+        pairs = pool.map(lambda item: (item[0], fetch_stooq_quote(item[1])), symbols.items())
+    out = {key: value for key, value in pairs if value}
+    for key, scale in STOOQ_PRICE_SCALE.items():
+        if key in out and isinstance(out[key].get("price"), (int, float)):
+            out[key]["price"] = out[key]["price"] * scale
+    return out
 
 
 def to_num(value: Any) -> Optional[float]:
@@ -202,6 +265,34 @@ def get_quote_fields(quotes: Dict[str, dict], symbol: str) -> Tuple[Optional[flo
     return to_num(q.get("regularMarketPrice")), to_num(q.get("regularMarketChangePercent"))
 
 
+def get_market_fields(
+    key: str,
+    quotes: Dict[str, dict],
+    stooq_quotes: Dict[str, dict],
+) -> Tuple[Optional[float], Optional[float], str, Optional[str]]:
+    price, change = get_quote_fields(quotes, YAHOO_SYMBOLS[key])
+    if price is not None:
+        return price, change, "live", None
+    stooq = stooq_quotes.get(key)
+    if stooq:
+        return to_num(stooq.get("price")), to_num(stooq.get("change_pct")), "stooq", stooq.get("source_as_of")
+    return None, None, "carry", None
+
+
+def get_stock_fields(
+    ticker: str,
+    quotes: Dict[str, dict],
+    stooq_quotes: Dict[str, dict],
+) -> Tuple[Optional[float], Optional[float], str, Optional[str]]:
+    price, change = get_quote_fields(quotes, ticker)
+    if price is not None:
+        return price, change, "live", None
+    stooq = stooq_quotes.get(ticker)
+    if stooq:
+        return to_num(stooq.get("price")), to_num(stooq.get("change_pct")), "stooq", stooq.get("source_as_of")
+    return None, None, "carry", None
+
+
 def read_prev_metric(prev_macro: dict, *path: str) -> Tuple[Optional[float], float, str, str, Optional[str]]:
     cur: Any = prev_macro
     for p in path:
@@ -225,6 +316,8 @@ def pick_value(
     now_as_of: str,
     metric_key: str,
     carry_issues: List[str],
+    live_source: str = "live",
+    source_as_of: Optional[str] = None,
 ) -> Dict[str, Any]:
     if live_val is None:
         carry_issues.append(metric_key)
@@ -239,8 +332,8 @@ def pick_value(
         "value": live_val,
         "delta": pct_or_zero(live_delta),
         "display": display_fn(live_val),
-        "source": "live",
-        "source_as_of": now_as_of,
+        "source": live_source,
+        "source_as_of": source_as_of or now_as_of,
     }
 
 
@@ -250,6 +343,7 @@ def main() -> int:
 
     symbols = sorted(set(YAHOO_SYMBOLS.values()) | {t for _, _, t in WATCHLIST})
     quotes, quotes_ok = fetch_yahoo_quotes(symbols)
+    stooq_quotes = fetch_stooq_quotes({**STOOQ_SYMBOLS, **WATCHLIST_STOOQ_SYMBOLS})
 
     usdkrw_data = fetch_json("https://open.er-api.com/v6/latest/USD")
     usdkrw_live = to_num((usdkrw_data or {}).get("rates", {}).get("KRW"))
@@ -258,7 +352,7 @@ def main() -> int:
         fred_results = pool.map(lambda item: (item[0], fetch_fred_latest(item[1])), FRED_SERIES.items())
     fred_map: Dict[str, Tuple[Optional[float], Optional[float], bool, Optional[str]]] = dict(fred_results)
 
-    fetched_any = quotes_ok or usdkrw_live is not None or any(x[2] for x in fred_map.values())
+    fetched_any = quotes_ok or bool(stooq_quotes) or usdkrw_live is not None or any(x[2] for x in fred_map.values())
     as_of = datetime.now(KST).strftime("%Y-%m-%d %H:%M KST") if fetched_any else prev_macro.get("as_of", datetime.now(KST).strftime("%Y-%m-%d %H:%M KST"))
 
     carry_issues: List[str] = []
@@ -292,18 +386,18 @@ def main() -> int:
     iorb = fred_pick("iorb", prev_iorb, fmt_2, "rates.iorb")
 
     prev_dxy = read_prev_metric(prev_macro, "fx", "dxy")
-    dxy_price, dxy_delta_live = get_quote_fields(quotes, YAHOO_SYMBOLS["dxy"])
-    dxy = pick_value(dxy_price, dxy_delta_live, prev_dxy, fmt_2, now_as_of=as_of, metric_key="fx.dxy", carry_issues=carry_issues)
+    dxy_price, dxy_delta_live, dxy_source, dxy_source_as_of = get_market_fields("dxy", quotes, stooq_quotes)
+    dxy = pick_value(dxy_price, dxy_delta_live, prev_dxy, fmt_2, now_as_of=as_of, metric_key="fx.dxy", carry_issues=carry_issues, live_source=dxy_source, source_as_of=dxy_source_as_of)
 
     prev_usdkrw = read_prev_metric(prev_macro, "fx", "usdkrw")
     usdkrw = pick_value(usdkrw_live, 0.0, prev_usdkrw, fmt_int, now_as_of=as_of, metric_key="fx.usdkrw", carry_issues=carry_issues)
 
     def y_pick(key: str, prev_path: Tuple[str, str], disp, metric_key: str, fred_fallback: Optional[str] = None):
         prev = read_prev_metric(prev_macro, *prev_path)
-        p, d = get_quote_fields(quotes, YAHOO_SYMBOLS[key])
+        p, d, source, source_as_of = get_market_fields(key, quotes, stooq_quotes)
         if p is None and fred_fallback:
             return fred_pick(fred_fallback, prev, disp, metric_key)
-        return pick_value(p, d, prev, disp, now_as_of=as_of, metric_key=metric_key, carry_issues=carry_issues)
+        return pick_value(p, d, prev, disp, now_as_of=as_of, metric_key=metric_key, carry_issues=carry_issues, live_source=source, source_as_of=source_as_of)
 
     nasdaq = y_pick("nasdaq", ("indices", "nasdaq"), fmt_int, "indices.nasdaq")
     dow = y_pick("dow", ("indices", "dow"), fmt_int, "indices.dow")
@@ -398,7 +492,7 @@ def main() -> int:
     prev_stock_rows = {str(r.get("ticker", "")).upper(): r for r in prev_stocks.get("rows", []) if isinstance(r, dict)}
     stocks_rows = []
     for group, name, ticker in WATCHLIST:
-        p_live, d_live = get_quote_fields(quotes, ticker)
+        p_live, d_live, stock_source, stock_source_as_of = get_stock_fields(ticker, quotes, stooq_quotes)
         prev_row = prev_stock_rows.get(ticker, {})
         price = round(p_live, 2) if p_live is not None else prev_row.get("price")
         change = round(pct_or_zero(d_live), 2) if d_live is not None else pct_or_zero(to_num(prev_row.get("change")))
@@ -408,8 +502,8 @@ def main() -> int:
             "ticker": ticker,
             "price": price,
             "change": change,
-            "source": "live" if p_live is not None else "carry",
-            "source_as_of": as_of if p_live is not None else None,
+            "source": stock_source if p_live is not None else "carry",
+            "source_as_of": stock_source_as_of or (as_of if p_live is not None else None),
         })
 
     stocks_payload = {"as_of": as_of, "rows": stocks_rows}
