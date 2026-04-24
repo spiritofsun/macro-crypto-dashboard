@@ -402,26 +402,46 @@ function renderGlobalDataHealth() {
   const host = document.getElementById("globalDataHealth");
   if (!host) return;
   const datasets = state.status?.datasets || {};
-  const entries = ["macro", "news", "etf"].map((key) => datasets[key]).filter(Boolean);
+  const entries = ["macro", "stocks", "snapshot", "news", "etf", "crypto_market"].map((key) => datasets[key]).filter(Boolean);
   if (!entries.length) {
     host.hidden = true;
     host.innerHTML = "";
     return;
   }
 
+  const problemEntries = entries.filter((entry) => entry.level !== "ok");
+  const overallTone = state.status?.overall === "ok" ? "up" : state.status?.overall === "danger" ? "down" : "flat";
+  const summary = problemEntries.length
+    ? `${problemEntries.map((entry) => entry.label).join(" · ")} 점검 필요`
+    : "전체 데이터 정상 갱신";
+
   host.hidden = false;
-  host.innerHTML = entries
-    .map((entry) => {
+  host.innerHTML = `
+    <article class="health-overview ${overallTone}">
+      <span>DATA OPS</span>
+      <strong>${statusText(state.status?.overall)}</strong>
+      <em>${summary}</em>
+    </article>
+    <div class="health-grid">
+      ${entries
+        .map((entry) => {
       const note = entry.critical_issue_count
         ? `검증 ${entry.critical_issue_count}건`
         : entry.issue_count
           ? `보류 ${entry.issue_count}건`
           : typeof entry.age_hours === "number"
-            ? `${Math.round(entry.age_hours)}h`
+            ? `${entry.age_hours < 1 ? "방금" : `${Math.round(entry.age_hours)}h`}`
             : "n/a";
-      return `<article class="health-pill ${statusTone(entry.level)}"><span>${entry.label}</span><strong>${statusText(entry.level)}</strong><em>${note}</em></article>`;
+      const detail = entry.carried_metrics?.length
+        ? `carry: ${entry.carried_metrics.slice(0, 2).join(", ")}${entry.carried_metrics.length > 2 ? "..." : ""}`
+        : entry.market_date
+          ? `시장일 ${entry.market_date}`
+          : entry.timestamp || "timestamp n/a";
+      return `<article class="health-pill ${statusTone(entry.level)}"><span>${entry.label}</span><strong>${statusText(entry.level)}</strong><em>${note}</em><small>${detail}</small></article>`;
     })
-    .join("");
+        .join("")}
+    </div>
+  `;
 }
 
 function cardHTML(item, index, topCount = 4) {

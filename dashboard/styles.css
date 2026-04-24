@@ -4889,3 +4889,123 @@ body:not(.crypto-portal-body) .brief-preview {
     padding: 24px;
   }
 }
+
+/* v20260425c data ops visibility */
+.global-data-health {
+  grid-template-columns: minmax(240px, 0.55fr) minmax(0, 1.45fr);
+  align-items: stretch;
+}
+
+.health-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.health-overview,
+.health-pill {
+  min-width: 0;
+}
+
+.health-overview {
+  display: grid;
+  align-content: center;
+  gap: 8px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at top right, rgba(245, 192, 54, 0.16), transparent 44%),
+    linear-gradient(180deg, rgba(11, 16, 21, 0.98), rgba(8, 12, 16, 0.98));
+  font-family: "JetBrains Mono", monospace;
+}
+
+.health-overview span,
+.health-overview em {
+  color: #90a491;
+  font-style: normal;
+}
+
+.health-overview span {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.health-overview strong {
+  color: var(--flat);
+  font-size: 28px;
+  line-height: 1;
+}
+
+.health-overview.up strong { color: var(--up); }
+.health-overview.down strong { color: var(--down); }
+.health-overview em {
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.health-pill {
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "label status"
+    "detail note";
+}
+
+.health-pill span { grid-area: label; }
+.health-pill strong { grid-area: status; }
+.health-pill em { grid-area: note; justify-self: end; }
+.health-pill small {
+  grid-area: detail;
+  min-width: 0;
+  overflow: hidden;
+  color: #78907c;
+  font-size: 11px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body:not(.crypto-portal-body) .global-data-health {
+  padding: 16px;
+  border-color: rgba(67, 181, 166, 0.2);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+body:not(.crypto-portal-body) .health-overview,
+body:not(.crypto-portal-body) .health-pill {
+  border-color: #dfe7f2;
+  background: #f8fbff;
+  color: #172033;
+}
+
+body:not(.crypto-portal-body) .health-overview {
+  background:
+    radial-gradient(circle at top right, rgba(67, 181, 166, 0.18), transparent 42%),
+    linear-gradient(135deg, #111827, #1f2937);
+}
+
+body:not(.crypto-portal-body) .health-overview span,
+body:not(.crypto-portal-body) .health-overview em {
+  color: #c7d8df;
+}
+
+body:not(.crypto-portal-body) .health-pill span,
+body:not(.crypto-portal-body) .health-pill small {
+  color: #7d889a;
+}
+
+body:not(.crypto-portal-body) .health-pill em {
+  color: #334155;
+}
+
+body:not(.crypto-portal-body) .health-pill.up strong { color: var(--site-green); }
+body:not(.crypto-portal-body) .health-pill.flat strong { color: #b88113; }
+body:not(.crypto-portal-body) .health-pill.down strong { color: var(--site-red); }
+
+@media (max-width: 980px) {
+  .global-data-health,
+  .health-grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
