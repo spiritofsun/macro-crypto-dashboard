@@ -22,6 +22,18 @@ const uiState = {
 };
 
 const STABLES = new Set(["USDT", "USDC", "DAI", "FDUSD", "TUSD", "USDE", "USDD", "FRAX"]);
+const CRYPTO_SECTOR_BY_SYMBOL = {
+  BTC: "Bitcoin", ETH: "Layer1", SOL: "Layer1", BNB: "Exchange/L1", XRP: "Payments", ADA: "Layer1", AVAX: "Layer1", SUI: "Layer1", TON: "Layer1", TRX: "Layer1",
+  LINK: "Oracle", PYTH: "Oracle", UNI: "DeFi", AAVE: "DeFi", CRV: "DeFi", LDO: "DeFi", PENDLE: "DeFi", ENA: "DeFi", MORPHO: "DeFi", ONDO: "RWA",
+  DOGE: "Meme", SHIB: "Meme", WLD: "AI", ICP: "AI", GRT: "AI/Data", NEAR: "AI/L1", SAND: "GameFi", HYPE: "Perp/DEX", MNT: "Layer2", OP: "Layer2", ARB: "Layer2", STRK: "Layer2", ZK: "Layer2", LINEA: "Layer2",
+  XLM: "Payments", XMR: "Privacy", BCH: "Bitcoin", LTC: "Bitcoin", FIL: "Storage", AERO: "DeFi", SYRUP: "DeFi", SKY: "DeFi", OKB: "Exchange/L1",
+};
+const CRYPTO_CHAIN_BY_SYMBOL = {
+  BTC: "Bitcoin", BCH: "Bitcoin", LTC: "Bitcoin",
+  ETH: "Ethereum", LINK: "Ethereum", UNI: "Ethereum", AAVE: "Ethereum", LDO: "Ethereum", ENA: "Ethereum", PENDLE: "Ethereum", MORPHO: "Ethereum", ONDO: "Ethereum", SHIB: "Ethereum", GRT: "Ethereum",
+  SOL: "Solana", PYTH: "Solana",
+  BNB: "BSC", TRX: "Tron", TON: "TON", ADA: "Cardano", AVAX: "Avalanche", SUI: "Sui", XRP: "XRP Ledger", XLM: "Stellar", HYPE: "Hyperliquid", MNT: "Mantle", OP: "Optimism", ARB: "Arbitrum", STRK: "Starknet", ZK: "ZKsync", LINEA: "Linea", NEAR: "Near",
+};
 const MODE_A = {
   apiBase: window.PROJECT_MARK_API_BASE || "https://project-mark-gateway.workers.dev",
 };
@@ -897,6 +909,34 @@ function renderCryptoSummary() {
   }
 }
 
+function aggregateCryptoGroups(rows, mapping, fallbackLabel) {
+  const grouped = new Map();
+  rows.forEach((row) => {
+    const ticker = String(row.ticker || "").toUpperCase();
+    if (!ticker || STABLES.has(ticker)) return;
+    const label = mapping[ticker] || fallbackLabel;
+    const change = toNumSafe(row.change_24h);
+    const volume = toNumSafe(row.volume_24h) ?? 0;
+    const cap = toNumSafe(row.market_cap) ?? 0;
+    if (!grouped.has(label)) {
+      grouped.set(label, { label, count: 0, changeSum: 0, changeWeight: 0, volume: 0, marketCap: 0 });
+    }
+    const bucket = grouped.get(label);
+    const weight = Math.max(cap, 1);
+    bucket.count += 1;
+    bucket.volume += volume;
+    bucket.marketCap += cap;
+    if (typeof change === "number") {
+      bucket.changeSum += change * weight;
+      bucket.changeWeight += weight;
+    }
+  });
+  return [...grouped.values()].map((bucket) => ({
+    ...bucket,
+    avgChange: bucket.changeWeight ? bucket.changeSum / bucket.changeWeight : 0,
+  }));
+}
+
 function renderCryptoBriefingExtras() {
   const flow = document.getElementById("cryptoFlowList");
   const trend = document.getElementById("cryptoTrendStrip");
@@ -904,6 +944,7 @@ function renderCryptoBriefingExtras() {
   const sentiment = document.getElementById("cryptoSentimentCards");
   const smartMoney = document.getElementById("cryptoSmartMoney");
   const topBottom = document.getElementById("cryptoTopBottom");
+  const sectorPerformance = document.getElementById("cryptoSectorPerformance");
   const predictions = document.getElementById("cryptoPredictionList");
   const rsiMap = document.getElementById("cryptoRsiMap");
   const chainFlow = document.getElementById("cryptoChainFlow");
@@ -915,7 +956,7 @@ function renderCryptoBriefingExtras() {
   const clock = document.getElementById("cryptoClock");
   const clockDate = document.getElementById("cryptoClockDate");
   const prevDay = document.getElementById("cryptoPrevDay");
-  if (!flow && !trend && !marketRows && !sentiment && !smartMoney && !topBottom && !predictions && !rsiMap && !chainFlow && !sideHot && !rightTicker) return;
+  if (!flow && !trend && !marketRows && !sentiment && !smartMoney && !topBottom && !sectorPerformance && !predictions && !rsiMap && !chainFlow && !sideHot && !rightTicker) return;
 
   const rows = state.cryptoUniverse.filter((r) => typeof r.market_cap === "number");
   const coreRows = ["BTC", "ETH", "SOL", "HYPE"].map((t) => rows.find((r) => r.ticker === t)).filter(Boolean);
@@ -925,9 +966,16 @@ function renderCryptoBriefingExtras() {
     .slice(0, 10);
   const gainers = [...rows].filter((r) => typeof r.change_24h === "number").sort((a, b) => b.change_24h - a.change_24h).slice(0, 5);
   const losers = [...rows].filter((r) => typeof r.change_24h === "number").sort((a, b) => a.change_24h - b.change_24h).slice(0, 5);
-  const buyRows = gainers.slice(0, 7);
-  const sellRows = losers.slice(0, 8);
-  const futuresRows = [...rows].filter((r) => typeof r.volume_24h === "number").sort((a, b) => b.volume_24h - a.volume_24h).slice(0, 6);
+  const smartScore = (row) => {
+    const change = toNumSafe(row.change_24h) ?? 0;
+    const volume = toNumSafe(row.volume_24h) ?? 0;
+    const cap = toNumSafe(row.market_cap) ?? 1;
+    const turnover = cap > 0 ? volume / cap : 0;
+    return change * 0.65 + Math.min(turnover * 100, 20) * 0.35;
+  };
+  const buyRows = [...rows].filter((r) => !STABLES.has(r.ticker)).sort((a, b) => smartScore(b) - smartScore(a)).slice(0, 7);
+  const sellRows = [...rows].filter((r) => !STABLES.has(r.ticker)).sort((a, b) => smartScore(a) - smartScore(b)).slice(0, 8);
+  const futuresRows = [...rows].filter((r) => typeof r.volume_24h === "number" && !STABLES.has(r.ticker)).sort((a, b) => b.volume_24h - a.volume_24h).slice(0, 6);
   const cryptoNews = Array.isArray(state.news?.crypto) ? state.news.crypto : [];
   const total = getTotalMarketCapUsd();
   const btcDom = getBtcDominance();
@@ -1049,16 +1097,18 @@ function renderCryptoBriefingExtras() {
 
   if (smartMoney) {
     const sourceRows = uiState.smartMoneyTab === "sell" ? sellRows : uiState.smartMoneyTab === "futures" ? futuresRows : buyRows;
-    const maxAbs = Math.max(1, ...sourceRows.map((r) => Math.abs(toNumSafe(r.change_24h) ?? 0)));
+    const maxAbs = Math.max(1, ...sourceRows.map((r) => Math.abs(smartScore(r))));
     smartMoney.innerHTML = sourceRows
       .map((r, idx) => {
         const change = toNumSafe(r.change_24h) ?? 0;
-        const width = Math.max(8, Math.min(100, Math.abs(change) / maxAbs * 100));
+        const score = smartScore(r);
+        const turnover = (toNumSafe(r.volume_24h) ?? 0) / Math.max(toNumSafe(r.market_cap) ?? 1, 1) * 100;
+        const width = Math.max(8, Math.min(100, Math.abs(score) / maxAbs * 100));
         return `
           <div class="smart-money-row">
             <span>${idx + 1}</span>
             <b>${r.ticker || "—"}</b>
-            <em>${r.name || ""}</em>
+            <em>${r.name || ""} · 회전율 ${turnover.toFixed(1)}%</em>
             <strong class="${toneClass(change)}">${formatPct(change)}</strong>
             <i><u style="width:${width}%"></u></i>
           </div>
@@ -1081,6 +1131,22 @@ function renderCryptoBriefingExtras() {
       </div>
     `;
     topBottom.innerHTML = block("급등 TOP 5", gainers, "up") + block("급락 TOP 5", losers, "down");
+  }
+
+  if (sectorPerformance) {
+    const sectors = aggregateCryptoGroups(rows, CRYPTO_SECTOR_BY_SYMBOL, "기타");
+    const topSectors = sectors.filter((x) => x.count >= 1).sort((a, b) => b.avgChange - a.avgChange).slice(0, 5);
+    const bottomSectors = sectors.filter((x) => x.count >= 1).sort((a, b) => a.avgChange - b.avgChange).slice(0, 5);
+    const renderSector = (title, list, tone) => `
+      <article class="sector-performance-card ${tone}">
+        <h3>${title}</h3>
+        ${list.map((x) => {
+          const intensity = Math.min(100, Math.max(8, Math.abs(x.avgChange) * 12));
+          return `<p><span>${x.label}<em>${x.count}개 · ${formatBigNumber(x.volume)}</em></span><b class="${toneClass(x.avgChange)}">${formatPct(x.avgChange, 1)}</b><i><u style="width:${intensity}%"></u></i></p>`;
+        }).join("")}
+      </article>
+    `;
+    sectorPerformance.innerHTML = renderSector("상승 TOP 5", topSectors, "up") + renderSector("하락 TOP 5", bottomSectors, "down");
   }
 
   if (predictions) {
@@ -1111,11 +1177,18 @@ function renderCryptoBriefingExtras() {
   }
 
   if (chainFlow) {
-    const tagCounts = new Map();
-    rows.forEach((r) => (r.tags || []).slice(0, 2).forEach((tag) => tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1)));
-    const tags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 6);
-    const max = Math.max(1, ...tags.map(([, count]) => count));
-    chainFlow.innerHTML = tags.map(([tag, count]) => `<p><span>${tag}</span><b style="width:${(count / max) * 100}%"></b><em>${count}</em></p>`).join("");
+    const chains = aggregateCryptoGroups(rows, CRYPTO_CHAIN_BY_SYMBOL, "기타")
+      .map((x) => ({ ...x, pressure: x.volume * (x.avgChange / 100) }))
+      .sort((a, b) => Math.abs(b.pressure) - Math.abs(a.pressure))
+      .slice(0, 8);
+    const max = Math.max(1, ...chains.map((x) => Math.abs(x.pressure)));
+    chainFlow.innerHTML = chains.map((x) => `
+      <p class="${toneClass(x.pressure, 1_000_000)}">
+        <span>${x.label}<small>${x.count}개 · ${formatBigNumber(x.volume)}</small></span>
+        <b style="width:${Math.max(8, Math.abs(x.pressure) / max * 100)}%"></b>
+        <em>${formatBigNumber(x.pressure)}</em>
+      </p>
+    `).join("");
   }
 
   if (sideHot) {

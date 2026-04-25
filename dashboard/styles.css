@@ -5009,3 +5009,209 @@ body:not(.crypto-portal-body) .health-pill.down strong { color: var(--site-red);
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 }
+
+/* v20260425d crypto readability + analysis modules */
+.crypto-portal-body #cryptoCustomTable th,
+.crypto-portal-body #cryptoCustomTable td {
+  color: #1f2937;
+  opacity: 1;
+}
+
+.crypto-portal-body #cryptoCustomTable th {
+  color: #475569;
+  font-weight: 950;
+}
+
+.crypto-portal-body #cryptoCustomTable td.num,
+.crypto-portal-body .crypto-summary-table .strong-num {
+  color: #172033;
+  font-weight: 900;
+}
+
+.crypto-portal-body #cryptoCustomTable td.num .up,
+.crypto-portal-body #cryptoCustomTable .up {
+  color: var(--portal-green);
+}
+
+.crypto-portal-body #cryptoCustomTable td.num .down,
+.crypto-portal-body #cryptoCustomTable .down {
+  color: var(--portal-red);
+}
+
+.crypto-portal-body #cryptoCustomTable tbody tr:hover td {
+  background: #f8fbff;
+}
+
+.portal-explainer {
+  display: grid;
+  gap: 6px;
+  margin: -4px 0 18px;
+  padding: 14px 16px;
+  border: 1px solid #dfe7f2;
+  border-radius: 16px;
+  background: #f8fbff;
+}
+
+.portal-explainer.compact {
+  margin-bottom: 12px;
+}
+
+.portal-explainer strong {
+  color: #1f2937;
+  font-size: 14px;
+  font-weight: 950;
+}
+
+.portal-explainer span {
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.65;
+}
+
+.sector-performance-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.sector-performance-card {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid #d8eee6;
+  border-radius: 20px;
+  background: #f0fff8;
+}
+
+.sector-performance-card.down {
+  border-color: #ffd3d7;
+  background: #fff2f3;
+}
+
+.sector-performance-card h3 {
+  margin: 0;
+  color: #172033;
+  font-size: 18px;
+  font-weight: 950;
+}
+
+.sector-performance-card p {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px 14px;
+  margin: 0;
+  align-items: center;
+}
+
+.sector-performance-card span,
+.sector-performance-card b,
+.sector-performance-card em {
+  min-width: 0;
+}
+
+.sector-performance-card span {
+  color: #253247;
+  font-weight: 950;
+}
+
+.sector-performance-card span em {
+  display: block;
+  margin-top: 2px;
+  color: #7d889a;
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.sector-performance-card b {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 17px;
+}
+
+.sector-performance-card i {
+  grid-column: 1 / -1;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.06);
+  overflow: hidden;
+}
+
+.sector-performance-card i u {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--portal-green);
+}
+
+.sector-performance-card.down i u {
+  background: var(--portal-red);
+}
+
+.chain-flow-card p {
+  grid-template-columns: 180px 1fr 86px;
+}
+
+.chain-flow-card p span {
+  display: grid;
+  gap: 2px;
+}
+
+.chain-flow-card small {
+  color: #7d889a;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.chain-flow-card p.up b {
+  background: linear-gradient(90deg, #10b981, #34d399);
+}
+
+.chain-flow-card p.down b {
+  background: linear-gradient(90deg, #fb7185, #ef4444);
+}
+
+.chain-flow-card p.flat b {
+  background: linear-gradient(90deg, #94a3b8, #cbd5e1);
+}
+
+.chain-flow-card p.down em {
+  color: var(--portal-red);
+}
+
+.chain-flow-card p.up em {
+  color: var(--portal-green);
+}
+
+body:not(.crypto-portal-body) .left-sidebar::after {
+  content: "데이터 자동 갱신 · 상태 패널에서 병목 확인";
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 14px;
+  background: #f8fbff;
+  color: #7d889a;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+@media (max-width: 900px) {
+  .sector-performance-grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .chain-flow-card p {
+    grid-template-columns: 120px 1fr 72px;
+  }
+}
+
+/* v20260425d reset legacy tone utility boxes */
+body:not(.home-body) .up,
+body:not(.home-body) .down,
+body:not(.home-body) .flat {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  text-align: inherit;
+}
