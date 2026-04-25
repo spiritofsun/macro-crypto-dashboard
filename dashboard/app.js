@@ -414,7 +414,7 @@ function renderGlobalDataHealth() {
   const host = document.getElementById("globalDataHealth");
   if (!host) return;
   const datasets = state.status?.datasets || {};
-  const entries = ["macro", "stocks", "snapshot", "news", "etf", "crypto_market"].map((key) => datasets[key]).filter(Boolean);
+  const entries = ["macro", "stocks", "snapshot", "news", "etf", "crypto_market", "crypto_universe"].map((key) => datasets[key]).filter(Boolean);
   if (!entries.length) {
     host.hidden = true;
     host.innerHTML = "";
@@ -1531,12 +1531,16 @@ function renderCryptoTable() {
     const gainers = rows.filter((r) => typeof r.change_24h === "number" && r.change_24h > 0).length;
     const losers = rows.filter((r) => typeof r.change_24h === "number" && r.change_24h < 0).length;
     const movers = rows.filter((r) => typeof r.change_24h === "number" && Math.abs(r.change_24h) >= 5).length;
+    const target = state.cryptoUniverseMeta?.target || 200;
+    const source = state.cryptoUniverseMeta?.source || "market data";
     head.innerHTML = `
       <div class="crypto-filter-summary">
+        <span>대상 <b>시총 상위 ${target}</b></span>
         <span>표시 <b>${rows.length}</b></span>
         <span>상승 <b class="up">${gainers}</b></span>
         <span>하락 <b class="down">${losers}</b></span>
         <span>급등락 <b class="flat">${movers}</b></span>
+        <span>소스 <b>${source}</b></span>
       </div>
     `;
   }
@@ -1989,6 +1993,15 @@ async function loadStatic() {
   state.status = status.status === "fulfilled" ? status.value : null;
   state.macroSnapshot = macro.status === "fulfilled" ? macro.value : fallbackMacro;
   state.cryptoUniverse = universe.status === "fulfilled" ? normalizeCustomUniverse(universe.value.assets || []) : [];
+  state.cryptoUniverseMeta = universe.status === "fulfilled"
+    ? {
+        universe: universe.value.universe,
+        count: universe.value.universe_size || (universe.value.assets || []).length,
+        target: universe.value.target_universe_size || 200,
+        source: universe.value._health?.source || universe.value.universe || "market data",
+        health: universe.value._health?.status || "unknown",
+      }
+    : null;
   state.cryptoStableMcap = universe.status === "fulfilled" ? universe.value.stablecoin_market_cap : 0;
   state.stocksWatchlist = stocks.status === "fulfilled" ? stocks.value.rows || [] : [];
   state.cryptoMarket = cryptoMarket.status === "fulfilled" ? cryptoMarket.value : null;

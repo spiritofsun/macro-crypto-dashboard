@@ -52,6 +52,8 @@ def main() -> int:
     news = load_json(DATA_DIR / "news.json")
     etf = load_json(DATA_DIR / "etf.json")
     crypto_market = load_json(DATA_DIR / "crypto_market.json")
+    crypto_custom = load_json(DATA_DIR / "crypto_custom_universe.json")
+    crypto_top20 = load_json(DATA_DIR / "crypto_top20.json")
 
     errors: list[str] = []
     checks = [
@@ -61,6 +63,8 @@ def main() -> int:
         ("news.updated_at", news.get("updated_at"), 12),
         ("etf.updated_at", etf.get("updated_at"), 36),
         ("crypto_market.as_of", crypto_market.get("as_of"), 2),
+        ("crypto_custom_universe.as_of", crypto_custom.get("as_of"), 3),
+        ("crypto_top20.as_of", crypto_top20.get("as_of"), 3),
     ]
 
     for label, raw, max_age_hours in checks:
@@ -79,6 +83,16 @@ def main() -> int:
         errors.append("etf.btc_history_7d_usd_m: insufficient history")
     if not isinstance(etf.get("eth_history_7d_usd_m"), list) or len(etf.get("eth_history_7d_usd_m") or []) < 3:
         errors.append("etf.eth_history_7d_usd_m: insufficient history")
+
+    crypto_assets = crypto_custom.get("assets") if isinstance(crypto_custom.get("assets"), list) else []
+    if len(crypto_assets) < 200:
+        errors.append(f"crypto_custom_universe.assets: expected >=200, got {len(crypto_assets)}")
+    blank_tickers = [str(row.get("rank_in_custom") or "?") for row in crypto_assets if isinstance(row, dict) and not row.get("ticker")]
+    if blank_tickers:
+        errors.append(f"crypto_custom_universe.assets: blank ticker ranks {', '.join(blank_tickers[:10])}")
+    health = crypto_custom.get("_health") if isinstance(crypto_custom.get("_health"), dict) else {}
+    if health.get("status") == "fallback" and len(crypto_assets) < 200:
+        errors.append("crypto_custom_universe._health: fallback without complete top-200 universe")
 
     if errors:
         print("dashboard freshness check failed:", file=sys.stderr)

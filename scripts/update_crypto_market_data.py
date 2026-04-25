@@ -1,38 +1,67 @@
 #!/usr/bin/env python3
-"""Update crypto global market metrics for the dashboard."""
+"""Update crypto global market metrics for the dashboard.
+
+This script is intentionally non-blocking: if one provider is rate-limited,
+it preserves the previous value and records the source error in _health.
+"""
 
 from __future__ import annotations
 
 import json
 import pathlib
 import subprocess
+import time
 import urllib.request
 from datetime import datetime, timezone
 from typing import Any
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 OUT = ROOT / "dashboard" / "data" / "crypto_market.json"
-USER_AGENT = "project-mark-dashboard/1.0"
+USER_AGENT = "project-mark-dashboard/1.0 (+https://spiritofsun.github.io/macro-crypto-dashboard/)"
 
 
-def fetch_text(url: str, timeout: int = 20) -> str:
+def read_existing() -> dict[str, Any]:
     try:
-        result = subprocess.run(
-            ["curl", "-sS", "--http1.1", "--max-time", str(timeout), "-A", USER_AGENT, url],
-            check=True,
-            capture_output=True,
-            text=True,
-            timeout=timeout + 2,
-        )
-        return result.stdout
+        return json.loads(OUT.read_text(encoding="utf-8"))
     except Exception:
-        req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+        return {}
+
+
+def fetch_text(url: str, timeout: int = 20, attempts: int = 2) -> str:
+    last_error: Exception | None = None
+    for attempt in range(1, attempts + 1):
+        try:
+            result = subprocess.run(
+                ["curl", "-sS", "--http1.1", "--fail", "--max-time", str(timeout), "-A", USER_AGENT, url],
+                check=True,
+                capture_output=True,
+                text=True,
+                timeout=timeout + 3,
+            )
+            return result.stdout
+        except Exception as exc:
+            last_error = exc
+            if attempt < attempts:
+                time.sleep(1.5 * attempt)
+    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+    try:
         with urllib.request.urlopen(req, timeout=timeout) as resp:
             return resp.read().decode("utf-8")
+    except Exception as exc:
+        raise RuntimeError(f"fetch failed: {url}: {exc}") from last_error
 
 
-def fetch_json(url: str, timeout: int = 20) -> dict[str, Any]:
-    return json.loads(fetch_text(url, timeout))
+def fetch_json(url: str, timeout: int = 20, attempts: int = 2) -> dict[str, Any]:
+    return json.loads(fetch_text(url, timeout=timeout, attempts=attempts))
+
+
+def safe_fetch(name: str, url: str, errors: list[str], timeout: int = 20, attempts: int = 2) -> dict[str, Any] | None:
+    try:
+        payload = fetch_json(url, timeout=timeout, attempts=attempts)
+        return payload if isinstance(payload, dict) else None
+    except Exception as exc:
+        errors.append(f"{name}: {exc}")
+        return None
 
 
 def to_num(value: Any) -> float | None:
@@ -45,26 +74,34 @@ def to_num(value: Any) -> float | None:
 
 
 def main() -> int:
-    cg = fetch_json("https://api.coingecko.com/api/v3/global")
-    btc_simple = fetch_json("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd")
-    coinbase_btc = fetch_json("https://api.coinbase.com/v2/prices/BTC-USD/spot")
-    fng = fetch_json("https://api.alternative.me/fng/?limit=1&format=json")
-    stables = fetch_json("https://stablecoins.llama.fi/stablecoins?includePrices=true")
+    existing = read_existing()
+    errors: list[str] = []
 
-    cg_data = cg.get("data") if isinstance(cg.get("data"), dict) else {}
+    cg = safe_fetch("coingecko_global", "https://api.coingecko.com/api/v3/global", errors, attempts=3)
+    btc_simple = safe_fetch("coingecko_btc", "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd", errors, attempts=2)
+    coinbase_btc = safe_fetch("coinbase_btc", "https://api.coinbase.com/v2/prices/BTC-USD/spot", errors, attempts=2)
+    fng = safe_fetch("fear_greed", "https://api.alternative.me/fng/?limit=1&format=json", errors, attempts=2)
+    stables = safe_fetch("defillama_stablecoins", "https://stablecoins.llama.fi/stablecoins?includePrices=true", errors, timeout=25, attempts=2)
+
+    prev_global = existing.get("global") if isinstance(existing.get("global"), dict) else {}
+    prev_fng = existing.get("fear_greed") if isinstance(existing.get("fear_greed"), dict) else {}
+    prev_premium = existing.get("coinbase_premium") if isinstance(existing.get("coinbase_premium"), dict) else {}
+    prev_stables = existing.get("stablecoins") if isinstance(existing.get("stablecoins"), dict) else {}
+
+    cg_data = cg.get("data") if isinstance(cg, dict) and isinstance(cg.get("data"), dict) else {}
     percentages = cg_data.get("market_cap_percentage") if isinstance(cg_data.get("market_cap_percentage"), dict) else {}
     market_caps = cg_data.get("total_market_cap") if isinstance(cg_data.get("total_market_cap"), dict) else {}
 
-    stable_assets = stables.get("peggedAssets") if isinstance(stables.get("peggedAssets"), list) else []
-    stable_total = sum(to_num((asset.get("circulating") or {}).get("peggedUSD")) or 0 for asset in stable_assets if isinstance(asset, dict))
+    stable_assets = stables.get("peggedAssets") if isinstance(stables, dict) and isinstance(stables.get("peggedAssets"), list) else []
+    stable_total = sum(to_num((asset.get("circulating") or {}).get("peggedUSD")) or 0 for asset in stable_assets if isinstance(asset, dict)) if stable_assets else None
     usdt = next((asset for asset in stable_assets if str(asset.get("symbol") or "").upper() == "USDT"), {})
     usdc = next((asset for asset in stable_assets if str(asset.get("symbol") or "").upper() == "USDC"), {})
-    usdt_market_cap = to_num((usdt.get("circulating") or {}).get("peggedUSD"))
-    usdc_market_cap = to_num((usdc.get("circulating") or {}).get("peggedUSD"))
+    usdt_market_cap = to_num((usdt.get("circulating") or {}).get("peggedUSD")) if usdt else None
+    usdc_market_cap = to_num((usdc.get("circulating") or {}).get("peggedUSD")) if usdc else None
 
-    fg_row = (fng.get("data") or [{}])[0] if isinstance(fng.get("data"), list) else {}
-    cg_btc_price = to_num(((btc_simple.get("bitcoin") or {}).get("usd")))
-    coinbase_btc_price = to_num(((coinbase_btc.get("data") or {}).get("amount")))
+    fg_row = (fng.get("data") or [{}])[0] if isinstance(fng, dict) and isinstance(fng.get("data"), list) else {}
+    cg_btc_price = to_num(((btc_simple or {}).get("bitcoin") or {}).get("usd"))
+    coinbase_btc_price = to_num(((coinbase_btc or {}).get("data") or {}).get("amount"))
     coinbase_premium = (
         ((coinbase_btc_price - cg_btc_price) / cg_btc_price * 100)
         if coinbase_btc_price is not None and cg_btc_price not in (None, 0)
@@ -74,36 +111,44 @@ def main() -> int:
     payload = {
         "as_of": datetime.now(timezone.utc).isoformat(),
         "global": {
-            "source": "CoinGecko global",
-            "total_market_cap_usd": to_num(market_caps.get("usd")),
-            "btc_dominance": to_num(percentages.get("btc")),
-            "eth_dominance": to_num(percentages.get("eth")),
-            "usdt_dominance_market": to_num(percentages.get("usdt")),
+            "source": "CoinGecko global" if cg else prev_global.get("source", "previous"),
+            "total_market_cap_usd": to_num(market_caps.get("usd")) if cg else prev_global.get("total_market_cap_usd"),
+            "btc_dominance": to_num(percentages.get("btc")) if cg else prev_global.get("btc_dominance"),
+            "eth_dominance": to_num(percentages.get("eth")) if cg else prev_global.get("eth_dominance"),
+            "usdt_dominance_market": to_num(percentages.get("usdt")) if cg else prev_global.get("usdt_dominance_market"),
         },
         "fear_greed": {
-            "source": "alternative.me",
-            "value": to_num(fg_row.get("value")),
-            "classification": fg_row.get("value_classification"),
-            "timestamp": fg_row.get("timestamp"),
+            "source": "alternative.me" if fng else prev_fng.get("source", "previous"),
+            "value": to_num(fg_row.get("value")) if fng else prev_fng.get("value"),
+            "classification": fg_row.get("value_classification") if fng else prev_fng.get("classification"),
+            "timestamp": fg_row.get("timestamp") if fng else prev_fng.get("timestamp"),
         },
         "coinbase_premium": {
-            "source": "Coinbase BTC spot vs CoinGecko BTC",
-            "pct": coinbase_premium,
-            "coinbase_btc_usd": coinbase_btc_price,
-            "coingecko_btc_usd": cg_btc_price,
+            "source": "Coinbase BTC spot vs CoinGecko BTC" if coinbase_premium is not None else prev_premium.get("source", "previous"),
+            "pct": coinbase_premium if coinbase_premium is not None else prev_premium.get("pct"),
+            "coinbase_btc_usd": coinbase_btc_price if coinbase_btc_price is not None else prev_premium.get("coinbase_btc_usd"),
+            "coingecko_btc_usd": cg_btc_price if cg_btc_price is not None else prev_premium.get("coingecko_btc_usd"),
         },
         "stablecoins": {
-            "source": "DefiLlama stablecoins",
-            "total_market_cap_usd": stable_total,
-            "usdt_market_cap_usd": usdt_market_cap,
-            "usdc_market_cap_usd": usdc_market_cap,
-            "usdt_dominance": (usdt_market_cap / stable_total * 100) if stable_total and usdt_market_cap is not None else None,
-            "usdc_dominance": (usdc_market_cap / stable_total * 100) if stable_total and usdc_market_cap is not None else None,
+            "source": "DefiLlama stablecoins" if stable_total is not None else prev_stables.get("source", "previous"),
+            "total_market_cap_usd": stable_total if stable_total is not None else prev_stables.get("total_market_cap_usd"),
+            "usdt_market_cap_usd": usdt_market_cap if usdt_market_cap is not None else prev_stables.get("usdt_market_cap_usd"),
+            "usdc_market_cap_usd": usdc_market_cap if usdc_market_cap is not None else prev_stables.get("usdc_market_cap_usd"),
+            "usdt_dominance": (usdt_market_cap / stable_total * 100) if stable_total and usdt_market_cap is not None else prev_stables.get("usdt_dominance"),
+            "usdc_dominance": (usdc_market_cap / stable_total * 100) if stable_total and usdc_market_cap is not None else prev_stables.get("usdc_dominance"),
+        },
+        "_health": {
+            "status": "ok" if not errors else "warn",
+            "errors": errors,
         },
     }
 
     OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"updated {OUT}")
+    print(f"updated {OUT} status={payload['_health']['status']}")
+    if errors:
+        print("warnings:")
+        for error in errors:
+            print(f"- {error}")
     return 0
 
 

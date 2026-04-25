@@ -77,6 +77,8 @@ def audit_static(rows: list[dict[str, str]], data: dict[str, dict[str, Any]]) ->
         "news.json": (data["news"].get("updated_at"), 12),
         "etf.json": (data["etf"].get("updated_at"), 36),
         "crypto_market.json": (data["crypto_market"].get("as_of"), 2),
+        "crypto_custom_universe.json": (data["custom"].get("as_of"), 3),
+        "crypto_top20.json": (data["top20"].get("as_of"), 3),
     }
     for name, (raw, max_h) in thresholds.items():
         age = age_hours(raw)
@@ -86,12 +88,6 @@ def audit_static(rows: list[dict[str, str]], data: dict[str, dict[str, Any]]) ->
             add(rows, "WARN", "freshness", name, f"age {age}h > {max_h}h")
         else:
             add(rows, "OK", "freshness", name, f"age {age}h")
-
-    for name in ("crypto_custom_universe.json", "crypto_top20.json"):
-        key = "custom" if "custom" in name else "top20"
-        age = age_hours(data[key].get("as_of"))
-        if age is None or age > 24:
-            add(rows, "WARN", "freshness", name, f"not part of update workflow; age {age}h")
 
 
 def audit_macro(rows: list[dict[str, str]], macro: dict[str, Any], snapshot: dict[str, Any]) -> None:
@@ -202,6 +198,23 @@ def audit_crypto_live(rows: list[dict[str, str]], crypto_market: dict[str, Any])
         add(rows, "OK", "crypto", "stablecoin market cap", f"file={stable_file:.0f}, live={stable_live:.0f}")
 
 
+def audit_crypto_universe(rows: list[dict[str, str]], custom: dict[str, Any], top20: dict[str, Any]) -> None:
+    assets = custom.get("assets") if isinstance(custom.get("assets"), list) else []
+    blank_tickers = [str(row.get("rank_in_custom") or "?") for row in assets if isinstance(row, dict) and not row.get("ticker")]
+    health = custom.get("_health") if isinstance(custom.get("_health"), dict) else {}
+    source = health.get("source") or custom.get("universe")
+    if len(assets) >= 200 and not blank_tickers:
+        add(rows, "OK", "crypto", "top-200 universe", f"assets={len(assets)}, source={source}, status={health.get('status')}")
+    else:
+        add(rows, "FAIL", "crypto", "top-200 universe", f"assets={len(assets)}, blank_tickers={blank_tickers[:10]}, source={source}")
+
+    top_assets = top20.get("assets") if isinstance(top20.get("assets"), list) else []
+    if len(top_assets) >= 20:
+        add(rows, "OK", "crypto", "top-20 universe", f"assets={len(top_assets)}")
+    else:
+        add(rows, "FAIL", "crypto", "top-20 universe", f"assets={len(top_assets)}")
+
+
 def main() -> int:
     data = {
         "macro": load_json(DATA_DIR / "macro_snapshot.json"),
@@ -217,6 +230,7 @@ def main() -> int:
     audit_static(rows, data)
     audit_macro(rows, data["macro"], data["snapshot"])
     audit_crypto_live(rows, data["crypto_market"])
+    audit_crypto_universe(rows, data["custom"], data["top20"])
 
     print("# Dashboard Data Audit")
     print(f"generated_at: {datetime.now(timezone.utc).isoformat()}")

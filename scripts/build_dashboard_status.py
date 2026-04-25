@@ -75,6 +75,7 @@ def main() -> int:
     news = load_json(DATA_DIR / "news.json")
     etf = load_json(DATA_DIR / "etf.json")
     crypto_market = load_json(DATA_DIR / "crypto_market.json")
+    crypto_custom = load_json(DATA_DIR / "crypto_custom_universe.json")
 
     macro_health = macro.get("_health") if isinstance(macro.get("_health"), dict) else {}
     macro_entry = build_entry("매크로", macro.get("as_of"), warn_h=4, fail_h=12, extra={
@@ -105,7 +106,20 @@ def main() -> int:
           "btc_dominance": ((crypto_market.get("global") or {}).get("btc_dominance")),
           "stablecoin_market_cap": ((crypto_market.get("stablecoins") or {}).get("total_market_cap_usd")),
       }),
+      "crypto_universe": build_entry("크립토 유니버스", crypto_custom.get("as_of"), warn_h=2, fail_h=6, extra={
+          "universe": crypto_custom.get("universe"),
+          "asset_count": len(crypto_custom.get("assets") or []),
+          "target_asset_count": crypto_custom.get("target_universe_size") or 200,
+          "source": ((crypto_custom.get("_health") or {}).get("source") if isinstance(crypto_custom.get("_health"), dict) else None),
+          "health": ((crypto_custom.get("_health") or {}).get("status") if isinstance(crypto_custom.get("_health"), dict) else None),
+      }),
     }
+
+    universe_entry = datasets["crypto_universe"]
+    if universe_entry.get("asset_count", 0) < universe_entry.get("target_asset_count", 200):
+        universe_entry["level"] = "danger"
+    elif universe_entry.get("health") in {"warn", "fallback"} and universe_entry["level"] == "ok":
+        universe_entry["level"] = "warn"
 
     levels = [entry["level"] for entry in datasets.values()]
     overall = "danger" if "danger" in levels or "missing" in levels else "warn" if "warn" in levels else "ok"
