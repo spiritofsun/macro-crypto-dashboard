@@ -1,15 +1,94 @@
 <!doctype html>
 <html lang="ko">
-  <head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>UI 1 Command Center</title><link rel="stylesheet" href="../prototypes.css?v=20260425e" /></head>
-  <body>
-    <header class="prototype-topbar"><a class="brand" href="../ui-prototypes.html"><span class="brand-mark">1</span> Command Center</a><nav class="proto-nav"><a href="../ui-prototypes.html">목록</a><a class="active" href="./command-center.html">Command</a><a href="./briefing-portal.html">Briefing</a><a href="./data-terminal.html">Terminal</a><a href="./flow-radar.html">Radar</a><a href="./research-report.html">Report</a></nav></header>
-    <main class="prototype-wrap">
-      <section class="proto-hero">
-        <article class="hero-card"><span class="eyebrow">Unified Operations</span><h1>시장 데이터 관제센터</h1><p class="lead">크립토, 주식/매크로, ETF, 뉴스의 갱신 상태를 상단에서 먼저 확인하고, 아래에서 핵심 지표와 표를 같은 카드 문법으로 읽는 구조입니다.</p><div class="kpi-row"><span class="kpi-chip">Macro <strong>정상 0h</strong></span><span class="kpi-chip">News <strong>정상 2h</strong></span><span class="kpi-chip">ETF <strong>주의 16h</strong></span></div></article>
-        <article class="panel"><div class="panel-title"><h2>데이터 상태</h2><span>병목 즉시 표시</span></div><table class="data-table"><tbody><tr><td>크립토</td><td class="up">정상</td><td>CoinGecko 12분 전</td></tr><tr><td>주식/매크로</td><td class="up">정상</td><td>Yahoo/Stooq 22분 전</td></tr><tr><td>ETF Flows</td><td class="down">지연</td><td>소스 응답 확인 필요</td></tr><tr><td>뉴스</td><td class="up">정상</td><td>RSS 2시간 전</td></tr></tbody></table></article>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI 1 Command Briefing</title>
+    <link rel="stylesheet" href="../prototypes.css?v=20260425g" />
+  </head>
+  <body class="command-briefing-proto">
+    <header class="prototype-topbar soft-topbar">
+      <a class="brand" href="../ui-prototypes.html"><span class="brand-mark">S</span> StraWeb Lab</a>
+      <nav class="proto-nav">
+        <a href="../ui-prototypes.html">목록</a>
+        <a class="active" href="./command-center.html">Command</a>
+        <a href="./briefing-portal.html">Briefing</a>
+        <a href="./data-terminal.html">Terminal</a>
+        <a href="./flow-radar.html">Radar</a>
+        <a href="./research-report.html">Report</a>
+      </nav>
+    </header>
+
+    <main class="briefing-shell">
+      <aside class="briefing-left">
+        <section class="side-widget clock-widget">
+          <p>2026.04.25 <b>토요일</b></p>
+          <strong>09 20 33</strong>
+          <span>☀️ 경기 맑음 · 11°C · 67%</span>
+        </section>
+        <section class="side-widget accent-left">
+          <div class="panel-title"><h2>🔥 인기글</h2><span>전체 →</span></div>
+          <ol class="ranked-news">
+            <li><b>1</b><span>ETF 플로우 지연 점검</span><em>👁 44</em></li>
+            <li><b>2</b><span>BTC 도미넌스 재검증</span><em>👁 30</em></li>
+            <li><b>3</b><span>VIX 데이터 소스 교체</span><em>👁 26</em></li>
+            <li><b>4</b><span>스마트머니 프록시 해석</span><em>👁 25</em></li>
+          </ol>
+        </section>
+        <section class="side-widget accent-left">
+          <h3>🏷️ 태그</h3>
+          <div class="tag-cloud-proto"><span>#크립토</span><span>#매크로</span><span>#ETF</span><span>#스마트머니</span><span>#체인플로우</span><span>#뉴스</span><span>#VIX</span><span>#도미넌스</span></div>
+        </section>
+      </aside>
+
+      <section class="briefing-main">
+        <header class="article-head-proto">
+          <span class="eyebrow">Daily Crypto Briefing</span>
+          <h1>크립토 브리핑 — 2026년 4월 25일</h1>
+          <p>1번 Command Center를 유지하되, 캡처처럼 밝은 브리핑 톤과 좌우 레일 구조를 결합한 최종 후보입니다.</p>
+          <nav class="section-pills"><a>시장개요</a><a>심리지표</a><a>자금흐름</a><a>스마트머니</a><a>유니버스</a></nav>
+        </header>
+
+        <section class="notice-card">⚠️ 투자 추천이 아닙니다. 가격·OI·펀딩비·거래량을 자동 합산한 참고용 점수입니다.</section>
+
+        <section>
+          <div class="section-title"><h2>전체 시장 개요</h2><span>운영 상태 포함</span></div>
+          <div class="metric-grid command-metrics">
+            <article class="metric-card blue-soft"><div class="metric-label">시가총액</div><div class="metric-value">$2.67T</div><div class="metric-note">CoinGecko live</div></article>
+            <article class="metric-card green-soft"><div class="metric-label">24h 변동</div><div class="metric-value down">▼ 0.37%</div><div class="metric-note">시장 평균</div></article>
+            <article class="metric-card amber-soft"><div class="metric-label">BTC 도미넌스</div><div class="metric-value">58.09%</div><div class="metric-note">유동성 흡수</div></article>
+            <article class="metric-card violet-soft"><div class="metric-label">데이터 상태</div><div class="metric-value up">정상</div><div class="metric-note">뉴스·크립토 갱신</div></article>
+          </div>
+          <div class="insight-line">💡 BTC 도미넌스 58.1% — 비트코인이 시장 유동성을 흡수하고 있습니다.</div>
+        </section>
+
+        <section>
+          <div class="section-title"><h2>체인별 자금흐름 <small>24h</small></h2><span>거래량 × 24h 변화율 프록시</span></div>
+          <div class="flow-map-proto">
+            <div class="flow-side left"><p style="--c:#4385f4">Ethereum <b>-$1.4B</b></p><p style="--c:#9a7cff">Bitcoin</p><p style="--c:#ea62b0">Tron</p><p style="--c:#fb8a3c">Arbitrum</p><p style="--c:#f7c721">Solana</p><p style="--c:#48c99a">Hyperliquid L1</p><p style="--c:#35c4dc">Polygon</p></div>
+            <div class="flow-canvas-proto"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="flow-side right"><p style="--c:#8585f4">BSC <b>+$40M</b></p><p style="--c:#ef6b65">Base <b>+$6M</b></p><p style="--c:#37c7b1">Provenance</p></div>
+          </div>
+          <div class="insight-line">BSC $40M 순유입 — 체인별 자금 쏠림이 뚜렷합니다. Ethereum은 이탈 중.</div>
+        </section>
+
+        <section>
+          <div class="section-title"><h2>🧠 스마트머니 동향</h2><span>매집·배분·선물</span></div>
+          <div class="smart-tabs-proto"><button class="active">📈 매집 <span>순매수 · 7개</span></button><button>📉 배분 <span>순매도 · 8개</span></button><button>⚡ 선물 <span>포지션 · 6개</span></button></div>
+          <div class="panel compact-panel"><table class="data-table"><thead><tr><th>토큰</th><th>가격</th><th>24h 넷플로우</th><th>7d</th></tr></thead><tbody><tr><td><span class="badge">ETH</span> ASTEROID</td><td>—</td><td class="up">+$55K</td><td class="down">-$4.3M</td></tr><tr><td><span class="badge">BAS</span> CODEFORMER</td><td>—</td><td class="up">+$20K</td><td class="up">+$17K</td></tr><tr><td><span class="badge">SOL</span> AINI</td><td>—</td><td class="up">+$19K</td><td class="up">+$19K</td></tr><tr><td><span class="badge">BAS</span> FUN</td><td>—</td><td class="up">+$13K</td><td class="up">+$13K</td></tr></tbody></table></div>
+        </section>
       </section>
-      <section class="metric-grid"><article class="metric-card"><div class="metric-label">BTC</div><div class="metric-value">$77,598</div><div class="metric-note down">▼ 0.55%</div></article><article class="metric-card"><div class="metric-label">NASDAQ</div><div class="metric-value">24,836</div><div class="metric-note up">▲ 0.73%</div></article><article class="metric-card"><div class="metric-label">VIX</div><div class="metric-value">21.34</div><div class="metric-note flat">주의권</div></article><article class="metric-card"><div class="metric-label">DXY</div><div class="metric-value">98.43</div><div class="metric-note up">▲ 0.16%</div></article></section>
-      <section class="layout-3col" style="margin-top:24px"><aside class="sidebar-stack"><div class="side-widget"><h3>카테고리</h3><ul class="mini-list"><li><span>크립토</span><strong class="up">live</strong></li><li><span>주식/매크로</span><strong class="up">live</strong></li><li><span>ETF</span><strong class="down">delay</strong></li><li><span>뉴스</span><strong class="up">live</strong></li></ul></div></aside><section class="main-stack"><div class="panel"><div class="panel-title"><h2>커스텀 유니버스</h2><span>표 중심</span></div><table class="data-table"><thead><tr><th>토큰</th><th>가격</th><th>24H</th><th>시총</th><th>거래량</th></tr></thead><tbody><tr><td><span class="badge">BTC</span> Bitcoin</td><td>$77,598</td><td class="down">-0.55%</td><td>$1.55T</td><td>$32.2B</td></tr><tr><td><span class="badge">ETH</span> Ethereum</td><td>$2,317</td><td class="down">-0.41%</td><td>$279.7B</td><td>$13.7B</td></tr><tr><td><span class="badge">SOL</span> Solana</td><td>$86.50</td><td class="up">+0.63%</td><td>$49.8B</td><td>$2.9B</td></tr></tbody></table></div></section><aside class="right-stack"><div class="side-widget"><h3>주요 뉴스</h3><p class="lead" style="font-size:15px">ETF 플로우 지연, VIX 변동성, 달러 강세 여부를 한 카드에서 요약합니다.</p></div></aside></section>
+
+      <aside class="briefing-right">
+        <section class="side-widget ticker-soft">
+          <h3>📈 시세</h3>
+          <ul class="mini-list"><li><span>₿ 비트코인</span><strong class="down">₩114,362,548 ▼1.14%</strong></li><li><span>🇺🇸 나스닥</span><strong class="up">24,836 ▲0.73%</strong></li><li><span>🇰🇷 코스피</span><strong class="up">6,475 ▲0.90%</strong></li><li><span>💵 달러 환율</span><strong>1,477.65원</strong></li></ul>
+        </section>
+        <section class="side-widget owner-news">
+          <h3>🔥 주인장 관심 뉴스</h3>
+          <article><b>하이라이트 클립</b><p>CZ: 일반 사람들은 여전히 Web3에서 큰 기회를 가지고 있다</p><a>더보기 ▼</a><small>1분 전</small></article>
+        </section>
+      </aside>
     </main>
   </body>
 </html>

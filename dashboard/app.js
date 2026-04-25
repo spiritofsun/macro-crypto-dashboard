@@ -456,6 +456,31 @@ function renderGlobalDataHealth() {
   `;
 }
 
+function renderCommandShellClock() {
+  const clock = document.getElementById("commandClock");
+  const date = document.getElementById("commandDate");
+  if (!clock && !date) return;
+  const now = new Date();
+  if (clock) {
+    clock.textContent = new Intl.DateTimeFormat("ko-KR", {
+      timeZone: "Asia/Seoul",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+    }).format(now).replaceAll(":", " ");
+  }
+  if (date) {
+    date.innerHTML = new Intl.DateTimeFormat("ko-KR", {
+      timeZone: "Asia/Seoul",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      weekday: "long",
+    }).format(now);
+  }
+}
+
 function cardHTML(item, index, topCount = 4) {
   const topClass = index < topCount ? " top-kpi" : "";
   return `
@@ -475,7 +500,8 @@ function renderCards(targetId, items, options = {}) {
 }
 
 function setupSidebarShell() {
-  if (!document.querySelector(".top-snapshot-bar")) {
+  const usesPortalShell = document.body.classList.contains("command-portal-body") || document.body.classList.contains("crypto-portal-body");
+  if (!usesPortalShell && !document.querySelector(".top-snapshot-bar")) {
     const bar = document.createElement("div");
     bar.className = "top-snapshot-bar";
     bar.innerHTML = '<div class="top-snapshot-inner" id="globalSnapshotText">Snapshot n/a · News n/a · ETF n/a · <span class="live-dot">●</span> Live n/a</div>';
@@ -1885,6 +1911,7 @@ function renderEtfFlows() {
 
 function renderAll() {
   setAsOf();
+  renderCommandShellClock();
   renderGlobalDataHealth();
   renderHomeHub();
   renderNewsPage();

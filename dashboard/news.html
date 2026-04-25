@@ -3,27 +3,57 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>뉴스 | Project Mark</title>
+    <title>뉴스 | StraWeb Lab</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260425d" />
+    <link rel="stylesheet" href="./styles.css?v=20260425g" />
   </head>
-  <body>
-    <div class="app-shell">
-      <aside class="left-sidebar">
-        <a class="side-home" href="./index.html">홈</a>
-        <a class="side-link" href="./crypto.html">크립토</a>
-        <a class="side-link" href="./stock-market.html">주식/매크로</a>
-        <a class="side-link" href="./long-short.html">롱/숏</a>
-        <a class="side-link" href="./etf.html">ETF Flows</a>
-        <a class="side-link" href="./funding.html">펀딩비</a>
-        <a class="side-link" href="./exchanges.html">거래소별 프리미엄+가격</a>
-        <a class="side-link" href="./ai-gpt-brief.html">AI 브리핑</a>
-        <a class="side-link active" href="./news.html">뉴스</a>
+  <body class="command-portal-body">
+    <header class="command-topbar">
+      <a class="command-brand" href="./index.html">StraWeb Lab</a>
+      <nav class="command-topnav">
+        <a class="" href="./crypto.html">크립토브리핑</a>
+        <a class="" href="./stock-market.html">주식/매크로</a>
+        <a class="" href="./etf.html">ETF</a>
+        <a class="active" href="./news.html">뉴스</a>
+      </nav>
+      <a class="command-search-pill" href="./ai-gpt-brief.html">AI 브리핑</a>
+    </header>
+
+    <div class="command-dashboard-shell">
+
+      <aside class="command-left-rail">
+        <section class="command-widget command-clock-card">
+          <p id="commandDate">2026.04.25 <b>토요일</b></p>
+          <strong id="commandClock">09 20 33</strong>
+          <span>데이터 갱신 상태를 먼저 확인하는 운영형 레일</span>
+        </section>
+
+        <section class="command-widget command-nav-card">
+          <h3>카테고리</h3>
+          <nav class="command-side-nav">
+            <a class="" href="./index.html">홈</a>
+            <a class="" href="./crypto.html">크립토</a>
+            <a class="" href="./stock-market.html">주식/매크로</a>
+            <a class="" href="./etf.html">ETF Flows</a>
+            <a class="active" href="./news.html">뉴스</a>
+            <a class="" href="./long-short.html">롱/숏</a>
+            <a class="" href="./funding.html">펀딩비</a>
+            <a class="" href="./exchanges.html">거래소 프리미엄</a>
+            <a class="" href="./ai-gpt-brief.html">AI 브리핑</a>
+          </nav>
+        </section>
+
+        <section class="command-widget command-tag-card">
+          <h3>태그</h3>
+          <div class="command-tags">
+            <span>#크립토</span><span>#매크로</span><span>#ETF</span><span>#뉴스</span><span>#VIX</span><span>#도미넌스</span><span>#스마트머니</span><span>#체인플로우</span>
+          </div>
+        </section>
       </aside>
 
-      <main class="page content-page">
+      <main class="command-main-brief page content-page">
         <header class="hero">
           <p class="kicker">카테고리 / 뉴스</p>
           <h1>뉴스</h1>
@@ -54,7 +84,30 @@
           <ul id="newsFeed" class="news-list news-list-large"></ul>
         </section>
       </main>
+
+
+      <aside class="command-right-rail">
+        <section class="command-widget command-ticker-card">
+          <div class="command-widget-head"><h3>시세</h3><span>live</span></div>
+          <div class="command-mini-tickers">
+            <p><span>₿ 비트코인</span><b>₩114,362,548</b><em class="down">▼ 1.14%</em></p>
+            <p><span>🇺🇸 나스닥</span><b>24,836.60</b><em class="up">▲ 0.73%</em></p>
+            <p><span>🇰🇷 코스피</span><b>6,475.63</b><em class="up">▲ 0.90%</em></p>
+            <p><span>💵 달러 환율</span><b>1,477.65원</b><em class="flat">보합</em></p>
+          </div>
+        </section>
+
+        <section class="command-widget command-news-card">
+          <div class="command-widget-head"><h3>주인장 관심 뉴스</h3><span>brief</span></div>
+          <article>
+            <b>하이라이트 클립</b>
+            <p>갱신 지연, ETF 플로우, VIX, 도미넌스 변화를 우측 레일에서 빠르게 점검합니다.</p>
+            <small>자동 브리핑 영역</small>
+          </article>
+        </section>
+      </aside>
     </div>
-    <script src="./app.js?v=20260425d"></script>
+
+    <script src="./app.js?v=20260425g"></script>
   </body>
 </html>

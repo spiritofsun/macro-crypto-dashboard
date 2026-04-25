@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>크립토 | Project Mark</title>
+    <title>크립토 브리핑 | StraWeb Lab</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260425d" />
+    <link rel="stylesheet" href="./styles.css?v=20260425g" />
   </head>
   <body class="crypto-portal-body">
     <header class="crypto-topbar">
-      <a class="crypto-brand" href="./index.html">Project Mark</a>
+      <a class="crypto-brand" href="./index.html">StraWeb Lab</a>
       <nav class="crypto-nav">
         <a class="active" href="./crypto.html">크립토브리핑</a>
         <a href="./stock-market.html">주식/매크로</a>
@@ -67,6 +67,7 @@
             <a href="#overview">시장개요</a>
             <a href="#sentiment">심리지표</a>
             <a href="#trending">트렌딩</a>
+            <a href="#chainflow">자금흐름</a>
             <a href="#smartmoney">스마트머니</a>
             <a href="#universe">유니버스</a>
           </div>
@@ -104,6 +105,18 @@
             <span>커스텀 유니버스</span>
           </div>
           <div class="portal-trending-grid" id="cryptoTrendStrip"></div>
+        </section>
+
+        <section class="crypto-market-section chain-feature-section" id="chainflow">
+          <div class="portal-section-title">
+            <h2>체인별 자금흐름 24h</h2>
+            <span>거래량 × 24h 변화율 프록시</span>
+          </div>
+          <div class="portal-explainer">
+            <strong>체인별 자금흐름 24h란?</strong>
+            <span>실제 브릿지/온체인 넷플로우가 아니라 각 체인 대표 코인의 24h 거래대금과 가격 변화를 합산한 자금 압력 지표입니다. 양수는 매수 압력, 음수는 이탈 압력으로 해석합니다.</span>
+          </div>
+          <div class="chain-flow-card" id="cryptoChainFlow"></div>
         </section>
 
         <section class="crypto-market-section" id="smartmoney">
@@ -162,18 +175,6 @@
             <span>24H 변동성 기반 참고 점수</span>
           </div>
           <div class="rsi-map" id="cryptoRsiMap"></div>
-        </section>
-
-        <section class="crypto-market-section">
-          <div class="portal-section-title">
-            <h2>체인별 자금흐름 24h</h2>
-            <span>거래량 × 24h 변화율 프록시</span>
-          </div>
-          <div class="portal-explainer">
-            <strong>체인별 자금흐름 24h란?</strong>
-            <span>실제 브릿지/온체인 넷플로우가 아니라 각 체인 대표 코인의 24h 거래대금과 가격 변화를 합산한 자금 압력 지표입니다. 양수는 매수 압력, 음수는 이탈 압력으로 해석합니다.</span>
-          </div>
-          <div class="chain-flow-card" id="cryptoChainFlow"></div>
         </section>
 
         <section class="crypto-market-section" id="universe">
@@ -235,6 +236,6 @@
       </aside>
     </div>
 
-    <script src="./app.js?v=20260425d"></script>
+    <script src="./app.js?v=20260425g"></script>
   </body>
 </html>
