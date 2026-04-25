@@ -1,14 +1,14 @@
 {
-  "as_of": "2026-04-25T19:25+09:00",
+  "as_of": "2026-04-25T20:23+09:00",
   "assets": [
     {
       "rank_in_custom": 1,
       "ticker": "BTC",
       "name": "Bitcoin",
-      "price": 77811.0,
-      "change_24h": 0.1311,
-      "market_cap": 1557653747036.0,
-      "volume_24h": 27442563489.0,
+      "price": 77709.0,
+      "change_24h": -0.696,
+      "market_cap": 1556448417832.0,
+      "volume_24h": 26219433091.0,
       "tags": [
         "major"
       ],
@@ -20,10 +20,10 @@
       "rank_in_custom": 2,
       "ticker": "ETH",
       "name": "Ethereum",
-      "price": 2321.22,
-      "change_24h": 0.2693,
-      "market_cap": 280137773742.0,
-      "volume_24h": 10479415385.0,
+      "price": 2316.24,
+      "change_24h": -0.5812,
+      "market_cap": 279706449276.0,
+      "volume_24h": 10264933549.0,
       "tags": [
         "major"
       ],
@@ -35,10 +35,10 @@
       "rank_in_custom": 3,
       "ticker": "XRP",
       "name": "XRP",
-      "price": 1.44,
-      "change_24h": 0.543,
-      "market_cap": 88542617991.0,
-      "volume_24h": 1731493222.0,
+      "price": 1.43,
+      "change_24h": -0.2861,
+      "market_cap": 88374502227.0,
+      "volume_24h": 1792077969.0,
       "tags": [
         "major"
       ],
@@ -50,10 +50,10 @@
       "rank_in_custom": 4,
       "ticker": "BNB",
       "name": "BNB",
-      "price": 637.89,
-      "change_24h": 0.3915,
-      "market_cap": 85971205835.0,
-      "volume_24h": 695061336.0,
+      "price": 637.03,
+      "change_24h": -0.1019,
+      "market_cap": 85940215980.0,
+      "volume_24h": 675374041.0,
       "tags": [
         "major"
       ],
@@ -65,10 +65,10 @@
       "rank_in_custom": 5,
       "ticker": "SOL",
       "name": "Solana",
-      "price": 86.65,
-      "change_24h": 1.3866,
-      "market_cap": 49883426752.0,
-      "volume_24h": 2455010938.0,
+      "price": 86.41,
+      "change_24h": 0.5106,
+      "market_cap": 49793475425.0,
+      "volume_24h": 2344446693.0,
       "tags": [
         "major"
       ],
@@ -80,10 +80,10 @@
       "rank_in_custom": 6,
       "ticker": "TRX",
       "name": "TRON",
-      "price": 0.322038,
-      "change_24h": -1.8597,
-      "market_cap": 30527493129.0,
-      "volume_24h": 607451469.0,
+      "price": 0.322627,
+      "change_24h": -1.5962,
+      "market_cap": 30577021517.0,
+      "volume_24h": 603656334.0,
       "tags": [
         "major"
       ],
@@ -95,10 +95,10 @@
       "rank_in_custom": 7,
       "ticker": "DOGE",
       "name": "Dogecoin",
-      "price": 0.098526,
-      "change_24h": 1.1681,
-      "market_cap": 15172403618.0,
-      "volume_24h": 1299709983.0,
+      "price": 0.098332,
+      "change_24h": 0.0031,
+      "market_cap": 15163697823.0,
+      "volume_24h": 1197628280.0,
       "tags": [
         "major"
       ],
@@ -110,10 +110,10 @@
       "rank_in_custom": 8,
       "ticker": "BCH",
       "name": "Bitcoin Cash",
-      "price": 455.06,
-      "change_24h": 0.0169,
-      "market_cap": 9111985702.0,
-      "volume_24h": 121964032.0,
+      "price": 454.47,
+      "change_24h": -0.6906,
+      "market_cap": 9103899571.0,
+      "volume_24h": 117270358.0,
       "tags": [
         "major"
       ],
@@ -125,10 +125,10 @@
       "rank_in_custom": 9,
       "ticker": "ADA",
       "name": "Cardano",
-      "price": 0.253492,
-      "change_24h": 1.6251,
-      "market_cap": 9364579274.0,
-      "volume_24h": 303114286.0,
+      "price": 0.25298,
+      "change_24h": 0.6449,
+      "market_cap": 9357630241.0,
+      "volume_24h": 296387606.0,
       "tags": [
         "major"
       ],
@@ -140,10 +140,10 @@
       "rank_in_custom": 10,
       "ticker": "LINK",
       "name": "Chainlink",
-      "price": 9.43,
-      "change_24h": 1.5239,
-      "market_cap": 6854331851.0,
-      "volume_24h": 179438359.0,
+      "price": 9.41,
+      "change_24h": 0.5323,
+      "market_cap": 6843939060.0,
+      "volume_24h": 174193295.0,
       "tags": [
         "major"
       ],
@@ -155,10 +155,10 @@
       "rank_in_custom": 11,
       "ticker": "AVAX",
       "name": "Avalanche",
-      "price": 9.48,
-      "change_24h": 1.2098,
-      "market_cap": 4091958073.0,
-      "volume_24h": 154268222.0,
+      "price": 9.45,
+      "change_24h": 0.0591,
+      "market_cap": 4079953268.0,
+      "volume_24h": 150152970.0,
       "tags": [
         "major"
       ],
@@ -170,10 +170,10 @@
       "rank_in_custom": 12,
       "ticker": "UNI",
       "name": "Uniswap",
-      "price": 3.27,
-      "change_24h": 0.5059,
-      "market_cap": 2072528555.0,
-      "volume_24h": 102642683.0,
+      "price": 3.26,
+      "change_24h": -0.5836,
+      "market_cap": 2065659068.0,
+      "volume_24h": 100658179.0,
       "tags": [
         "major"
       ],
@@ -186,9 +186,9 @@
       "ticker": "AAVE",
       "name": "Aave",
       "price": 95.87,
-      "change_24h": 2.4844,
-      "market_cap": 1454940333.0,
-      "volume_24h": 253777461.0,
+      "change_24h": 0.9553,
+      "market_cap": 1456286615.0,
+      "volume_24h": 248147250.0,
       "tags": [
         "major"
       ],
@@ -201,9 +201,9 @@
       "ticker": "NEAR",
       "name": "NEAR Protocol",
       "price": 1.41,
-      "change_24h": 0.4309,
-      "market_cap": 1829215686.0,
-      "volume_24h": 120889848.0,
+      "change_24h": -0.8618,
+      "market_cap": 1823556349.0,
+      "volume_24h": 116662372.0,
       "tags": [
         "major"
       ],
@@ -215,10 +215,10 @@
       "rank_in_custom": 15,
       "ticker": "ONDO",
       "name": "Ondo",
-      "price": 0.263624,
-      "change_24h": 1.0004,
-      "market_cap": 1283297271.0,
-      "volume_24h": 39422627.0,
+      "price": 0.262449,
+      "change_24h": -0.7238,
+      "market_cap": 1277877001.0,
+      "volume_24h": 38294334.0,
       "tags": [
         "major"
       ],
@@ -230,10 +230,10 @@
       "rank_in_custom": 16,
       "ticker": "SUI",
       "name": "Sui",
-      "price": 0.953067,
-      "change_24h": 1.1283,
-      "market_cap": 3767817854.0,
-      "volume_24h": 207773852.0,
+      "price": 0.948979,
+      "change_24h": -0.1098,
+      "market_cap": 3756516139.0,
+      "volume_24h": 195919230.0,
       "tags": [
         "major"
       ],
@@ -245,10 +245,10 @@
       "rank_in_custom": 17,
       "ticker": "TON",
       "name": "Toncoin",
-      "price": 1.35,
-      "change_24h": 3.1932,
-      "market_cap": 3352301037.0,
-      "volume_24h": 120757308.0,
+      "price": 1.34,
+      "change_24h": 1.9264,
+      "market_cap": 3347526015.0,
+      "volume_24h": 116252412.0,
       "tags": [
         "major"
       ],
@@ -260,10 +260,10 @@
       "rank_in_custom": 18,
       "ticker": "XLM",
       "name": "Stellar",
-      "price": 0.173509,
-      "change_24h": -0.6194,
-      "market_cap": 5774447065.0,
-      "volume_24h": 91813323.0,
+      "price": 0.173897,
+      "change_24h": -1.0913,
+      "market_cap": 5789615318.0,
+      "volume_24h": 93137622.0,
       "tags": [
         "major"
       ],
@@ -275,10 +275,10 @@
       "rank_in_custom": 19,
       "ticker": "XMR",
       "name": "Monero",
-      "price": 373.33,
-      "change_24h": -1.0051,
-      "market_cap": 6886294557.0,
-      "volume_24h": 98686726.0,
+      "price": 369.68,
+      "change_24h": -2.1088,
+      "market_cap": 6818811408.0,
+      "volume_24h": 99315323.0,
       "tags": [
         "major"
       ],
@@ -290,10 +290,10 @@
       "rank_in_custom": 20,
       "ticker": "MNT",
       "name": "Mantle",
-      "price": 0.651476,
-      "change_24h": 0.2705,
-      "market_cap": 2135490079.0,
-      "volume_24h": 31236550.0,
+      "price": 0.65807,
+      "change_24h": 0.8579,
+      "market_cap": 2157161780.0,
+      "volume_24h": 32194628.0,
       "tags": [
         "major"
       ],
@@ -304,10 +304,10 @@
       "rank_in_custom": 21,
       "ticker": "HYPE",
       "name": "Hyperliquid",
-      "price": 41.67,
-      "change_24h": 2.1794,
-      "market_cap": 9927253764.0,
-      "volume_24h": 166772081.0,
+      "price": 41.7,
+      "change_24h": 1.7124,
+      "market_cap": 9942901643.0,
+      "volume_24h": 164147827.0,
       "tags": [
         "watch"
       ],
@@ -319,10 +319,10 @@
       "rank_in_custom": 22,
       "ticker": "ENA",
       "name": "Ethena",
-      "price": 0.110113,
-      "change_24h": 1.6113,
-      "market_cap": 964623911.0,
-      "volume_24h": 71738498.0,
+      "price": 0.109168,
+      "change_24h": -0.5373,
+      "market_cap": 956231988.0,
+      "volume_24h": 70451623.0,
       "tags": [
         "watch"
       ],
@@ -334,10 +334,10 @@
       "rank_in_custom": 23,
       "ticker": "POL",
       "name": "POL (ex-MATIC)",
-      "price": 0.093179,
-      "change_24h": -1.6507,
-      "market_cap": 990645258.0,
-      "volume_24h": 56086607.0,
+      "price": 0.093103,
+      "change_24h": -2.1115,
+      "market_cap": 990334636.0,
+      "volume_24h": 55416740.0,
       "tags": [
         "watch"
       ],
@@ -349,10 +349,10 @@
       "rank_in_custom": 24,
       "ticker": "APT",
       "name": "Aptos",
-      "price": 0.977631,
-      "change_24h": 2.8005,
-      "market_cap": 788601273.0,
-      "volume_24h": 78000044.0,
+      "price": 0.973129,
+      "change_24h": 1.4255,
+      "market_cap": 785545731.0,
+      "volume_24h": 76637831.0,
       "tags": [
         "watch"
       ],
@@ -364,10 +364,10 @@
       "rank_in_custom": 25,
       "ticker": "ARB",
       "name": "Arbitrum",
-      "price": 0.131845,
-      "change_24h": 2.7454,
-      "market_cap": 810374919.0,
-      "volume_24h": 82514860.0,
+      "price": 0.130925,
+      "change_24h": 0.6383,
+      "market_cap": 805756470.0,
+      "volume_24h": 80382061.0,
       "tags": [
         "watch"
       ],
@@ -379,10 +379,10 @@
       "rank_in_custom": 26,
       "ticker": "OP",
       "name": "Optimism",
-      "price": 0.132613,
-      "change_24h": 8.9406,
-      "market_cap": 284839596.0,
-      "volume_24h": 74959918.0,
+      "price": 0.13018,
+      "change_24h": 6.3415,
+      "market_cap": 280093831.0,
+      "volume_24h": 76773789.0,
       "tags": [
         "watch"
       ],
@@ -394,10 +394,10 @@
       "rank_in_custom": 27,
       "ticker": "CRV",
       "name": "Curve DAO",
-      "price": 0.23053,
-      "change_24h": 2.7577,
-      "market_cap": 347296194.0,
-      "volume_24h": 44745916.0,
+      "price": 0.228735,
+      "change_24h": 1.9695,
+      "market_cap": 344629019.0,
+      "volume_24h": 44022834.0,
       "tags": [
         "watch"
       ],
@@ -409,10 +409,10 @@
       "rank_in_custom": 28,
       "ticker": "ZRO",
       "name": "LayerZero",
-      "price": 1.58,
-      "change_24h": -0.7461,
-      "market_cap": 399266808.0,
-      "volume_24h": 26912680.0,
+      "price": 1.57,
+      "change_24h": -1.7599,
+      "market_cap": 396968340.0,
+      "volume_24h": 26151790.0,
       "tags": [
         "watch"
       ],
@@ -424,10 +424,10 @@
       "rank_in_custom": 29,
       "ticker": "PYTH",
       "name": "Pyth Network",
-      "price": 0.04990115,
-      "change_24h": -2.5591,
-      "market_cap": 286720877.0,
-      "volume_24h": 16931569.0,
+      "price": 0.04954522,
+      "change_24h": -4.4207,
+      "market_cap": 284971653.0,
+      "volume_24h": 16638484.0,
       "tags": [
         "watch"
       ],
@@ -439,10 +439,10 @@
       "rank_in_custom": 30,
       "ticker": "GRT",
       "name": "The Graph",
-      "price": 0.0253738,
-      "change_24h": 3.3866,
-      "market_cap": 274155233.0,
-      "volume_24h": 17928339.0,
+      "price": 0.0252605,
+      "change_24h": 2.5802,
+      "market_cap": 272737971.0,
+      "volume_24h": 18623472.0,
       "tags": [
         "watch"
       ],
@@ -454,10 +454,10 @@
       "rank_in_custom": 31,
       "ticker": "LDO",
       "name": "Lido DAO",
-      "price": 0.379432,
-      "change_24h": -0.5758,
-      "market_cap": 322096863.0,
-      "volume_24h": 22181296.0,
+      "price": 0.377468,
+      "change_24h": -1.4655,
+      "market_cap": 320772866.0,
+      "volume_24h": 21106369.0,
       "tags": [
         "watch"
       ],
@@ -469,10 +469,10 @@
       "rank_in_custom": 32,
       "ticker": "AERO",
       "name": "Aerodrome Finance",
-      "price": 0.426853,
-      "change_24h": -0.377,
-      "market_cap": 395328180.0,
-      "volume_24h": 11051392.0,
+      "price": 0.427931,
+      "change_24h": -2.4392,
+      "market_cap": 396975381.0,
+      "volume_24h": 10591546.0,
       "tags": [
         "watch"
       ],
@@ -484,10 +484,10 @@
       "rank_in_custom": 33,
       "ticker": "STRK",
       "name": "Starknet",
-      "price": 0.04060413,
-      "change_24h": -4.2685,
-      "market_cap": 237526663.0,
-      "volume_24h": 26592786.0,
+      "price": 0.04099784,
+      "change_24h": -3.1377,
+      "market_cap": 240044755.0,
+      "volume_24h": 26471348.0,
       "tags": [
         "watch"
       ],
@@ -499,10 +499,10 @@
       "rank_in_custom": 34,
       "ticker": "ZK",
       "name": "ZKsync",
-      "price": 0.01673571,
-      "change_24h": 1.3777,
-      "market_cap": 162389559.0,
-      "volume_24h": 15524047.0,
+      "price": 0.01667304,
+      "change_24h": 1.2302,
+      "market_cap": 161910456.0,
+      "volume_24h": 15170012.0,
       "tags": [
         "watch"
       ],
@@ -515,9 +515,9 @@
       "ticker": "PENDLE",
       "name": "Pendle",
       "price": 1.29,
-      "change_24h": -1.7768,
-      "market_cap": 214869108.0,
-      "volume_24h": 27674622.0,
+      "change_24h": -3.0938,
+      "market_cap": 214926673.0,
+      "volume_24h": 27235776.0,
       "tags": [
         "watch"
       ],
@@ -529,10 +529,10 @@
       "rank_in_custom": 36,
       "ticker": "SAND",
       "name": "The Sandbox",
-      "price": 0.083907,
-      "change_24h": 9.1247,
-      "market_cap": 223827288.0,
-      "volume_24h": 102485736.0,
+      "price": 0.083414,
+      "change_24h": 7.9836,
+      "market_cap": 222659221.0,
+      "volume_24h": 109162220.0,
       "tags": [
         "watch"
       ],
@@ -544,10 +544,10 @@
       "rank_in_custom": 37,
       "ticker": "BERA",
       "name": "Berachain",
-      "price": 0.403729,
-      "change_24h": 1.4977,
-      "market_cap": 99222580.0,
-      "volume_24h": 22354947.0,
+      "price": 0.400341,
+      "change_24h": 0.2857,
+      "market_cap": 98384192.0,
+      "volume_24h": 20158498.0,
       "tags": [
         "watch"
       ],
@@ -559,10 +559,10 @@
       "rank_in_custom": 38,
       "ticker": "BEAM",
       "name": "Beam",
-      "price": 0.00202428,
-      "change_24h": 1.1811,
-      "market_cap": 103847283.0,
-      "volume_24h": 4261156.0,
+      "price": 0.00201887,
+      "change_24h": 0.9805,
+      "market_cap": 103681502.0,
+      "volume_24h": 4342414.0,
       "tags": [
         "watch"
       ],
@@ -573,10 +573,10 @@
       "rank_in_custom": 39,
       "ticker": "FRAX",
       "name": "Legacy Frax Dollar",
-      "price": 0.993337,
-      "change_24h": -0.0112,
-      "market_cap": 273972449.0,
-      "volume_24h": 188862.0,
+      "price": 0.992942,
+      "change_24h": -0.0418,
+      "market_cap": 274107085.0,
+      "volume_24h": 189002.0,
       "tags": [
         "stablecoin",
         "watch"
@@ -589,10 +589,10 @@
       "rank_in_custom": 40,
       "ticker": "LTC",
       "name": "Litecoin",
-      "price": 56.52,
-      "change_24h": 0.5702,
-      "market_cap": 4357291468.0,
-      "volume_24h": 273222042.0,
+      "price": 56.35,
+      "change_24h": -0.2008,
+      "market_cap": 4345829538.0,
+      "volume_24h": 257812646.0,
       "tags": [
         "major"
       ],
@@ -604,10 +604,10 @@
       "rank_in_custom": 41,
       "ticker": "ICP",
       "name": "Internet Computer",
-      "price": 2.48,
-      "change_24h": 0.45,
-      "market_cap": 1368268464.0,
-      "volume_24h": 27851989.0,
+      "price": 2.47,
+      "change_24h": -0.6895,
+      "market_cap": 1364739744.0,
+      "volume_24h": 27463419.0,
       "tags": [
         "major"
       ],
@@ -634,10 +634,10 @@
       "rank_in_custom": 43,
       "ticker": "MORPHO",
       "name": "Morpho",
-      "price": 1.84,
-      "change_24h": -0.8917,
-      "market_cap": 1079676152.0,
-      "volume_24h": 10889650.0,
+      "price": 1.85,
+      "change_24h": -1.458,
+      "market_cap": 1083918629.0,
+      "volume_24h": 10629376.0,
       "tags": [
         "project_tracking"
       ],
@@ -663,10 +663,10 @@
       "rank_in_custom": 45,
       "ticker": "IP",
       "name": "Story",
-      "price": 0.548017,
-      "change_24h": 4.2021,
-      "market_cap": 193903405.0,
-      "volume_24h": 34717699.0,
+      "price": 0.548557,
+      "change_24h": 3.9366,
+      "market_cap": 193871419.0,
+      "volume_24h": 33860411.0,
       "tags": [
         "project_tracking"
       ],
@@ -731,10 +731,10 @@
       "rank_in_custom": 50,
       "ticker": "EIGEN",
       "name": "EigenCloud (prev. EigenLayer)",
-      "price": 0.183953,
-      "change_24h": 1.6228,
-      "market_cap": 127127984.0,
-      "volume_24h": 14438352.0,
+      "price": 0.182426,
+      "change_24h": -0.2446,
+      "market_cap": 126151893.0,
+      "volume_24h": 14400205.0,
       "tags": [
         "project_tracking"
       ],
@@ -746,10 +746,10 @@
       "rank_in_custom": 51,
       "ticker": "LINEA",
       "name": "Linea",
-      "price": 0.00363124,
-      "change_24h": 8.7529,
-      "market_cap": 90339404.0,
-      "volume_24h": 21947191.0,
+      "price": 0.00365336,
+      "change_24h": 8.4208,
+      "market_cap": 90771280.0,
+      "volume_24h": 24680953.0,
       "tags": [
         "project_tracking"
       ],
@@ -761,10 +761,10 @@
       "rank_in_custom": 52,
       "ticker": "WLD",
       "name": "Worldcoin",
-      "price": 0.262763,
-      "change_24h": 0.4564,
-      "market_cap": 865371176.0,
-      "volume_24h": 67504394.0,
+      "price": 0.261611,
+      "change_24h": -0.3983,
+      "market_cap": 862376991.0,
+      "volume_24h": 63916262.0,
       "tags": [
         "project_tracking"
       ],
@@ -776,10 +776,10 @@
       "rank_in_custom": 53,
       "ticker": "OKB",
       "name": "OKB",
-      "price": 84.69,
-      "change_24h": 1.0962,
-      "market_cap": 1778081833.0,
-      "volume_24h": 11638769.0,
+      "price": 84.55,
+      "change_24h": 0.7044,
+      "market_cap": 1775856113.0,
+      "volume_24h": 11695912.0,
       "tags": [
         "project_tracking"
       ],
@@ -790,10 +790,10 @@
       "rank_in_custom": 54,
       "ticker": "SKY",
       "name": "Sky",
-      "price": 0.084192,
-      "change_24h": 0.2241,
-      "market_cap": 1953296982.0,
-      "volume_24h": 9004368.0,
+      "price": 0.08395,
+      "change_24h": -0.3889,
+      "market_cap": 1947691549.0,
+      "volume_24h": 8805972.0,
       "tags": [
         "project_tracking"
       ],
@@ -818,10 +818,10 @@
       "rank_in_custom": 56,
       "ticker": "FIL",
       "name": "Filecoin",
-      "price": 0.951823,
-      "change_24h": 2.1564,
-      "market_cap": 736195163.0,
-      "volume_24h": 72846400.0,
+      "price": 0.945987,
+      "change_24h": 0.6336,
+      "market_cap": 732458962.0,
+      "volume_24h": 71295194.0,
       "tags": [
         "project_tracking"
       ],
