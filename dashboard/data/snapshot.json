@@ -1,5 +1,5 @@
 {
-  "asOf": "2026-04-25 08:49 KST",
+  "asOf": "2026-04-25 12:21 KST",
   "liquidity_checklist": [
     "S&P500 +0.40% / NASDAQ +0.89%",
     "US10Y 4.34 (+0.04%) / US2Y 3.83 (+0.04%)"
@@ -34,18 +34,18 @@
   "crypto_equities": [
     {
       "label": "COIN",
-      "value": "199.72",
-      "delta": -1.27
+      "value": "199.77",
+      "delta": -1.14
     },
     {
       "label": "MSTR",
-      "value": "171.03",
-      "delta": -3.3
+      "value": "171.02",
+      "delta": -3.31
     },
     {
       "label": "MARA",
-      "value": "11.63",
-      "delta": -2.96
+      "value": "11.64",
+      "delta": -2.92
     },
     {
       "label": "RIOT",

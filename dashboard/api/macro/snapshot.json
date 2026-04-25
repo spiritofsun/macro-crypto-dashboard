@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-04-25 08:49 KST",
+  "as_of": "2026-04-25 12:21 KST",
   "rates": {
     "us10y": {
       "value": 4.34,
@@ -32,18 +32,18 @@
   },
   "fx": {
     "dxy": {
-      "value": 98.36,
-      "delta": -0.28891479547873344,
+      "value": 98.364,
+      "delta": -0.3050727208229888,
       "display": "98.36",
       "source": "stooq",
-      "source_as_of": "20260424 225853"
+      "source_as_of": "20260424 230000"
     },
     "usdkrw": {
-      "value": 1481.451361,
+      "value": 1477.650527,
       "delta": 0.0,
-      "display": "1,481",
+      "display": "1,478",
       "source": "live",
-      "source_as_of": "2026-04-25 08:49 KST"
+      "source_as_of": "2026-04-25 12:21 KST"
     }
   },
   "indices": {
