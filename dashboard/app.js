@@ -21,7 +21,7 @@ const uiState = {
   staticLastFetchTs: 0,
 };
 
-const STABLES = new Set(["USDT", "USDC", "DAI", "FDUSD", "TUSD", "USDE", "USDD", "FRAX"]);
+const STABLES = new Set(["USDT", "USDC", "DAI", "FDUSD", "TUSD", "USDE", "USDD", "FRAX", "USDS", "SUSDS", "SUSDE", "USDTB", "USDF", "USD1", "BFUSD", "USD0", "USDC.E", "STABLE"]);
 const CRYPTO_SECTOR_BY_SYMBOL = {
   BTC: "Bitcoin", ETH: "Layer1", SOL: "Layer1", BNB: "Exchange/L1", XRP: "Payments", ADA: "Layer1", AVAX: "Layer1", SUI: "Layer1", TON: "Layer1", TRX: "Layer1",
   LINK: "Oracle", PYTH: "Oracle", UNI: "DeFi", AAVE: "DeFi", CRV: "DeFi", LDO: "DeFi", PENDLE: "DeFi", ENA: "DeFi", MORPHO: "DeFi", ONDO: "RWA",
@@ -29,10 +29,18 @@ const CRYPTO_SECTOR_BY_SYMBOL = {
   XLM: "Payments", XMR: "Privacy", BCH: "Bitcoin", LTC: "Bitcoin", FIL: "Storage", AERO: "DeFi", SYRUP: "DeFi", SKY: "DeFi", OKB: "Exchange/L1",
 };
 const CRYPTO_CHAIN_BY_SYMBOL = {
-  BTC: "Bitcoin", BCH: "Bitcoin", LTC: "Bitcoin",
-  ETH: "Ethereum", LINK: "Ethereum", UNI: "Ethereum", AAVE: "Ethereum", LDO: "Ethereum", ENA: "Ethereum", PENDLE: "Ethereum", MORPHO: "Ethereum", ONDO: "Ethereum", SHIB: "Ethereum", GRT: "Ethereum",
-  SOL: "Solana", PYTH: "Solana",
-  BNB: "BSC", TRX: "Tron", TON: "TON", ADA: "Cardano", AVAX: "Avalanche", SUI: "Sui", XRP: "XRP Ledger", XLM: "Stellar", HYPE: "Hyperliquid", MNT: "Mantle", OP: "Optimism", ARB: "Arbitrum", STRK: "Starknet", ZK: "ZKsync", LINEA: "Linea", NEAR: "Near",
+  BTC: "Bitcoin", BCH: "Bitcoin", LTC: "Bitcoin", BSV: "Bitcoin", DOGE: "Dogecoin",
+  ETH: "Ethereum", WETH: "Ethereum", WBTC: "Ethereum", WEETH: "Ethereum", WSTETH: "Ethereum", STETH: "Ethereum", RETH: "Ethereum", RSETH: "Ethereum", EZETH: "Ethereum", ETHFI: "Ethereum", ETHX: "Ethereum", LSETH: "Ethereum", LINK: "Ethereum", UNI: "Ethereum", AAVE: "Ethereum", LDO: "Ethereum", ENA: "Ethereum", PENDLE: "Ethereum", MORPHO: "Ethereum", ONDO: "Ethereum", SHIB: "Ethereum", PEPE: "Ethereum", GRT: "Ethereum", FET: "Ethereum", WLD: "Ethereum", MOG: "Ethereum", METH: "Ethereum", QNT: "Ethereum", DEXE: "Ethereum", PAXG: "Ethereum", XAUT: "Ethereum", SPX: "Ethereum", FLOKI: "Ethereum",
+  SOL: "Solana", PYTH: "Solana", RAY: "Solana", JUP: "Solana", JLP: "Solana", BONK: "Solana", WIF: "Solana", PENGU: "Solana", JTO: "Solana", JITOSOL: "Solana", JUPSOL: "Solana", BNSOL: "Solana", MSOL: "Solana", MEW: "Solana", POPCAT: "Solana", TRUMP: "Solana", PUMP: "Solana",
+  BNB: "BSC", BTCB: "BSC", WBNB: "BSC", CAKE: "BSC", FDUSD: "BSC", TWT: "BSC", ASTER: "BSC",
+  TRX: "Tron", WTRX: "Tron", JST: "Tron", SUN: "Tron", BTT: "Tron", NFT: "Tron",
+  TON: "TON", NOT: "TON", DOGS: "TON",
+  ADA: "Cardano", AVAX: "Avalanche", SUI: "Sui", XRP: "XRP Ledger", XLM: "Stellar",
+  HYPE: "Hyperliquid", MNT: "Mantle", OP: "Optimism", ARB: "Arbitrum", GMX: "Arbitrum", STRK: "Starknet", ZK: "ZKsync", LINEA: "Linea",
+  NEAR: "Near", ATOM: "Cosmos", TIA: "Cosmos", INJ: "Cosmos", SEI: "Cosmos", OSMO: "Cosmos",
+  POL: "Polygon", MATIC: "Polygon", AERO: "Base", VIRTUAL: "Base", BRETT: "Base", DEGEN: "Base", CBBTC: "Base", TBTC: "Base",
+  ICP: "Internet Computer", FIL: "Filecoin", XMR: "Monero", TAO: "Bittensor", OKB: "OKX", CRO: "Cronos", KAS: "Kaspa", ALGO: "Algorand", APT: "Aptos",
+  LEO: "Bitfinex", WBT: "WhiteBIT", ZEC: "Zcash", M: "MemeCore", CC: "Canton", HBAR: "Hedera", RAIN: "Arbitrum", SKY: "Ethereum", WLFI: "Ethereum", PI: "Pi", BGB: "Bitget", ETC: "Ethereum Classic", KCS: "KuCoin", KHYPE: "Hyperliquid", RENDER: "Solana", LBTC: "Ethereum", GT: "Gate", FLR: "Flare", VET: "VeChain", BDX: "Beldex", NIGHT: "Cardano", NEXO: "Ethereum", SIREN: "BSC", SOLVBTC: "BSC", DASH: "Dash", EDGE: "edgeX", VVV: "Base", STX: "Stacks", XTZ: "Tezos", XDC: "XDC", EOS: "EOS", "BTC.B": "Avalanche", LUNC: "Terra Classic", DCR: "Decred", MON: "Monad", IMX: "Immutable", GNO: "Gnosis", KAIA: "Kaia", "2Z": "Solana",
 };
 const MODE_A = {
   apiBase: window.PROJECT_MARK_API_BASE || "https://project-mark-gateway.workers.dev",
@@ -144,6 +152,24 @@ function formatBigNumber(value) {
   if (abs >= 1e9) return `${sign}$${(abs / 1e9).toFixed(2)}B`;
   if (abs >= 1e6) return `${sign}$${(abs / 1e6).toFixed(2)}M`;
   return `${sign}${abs.toLocaleString()}`;
+}
+
+function formatCompactUsd(value) {
+  if (typeof value !== "number" || Number.isNaN(value)) return "—";
+  const sign = value < 0 ? "-" : "";
+  const abs = Math.abs(value);
+  if (abs >= 1e12) return `${sign}$${(abs / 1e12).toFixed(2)}T`;
+  if (abs >= 1e9) return `${sign}$${(abs / 1e9).toFixed(2)}B`;
+  if (abs >= 1e6) return `${sign}$${(abs / 1e6).toFixed(2)}M`;
+  if (abs >= 1e3) return `${sign}$${(abs / 1e3).toFixed(2)}K`;
+  if (abs > 0) return `${sign}$${abs.toFixed(abs >= 10 ? 0 : 2)}`;
+  return "$0";
+}
+
+function formatSignedCompactUsd(value) {
+  if (typeof value !== "number" || Number.isNaN(value)) return "—";
+  if (Math.abs(value) < 0.000001) return "$0";
+  return `${value > 0 ? "+" : "-"}${formatCompactUsd(Math.abs(value))}`;
 }
 
 function toNumSafe(value) {
@@ -1203,18 +1229,85 @@ function renderCryptoBriefingExtras() {
   }
 
   if (chainFlow) {
-    const chains = aggregateCryptoGroups(rows, CRYPTO_CHAIN_BY_SYMBOL, "기타")
-      .map((x) => ({ ...x, pressure: x.volume * (x.avgChange / 100) }))
-      .sort((a, b) => Math.abs(b.pressure) - Math.abs(a.pressure))
-      .slice(0, 8);
-    const max = Math.max(1, ...chains.map((x) => Math.abs(x.pressure)));
-    chainFlow.innerHTML = chains.map((x) => `
-      <p class="${toneClass(x.pressure, 1_000_000)}">
-        <span>${x.label}<small>${x.count}개 · ${formatBigNumber(x.volume)}</small></span>
-        <b style="width:${Math.max(8, Math.abs(x.pressure) / max * 100)}%"></b>
-        <em>${formatBigNumber(x.pressure)}</em>
-      </p>
-    `).join("");
+    const groups = aggregateCryptoGroups(rows, CRYPTO_CHAIN_BY_SYMBOL, "미분류")
+      .map((x) => ({ ...x, pressure: x.volume * (x.avgChange / 100) }));
+    const knownChains = groups.filter((x) => x.label !== "미분류");
+    const unknownChains = groups.find((x) => x.label === "미분류");
+    const totalCount = groups.reduce((sum, x) => sum + x.count, 0);
+    const knownCount = knownChains.reduce((sum, x) => sum + x.count, 0);
+    const totalVolume = groups.reduce((sum, x) => sum + x.volume, 0);
+    const coverage = totalCount ? Math.round((knownCount / totalCount) * 100) : 0;
+    const positiveChains = knownChains.filter((x) => x.pressure > 0).sort((a, b) => b.pressure - a.pressure);
+    const negativeChains = knownChains.filter((x) => x.pressure < 0).sort((a, b) => a.pressure - b.pressure);
+    const rankedChains = [...knownChains].sort((a, b) => Math.abs(b.pressure) - Math.abs(a.pressure)).slice(0, 8);
+    const maxAbsPressure = Math.max(1, ...knownChains.map((x) => Math.abs(x.pressure)));
+    const rowWidth = (value) => Math.max(14, Math.min(100, (Math.abs(value) / maxAbsPressure) * 100));
+    const laneRows = (items, kind) => {
+      const selected = items.slice(0, 5);
+      if (!selected.length) return `<div class="chain-flow-empty">관측된 ${kind === "inflow" ? "순유입" : "순유출"} 체인이 없습니다.</div>`;
+      return selected.map((x) => `
+        <div class="chain-flow-row ${kind}">
+          <span><b>${escapeHtml(x.label)}</b><small>${x.count}개 · ${formatCompactUsd(x.volume)}</small></span>
+          <div class="chain-flow-bar" style="--w:${rowWidth(x.pressure).toFixed(1)}%"><i></i></div>
+          <em>${formatSignedCompactUsd(x.pressure)}</em>
+        </div>
+      `).join("");
+    };
+    const topInflow = positiveChains[0];
+    const topOutflow = negativeChains[0];
+    chainFlow.innerHTML = `
+      <div class="chain-flow-board">
+        <div class="chain-flow-summary">
+          <article class="chain-flow-stat inflow">
+            <span>순유입 1위</span>
+            <b>${topInflow ? escapeHtml(topInflow.label) : "관측 없음"}</b>
+            <em>${topInflow ? formatSignedCompactUsd(topInflow.pressure) : "$0"}</em>
+          </article>
+          <article class="chain-flow-stat outflow">
+            <span>순유출 1위</span>
+            <b>${topOutflow ? escapeHtml(topOutflow.label) : "관측 없음"}</b>
+            <em>${topOutflow ? formatSignedCompactUsd(topOutflow.pressure) : "$0"}</em>
+          </article>
+          <article class="chain-flow-stat">
+            <span>총 관측 거래대금</span>
+            <b>${formatCompactUsd(totalVolume)}</b>
+            <em>${totalCount.toLocaleString()}개 코인</em>
+          </article>
+          <article class="chain-flow-stat neutral">
+            <span>분류 커버리지</span>
+            <b>${coverage}%</b>
+            <em>미분류 ${unknownChains ? unknownChains.count : 0}개</em>
+          </article>
+        </div>
+        <div class="chain-flow-lanes">
+          <section class="chain-flow-lane outflow">
+            <div class="chain-flow-lane-head"><span>순유출</span><b>${negativeChains.length}개 체인</b></div>
+            ${laneRows(negativeChains, "outflow")}
+          </section>
+          <section class="chain-flow-lane inflow">
+            <div class="chain-flow-lane-head"><span>순유입</span><b>${positiveChains.length}개 체인</b></div>
+            ${laneRows(positiveChains, "inflow")}
+          </section>
+        </div>
+        <div class="chain-flow-table">
+          <table>
+            <thead><tr><th>체인</th><th>코인</th><th>거래대금</th><th>24h 평균</th><th>압력</th></tr></thead>
+            <tbody>
+              ${rankedChains.map((x) => `
+                <tr>
+                  <td>${escapeHtml(x.label)}</td>
+                  <td>${x.count}개</td>
+                  <td>${formatCompactUsd(x.volume)}</td>
+                  <td class="${toneClass(x.avgChange, 0.1)}">${formatPct(x.avgChange, 2)}</td>
+                  <td class="${toneClass(x.pressure, 1)}">${formatSignedCompactUsd(x.pressure)}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+        ${unknownChains ? `<div class="chain-flow-unknown">미분류 ${unknownChains.count}개 · ${formatCompactUsd(unknownChains.volume)} · 메인 flow lane에서는 제외</div>` : ""}
+      </div>
+    `;
   }
 
   if (sideHot) {
