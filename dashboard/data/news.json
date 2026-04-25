@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-24T23:52:14.724173+00:00",
+  "updated_at": "2026-04-25T01:49:41.038490+00:00",
   "macro": [
     {
       "title": "Why Are Stocks at Record Highs with no Iran Resolution? - J.P. Morgan",
@@ -26,12 +26,6 @@
       "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
     },
     {
-      "title": "How major US stock indexes fared Friday 4/24/2026 - The Washington Post",
-      "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNYldWM3pwMW0yZlJaV3FhMWJmNTFLVEt6a0hsT1oya2hKMUNKYXJfZzN3dVVkRl9ZUzdvRFAzemFfQmVBQmRuXzNLVGVza1lhUDNwVWo0bEVnSGVkdkMyN0dnR01uSVRudDNueGVJVWJKclZEeUg4YnZmMXFma0JBTEx5dlFXX21VSUt5UkVzS211NkFfUzJIWUNyY1l4UUQ0SnE2VXE5WjZMWDduMjRfbTdRbUhTQUdVNnFSSUozUFNYQXQyUHFJ?oc=5",
-      "pubDate": "Fri, 24 Apr 2026 20:26:41 GMT",
-      "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
-    },
-    {
       "title": "April Monthly Roundup: Locking in Big Gains as We Pull Ahead of the S&P 500 - TheStreet Pro",
       "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPZTJ6amI4SF96WGtYakRhYXFsNk9pR2VBdFgtSG5UbG9McmxMUENDOW81U3RsMlBndTM1clZOWHpwTE01Y084TVFMaWF3ZTYtVEY2Z2hMcXdxZ3lOZUpJNGg3SmY5WFhNYnZGWlFoMVRlWl9WUDlEN3Y0alhkT2tBaHRTVm5qSWYwb1l3RUpUT014Zi1kb180djR5WWJwam1fa2lIa1FWRW1aR05lT0N3?oc=5",
       "pubDate": "Fri, 24 Apr 2026 22:30:00 GMT",
@@ -39,14 +33,20 @@
     },
     {
       "title": "US stocks race ahead of Europe as Wall Street shrugs off energy shock - Financial Times",
-      "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBVR2sxNEhBLWhvR1dvRXFpaDlEU0Z2LUt4dnZVUjZVVVhEQ0haaDctZ3k5T21Ia0NJTVlWS3ZQUlpoTEhxR0pxRHFpR3FOd0dyT3FpM21BMWpUUkdqaDNkckJlNmxJM2lHanUxM2RaMUg?oc=5",
+      "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNR2tJZVZITXd2WmtjWjZpSlUzemxzeTgtRWhIcnUyU3JKR0cwcE44ejRGcGFoZkxLLXVsZmpncklGb1VyZFVSbHNpSGkyWDBhc082SS1SUThnZ0pGYWR2TVpiQ2Foc0ZEaG1HelVrdUFuNHVTdlJvZHB4QmVhNkttUzlyU28?oc=5",
       "pubDate": "Fri, 24 Apr 2026 20:30:28 GMT",
       "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
     },
     {
-      "title": "S&P 500, Nasdaq close at records on tech lift, Iran peace talk hopes - Reuters",
-      "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNeFI0QnNnNVVVckNHY3RrNk9MQTd1aS1ZRzFVZ2FzZEIycjhqSjdndzdyYkdXdGNPSThqc1lrSURHeUdQQk9JLW1KTHlUWkZweGxibG1YRVJhN2F6b0dhb0loZGo1NUtWU3FOeVNIcG1oWDY2QnppRXdVTkh5LTE4MkZoaGxWNmFTQ3JoQkxGWWRVb0c2TjRSTnMxUzA3cHp5ZDc2N1d1Z2tMOThqcFE?oc=5",
-      "pubDate": "Fri, 24 Apr 2026 22:21:53 GMT",
+      "title": "Why Is The US Stock Market Up Today? - Yahoo Finance",
+      "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE04RGlGUnBTclNybHAtdnlCSnZzbV83NVVxbFA5NDNqV2p4a2hVaEUtMG8zUDRhVjlKOThzTjBhT0NBSjU4Y0JWXy11VnRmTHVUWFVLa0x5SkdjakRUSHQ5Q0RqS2NFLUlQdjAzYm1hMmNnQUxPWUVSdzA1Yw?oc=5",
+      "pubDate": "Fri, 24 Apr 2026 18:10:47 GMT",
+      "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
+    },
+    {
+      "title": "Tech boosts US stocks to record close, oil dips on signs of Iran peace progress - Reuters",
+      "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPcGFfSlR2bzRVYUJjekt5UlU3ZFlaLWc1aXI2SXFmMEhaUWhuYVFEN0hFNC00QzlOZ0d3eGFqUEt5RGcxS2JLVTZsVFNKZUlxM0Ytd05mRVBTdy1Fc3E1MUNSeGZOOWNaWlh1WS1sYS1MN3pwX0ZJWVlyRXZBbXlBWEV4eEZVcUMzWnRFWA?oc=5",
+      "pubDate": "Fri, 24 Apr 2026 21:35:41 GMT",
       "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
     }
   ],
@@ -58,15 +58,15 @@
       "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
     },
     {
-      "title": "Bitcoin ETF inflows and Ethereum's struggle for growth - Coinspot.io",
-      "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOWHRUODZDS1FLenhkU3ZyOVNsTk1abHF6MUhiandSSlcyYS1neE9Hci1YVEYxZG1ZUE1CYzEtODNjd0k2TFc2blMwS2cxQzlTVDVTWjBmclNjNEpHREU5U1ZfVXRwQnZrcUxfdk5IOWMwOW9nekFUSWpOS1d0ZFFyT0NBU0U0M2Y1R0QwcHd2aUR6cC1pMS1vNnlPWlhXbGM?oc=5",
-      "pubDate": "Fri, 24 Apr 2026 19:27:00 GMT",
+      "title": "Strategy (MSTR) Is Essentially a Leveraged Bitcoin ETF -- Is That a Good Thing? - AOL.com",
+      "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOSUNpVGVpUnZDM0JudHl4aGZyaklFMkpZcFpvQ0V3aU9vVU9GVWlJNC1ZNVN6TmhZbHNxUHJxWmxzRzRkZkp5cjdub1RnMDQ3RVN4WFo0MHBaNDBfcktjVkdwcXZsVTJkd2ozTUJoLW91V2lRaXVIS0NSajNvZGh0YkUyYy1wSEpXTTdZVEVtZ1g?oc=5",
+      "pubDate": "Fri, 24 Apr 2026 22:33:37 GMT",
       "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
     },
     {
-      "title": "Bitcoin ETF Inflows Drive Crypto Rally to $78K: BTC, MSTR & COIN Analysis - Intellectia AI",
-      "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5qUmFjUzc3ZG9DaHAwdUxRNVNMRVVoQk5CNUVJSGNfRm1CbXJ1eG80alJWZWxuZFZVNktmS2lTZXNLelpMZmNma1A2Yk1TV3lQQXdoczVBR0s0bkhqNGZnQ3U5Y3hxaGc?oc=5",
-      "pubDate": "Fri, 24 Apr 2026 12:14:17 GMT",
+      "title": "Bitcoin ETF inflows and Ethereum's struggle for growth - Coinspot.io",
+      "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOWHRUODZDS1FLenhkU3ZyOVNsTk1abHF6MUhiandSSlcyYS1neE9Hci1YVEYxZG1ZUE1CYzEtODNjd0k2TFc2blMwS2cxQzlTVDVTWjBmclNjNEpHREU5U1ZfVXRwQnZrcUxfdk5IOWMwOW9nekFUSWpOS1d0ZFFyT0NBU0U0M2Y1R0QwcHd2aUR6cC1pMS1vNnlPWlhXbGM?oc=5",
+      "pubDate": "Fri, 24 Apr 2026 19:27:00 GMT",
       "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
     },
     {
@@ -82,21 +82,21 @@
       "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
     },
     {
+      "title": "GraniteShares YieldBOOST Bitcoin ETF announces weekly distribution of $0.1321 - MSN",
+      "link": "https://news.google.com/rss/articles/CBMi_AJBVV95cUxPWS1iOTc2OGdRSGRkWkxscEhtaDNRS3llV1EwcUxtYkt0cHJTeTJZQklkMm9jYUNFc0VSRWNCQm5iUjNxQ1N5Z09QdW9tU1Y5WWhMcGR6Z1p3NURPOW5BSkRoVk5oaHVwbXdXbnhNd0NDZ3UxdnNvMVJoS1NnSC1lamUyV3BNREhPaFlGdHlXTnh5OUR5OW5XU1B3bkRkcFBkZ3VKQWptTjNtZDM5QkI3TmZVX1VwdXdCdjlzdWUzZXNrZkxaVFRRekZjRlh5cTBrNndYLWVtLTlXNW5YQzc0ejdwYlYzM043a1M0bEJVblM3RjZrZUM0ZmVlNXJENEVScF9iWVZZeWdNdzFHM3l3Ny1RTkJjQmNtWlBrY0FCZkFuS2JibmFSdjQxdzlTWUl3b0Z1WkRrX2xTUEFmLW5KNk95emRDYm1SUFVGa0lpNG41Z0xhR3NGS2U5ZzBickMweWR6OVlKN1ZJWVZVamg1TGlLRVJxdGZ1V0JhNg?oc=5",
+      "pubDate": "Fri, 24 Apr 2026 23:26:57 GMT",
+      "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
+    },
+    {
       "title": "Bitcoin Crisis Resilience: The Real-Time Test - ETF Database",
       "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNdlY3dGpabElTVUVWTHlxNlhjWXpqMkFoT1ZxTWdhcWl5UndDT2wtQ0Zhb3BCa1lhOVpCTmNicWJMOF9oMFRkT0ZySENyOW8wT0RfZ0M4dUtHNjlsaFd4V2twM2dXU1ZabVN4N3RIUnZudXZCVm1JNUVwXzF3NEdlTE9fcnNUd0NRMmYwRVhYd1RXQTZNVVFMSnVwZkw0OFBMNktoY0lPUS1zNVU?oc=5",
       "pubDate": "Fri, 24 Apr 2026 18:30:29 GMT",
       "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
     },
     {
-      "title": "BAGY: Everything You Need To Know About This Bitcoin Covered Call ETF - Seeking Alpha",
-      "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPa29MbkN4VFVJNGNzSTRLZVlCWEJMTmFjYjBKSUNFY1lITFhmTm9vWVJ4akEwNEpudjloTW1ZbmZwTDRpZkZRNVZQWVlqREdZV1JtQ1gzeHpwd19vcWhKR3ZuNGJFSjhuc3hlQ1c3YWJiNU1PYk9VZ250RGlNdWRKUEp4OG9RanNSNFR5ZW1uOHg4Z0pXX1VJZTk5WS1LTnhxaTh5WFJNbFlWaExsT0E?oc=5",
-      "pubDate": "Fri, 24 Apr 2026 19:13:18 GMT",
-      "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
-    },
-    {
-      "title": "Bitcoin ETF Inflows Extend to Eight Days as Ethereum Funds Reverse Course - blockhead.co",
-      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQMEJ5WVhPSEcxbE5OQ1V5Rnk4Y19KbjY2S0Vwek8xZDdFMG9UUThhQmJZeXVXRUkyMHVRQzRxZ2NpVFhJS3ZnVWZMT2pVZzFRdDVYM1o0OFp0OU9NUjJSWVoxN0hSWmkwVmFLY1UzWTNTYVdpMmdtcVRZRXp6cllmb3ZPN2lJZFdSZm9KaURvUUszaUFsQks1TWRLeG1OeDkxTHptQkVWcnFHY0Q2c2I0?oc=5",
-      "pubDate": "Fri, 24 Apr 2026 06:49:20 GMT",
+      "title": "Bitcoin News: Bitcoin ETFs Just Turned Positive Across Every Timeframe - 24/7 Wall St.",
+      "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPYlNKWkYxcE4xTWhpb1JyYnppY2VvNXZhUTZybzZNSjkxZzVicTcwWmYwLXFocC1oNjc3T195VkZMa1ZDZWc2RUd5NXF6SWQzQnJqNEZSUTNqUS1WWWJHSHZqNXlrWGxRSEpDZ3FqQTBDcjZpUEZ5cHdHWTBHR0c4eEprcTl3TXJHbEFycFgwOVR5RExNUFgyMldXTWVjaXNyMFMtYzZXUGJoQ1JVYzJSUE5QUQ?oc=5",
+      "pubDate": "Fri, 24 Apr 2026 15:12:07 GMT",
       "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
     }
   ]
