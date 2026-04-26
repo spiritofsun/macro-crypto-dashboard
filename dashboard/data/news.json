@@ -1,10 +1,28 @@
 {
-  "updated_at": "2026-04-26T16:34:36.815965+00:00",
+  "updated_at": "2026-04-26T20:31:18.859512+00:00",
   "macro": [
     {
       "title": "How Will Futures React To Iran News? - Investor's Business Daily",
       "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOSE1jRE4zdDFRTzhFdTBYMXBNWjdXLTN4RjRXOWJRZjBYN3MySUZCQ2Nxc3VjVGZYdlJIY3NtNnh0emJQZEU0eU9vcmUtdk1xb1NWQUtrZW9aMU0wcG9LTWlpYTFCdWZNWVZVb3ZOWXY3QnBrQXpSSFhTN0xVUVVMVW5Lakh6bXRXZlNvck83Si1rcjFkdVJVVlI5SmtNTENYTkI0ZlFIUzduQXg5Y2R5QVVKUnk4Yy00a3Jn?oc=5",
-      "pubDate": "Sun, 26 Apr 2026 14:49:00 GMT",
+      "pubDate": "Sun, 26 Apr 2026 18:04:00 GMT",
+      "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
+    },
+    {
+      "title": "Stock Futures on Deck After Record-Setting Friday - Barron's",
+      "link": "https://news.google.com/rss/articles/CBMiekFVX3lxTFBsb2g1cUVsdGo5NlVQbkVfM0xsdXE3NWdzeFBKQ1RRRGxDNXZKYm9CY2IyYm50UElQeUxNbGpGVVRNYlFJX3YyYnFCYTM2ZnhDSHZReFB1Q1FfRk4tQ3hnRTJ4VldmTDl6Sk8tRVVNZHMzeFNPRWljUFln?oc=5",
+      "pubDate": "Sun, 26 Apr 2026 20:24:00 GMT",
+      "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
+    },
+    {
+      "title": "S&P 500: I'm Chasing This Rally (Technical Analysis) (SP500) - Seeking Alpha",
+      "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQeHM2M3JWWmlkZ01Qak11a1J6NFlydmhVQ0lEMUx3c2I3MVUtUzlIaVQ0TTM3cmt4bmlDZ2pib214R3Zpd0s5bmdMdWNRSm04QTB1NXpHZlkyWHN2Q0JmVmhERi1GTFJqRXdEU1BzZHRnaGNxc0R4UDlMR0FjM0tNbzQzSQ?oc=5",
+      "pubDate": "Sun, 26 Apr 2026 20:00:00 GMT",
+      "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
+    },
+    {
+      "title": "US Stock Market Week Ahead: Why Wall Street’s Record Rally Faces Its Biggest Test This Week - TechStock²",
+      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQdDJlTmlRaVJqdVBLdWh1RGZSTVNLVHBkQ3hYNzZqc3lvREh5RUU2NXEwTnZjZlNaeDdveDAyYWxYb284ek5uV1VjWVNycFVuRndNZUxuOE1oZDdtV1J6YzJPd2tNVjJHMldJQWkzMEwzV1dZYmJ4WDZjZEN3eWY4LVYxakZCd3l3bl9XNVQwLW5PVzZlWjdPQlFmUFRsT1h0Zm1FdHRYMVI0SEQ2Z2VB?oc=5",
+      "pubDate": "Sun, 26 Apr 2026 17:16:32 GMT",
       "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
     },
     {
@@ -14,43 +32,55 @@
       "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
     },
     {
+      "title": "Dow, S&P 500, Nasdaq Futures Pull Back After Record Session On Strait Of Hormuz Uncertainty: Why TSLA, GME, TLRY, NOW, QS Stocks Are In Focus - Stocktwits",
+      "link": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxQc0tXY1RaVDRrNmF1YVJNOUEtdzVmd0FZUkNqZkZPTlBwUjFaNGNCaDcwRU52OFRBSkdscGNINEJpS1M3Yi1uT0gyVWc5ajg4Wmt4YnR3RXIzVVRnMnNzbnY1emY3eTR3QnFIX082bjFmaVRjUjNTd2JqT05INW8yM0EtcGo3bTJnazN6Rkpxb3lWREl1ajJnVGI4SGExOVNUUUVnT0N0M1NUMnZHR1JCNk5Na1V5Y1Z0QzZOd1lrRFdmZXZDNDNERWhKV2d0bEd4dmE5V01zN2t4S0NJbWJRVE5BUWJOZw?oc=5",
+      "pubDate": "Sun, 26 Apr 2026 11:05:25 GMT",
+      "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
+    },
+    {
       "title": "Trump's Unprecedented Influence on Stock Market: 15 Months of Market Extremes - News and Statistics - IndexBox",
       "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOQ19tMmJNS3BzdjJBVlpjZVhKZkFybkxuRHNNMVhRaEh6cnNFVllFaEpGMG1HSHRhbjBiV2RTVHdaV0RNb2dYZVBSQ3ZrN3RhejdsSDVTa2VCeUlTQTQxc2tuc1VYd21FanhfYlhpSEp0YTd0dVF6ZnhQRmFhWnNqdl8tSEZVNWNHLVQtdU9IOFNyOTlMYlZ3cFdXdkM?oc=5",
       "pubDate": "Sun, 26 Apr 2026 13:40:00 GMT",
       "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
     },
     {
-      "title": "JPMorgan Thinks the S&P 500 Can Get to 8000. Here's What Its Experts Think It Will Take - AOL.com",
-      "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTFBjbVRlNlBBOWd3UFBIdWVmOE00QmJZbW9ZNkh5Ym43VlRCZm1LT0w0c3FEbGpZeEN0ZUZFT2tOMzJBYy1SQ01QcXRidmpoTG8wYUFHcGYzckR0ZVR5NFJCUGJPNFA5NDI0RTBSRmtienZOeWl4ZkktZg?oc=5",
-      "pubDate": "Sun, 26 Apr 2026 15:07:07 GMT",
-      "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
-    },
-    {
-      "title": "Dow, S&P 500, Nasdaq Futures Pull Back After Record Session On Strait Of Hormuz Uncertainty: Why TSLA, GME, TLRY, NOW, QS Stocks Are In Focus - Stocktwits",
-      "link": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxQc0tXY1RaVDRrNmF1YVJNOUEtdzVmd0FZUkNqZkZPTlBwUjFaNGNCaDcwRU52OFRBSkdscGNINEJpS1M3Yi1uT0gyVWc5ajg4Wmt4YnR3RXIzVVRnMnNzbnY1emY3eTR3QnFIX082bjFmaVRjUjNTd2JqT05INW8yM0EtcGo3bTJnazN6Rkpxb3lWREl1ajJnVGI4SGExOVNUUUVnT0N0M1NUMnZHR1JCNk5Na1V5Y1Z0QzZOd1lrRFdmZXZDNDNERWhKV2d0bEd4dmE5V01zN2t4S0NJbWJRVE5BUWJOZw?oc=5",
-      "pubDate": "Sun, 26 Apr 2026 06:59:59 GMT",
-      "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
-    },
-    {
-      "title": "United Rentals stock leads the S&P 500 today. Why it’s surging 20%. - MSN",
-      "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQdGdNeGpBdkNTdW9Dc3YxajVSWlFtei1BbnZQWktYN1c4LWZVWjJCVExaVG5GOGdKR0FtUlREVnFrMHF0Wk1SN2JDblNBbF9DSmlFd0NsZEYzNXV5MkVRVkRneDNRbzc4Ulk5bFFhS3U5d0dwLUFnMkZtODRiTjBQbW44aFZaY0xKamFRMkxPMVZwaF8ycmtpVTdBdjVSZjRrRzNwWVNXb2VJZlJfc0tSNzdsNVNHOUZBNlE?oc=5",
-      "pubDate": "Sun, 26 Apr 2026 11:44:19 GMT",
-      "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
-    },
-    {
-      "title": "US Stock Market This Week: S&P 500, Nasdaq Hit Records as Intel Sparks AI Rally - TechStock²",
-      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxOTVgycVA2OGR2Rm9mRWd1cHVFLUgzakZZNFVXR0Y0WjBPQnhzNzltME9sRkxnVFJzaHg3V0MtWW5WblpDemZROGwzd3FIRjdiUVFYSTVwNVA0TjZoaUV3V21vcEhxdlk2TGdRekszUmN5cmw5dGdfRFk2OHM1S1RldzVvYUwzUndlVm43WWdXWHZ1dU1NeUM2YXloN0w3QQ?oc=5",
-      "pubDate": "Sat, 25 Apr 2026 17:22:20 GMT",
-      "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
-    },
-    {
-      "title": "ServiceNow Reset: Hidden Value In S&P 500 Index Play - Kalkine Media",
-      "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQTkFuRUZBLUFGeUtBRlNpNEtBa0U3MTU4TTIzVXliT2hUSFhLY0ExRHJ0c3l3NGdBYWJrMkRiQUN2NGp4NGd0c3VLbGNDSlNSUXBLbzI0N1hUbEhpV0VCMHZfX3JPbVlNMTN1WWVqSTVqMzJYa29PX0JCOFFSRFRITGdZYzJEUEZvQ24tZjJhZzZUaElQUEl0QjBOSUo?oc=5",
-      "pubDate": "Sun, 26 Apr 2026 13:24:00 GMT",
+      "title": "Meet the Unstoppable BlackRock ETF Obliterating the S&P 500, the Nasdaq-100, and the Dow Jones Right Now - AOL.com",
+      "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQcmVZejBXMnpCMHdfSFRDTFFHQW1aRF83cGZjZXluOEp3T3VLbG5JYXZOUXhEZmdrVHB6OHZDZks3cEJDbHY0MkpJOHRNem5ldzBOcjUwM2hnakNXQTA3RXNfanpVQkliakg4TE0xY1B5cW4tVVM2SkF6My1iWW40Qm9DSks1Y21yWmJDa2VZVQ?oc=5",
+      "pubDate": "Sun, 26 Apr 2026 12:08:34 GMT",
       "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
     }
   ],
   "crypto": [
+    {
+      "title": "Bitcoin ETF: Three Reasons Morgan Stanley's MSBT Could Overtake BlackRock's IBIT BTC ETF - 24/7 Wall St.",
+      "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQYWdMSnJFLWRSUzZXWlNoZmVUOEtlYmZyaTBKeXBPOUE2OFFqdl9WVDJiMzhwSHhtWDllV21PeHl3MkNkSXJ5Y1dLMGlQU1Q1NzB6b1RHOVR6SVBnbXc4NFNZNzV6ZElzU29iaEJZSF9RVXhaX05VX2NRanBrWEdqMmFLamRPakRDaGYycEE4YlA5TU1xOFBuX2owMmFjT1RxNDdCY2lpN3Y1aHFUVUhUVEZPS3VKTUk5TURDa2FRcWp0SXphT0plZQ?oc=5",
+      "pubDate": "Sun, 26 Apr 2026 17:45:27 GMT",
+      "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
+    },
+    {
+      "title": "Risk-On Surge Lifts Crypto Outlook as Equity ETFs Hit Record $7.5 Billion Daily Pace - Yahoo Finance",
+      "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQUnowVnJLcWN0SHFDcTV2eUFldEwwWE95TERKdmdya0IxcFBBb0lsSVNRNHFaeFlZLVctRUNubHpDdE14VFJLSGhKcm5lODk5Zk1tWGJVd2s3MkhwdlVZQnVKNDl1eWZSNW9pZ3JjTTRZdXVmS1c4MzJqVFhFRllIOE4tZkI0bjRMRm0yR0xJT0ZWVVk3QkhPTmVVUk4?oc=5",
+      "pubDate": "Sun, 26 Apr 2026 17:53:42 GMT",
+      "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
+    },
+    {
+      "title": "ETHA Grows Larger Than HODL With Higher Recent Returns - The Motley Fool",
+      "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOWjlNa182REM3UXR0dGxEM0phSnM1MFRwakpnMFh6UWF2VTBfZ3c0WkdXQWlHdUs2YWNyR1FacVVfejRBVW1Sd3hRb3c0ODI5a2JTUGxuY0JnVW5FUlRtVENXaXdHbGdZai0xdUNKR1Z4SHU3U2xOUFpPeXJXQjRDOW1wenRlRTZJVkkyeGJBakc0TklXQVA1TWRYaTlyakpqUlBR?oc=5",
+      "pubDate": "Sun, 26 Apr 2026 16:48:13 GMT",
+      "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
+    },
+    {
+      "title": "Bitcoin leads ETF flows, but Ethereum builds institutional base for Q2 showdown - AMBCrypto",
+      "link": "https://news.google.com/rss/articles/CBMiRkFVX3lxTE9PdUhMSUZNc1ZNR1VsZFRGUGJ5aUlIVHFzR2VPMllYamZxWld0S2xYZmNSVU03RWFBQ1FvRTRPV3F1c0NMT0HSAagBQVVfeXFMT1lvTlNxU2ZlcTd1eDA0T3NyY3pXQUttRkcySXk4RTZpNEJxTUcxNmVhNWgyeUpiUFY0NkZmRXlLMnJvZkxiME5tSm5kRXJ5RXdkZkh2Q2Z4ajQ0STNIOXpNaS1HWnhOVS1VQzFHblZLSGZwY2l5M21TNkJ2M2hmSXFDdjlBR0JIUi1JTHNNdkNLLUhnSkdURVNmVW1veDM4U2NFZmlFc2dD?oc=5",
+      "pubDate": "Sun, 26 Apr 2026 17:00:34 GMT",
+      "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
+    },
+    {
+      "title": "Goldman Sachs joins Morgan Stanley in Bitcoin ETF race across Wall Street - MSN",
+      "link": "https://news.google.com/rss/articles/CBMi9AJBVV95cUxQVzJ0eTQxZXdyQ2tEejN1TjRuS096R2RlVXFFRTN6U0RFRGpBNjd6cUVlZHU2TVdVYUw4V1o5Y0hxNTQxSjExaGx0SHdHM3RPd1FJMWt1dmN2RHY0Vkc3MXB2RzQ0QXNLZkdSWnBURGdNbnYxLWs1WFlYMXR4blNHQ1UzeWRPOTMxOGhZZXN5aEFUN0JvR2g1UVIwNlRKM1V1ZVhQeElvV0w0WUhkdmVSLVRwRE8yc3FKbjYzTmhSZWs4TkpXNk5VZjlzc1ppbzg4dUwxajB4Y2MtV1V0NXEtallEb3cwUkNNR1RxLUVfcTJ6U0pkcF9udDgySDNnVjBLV1NjVlJVWUstY2swV2U4MVoyMmVzNU1kMTFJUnZxRk5lbjYyZW4walJaTkduSFhkdDVhVHFKdmFseGRrMTQzR1FwOGJWMUtDX2Y2RFQ5ZFNRWDZxTXBnQ2xTRmxWNk9ad1NSSW1UcTNZV1F1dS10YWJBQVA?oc=5",
+      "pubDate": "Sun, 26 Apr 2026 15:59:19 GMT",
+      "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
+    },
     {
       "title": "Ethereum Foundation Unstakes Nearly $50 Million ETH While ETF Inflow Streak - Stocktwits",
       "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxObUd0QTZJc3pWUVVkczRqT0I1bHBPMkRvR0JzcnBXMGhNQV93UVpQRVdUUzBOTkpYYzRCbkI2c2w0LTkyV0Z2RXpFX01vMmNMa3dhSEotTGpONHNCakFvaWF1Q0FPQWlBcFdBYjRmNUdjWGlzOGxrZ2hxZ1lmclVtZlpZcXpZSDJpYnFGMzF3TlotN2VERzVLNjhGU1FsdnFzTnptSTZCSDV0RklQcm1SWQ?oc=5",
@@ -64,39 +94,9 @@
       "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
     },
     {
-      "title": "Goldman Sachs files Bitcoin ETF targeting steady income, not just gains - MSN",
-      "link": "https://news.google.com/rss/articles/CBMikwNBVV95cUxQNXExUzdFcVdPOUZlXzMwbTZTUm5IcU1CU0J5VlFQNUJ4OXRRd0NiNGg4MExhQTUtbHpjMGZMczNXaUlhZnRwT3A2aFVxTmxZdU5JX2dEUUpkMHJfMWhqall2UnJ2dElJRVBXWkxHbExBOWdXUmpJTVpYQlluaTNwa0xPZldJYks4cEZIUUsxMUFVUGZnV2s3c0RZa1pvNmRvdGZWanZVdHVoOHJ4OVAxZjlYblZSSmZOdWJ0SmVUSGF2R3N0RDNxSTJrMmstNGVvVUFtajkzSC1SZ0xCYnhHQjM1dlFWU2FQeWpEbml6WnlIYXRFZGRoRWZsMWFrYkpDUXNJeFVFdklVU0NKYUZpV01iOFF3SU00OVVoOElpaURtenNzWVlxVHRSYXlnY0x6dXkxYlVZTktYcXVYbEhOUGtOX2Z2dWdiQ1N0dWZoRDZlN0NGOExubVhkWmZuNjRRR0VUNl9vSDZZMHhzQnhlRzlhN3BnRUNmMUI5dU5KZm00Y3VyV0V1WTBsRmhUakh5aWN3?oc=5",
-      "pubDate": "Sun, 26 Apr 2026 15:11:15 GMT",
-      "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
-    },
-    {
-      "title": "Why investors are flocking to BlackRock’s bitcoin options to hedge against a wild global economy - CoinDesk",
-      "link": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxOZUtlWGN3OVBTeHdCd21IVVdOelZNYWhoaHg5dm1ERlEtbUdscllZU2RLaEIzY1dLMHo5cjYyclJTcmJZcEc3UVFwZnVfdHN1WjctbVVobFRSeHVIWHh0bG10dW9DUTVFZHhyQnZNT0VVbkFfbWstRUEtYXRyYzV4anh3ZVFabkVySHBJTmc3Rjl1Q2V6cEZselRfQ0RRLVZxdE5obi1wVXJ1d2hKNGg1M0VHN1lFbDN6T0FWejRMVG9kbGFMTEtXMzU4ZTlja01aTzdKcTZn?oc=5",
-      "pubDate": "Sat, 25 Apr 2026 18:32:34 GMT",
-      "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
-    },
-    {
-      "title": "Morgan Stanley Bitcoin ETF hits $184M inflows amid US-Iran ceasefire - Crypto Briefing",
-      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQRUZsT2VrbFlCQmZpNC1rSVlsb2VMR3R5Ul9waXBmUUtRaU42UlpNU1h2Z2xyTjhkbU9DbFVxbTNZTm5MYkZTNmRSRG5BYnVoQXVfMVJYOGI2eTEzckc4OFZxRnVKVkFSZUlxWGU2TzBtTWVDQXQ4Z3NvS2tJTExIZkNXMWlPNWRYMlRpUXk3c3BFQkpFY3Z6bDg1TQ?oc=5",
-      "pubDate": "Sun, 26 Apr 2026 05:30:16 GMT",
-      "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
-    },
-    {
-      "title": "IBIT vs ETHA: Bitcoin and Ethereum ETF Cost, Performance, and Risk Analysis - News and Statistics - IndexBox",
-      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPckdTeGlSUnBCR09rZ3pOZmVRM0dhbFpzWTZLMDQyN3VlTFRURDJrcXQ5Z2xPMmRrMEZ6WXJJWUFzR2VhaFZaOXJObmtGVW9sQUtJQkIyS3l2TDBEM1ZZUjNta3B5TmxCTUpiMnYwV0VLc2ZkMVBTclNtb0NsQ25PVkRpZklYR1NQeUk4d3ZqLUxKSkh2T2tV?oc=5",
-      "pubDate": "Sun, 26 Apr 2026 00:40:00 GMT",
-      "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
-    },
-    {
-      "title": "Morgan Stanley MSBT ETF Nears Launch With NYSE Listing - CoinMarketCap",
-      "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOUFNpS1FJS0JJbEJWdVhwUDlnZkFtVGxfT3ZicHNQMGtSQTkxclRFaHdvSnUwS09DdFBUZ25sVE5TeTZQVm1UZ3dRRmVGay1fVEl0RjV3dlh6U2VNZDd6TWNXSkhhUFpMbzlWQkF0YWNTS0o4MVNqb2hBUF82ZExQZjZDYmxpcE8tSUl2bG9RelBGQVRaa2JnSmoyLWU?oc=5",
-      "pubDate": "Sun, 26 Apr 2026 08:03:23 GMT",
-      "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
-    },
-    {
-      "title": "Bitcoin ETF Giant IBIT Draws Fresh Cash as Traders Buy the Dip - TipRanks",
-      "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNa3FDNWRwUncxQjdCRzA5cnN2SWcybVF2aXdfbGpKdUtXWjk1enFHbGN1Z3hodHFabVN2WnlWMXhacjZaU185QzdRcW1oYU9mVjh2VXRxSGpUUEFGSDlTT0txUnMwRmNHd2VCTjNjMlo2QXlGUHZsekhhSTY0OU9XWXVvbHpJeURiRmNBVDhoT3p5Nlo5R3VpSDNaSmJ0N3BsMy1CTHAxNTdnMktKUkE?oc=5",
-      "pubDate": "Sun, 26 Apr 2026 10:33:22 GMT",
+      "title": "Bitcoin ETF Investors Hit the Brakes as ProShares’ BITO Sees Notable Outflows - TipRanks",
+      "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOV2ZURUlRQXhtbnV5cXlmUUw5QmgxWk9zYUZmZkx2b2ZwM0ZmcjFpMVBhWFRSa0RMcUo5dXVPT0J4LW1ZU3U1am9iTHdkUFUtZVEzT21aa0ZnaXhLVVh6dDRwNkhaR21rWHJ3dENLRzNub0V2N3VBV3IydDRYQjM2N19LLU0yQU9Mc2RNMTlWYW5NZ2F0d2ZsWllLd3ZUNGM5Nk9xQVBSYnNaUHhjamlEVEFsRWVCaDBycmVhUDVqMnQ?oc=5",
+      "pubDate": "Sun, 26 Apr 2026 18:16:24 GMT",
       "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
     }
   ]
