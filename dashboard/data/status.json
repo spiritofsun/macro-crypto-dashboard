@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-04-26T08:51:47.638858+00:00",
+  "updated_at": "2026-04-26T09:32:41.078337+00:00",
   "overall": "warn",
   "datasets": {
     "macro": {
       "label": "매크로",
-      "timestamp": "2026-04-26 17:04 KST",
-      "age_hours": 0.8,
+      "timestamp": "2026-04-26 18:32 KST",
+      "age_hours": 0.01,
       "level": "warn",
       "issue_count": 2,
       "critical_issue_count": 0,
@@ -17,28 +17,28 @@
     },
     "stocks": {
       "label": "주식 워치",
-      "timestamp": "2026-04-26 17:04 KST",
-      "age_hours": 0.8,
+      "timestamp": "2026-04-26 18:32 KST",
+      "age_hours": 0.01,
       "level": "ok"
     },
     "snapshot": {
       "label": "스냅샷",
-      "timestamp": "2026-04-26 17:04 KST",
-      "age_hours": 0.8,
+      "timestamp": "2026-04-26 18:32 KST",
+      "age_hours": 0.01,
       "level": "ok"
     },
     "news": {
       "label": "뉴스",
       "timestamp": "2026-04-26T08:51:47.553983+00:00",
-      "age_hours": 0.0,
+      "age_hours": 0.68,
       "level": "ok",
       "macro_count": 8,
       "crypto_count": 8
     },
     "etf": {
       "label": "ETF",
-      "timestamp": "2026-04-26T08:04:36.137130+00:00",
-      "age_hours": 0.79,
+      "timestamp": "2026-04-26T09:32:35.353070+00:00",
+      "age_hours": 0.0,
       "level": "ok",
       "market_date": "24 Apr 2026",
       "freshness": "latest",
@@ -46,16 +46,16 @@
     },
     "crypto_market": {
       "label": "크립토 마켓",
-      "timestamp": "2026-04-26T08:04:37.323278+00:00",
-      "age_hours": 0.79,
+      "timestamp": "2026-04-26T09:32:35.975935+00:00",
+      "age_hours": 0.0,
       "level": "ok",
-      "btc_dominance": 58.2089708379404,
-      "stablecoin_market_cap": 318913112546.62714
+      "btc_dominance": 58.18745076028874,
+      "stablecoin_market_cap": 318948120926.2556
     },
     "crypto_universe": {
       "label": "크립토 유니버스",
-      "timestamp": "2026-04-26T17:04+09:00",
-      "age_hours": 0.8,
+      "timestamp": "2026-04-26T18:32+09:00",
+      "age_hours": 0.01,
       "level": "warn",
       "universe": "market_cap_top_200",
       "asset_count": 200,
