@@ -541,12 +541,12 @@ function setupSidebarShell() {
     { href: "./index.html", label: "홈", icon: "🏠" },
     { href: "./crypto.html", label: "크립토", icon: "₿" },
     { href: "./stock-market.html", label: "주식/매크로", icon: "📈" },
-    { href: "./long-short.html", label: "롱/숏", icon: "⚖️" },
     { href: "./etf.html", label: "ETF Flows", icon: "🏦" },
-    { href: "./funding.html", label: "펀딩비", icon: "💸" },
-    { href: "./exchanges.html", label: "거래소별 프리미엄+가격", icon: "🧾" },
-    { href: "./ai-gpt-brief.html", label: "AI 브리핑", icon: "🤖" },
     { href: "./news.html", label: "뉴스", icon: "📰" },
+    { href: "./long-short.html", label: "롱/숏", icon: "⚖️" },
+    { href: "./funding.html", label: "펀딩비", icon: "💸" },
+    { href: "./exchanges.html", label: "거래소 프리미엄", icon: "🧾" },
+    { href: "./ai-gpt-brief.html", label: "AI 브리핑", icon: "🤖" },
   ];
 
   const current = window.location.pathname.split("/").pop() || "index.html";
