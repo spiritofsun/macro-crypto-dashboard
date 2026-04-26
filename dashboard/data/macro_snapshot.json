@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-04-26 18:32 KST",
+  "as_of": "2026-04-26 19:53 KST",
   "rates": {
     "us10y": {
       "value": 4.34,
@@ -43,7 +43,7 @@
       "delta": 0.0,
       "display": "1,478",
       "source": "live",
-      "source_as_of": "2026-04-26 18:32 KST"
+      "source_as_of": "2026-04-26 19:53 KST"
     }
   },
   "indices": {
