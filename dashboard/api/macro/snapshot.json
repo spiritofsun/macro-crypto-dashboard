@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-04-27 16:16 KST",
+  "as_of": "2026-04-27 18:39 KST",
   "rates": {
     "us10y": {
       "value": 4.34,
@@ -32,18 +32,18 @@
   },
   "fx": {
     "dxy": {
-      "value": 98.25,
-      "delta": -0.17272912009754288,
-      "display": "98.25",
+      "value": 98.127,
+      "delta": -0.2977037187563568,
+      "display": "98.13",
       "source": "stooq",
-      "source_as_of": "20260427 091633"
+      "source_as_of": "20260427 113908"
     },
     "usdkrw": {
       "value": 1476.462523,
       "delta": 0.0,
       "display": "1,476",
       "source": "live",
-      "source_as_of": "2026-04-27 16:16 KST"
+      "source_as_of": "2026-04-27 18:39 KST"
     }
   },
   "indices": {
@@ -99,32 +99,32 @@
   },
   "commodities": {
     "gold": {
-      "value": 4728.54,
-      "delta": 0.26484027947116295,
-      "display": "$4,729/oz",
+      "value": 4718.55,
+      "delta": 0.05301046426564604,
+      "display": "$4,719/oz",
       "source": "stooq",
-      "source_as_of": "20260427 091632"
+      "source_as_of": "20260427 113914"
     },
     "silver": {
-      "value": 75.755,
-      "delta": 0.3111758474576271,
-      "display": "$75.75/oz",
+      "value": 75.61,
+      "delta": 0.11917372881355932,
+      "display": "$75.61/oz",
       "source": "stooq",
-      "source_as_of": "20260427 091634"
+      "source_as_of": "20260427 113912"
     },
     "wti": {
-      "value": 96.48,
-      "delta": 0.8677469942498675,
-      "display": "$96.48",
+      "value": 96.54,
+      "delta": 0.9304756926293786,
+      "display": "$96.54",
       "source": "stooq",
-      "source_as_of": "20260427 091633"
+      "source_as_of": "20260427 113914"
     },
     "copper": {
-      "value": 6.094500000000001,
-      "delta": 0.07717823245427227,
-      "display": "$6.09/lb",
+      "value": 6.1065,
+      "delta": 0.2742290387204767,
+      "display": "$6.11/lb",
       "source": "stooq",
-      "source_as_of": "20260427 091633"
+      "source_as_of": "20260427 113906"
     }
   },
   "liquidity": {
