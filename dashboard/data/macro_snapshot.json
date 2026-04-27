@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-04-27 08:09 KST",
+  "as_of": "2026-04-27 09:07 KST",
   "rates": {
     "us10y": {
       "value": 4.34,
@@ -32,18 +32,18 @@
   },
   "fx": {
     "dxy": {
-      "value": 98.45,
-      "delta": 0.030481609428979,
-      "display": "98.45",
+      "value": 98.457,
+      "delta": 0.03759398496239782,
+      "display": "98.46",
       "source": "stooq",
-      "source_as_of": "20260427 005857"
+      "source_as_of": "20260427 020649"
     },
     "usdkrw": {
       "value": 1477.704707,
       "delta": 0.0,
       "display": "1,478",
       "source": "live",
-      "source_as_of": "2026-04-27 08:09 KST"
+      "source_as_of": "2026-04-27 09:07 KST"
     }
   },
   "indices": {
@@ -99,32 +99,32 @@
   },
   "commodities": {
     "gold": {
-      "value": 4698.36,
-      "delta": -0.37510204514372214,
-      "display": "$4,698/oz",
+      "value": 4690.16,
+      "delta": -0.5489763679350372,
+      "display": "$4,690/oz",
       "source": "stooq",
-      "source_as_of": "20260427 010908"
+      "source_as_of": "20260427 020649"
     },
     "silver": {
-      "value": 75.04,
-      "delta": -0.6355932203389831,
-      "display": "$75.04/oz",
+      "value": 74.878,
+      "delta": -0.8501059322033874,
+      "display": "$74.88/oz",
       "source": "stooq",
-      "source_as_of": "20260427 010905"
+      "source_as_of": "20260427 020648"
     },
     "wti": {
-      "value": 96.13,
-      "delta": 0.5018295870360583,
-      "display": "$96.13",
+      "value": 96.31,
+      "delta": 0.6900156821745913,
+      "display": "$96.31",
       "source": "stooq",
-      "source_as_of": "20260427 010908"
+      "source_as_of": "20260427 020651"
     },
     "copper": {
-      "value": 6.083200000000001,
-      "delta": -0.10837794344641337,
-      "display": "$6.08/lb",
+      "value": 6.0738,
+      "delta": -0.26273440835495787,
+      "display": "$6.07/lb",
       "source": "stooq",
-      "source_as_of": "20260427 010906"
+      "source_as_of": "20260427 020653"
     }
   },
   "liquidity": {
