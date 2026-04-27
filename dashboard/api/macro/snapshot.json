@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-04-28 01:09 KST",
+  "as_of": "2026-04-28 02:50 KST",
   "rates": {
     "us10y": {
       "value": 4.34,
@@ -32,18 +32,18 @@
   },
   "fx": {
     "dxy": {
-      "value": 98.21,
-      "delta": -0.21337126600285303,
-      "display": "98.21",
+      "value": 98.29,
+      "delta": -0.13208697419223273,
+      "display": "98.29",
       "source": "stooq",
-      "source_as_of": "20260427 180939"
+      "source_as_of": "20260427 195010"
     },
     "usdkrw": {
       "value": 1476.462523,
       "delta": 0.0,
       "display": "1,476",
       "source": "live",
-      "source_as_of": "2026-04-28 01:09 KST"
+      "source_as_of": "2026-04-28 02:50 KST"
     }
   },
   "indices": {
@@ -62,18 +62,18 @@
       "source_as_of": null
     },
     "nasdaq": {
-      "value": 24788.611,
-      "delta": -0.016089478312067952,
-      "display": "24,789",
+      "value": 24878.791,
+      "delta": 0.34764808854255924,
+      "display": "24,879",
       "source": "stooq",
-      "source_as_of": "20260427 180913"
+      "source_as_of": "20260427 194953"
     },
     "dow": {
-      "value": 49143.1,
-      "delta": -0.004679990395851718,
-      "display": "49,143",
+      "value": 49135.3,
+      "delta": -0.020551262173059016,
+      "display": "49,135",
       "source": "stooq",
-      "source_as_of": "20260427 180912"
+      "source_as_of": "20260427 194941"
     },
     "russell2000": {
       "value": 2647.0,
@@ -83,11 +83,11 @@
       "source_as_of": null
     },
     "sp500": {
-      "value": 7161.3,
-      "delta": 0.0922470543838367,
-      "display": "7,161",
+      "value": 7173.1,
+      "delta": 0.2571736061609927,
+      "display": "7,173",
       "source": "stooq",
-      "source_as_of": "20260427 180908"
+      "source_as_of": "20260427 194956"
     },
     "vix": {
       "value": 18.71,
@@ -99,32 +99,32 @@
   },
   "commodities": {
     "gold": {
-      "value": 4687.19,
-      "delta": -0.6119527994826301,
-      "display": "$4,687/oz",
+      "value": 4696.71,
+      "delta": -0.4100889515590408,
+      "display": "$4,697/oz",
       "source": "stooq",
-      "source_as_of": "20260427 180946"
+      "source_as_of": "20260427 195013"
     },
     "silver": {
-      "value": 74.893,
-      "delta": -0.8302436440677942,
-      "display": "$74.89/oz",
+      "value": 75.22800000000001,
+      "delta": -0.38665254237287894,
+      "display": "$75.23/oz",
       "source": "stooq",
-      "source_as_of": "20260427 180946"
+      "source_as_of": "20260427 195012"
     },
     "wti": {
-      "value": 96.19,
-      "delta": 0.5645582854155693,
-      "display": "$96.19",
+      "value": 96.76,
+      "delta": 1.160480920020909,
+      "display": "$96.76",
       "source": "stooq",
-      "source_as_of": "20260427 180946"
+      "source_as_of": "20260427 195013"
     },
     "copper": {
-      "value": 6.063200000000001,
-      "delta": -0.4367959538901061,
-      "display": "$6.06/lb",
+      "value": 6.0893,
+      "delta": -0.008210450261103518,
+      "display": "$6.09/lb",
       "source": "stooq",
-      "source_as_of": "20260427 180946"
+      "source_as_of": "20260427 194930"
     }
   },
   "liquidity": {

@@ -1,11 +1,11 @@
 {
-  "as_of": "2026-04-27T16:09:54.823544+00:00",
+  "as_of": "2026-04-27T17:50:25.976624+00:00",
   "global": {
     "source": "CoinGecko global",
-    "total_market_cap_usd": 2643175552825.4277,
-    "btc_dominance": 58.156127026994476,
-    "eth_dominance": 10.374094875676102,
-    "usdt_dominance_market": 7.180398325690608
+    "total_market_cap_usd": 2649443758533.698,
+    "btc_dominance": 58.07517571609226,
+    "eth_dominance": 10.435442519658526,
+    "usdt_dominance_market": 7.1635203606594295
   },
   "fear_greed": {
     "source": "alternative.me",
@@ -15,17 +15,17 @@
   },
   "coinbase_premium": {
     "source": "Coinbase BTC spot vs CoinGecko BTC",
-    "pct": 0.06715357026410856,
-    "coinbase_btc_usd": 76726.49,
-    "coingecko_btc_usd": 76675.0
+    "pct": -0.0012825019856002788,
+    "coinbase_btc_usd": 76802.015,
+    "coingecko_btc_usd": 76803.0
   },
   "stablecoins": {
     "source": "DefiLlama stablecoins",
-    "total_market_cap_usd": 318861527708.53296,
-    "usdt_market_cap_usd": 189732294256.20325,
-    "usdc_market_cap_usd": 77781566235.80608,
-    "usdt_dominance": 59.503037453184064,
-    "usdc_dominance": 24.393524924369416
+    "total_market_cap_usd": 318780766458.1055,
+    "usdt_market_cap_usd": 189741277258.47656,
+    "usdc_market_cap_usd": 77743224500.93167,
+    "usdt_dominance": 59.520930125943636,
+    "usdc_dominance": 24.387677263191712
   },
   "_health": {
     "status": "ok",
