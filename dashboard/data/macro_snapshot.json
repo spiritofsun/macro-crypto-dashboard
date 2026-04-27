@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-04-27 09:07 KST",
+  "as_of": "2026-04-27 13:09 KST",
   "rates": {
     "us10y": {
       "value": 4.34,
@@ -32,27 +32,27 @@
   },
   "fx": {
     "dxy": {
-      "value": 98.457,
-      "delta": 0.03759398496239782,
-      "display": "98.46",
+      "value": 98.26,
+      "delta": -0.16256858362121174,
+      "display": "98.26",
       "source": "stooq",
-      "source_as_of": "20260427 020649"
+      "source_as_of": "20260427 060819"
     },
     "usdkrw": {
-      "value": 1477.704707,
+      "value": 1476.462523,
       "delta": 0.0,
-      "display": "1,478",
+      "display": "1,476",
       "source": "live",
-      "source_as_of": "2026-04-27 09:07 KST"
+      "source_as_of": "2026-04-27 13:09 KST"
     }
   },
   "indices": {
     "kospi": {
-      "value": 6475.63,
-      "delta": -0.3151121442096066,
-      "display": "6,476",
+      "value": 6631.98,
+      "delta": 1.5057548671482675,
+      "display": "6,632",
       "source": "stooq",
-      "source_as_of": "20260424 110540"
+      "source_as_of": "20260427 054850"
     },
     "kosdaq": {
       "value": 1106.0,
@@ -99,32 +99,32 @@
   },
   "commodities": {
     "gold": {
-      "value": 4690.16,
-      "delta": -0.5489763679350372,
-      "display": "$4,690/oz",
+      "value": 4742.36,
+      "delta": 0.5578821259316481,
+      "display": "$4,742/oz",
       "source": "stooq",
-      "source_as_of": "20260427 020649"
+      "source_as_of": "20260427 060857"
     },
     "silver": {
-      "value": 74.878,
-      "delta": -0.8501059322033874,
-      "display": "$74.88/oz",
+      "value": 76.47,
+      "delta": 1.2579449152542372,
+      "display": "$76.47/oz",
       "source": "stooq",
-      "source_as_of": "20260427 020648"
+      "source_as_of": "20260427 060855"
     },
     "wti": {
-      "value": 96.31,
-      "delta": 0.6900156821745913,
-      "display": "$96.31",
+      "value": 95.27,
+      "delta": -0.3972817564035647,
+      "display": "$95.27",
       "source": "stooq",
-      "source_as_of": "20260427 020651"
+      "source_as_of": "20260427 060854"
     },
     "copper": {
-      "value": 6.0738,
-      "delta": -0.26273440835495787,
-      "display": "$6.07/lb",
+      "value": 6.1278,
+      "delta": 0.6239942198430086,
+      "display": "$6.13/lb",
       "source": "stooq",
-      "source_as_of": "20260427 020653"
+      "source_as_of": "20260427 060902"
     }
   },
   "liquidity": {
