@@ -1,11 +1,11 @@
 {
-  "as_of": "2026-04-28 08:30 KST",
+  "as_of": "2026-04-28 12:54 KST",
   "rows": [
     {
       "group": "Big Tech",
       "name": "Apple",
       "ticker": "AAPL",
-      "price": 267.62,
+      "price": 267.61,
       "change": 0.57,
       "source": "stooq",
       "source_as_of": "20260427 220021"
@@ -14,8 +14,8 @@
       "group": "Big Tech",
       "name": "Microsoft",
       "ticker": "MSFT",
-      "price": 424.96,
-      "change": 0.61,
+      "price": 424.82,
+      "change": 0.58,
       "source": "stooq",
       "source_as_of": "20260427 220018"
     },
@@ -32,8 +32,8 @@
       "group": "Big Tech",
       "name": "Amazon",
       "ticker": "AMZN",
-      "price": 261.07,
-      "change": -0.92,
+      "price": 261.12,
+      "change": -0.89,
       "source": "stooq",
       "source_as_of": "20260427 220021"
     },
@@ -59,8 +59,8 @@
       "group": "Big Tech",
       "name": "Tesla",
       "ticker": "TSLA",
-      "price": 378.56,
-      "change": 1.74,
+      "price": 378.67,
+      "change": 1.77,
       "source": "stooq",
       "source_as_of": "20260427 220021"
     },
@@ -77,8 +77,8 @@
       "group": "Crypto Related",
       "name": "Coinbase",
       "ticker": "COIN",
-      "price": 196.71,
-      "change": -1.2,
+      "price": 196.68,
+      "change": -1.22,
       "source": "stooq",
       "source_as_of": "20260427 220020"
     },
@@ -96,7 +96,7 @@
       "name": "Marathon Digital",
       "ticker": "MARA",
       "price": 11.18,
-      "change": -3.15,
+      "change": -3.19,
       "source": "stooq",
       "source_as_of": "20260427 220018"
     },
@@ -104,8 +104,8 @@
       "group": "Crypto Related",
       "name": "Riot Platforms",
       "ticker": "RIOT",
-      "price": 18.27,
-      "change": -1.19,
+      "price": 18.28,
+      "change": -1.14,
       "source": "stooq",
       "source_as_of": "20260427 220020"
     },
@@ -123,7 +123,7 @@
       "name": "PayPal",
       "ticker": "PYPL",
       "price": 49.77,
-      "change": -1.15,
+      "change": -1.21,
       "source": "stooq",
       "source_as_of": "20260427 220018"
     },
