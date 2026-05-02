@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-05-02T21:10:31.472461+00:00",
+  "updated_at": "2026-05-02T22:08:06.230931+00:00",
   "overall": "warn",
   "datasets": {
     "macro": {
       "label": "매크로",
-      "timestamp": "2026-05-03 06:10 KST",
-      "age_hours": 0.01,
+      "timestamp": "2026-05-03 07:07 KST",
+      "age_hours": 0.02,
       "level": "warn",
       "issue_count": 2,
       "critical_issue_count": 0,
@@ -17,27 +17,27 @@
     },
     "stocks": {
       "label": "주식 워치",
-      "timestamp": "2026-05-03 06:10 KST",
-      "age_hours": 0.01,
+      "timestamp": "2026-05-03 07:07 KST",
+      "age_hours": 0.02,
       "level": "ok"
     },
     "snapshot": {
       "label": "스냅샷",
-      "timestamp": "2026-05-03 06:10 KST",
-      "age_hours": 0.01,
+      "timestamp": "2026-05-03 07:07 KST",
+      "age_hours": 0.02,
       "level": "ok"
     },
     "news": {
       "label": "뉴스",
       "timestamp": "2026-05-02T20:34:14.399332+00:00",
-      "age_hours": 0.6,
+      "age_hours": 1.56,
       "level": "ok",
       "macro_count": 8,
       "crypto_count": 8
     },
     "etf": {
       "label": "ETF",
-      "timestamp": "2026-05-02T21:10:26.096628+00:00",
+      "timestamp": "2026-05-02T22:07:59.869594+00:00",
       "age_hours": 0.0,
       "level": "ok",
       "market_date": "01 May 2026",
@@ -46,16 +46,16 @@
     },
     "crypto_market": {
       "label": "크립토 마켓",
-      "timestamp": "2026-05-02T21:10:26.561317+00:00",
+      "timestamp": "2026-05-02T22:08:00.865576+00:00",
       "age_hours": 0.0,
       "level": "ok",
-      "btc_dominance": 58.44421866115217,
-      "stablecoin_market_cap": 319366630480.63086
+      "btc_dominance": 58.47104441694023,
+      "stablecoin_market_cap": 320197111069.3298
     },
     "crypto_universe": {
       "label": "크립토 유니버스",
-      "timestamp": "2026-05-03T06:10+09:00",
-      "age_hours": 0.01,
+      "timestamp": "2026-05-03T07:08+09:00",
+      "age_hours": 0.0,
       "level": "warn",
       "universe": "market_cap_top_200",
       "asset_count": 200,
