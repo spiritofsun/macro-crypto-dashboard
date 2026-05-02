@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-05-02T09:42:34.589912+00:00",
+  "updated_at": "2026-05-02T10:58:12.848830+00:00",
   "overall": "warn",
   "datasets": {
     "macro": {
       "label": "매크로",
-      "timestamp": "2026-05-02 18:42 KST",
-      "age_hours": 0.01,
+      "timestamp": "2026-05-02 19:58 KST",
+      "age_hours": 0.0,
       "level": "warn",
       "issue_count": 2,
       "critical_issue_count": 0,
@@ -17,27 +17,27 @@
     },
     "stocks": {
       "label": "주식 워치",
-      "timestamp": "2026-05-02 18:42 KST",
-      "age_hours": 0.01,
+      "timestamp": "2026-05-02 19:58 KST",
+      "age_hours": 0.0,
       "level": "ok"
     },
     "snapshot": {
       "label": "스냅샷",
-      "timestamp": "2026-05-02 18:42 KST",
-      "age_hours": 0.01,
+      "timestamp": "2026-05-02 19:58 KST",
+      "age_hours": 0.0,
       "level": "ok"
     },
     "news": {
       "label": "뉴스",
       "timestamp": "2026-05-02T08:58:35.918259+00:00",
-      "age_hours": 0.73,
+      "age_hours": 1.99,
       "level": "ok",
       "macro_count": 8,
       "crypto_count": 8
     },
     "etf": {
       "label": "ETF",
-      "timestamp": "2026-05-02T09:42:28.563294+00:00",
+      "timestamp": "2026-05-02T10:58:06.827960+00:00",
       "age_hours": 0.0,
       "level": "ok",
       "market_date": "01 May 2026",
@@ -46,16 +46,16 @@
     },
     "crypto_market": {
       "label": "크립토 마켓",
-      "timestamp": "2026-05-02T09:42:29.150786+00:00",
+      "timestamp": "2026-05-02T10:58:07.376159+00:00",
       "age_hours": 0.0,
       "level": "ok",
-      "btc_dominance": 58.48085322177832,
-      "stablecoin_market_cap": 318941320130.19415
+      "btc_dominance": 58.475245489102,
+      "stablecoin_market_cap": 318951230315.0538
     },
     "crypto_universe": {
       "label": "크립토 유니버스",
-      "timestamp": "2026-05-02T18:42+09:00",
-      "age_hours": 0.01,
+      "timestamp": "2026-05-02T19:58+09:00",
+      "age_hours": 0.0,
       "level": "warn",
       "universe": "market_cap_top_200",
       "asset_count": 200,
