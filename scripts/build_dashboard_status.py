@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import json
 import pathlib
+import subprocess
+import sys
 from datetime import datetime, timezone
 from typing import Any
 
@@ -131,6 +133,7 @@ def main() -> int:
     }
     OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"updated {OUT}")
+    subprocess.run([sys.executable, str(ROOT / "scripts" / "build_dashboard_data_bundle.py")], check=True)
     return 0
 
 

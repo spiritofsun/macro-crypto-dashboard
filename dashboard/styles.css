@@ -6670,6 +6670,21 @@ body:not(.home-body) .flat {
   background: #ffffff;
 }
 
+.crypto-empty-state {
+  grid-column: 1 / -1;
+  min-height: 140px;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 18px;
+  background: #f8fbff;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 900;
+  text-align: center;
+}
+
 .ai-summary-hub {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);

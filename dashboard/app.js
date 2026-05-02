@@ -1300,7 +1300,9 @@ function renderCryptoBriefingExtras() {
         }).join("")}
       </article>
     `;
-    sectorPerformance.innerHTML = renderSector("상승 TOP 5", topSectors, "up") + renderSector("하락 TOP 5", bottomSectors, "down");
+    sectorPerformance.innerHTML = sectors.length
+      ? renderSector("상승 TOP 5", topSectors, "up") + renderSector("하락 TOP 5", bottomSectors, "down")
+      : `<div class="crypto-empty-state">섹터 데이터 로딩 대기 중입니다. 데이터 번들이 없거나 네트워크 요청이 차단되면 표시됩니다.</div>`;
   }
 
   if (predictions) {
@@ -1328,15 +1330,17 @@ function renderCryptoBriefingExtras() {
       ...gainers.slice(0, 4).map((r) => r.ticker),
       ...losers.slice(0, 4).map((r) => r.ticker),
     ]);
-    rsiMap.innerHTML = rsiRows
-      .map((r, idx) => {
-        const score = rsiScore(r);
-        const left = rsiRows.length <= 1 ? 50 : 5 + idx * (90 / (rsiRows.length - 1));
-        const tone = score >= 70 ? "hot" : score <= 30 ? "cold" : "mid";
-        const size = idx < 20 ? "large" : idx < 80 ? "medium" : "small";
-        return `<span class="rsi-dot ${tone} ${size}" title="${escapeHtml(r.ticker)} ${score}" style="left:${left.toFixed(2)}%; bottom:${score}%"><b>${score}</b>${labelSet.has(r.ticker) ? `<em>${r.ticker}</em>` : ""}</span>`;
-      })
-      .join("");
+    rsiMap.innerHTML = rsiRows.length
+      ? rsiRows
+        .map((r, idx) => {
+          const score = rsiScore(r);
+          const left = rsiRows.length <= 1 ? 50 : 5 + idx * (90 / (rsiRows.length - 1));
+          const tone = score >= 70 ? "hot" : score <= 30 ? "cold" : "mid";
+          const size = idx < 20 ? "large" : idx < 80 ? "medium" : "small";
+          return `<span class="rsi-dot ${tone} ${size}" title="${escapeHtml(r.ticker)} ${score}" style="left:${left.toFixed(2)}%; bottom:${score}%"><b>${score}</b>${labelSet.has(r.ticker) ? `<em>${r.ticker}</em>` : ""}</span>`;
+        })
+        .join("")
+      : `<div class="crypto-empty-state">RSI 산점도는 시총 상위 200 데이터가 로딩되면 표시됩니다.</div>`;
   }
 
   if (chainFlow) {
@@ -2144,6 +2148,31 @@ async function fetchJson(url) {
   return response.json();
 }
 
+function getBundledStaticData(key) {
+  const bundle = window.__DASHBOARD_DATA__;
+  if (!bundle || !Object.prototype.hasOwnProperty.call(bundle, key)) return undefined;
+  return bundle[key];
+}
+
+function cloneStaticData(value) {
+  if (value === undefined) return undefined;
+  if (typeof structuredClone === "function") return structuredClone(value);
+  return JSON.parse(JSON.stringify(value));
+}
+
+async function fetchStaticJson(url, key) {
+  const bundled = getBundledStaticData(key);
+  if (window.location.protocol === "file:" && bundled !== undefined) {
+    return cloneStaticData(bundled);
+  }
+  try {
+    return await fetchJson(url);
+  } catch (error) {
+    if (bundled !== undefined) return cloneStaticData(bundled);
+    throw error;
+  }
+}
+
 function detectPageType() {
   if (document.getElementById("pulseRows")) return "home";
   if (document.getElementById("cryptoCustomRows")) return "crypto";
@@ -2181,14 +2210,14 @@ function normalizeGatewayPayload(payload) {
 
 async function loadStatic() {
   const [snapshot, news, etf, status, macro, universe, stocks, cryptoMarket] = await Promise.allSettled([
-    fetchJson("./data/snapshot.json"),
-    fetchJson("./data/news.json"),
-    fetchJson("./data/etf.json"),
-    fetchJson("./data/status.json"),
-    fetchJson("./data/macro_snapshot.json"),
-    fetchJson("./data/crypto_custom_universe.json"),
-    fetchJson("./data/stocks_watchlist.json"),
-    fetchJson("./data/crypto_market.json"),
+    fetchStaticJson("./data/snapshot.json", "snapshot"),
+    fetchStaticJson("./data/news.json", "news"),
+    fetchStaticJson("./data/etf.json", "etf"),
+    fetchStaticJson("./data/status.json", "status"),
+    fetchStaticJson("./data/macro_snapshot.json", "macro_snapshot"),
+    fetchStaticJson("./data/crypto_custom_universe.json", "crypto_custom_universe"),
+    fetchStaticJson("./data/stocks_watchlist.json", "stocks_watchlist"),
+    fetchStaticJson("./data/crypto_market.json", "crypto_market"),
   ]);
 
   state.snapshot = snapshot.status === "fulfilled" ? snapshot.value : null;
