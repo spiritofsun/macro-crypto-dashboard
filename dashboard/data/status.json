@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-05-02T13:38:32.304489+00:00",
+  "updated_at": "2026-05-02T14:56:38.689717+00:00",
   "overall": "warn",
   "datasets": {
     "macro": {
       "label": "매크로",
-      "timestamp": "2026-05-02 22:38 KST",
+      "timestamp": "2026-05-02 23:56 KST",
       "age_hours": 0.01,
       "level": "warn",
       "issue_count": 2,
@@ -17,27 +17,27 @@
     },
     "stocks": {
       "label": "주식 워치",
-      "timestamp": "2026-05-02 22:38 KST",
+      "timestamp": "2026-05-02 23:56 KST",
       "age_hours": 0.01,
       "level": "ok"
     },
     "snapshot": {
       "label": "스냅샷",
-      "timestamp": "2026-05-02 22:38 KST",
+      "timestamp": "2026-05-02 23:56 KST",
       "age_hours": 0.01,
       "level": "ok"
     },
     "news": {
       "label": "뉴스",
       "timestamp": "2026-05-02T12:53:18.481414+00:00",
-      "age_hours": 0.75,
+      "age_hours": 2.06,
       "level": "ok",
       "macro_count": 8,
       "crypto_count": 8
     },
     "etf": {
       "label": "ETF",
-      "timestamp": "2026-05-02T13:38:25.472074+00:00",
+      "timestamp": "2026-05-02T14:56:32.912147+00:00",
       "age_hours": 0.0,
       "level": "ok",
       "market_date": "01 May 2026",
@@ -46,15 +46,15 @@
     },
     "crypto_market": {
       "label": "크립토 마켓",
-      "timestamp": "2026-05-02T13:38:26.653568+00:00",
+      "timestamp": "2026-05-02T14:56:33.668172+00:00",
       "age_hours": 0.0,
       "level": "ok",
-      "btc_dominance": 58.46974969069917,
-      "stablecoin_market_cap": 319892962229.26794
+      "btc_dominance": 58.49414376547133,
+      "stablecoin_market_cap": 318901058150.1396
     },
     "crypto_universe": {
       "label": "크립토 유니버스",
-      "timestamp": "2026-05-02T22:38+09:00",
+      "timestamp": "2026-05-02T23:56+09:00",
       "age_hours": 0.01,
       "level": "warn",
       "universe": "market_cap_top_200",
