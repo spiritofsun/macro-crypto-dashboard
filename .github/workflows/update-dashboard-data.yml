@@ -60,7 +60,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add dashboard/data/news.json dashboard/data/etf.json dashboard/data/crypto_market.json dashboard/data/crypto_custom_universe.json dashboard/data/crypto_top20.json dashboard/data/macro_snapshot.json dashboard/data/stocks_watchlist.json dashboard/data/snapshot.json dashboard/data/status.json dashboard/api/macro/snapshot.json
+          git add dashboard/data/news.json dashboard/data/etf.json dashboard/data/crypto_market.json dashboard/data/crypto_custom_universe.json dashboard/data/crypto_top20.json dashboard/data/macro_snapshot.json dashboard/data/stocks_watchlist.json dashboard/data/snapshot.json dashboard/data/status.json dashboard/data/dashboard-data.js dashboard/api/macro/snapshot.json
           if git diff --staged --quiet; then
             echo "No changes."
             exit 0

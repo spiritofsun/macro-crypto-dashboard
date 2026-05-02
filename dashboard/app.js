@@ -472,7 +472,13 @@ function renderGlobalDataHealth() {
   const summary = problemEntries.length
     ? `${problemEntries.map((entry) => entry.label).join(" · ")} 점검 필요`
     : "전체 데이터 정상 갱신";
+  const nowKst = formatKstDateTime(new Date().toISOString(), "현재 시각 확인 중");
   const lastBuild = formatKstDateTime(state.status?.updated_at, "상태 파일 대기");
+  const lastDataTs = entries
+    .map((entry) => parseDashboardDate(entry.timestamp))
+    .filter(Boolean)
+    .sort((a, b) => b.getTime() - a.getTime())[0];
+  const lastDataUpdate = lastDataTs ? formatKstDateTime(lastDataTs.toISOString(), "데이터 시각 대기") : "데이터 시각 대기";
   const issueText = dangerCount ? `${dangerCount}개 지연/누락` : warnCount ? `${warnCount}개 주의` : "병목 없음";
 
   const entryDetail = (entry) => {
@@ -497,7 +503,11 @@ function renderGlobalDataHealth() {
           <em>${summary}</em>
         </div>
         <div class="data-ops-build">
-          <span>마지막 빌드</span>
+          <span>현재 시각</span>
+          <b>${nowKst}</b>
+          <span>최근 데이터</span>
+          <b>${lastDataUpdate}</b>
+          <span>상태 빌드</span>
           <b>${lastBuild}</b>
         </div>
       </div>
