@@ -371,6 +371,20 @@ function statusTone(level) {
   return "up";
 }
 
+function statusLabel(level) {
+  if (level === "danger" || level === "missing") return "danger";
+  if (level === "warn") return "warn";
+  return "ok";
+}
+
+function formatAgeHours(value) {
+  if (typeof value !== "number" || !Number.isFinite(value)) return "n/a";
+  if (value < 0.05) return "방금";
+  if (value < 1) return `${Math.max(1, Math.round(value * 60))}분`;
+  if (value < 24) return `${value.toFixed(value < 10 ? 1 : 0)}h`;
+  return `${(value / 24).toFixed(1)}d`;
+}
+
 function parseDashboardDate(input) {
   if (!input || typeof input !== "string") return null;
   const direct = new Date(input);
@@ -448,37 +462,73 @@ function renderGlobalDataHealth() {
   }
 
   const problemEntries = entries.filter((entry) => entry.level !== "ok");
+  const okCount = entries.filter((entry) => entry.level === "ok").length;
+  const warnCount = entries.filter((entry) => entry.level === "warn").length;
+  const dangerCount = entries.filter((entry) => entry.level === "danger" || entry.level === "missing").length;
+  const issueCount = entries.reduce((sum, entry) => sum + (entry.issue_count || 0) + (entry.critical_issue_count || 0), 0);
+  const maxAge = Math.max(0, ...entries.map((entry) => (typeof entry.age_hours === "number" ? entry.age_hours : 0)));
   const overallTone = state.status?.overall === "ok" ? "up" : state.status?.overall === "danger" ? "down" : "flat";
+  const overallClass = statusLabel(state.status?.overall);
   const summary = problemEntries.length
     ? `${problemEntries.map((entry) => entry.label).join(" · ")} 점검 필요`
     : "전체 데이터 정상 갱신";
+  const lastBuild = formatKstDateTime(state.status?.updated_at, "상태 파일 대기");
+  const issueText = dangerCount ? `${dangerCount}개 지연/누락` : warnCount ? `${warnCount}개 주의` : "병목 없음";
+
+  const entryDetail = (entry) => {
+    const details = [];
+    if (entry.carried_metrics?.length) details.push(`carry ${entry.carried_metrics.slice(0, 2).join(", ")}${entry.carried_metrics.length > 2 ? "..." : ""}`);
+    if (entry.critical_metrics?.length) details.push(`critical ${entry.critical_metrics.slice(0, 2).join(", ")}${entry.critical_metrics.length > 2 ? "..." : ""}`);
+    if (entry.market_date) details.push(`시장일 ${entry.market_date}`);
+    if (entry.source) details.push(`source ${entry.source}`);
+    if (entry.universe) details.push(entry.universe);
+    if (entry.asset_count) details.push(`${entry.asset_count} assets`);
+    if (typeof entry.macro_count === "number" || typeof entry.crypto_count === "number") details.push(`뉴스 ${entry.macro_count || 0}/${entry.crypto_count || 0}`);
+    return details.length ? details.join(" · ") : entry.timestamp || "timestamp n/a";
+  };
 
   host.hidden = false;
   host.innerHTML = `
-    <article class="health-overview ${overallTone}">
-      <span>DATA OPS</span>
-      <strong>${statusText(state.status?.overall)}</strong>
-      <em>${summary}</em>
+    <article class="data-ops-panel ${overallTone} ${overallClass}">
+      <div class="data-ops-head">
+        <div>
+          <span>DATA OPS</span>
+          <strong>${statusText(state.status?.overall)}</strong>
+          <em>${summary}</em>
+        </div>
+        <div class="data-ops-build">
+          <span>마지막 빌드</span>
+          <b>${lastBuild}</b>
+        </div>
+      </div>
+      <div class="data-ops-metrics">
+        <p><span>정상</span><b>${okCount}</b></p>
+        <p><span>주의</span><b>${warnCount}</b></p>
+        <p><span>지연</span><b>${dangerCount}</b></p>
+        <p><span>최대 지연</span><b>${formatAgeHours(maxAge)}</b></p>
+      </div>
+      <div class="data-ops-alert ${dangerCount ? "down" : warnCount ? "flat" : "up"}">
+        <b>${issueText}</b>
+        <span>${issueCount ? `확인 항목 ${issueCount}건 · 자동 갱신은 유지 중` : "갱신 병목 없이 정상 범위입니다."}</span>
+      </div>
+      <div class="data-ops-grid">
+        ${entries.map((entry) => {
+          const note = entry.critical_issue_count
+            ? `검증 ${entry.critical_issue_count}건`
+            : entry.issue_count
+              ? `보류 ${entry.issue_count}건`
+              : formatAgeHours(entry.age_hours);
+          return `
+            <article class="data-ops-item ${statusLabel(entry.level)}">
+              <div><span>${entry.label}</span><strong>${statusText(entry.level)}</strong></div>
+              <p>${note}</p>
+              <small>${entryDetail(entry)}</small>
+              <em>${formatKstDateTime(entry.timestamp, "timestamp n/a")}</em>
+            </article>
+          `;
+        }).join("")}
+      </div>
     </article>
-    <div class="health-grid">
-      ${entries
-        .map((entry) => {
-      const note = entry.critical_issue_count
-        ? `검증 ${entry.critical_issue_count}건`
-        : entry.issue_count
-          ? `보류 ${entry.issue_count}건`
-          : typeof entry.age_hours === "number"
-            ? `${entry.age_hours < 1 ? "방금" : `${Math.round(entry.age_hours)}h`}`
-            : "n/a";
-      const detail = entry.carried_metrics?.length
-        ? `carry: ${entry.carried_metrics.slice(0, 2).join(", ")}${entry.carried_metrics.length > 2 ? "..." : ""}`
-        : entry.market_date
-          ? `시장일 ${entry.market_date}`
-          : entry.timestamp || "timestamp n/a";
-      return `<article class="health-pill ${statusTone(entry.level)}"><span>${entry.label}</span><strong>${statusText(entry.level)}</strong><em>${note}</em><small>${detail}</small></article>`;
-    })
-        .join("")}
-    </div>
   `;
 }
 

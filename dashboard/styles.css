@@ -6213,3 +6213,305 @@ body:not(.home-body) .flat {
     text-align: left;
   }
 }
+
+/* v20260502 unified layout + data ops panel */
+.command-dashboard-shell,
+.crypto-portal-shell {
+  grid-template-columns: 300px minmax(0, 1fr) 310px;
+  gap: 30px;
+  width: min(1740px, calc(100% - 72px));
+  margin-inline: auto;
+}
+
+.command-main-brief,
+.crypto-main-brief {
+  display: grid;
+  align-content: start;
+  gap: 22px;
+  min-width: 0;
+}
+
+.command-left-rail,
+.command-right-rail,
+.crypto-side-rail,
+.crypto-right-rail {
+  align-self: start;
+}
+
+.command-widget,
+.portal-card,
+.crypto-market-section,
+.panel,
+.page-lead-card,
+.page-quick-card {
+  border-color: #dfe7f2;
+}
+
+.global-data-health:not([hidden]) {
+  display: block;
+  grid-template-columns: none;
+  margin: 0 0 4px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+}
+
+.data-ops-panel {
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid #dfe7f2;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(72, 185, 173, 0.16), transparent 32%),
+    linear-gradient(135deg, #ffffff, #f8fbff);
+  box-shadow: 0 16px 36px rgba(22, 33, 54, 0.07);
+}
+
+.data-ops-panel.warn,
+.data-ops-panel.flat {
+  border-color: #f4d78b;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(245, 192, 54, 0.18), transparent 32%),
+    linear-gradient(135deg, #fffdf4, #ffffff);
+}
+
+.data-ops-panel.down,
+.data-ops-panel.danger {
+  border-color: #fecdd3;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(239, 68, 68, 0.12), transparent 32%),
+    linear-gradient(135deg, #fff7f7, #ffffff);
+}
+
+.data-ops-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, auto);
+  gap: 16px;
+  align-items: start;
+}
+
+.data-ops-head div:first-child {
+  display: grid;
+  gap: 6px;
+}
+
+.data-ops-head span,
+.data-ops-build span,
+.data-ops-metrics span,
+.data-ops-item span {
+  color: #667085;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+}
+
+.data-ops-head strong {
+  color: #101828;
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 950;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.data-ops-panel.up .data-ops-head strong,
+.data-ops-panel.ok .data-ops-head strong {
+  color: #00a876;
+}
+
+.data-ops-panel.flat .data-ops-head strong,
+.data-ops-panel.warn .data-ops-head strong {
+  color: #b7791f;
+}
+
+.data-ops-panel.down .data-ops-head strong,
+.data-ops-panel.danger .data-ops-head strong {
+  color: #ef4444;
+}
+
+.data-ops-head em {
+  color: #475467;
+  font-style: normal;
+  font-weight: 850;
+}
+
+.data-ops-build {
+  display: grid;
+  gap: 6px;
+  justify-items: end;
+  padding: 12px 14px;
+  border: 1px solid #e6ecf5;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.data-ops-build b {
+  color: #1f2937;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  text-align: right;
+}
+
+.data-ops-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.data-ops-metrics p {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 13px 14px;
+  border: 1px solid #e6ecf5;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.data-ops-metrics b {
+  color: #101828;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.data-ops-alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 13px 15px;
+  border-radius: 16px;
+  background: #f8fafc;
+  color: #475467;
+  font-weight: 850;
+}
+
+.data-ops-alert b {
+  color: #101828;
+  white-space: nowrap;
+}
+
+.data-ops-alert.up { background: #ecfdf5; }
+.data-ops-alert.flat { background: #fff7df; }
+.data-ops-alert.down { background: #fff1f2; }
+
+.data-ops-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.data-ops-item {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid #e6ecf5;
+  border-radius: 17px;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.data-ops-item > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.data-ops-item strong {
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: #ecfdf5;
+  color: #00a876;
+  font-size: 12px;
+  font-weight: 950;
+}
+
+.data-ops-item.warn strong {
+  background: #fff7df;
+  color: #b7791f;
+}
+
+.data-ops-item.danger strong {
+  background: #fff1f2;
+  color: #ef4444;
+}
+
+.data-ops-item p {
+  margin: 0;
+  color: #101828;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.data-ops-item small,
+.data-ops-item em {
+  min-width: 0;
+  overflow: hidden;
+  color: #667085;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.crypto-portal-body .data-ops-panel {
+  border-color: #dfe7f2;
+  color: #101828;
+}
+
+@media (max-width: 1360px) {
+  .command-dashboard-shell,
+  .crypto-portal-shell {
+    grid-template-columns: minmax(0, 1fr) 300px;
+    width: min(100% - 44px, 1240px);
+  }
+
+  .command-left-rail,
+  .crypto-side-rail {
+    display: none;
+  }
+}
+
+@media (max-width: 1100px) {
+  .data-ops-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 980px) {
+  .command-dashboard-shell,
+  .crypto-portal-shell {
+    grid-template-columns: minmax(0, 1fr);
+    width: min(100% - 28px, 960px);
+  }
+
+  .command-right-rail,
+  .crypto-right-rail {
+    position: static;
+  }
+
+  .data-ops-head,
+  .data-ops-metrics,
+  .data-ops-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .data-ops-build {
+    justify-items: start;
+  }
+
+  .data-ops-build b {
+    text-align: left;
+  }
+
+  .data-ops-alert {
+    display: grid;
+  }
+}
