@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-05-02T17:58:25.593990+00:00",
+  "updated_at": "2026-05-02T19:14:00.954026+00:00",
   "overall": "warn",
   "datasets": {
     "macro": {
       "label": "매크로",
-      "timestamp": "2026-05-03 02:58 KST",
-      "age_hours": 0.01,
+      "timestamp": "2026-05-03 04:13 KST",
+      "age_hours": 0.02,
       "level": "warn",
       "issue_count": 2,
       "critical_issue_count": 0,
@@ -17,27 +17,27 @@
     },
     "stocks": {
       "label": "주식 워치",
-      "timestamp": "2026-05-03 02:58 KST",
-      "age_hours": 0.01,
+      "timestamp": "2026-05-03 04:13 KST",
+      "age_hours": 0.02,
       "level": "ok"
     },
     "snapshot": {
       "label": "스냅샷",
-      "timestamp": "2026-05-03 02:58 KST",
-      "age_hours": 0.01,
+      "timestamp": "2026-05-03 04:13 KST",
+      "age_hours": 0.02,
       "level": "ok"
     },
     "news": {
       "label": "뉴스",
       "timestamp": "2026-05-02T16:38:19.924705+00:00",
-      "age_hours": 1.33,
+      "age_hours": 2.59,
       "level": "ok",
       "macro_count": 8,
       "crypto_count": 8
     },
     "etf": {
       "label": "ETF",
-      "timestamp": "2026-05-02T17:58:19.505443+00:00",
+      "timestamp": "2026-05-02T19:13:54.686136+00:00",
       "age_hours": 0.0,
       "level": "ok",
       "market_date": "01 May 2026",
@@ -46,16 +46,16 @@
     },
     "crypto_market": {
       "label": "크립토 마켓",
-      "timestamp": "2026-05-02T17:58:20.297551+00:00",
+      "timestamp": "2026-05-02T19:13:55.500956+00:00",
       "age_hours": 0.0,
       "level": "ok",
-      "btc_dominance": 58.46262917220662,
-      "stablecoin_market_cap": 320175017647.25037
+      "btc_dominance": 58.457656282254945,
+      "stablecoin_market_cap": 319043668474.07465
     },
     "crypto_universe": {
       "label": "크립토 유니버스",
-      "timestamp": "2026-05-03T02:58+09:00",
-      "age_hours": 0.01,
+      "timestamp": "2026-05-03T04:13+09:00",
+      "age_hours": 0.02,
       "level": "warn",
       "universe": "market_cap_top_200",
       "asset_count": 200,
