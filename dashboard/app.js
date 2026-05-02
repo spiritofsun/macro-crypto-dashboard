@@ -782,7 +782,8 @@ function renderAiBriefPage() {
   const sentimentHost = document.getElementById("aiSentimentGauge");
   const newsBriefHost = document.getElementById("aiNewsBriefGrid");
   const catalystHost = document.getElementById("aiCatalystList");
-  if (!statusHost && !sentimentHost && !newsBriefHost && !catalystHost) return;
+  const hubHost = document.getElementById("aiSummaryHub");
+  if (!statusHost && !sentimentHost && !newsBriefHost && !catalystHost && !hubHost) return;
 
   if (statusHost) {
     const datasets = state.status?.datasets || {};
@@ -853,6 +854,35 @@ function renderAiBriefPage() {
   const macro = Array.isArray(state.news?.macro) ? state.news.macro.map((n) => ({ ...n, type: "매크로" })) : [];
   const crypto = Array.isArray(state.news?.crypto) ? state.news.crypto.map((n) => ({ ...n, type: "크립토" })) : [];
   const items = [...macro.slice(0, 4), ...crypto.slice(0, 4)].slice(0, 8);
+  const btcDom = getBtcDominance();
+  const fearGreed = getFearGreedValue();
+  const premium = getCoinbasePremiumPct();
+  const status = state.status?.overall || "warn";
+  const hubTone = status === "ok" ? "up" : status === "danger" ? "down" : "flat";
+  const briefingMode = status === "ok" ? "요약 생성 가능" : "데이터 점검 병행";
+  const marketRead =
+    typeof fearGreed === "number" && fearGreed < 30
+      ? "방어적 심리가 우세합니다. 뉴스보다 데이터 지연과 ETF 수급 확인이 먼저입니다."
+      : typeof fearGreed === "number" && fearGreed > 60
+        ? "위험선호가 강합니다. 추세 지속 여부는 BTC 도미넌스와 거래량 확산으로 확인합니다."
+        : "중립 구간입니다. 큰 방향성보다 섹터별 선별 흐름과 주요 뉴스 영향을 구분해야 합니다.";
+
+  if (hubHost) {
+    const topNews = items[0];
+    hubHost.innerHTML = `
+      <article class="ai-hub-main ${hubTone}">
+        <p>AI Briefing Hub</p>
+        <h2>${briefingMode}</h2>
+        <span>${marketRead}</span>
+      </article>
+      <div class="ai-hub-grid">
+        <article><p>핵심 뉴스</p><strong>${topNews ? escapeHtml(localizeNewsTitle(topNews.title, topNews.type)) : "뉴스 수집 대기"}</strong><span>${topNews ? escapeHtml(newsImpactText(topNews.title, topNews.type)) : "다음 업데이트를 기다립니다."}</span></article>
+        <article><p>심리</p><strong>${typeof fearGreed === "number" ? Math.round(fearGreed) : "—"}</strong><span>Fear & Greed</span></article>
+        <article><p>BTC 주도권</p><strong>${typeof btcDom === "number" ? `${btcDom.toFixed(2)}%` : "—"}</strong><span>도미넌스 확인</span></article>
+        <article><p>프리미엄</p><strong>${formatPct(premium, 2)}</strong><span>Coinbase BTC</span></article>
+      </div>
+    `;
+  }
 
   if (newsBriefHost) {
     const featured = items.slice(0, 2);
@@ -1043,6 +1073,7 @@ function renderCryptoBriefingExtras() {
   const flow = document.getElementById("cryptoFlowList");
   const trend = document.getElementById("cryptoTrendStrip");
   const marketRows = document.getElementById("cryptoMarketRows");
+  const actionCards = document.getElementById("cryptoActionCards");
   const sentiment = document.getElementById("cryptoSentimentCards");
   const smartMoney = document.getElementById("cryptoSmartMoney");
   const topBottom = document.getElementById("cryptoTopBottom");
@@ -1058,7 +1089,7 @@ function renderCryptoBriefingExtras() {
   const clock = document.getElementById("cryptoClock");
   const clockDate = document.getElementById("cryptoClockDate");
   const prevDay = document.getElementById("cryptoPrevDay");
-  if (!flow && !trend && !marketRows && !sentiment && !smartMoney && !topBottom && !sectorPerformance && !predictions && !rsiMap && !chainFlow && !sideHot && !rightTicker) return;
+  if (!flow && !trend && !marketRows && !actionCards && !sentiment && !smartMoney && !topBottom && !sectorPerformance && !predictions && !rsiMap && !chainFlow && !sideHot && !rightTicker) return;
 
   const rows = state.cryptoUniverse.filter((r) => typeof r.market_cap === "number");
   const coreRows = ["BTC", "ETH", "SOL", "HYPE"].map((t) => rows.find((r) => r.ticker === t)).filter(Boolean);
@@ -1087,6 +1118,27 @@ function renderCryptoBriefingExtras() {
   const stable = toNumSafe(state.stablecoinSummary?.total) ?? toNumSafe(state.cryptoMarket?.stablecoins?.total_market_cap_usd);
   const rsiScore = (row) => Math.max(5, Math.min(95, Math.round(50 + (toNumSafe(row.change_24h) ?? 0) * 6)));
   const now = new Date();
+
+  if (actionCards) {
+    const inflowProxy = aggregateCryptoGroups(rows, CRYPTO_CHAIN_BY_SYMBOL, "미분류")
+      .map((x) => ({ ...x, pressure: x.volume * (x.avgChange / 100) }))
+      .filter((x) => x.label !== "미분류")
+      .sort((a, b) => b.pressure - a.pressure)[0];
+    const movers = rows.filter((r) => typeof r.change_24h === "number" && Math.abs(r.change_24h) >= 5).length;
+    const ctas = [
+      { href: "#sentiment", label: "심리 먼저", value: typeof fearGreed === "number" ? `${Math.round(fearGreed)}` : "—", meta: "Fear & Greed", tone: typeof fearGreed === "number" && fearGreed < 30 ? "down" : "flat" },
+      { href: "#chainflow", label: "체인 수급", value: inflowProxy?.label || "관측 대기", meta: inflowProxy ? formatSignedCompactUsd(inflowProxy.pressure) : "$0", tone: inflowProxy?.pressure > 0 ? "up" : "flat" },
+      { href: "#rsi", label: "과열/침체", value: `${movers}개`, meta: "±5% 이상 변동", tone: movers >= 20 ? "down" : "flat" },
+      { href: "#universe", label: "상위 200", value: `${state.cryptoUniverse.length || rows.length}개`, meta: state.cryptoUniverseMeta?.source || "market data", tone: "up" },
+    ];
+    actionCards.innerHTML = ctas.map((x) => `
+      <a class="crypto-cta-card ${x.tone}" href="${x.href}">
+        <span>${x.label}</span>
+        <strong>${x.value}</strong>
+        <em>${x.meta}</em>
+      </a>
+    `).join("");
+  }
 
   if (clockDate) {
     clockDate.textContent = new Intl.DateTimeFormat("ko-KR", {
@@ -1267,13 +1319,22 @@ function renderCryptoBriefingExtras() {
   }
 
   if (rsiMap) {
-    const rsiRows = [...gainers.slice(0, 5), ...losers.slice(0, 5)];
+    const rsiRows = rows
+      .filter((r) => typeof r.change_24h === "number" && typeof r.market_cap === "number")
+      .sort((a, b) => b.market_cap - a.market_cap)
+      .slice(0, 200);
+    const labelSet = new Set([
+      ...rsiRows.slice(0, 5).map((r) => r.ticker),
+      ...gainers.slice(0, 4).map((r) => r.ticker),
+      ...losers.slice(0, 4).map((r) => r.ticker),
+    ]);
     rsiMap.innerHTML = rsiRows
       .map((r, idx) => {
         const score = rsiScore(r);
-        const left = rsiRows.length <= 1 ? 50 : 8 + idx * (84 / (rsiRows.length - 1));
+        const left = rsiRows.length <= 1 ? 50 : 5 + idx * (90 / (rsiRows.length - 1));
         const tone = score >= 70 ? "hot" : score <= 30 ? "cold" : "mid";
-        return `<span class="rsi-dot ${tone}" style="left:${left}%; bottom:${score}%"><b>${score}</b><em>${r.ticker}</em></span>`;
+        const size = idx < 20 ? "large" : idx < 80 ? "medium" : "small";
+        return `<span class="rsi-dot ${tone} ${size}" title="${escapeHtml(r.ticker)} ${score}" style="left:${left.toFixed(2)}%; bottom:${score}%"><b>${score}</b>${labelSet.has(r.ticker) ? `<em>${r.ticker}</em>` : ""}</span>`;
       })
       .join("");
   }
@@ -1698,9 +1759,9 @@ function renderCryptoTable() {
   tbody.innerHTML = rows
     .map((r) => `
       <tr class="click-row" data-symbol="${(r.ticker || r.name).toUpperCase()}">
-        <td>${r.rank_in_custom}</td>
-        <td><strong>${r.ticker || "—"}</strong></td>
-        <td>${r.name}</td>
+        <td><span class="rank-badge">${r.rank_in_custom}</span></td>
+        <td><strong class="ticker-badge">${r.ticker || "—"}</strong></td>
+        <td><b class="asset-name">${r.name}</b><small>${(r.tags || []).slice(0, 2).join(" · ")}</small></td>
         <td class="num">${typeof r.price === "number" ? formatUsd(r.price, r.price < 1 ? 4 : 2) : "—"}</td>
         <td class="num ${toneClass(r.change_24h)}">${formatPct(r.change_24h)}</td>
         <td class="num">${formatBigNumber(r.market_cap)}</td>
