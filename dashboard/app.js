@@ -479,7 +479,7 @@ function renderGlobalDataHealth() {
     .filter(Boolean)
     .sort((a, b) => b.getTime() - a.getTime())[0];
   const lastDataUpdate = lastDataTs ? formatKstDateTime(lastDataTs.toISOString(), "데이터 시각 대기") : "데이터 시각 대기";
-  const issueText = dangerCount ? `${dangerCount}개 지연/누락` : warnCount ? `${warnCount}개 주의` : "병목 없음";
+  const issueText = dangerCount ? `${dangerCount}개 지연/누락` : warnCount ? `${warnCount}개 주의` : "정상 갱신";
 
   const entryDetail = (entry) => {
     const details = [];
@@ -495,33 +495,38 @@ function renderGlobalDataHealth() {
 
   host.hidden = false;
   host.innerHTML = `
-    <article class="data-ops-panel ${overallTone} ${overallClass}">
-      <div class="data-ops-head">
+    <article class="data-ops-panel data-ops-compact ${overallTone} ${overallClass}">
+      <header class="data-ops-topline">
         <div>
-          <span>DATA OPS</span>
-          <strong>${statusText(state.status?.overall)}</strong>
-          <em>${summary}</em>
+          <span class="data-ops-kicker">DATA OPS</span>
+          <h2>데이터 갱신 상태</h2>
+          <p>${summary}</p>
         </div>
-        <div class="data-ops-build">
-          <span>현재 시각</span>
-          <b>${nowKst}</b>
-          <span>최근 데이터</span>
-          <b>${lastDataUpdate}</b>
-          <span>상태 빌드</span>
-          <b>${lastBuild}</b>
-        </div>
-      </div>
-      <div class="data-ops-metrics">
-        <p><span>정상</span><b>${okCount}</b></p>
-        <p><span>주의</span><b>${warnCount}</b></p>
-        <p><span>지연</span><b>${dangerCount}</b></p>
+        <strong class="data-ops-status-pill ${overallClass}">${statusText(state.status?.overall)}</strong>
+      </header>
+
+      <div class="data-ops-summary-row">
+        <p><span>현재 시각</span><b>${nowKst}</b></p>
+        <p><span>최근 데이터</span><b>${lastDataUpdate}</b></p>
+        <p><span>상태 빌드</span><b>${lastBuild}</b></p>
         <p><span>최대 지연</span><b>${formatAgeHours(maxAge)}</b></p>
       </div>
-      <div class="data-ops-alert ${dangerCount ? "down" : warnCount ? "flat" : "up"}">
-        <b>${issueText}</b>
-        <span>${issueCount ? `확인 항목 ${issueCount}건 · 자동 갱신은 유지 중` : "갱신 병목 없이 정상 범위입니다."}</span>
+
+      <div class="data-ops-score-row">
+        <span class="ok">정상 ${okCount}</span>
+        <span class="warn">주의 ${warnCount}</span>
+        <span class="danger">지연 ${dangerCount}</span>
+        <em>${issueCount ? `확인 항목 ${issueCount}건 · 자동 갱신 유지` : "병목 없이 정상 범위"}</em>
       </div>
-      <div class="data-ops-grid">
+
+      <div class="data-ops-table" role="table" aria-label="데이터 상태">
+        <div class="data-ops-table-head" role="row">
+          <span>데이터</span>
+          <span>상태</span>
+          <span>지연</span>
+          <span>갱신 시각</span>
+          <span>비고</span>
+        </div>
         ${entries.map((entry) => {
           const note = entry.critical_issue_count
             ? `검증 ${entry.critical_issue_count}건`
@@ -529,12 +534,13 @@ function renderGlobalDataHealth() {
               ? `보류 ${entry.issue_count}건`
               : formatAgeHours(entry.age_hours);
           return `
-            <article class="data-ops-item ${statusLabel(entry.level)}">
-              <div><span>${entry.label}</span><strong>${statusText(entry.level)}</strong></div>
-              <p>${note}</p>
+            <div class="data-ops-table-row ${statusLabel(entry.level)}" role="row">
+              <b>${entry.label}</b>
+              <strong>${statusText(entry.level)}</strong>
+              <span>${note}</span>
+              <time>${formatKstDateTime(entry.timestamp, "timestamp n/a")}</time>
               <small title="${escapeHtml(entryDetail(entry))}">${entryDetail(entry)}</small>
-              <em>${formatKstDateTime(entry.timestamp, "timestamp n/a")}</em>
-            </article>
+            </div>
           `;
         }).join("")}
       </div>
