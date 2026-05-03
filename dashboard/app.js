@@ -1516,16 +1516,6 @@ function renderCryptoBriefingExtras() {
     sideNews.innerHTML = cryptoNews.slice(0, 4).map((n, idx) => `<p><b>${idx + 1}</b><span>${localizeNewsTitle(n.title, "크립토") || "뉴스 수집 대기"}</span></p>`).join("");
   }
 
-  if (rightTicker) {
-    const tickers = [
-      { label: "비트코인", value: state.live?.BTC?.price ?? rows.find((r) => r.ticker === "BTC")?.price, delta: state.live?.BTC?.change ?? rows.find((r) => r.ticker === "BTC")?.change_24h },
-      { label: "이더리움", value: state.live?.ETH?.price ?? rows.find((r) => r.ticker === "ETH")?.price, delta: state.live?.ETH?.change ?? rows.find((r) => r.ticker === "ETH")?.change_24h },
-      { label: "솔라나", value: state.live?.SOL?.price ?? rows.find((r) => r.ticker === "SOL")?.price, delta: state.live?.SOL?.change ?? rows.find((r) => r.ticker === "SOL")?.change_24h },
-      { label: "달러 환율", value: state.fx?.usdKrw ?? fallbackFx.usdKrw, delta: state.fx?.delta ?? fallbackFx.delta },
-    ];
-    rightTicker.innerHTML = tickers.map((t) => `<p><span>${t.label}</span><b>${t.label.includes("환율") ? `${Math.round(t.value || 0).toLocaleString()}원` : formatUsd(toNumSafe(t.value), 0)}</b><em class="${toneClass(t.delta)}">${formatPct(toNumSafe(t.delta), 2)}</em></p>`).join("");
-  }
-
   if (rightNews) {
     const top = cryptoNews[0];
     rightNews.innerHTML = top

@@ -7,12 +7,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260503i" />
+    <link rel="stylesheet" href="./styles.css?v=20260503j" />
   </head>
-  <body class="crypto-portal-body">
-    <header class="crypto-topbar">
-      <a class="crypto-brand" href="./index.html">Market Desk</a>
-      <nav class="crypto-nav">
+  <body class="command-portal-body crypto-portal-body">
+    <header class="command-topbar crypto-topbar">
+      <a class="command-brand crypto-brand" href="./index.html">Market Desk</a>
+      <nav class="command-topnav crypto-nav">
         <a class="" href="./index.html">홈</a>
         <a class="active" href="./crypto.html">크립토</a>
         <a class="" href="./stock-market.html">주식/매크로</a>
@@ -23,23 +23,23 @@
         <a class="" href="./exchanges.html">거래소 프리미엄</a>
         <a class="" href="./ai-gpt-brief.html">AI 브리핑</a>
       </nav>
-      <a class="crypto-search-pill" href="./ai-gpt-brief.html">AI 브리핑</a>
+      <a class="command-search-pill crypto-search-pill" href="./ai-gpt-brief.html">AI 브리핑</a>
     </header>
 
-    <div class="crypto-portal-shell">
-      <aside class="crypto-side-rail">
-        <section class="portal-card crypto-clock-card">
+    <div class="command-dashboard-shell crypto-portal-shell">
+      <aside class="command-left-rail crypto-side-rail">
+        <section class="command-widget command-clock-card portal-card crypto-clock-card">
           <p id="cryptoClockDate">날짜 확인 중</p>
           <strong id="cryptoClock">--:--:--</strong>
           <span>SNAPSHOT <b id="asOfText">loading...</b></span>
         </section>
 
-        <section class="portal-card crypto-nav-card">
-          <div class="portal-card-head">
+        <section class="command-widget command-nav-card portal-card crypto-nav-card">
+          <div class="command-widget-head portal-card-head">
             <h3>카테고리</h3>
             <span>전체 이동</span>
           </div>
-          <nav class="crypto-side-nav">
+          <nav class="command-side-nav crypto-side-nav">
             <a href="./index.html">홈</a>
             <a class="active" href="./crypto.html">크립토</a>
             <a href="./stock-market.html">주식/매크로</a>
@@ -52,30 +52,30 @@
           </nav>
         </section>
 
-        <section class="portal-card">
-          <div class="portal-card-head">
+        <section class="command-widget portal-card">
+          <div class="command-widget-head portal-card-head">
             <h3>인기 코인</h3>
             <span>24H</span>
           </div>
           <div class="side-rank-list" id="cryptoSideHot"></div>
         </section>
 
-        <section class="portal-card">
-          <div class="portal-card-head">
+        <section class="command-widget portal-card">
+          <div class="command-widget-head portal-card-head">
             <h3>태그</h3>
           </div>
           <div class="tag-cloud" id="cryptoTagCloud"></div>
         </section>
 
-        <section class="portal-card">
-          <div class="portal-card-head">
+        <section class="command-widget portal-card">
+          <div class="command-widget-head portal-card-head">
             <h3>실시간 뉴스</h3>
           </div>
           <div class="side-news-list" id="cryptoSideNews"></div>
         </section>
       </aside>
 
-      <main class="crypto-main-brief">
+      <main class="command-main-brief crypto-main-brief">
         <section class="global-data-health" id="globalDataHealth" hidden></section>
 
         <header class="crypto-article-head">
@@ -243,17 +243,17 @@
         </section>
       </main>
 
-      <aside class="crypto-right-rail">
-        <section class="portal-card ticker-card">
-          <div class="portal-card-head">
+      <aside class="command-right-rail crypto-right-rail">
+        <section class="command-widget command-ticker-card portal-card ticker-card">
+          <div class="command-widget-head portal-card-head">
             <h3>시세</h3>
             <span>live</span>
           </div>
-          <div id="cryptoRightTicker"></div>
+          <div class="command-mini-tickers" id="cryptoRightTicker"></div>
         </section>
 
-        <section class="portal-card right-news-card">
-          <div class="portal-card-head">
+        <section class="command-widget command-news-card portal-card right-news-card">
+          <div class="command-widget-head portal-card-head">
             <h3>주인장 관심 뉴스</h3>
             <span>crypto</span>
           </div>
@@ -262,7 +262,7 @@
       </aside>
     </div>
 
-    <script src="./data/dashboard-data.js?v=20260503i"></script>
-    <script src="./app.js?v=20260503i"></script>
+    <script src="./data/dashboard-data.js?v=20260503j"></script>
+    <script src="./app.js?v=20260503j"></script>
   </body>
 </html>
