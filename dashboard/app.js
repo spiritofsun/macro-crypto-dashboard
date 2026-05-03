@@ -172,6 +172,11 @@ function formatSignedCompactUsd(value) {
   return `${value > 0 ? "+" : "-"}${formatCompactUsd(Math.abs(value))}`;
 }
 
+function formatKrw(value) {
+  if (typeof value !== "number" || Number.isNaN(value)) return "—";
+  return `₩${Math.round(value).toLocaleString()}`;
+}
+
 function toNumSafe(value) {
   const n = Number(value);
   return Number.isFinite(n) ? n : null;
@@ -519,31 +524,37 @@ function renderGlobalDataHealth() {
         <em>${issueCount ? `확인 항목 ${issueCount}건 · 자동 갱신 유지` : "병목 없이 정상 범위"}</em>
       </div>
 
-      <div class="data-ops-table" role="table" aria-label="데이터 상태">
-        <div class="data-ops-table-head" role="row">
-          <span>데이터</span>
-          <span>상태</span>
-          <span>지연</span>
-          <span>갱신 시각</span>
-          <span>비고</span>
+      <details class="data-ops-details">
+        <summary>
+          <span>상세 데이터 상태</span>
+          <b>${entries.length}개 소스</b>
+        </summary>
+        <div class="data-ops-table" role="table" aria-label="데이터 상태">
+          <div class="data-ops-table-head" role="row">
+            <span>데이터</span>
+            <span>상태</span>
+            <span>지연</span>
+            <span>갱신 시각</span>
+            <span>비고</span>
+          </div>
+          ${entries.map((entry) => {
+            const note = entry.critical_issue_count
+              ? `검증 ${entry.critical_issue_count}건`
+              : entry.issue_count
+                ? `보류 ${entry.issue_count}건`
+                : formatAgeHours(entry.age_hours);
+            return `
+              <div class="data-ops-table-row ${statusLabel(entry.level)}" role="row">
+                <b>${entry.label}</b>
+                <strong>${statusText(entry.level)}</strong>
+                <span>${note}</span>
+                <time>${formatKstDateTime(entry.timestamp, "timestamp n/a")}</time>
+                <small title="${escapeHtml(entryDetail(entry))}">${entryDetail(entry)}</small>
+              </div>
+            `;
+          }).join("")}
         </div>
-        ${entries.map((entry) => {
-          const note = entry.critical_issue_count
-            ? `검증 ${entry.critical_issue_count}건`
-            : entry.issue_count
-              ? `보류 ${entry.issue_count}건`
-              : formatAgeHours(entry.age_hours);
-          return `
-            <div class="data-ops-table-row ${statusLabel(entry.level)}" role="row">
-              <b>${entry.label}</b>
-              <strong>${statusText(entry.level)}</strong>
-              <span>${note}</span>
-              <time>${formatKstDateTime(entry.timestamp, "timestamp n/a")}</time>
-              <small title="${escapeHtml(entryDetail(entry))}">${entryDetail(entry)}</small>
-            </div>
-          `;
-        }).join("")}
-      </div>
+      </details>
     </article>
   `;
 }
@@ -724,6 +735,29 @@ function renderHomeHub() {
         <li>동행 리스크(BTC-ETH, 위험자산) 점검 필요.</li>
       </ul>
     `;
+  }
+
+  const homeRightTicker = document.getElementById("homeRightTicker");
+  if (homeRightTicker) {
+    const macro = state.macroSnapshot || fallbackMacro;
+    const btcKrw = state.live?.upbitBtcKrw || ((state.live?.BTC?.price || 0) * (state.fx?.usdKrw || fallbackFx.usdKrw));
+    const tickerRows = [
+      { label: "비트코인", icon: "₿", value: formatKrw(btcKrw), delta: state.live?.BTC?.change },
+      { label: "나스닥", icon: "US", value: macro.indices?.nasdaq?.display || "—", delta: macro.indices?.nasdaq?.delta },
+      { label: "VIX", icon: "VX", value: macro.indices?.vix?.display || "—", delta: macro.indices?.vix?.delta, invert: true },
+      { label: "달러 환율", icon: "FX", value: `${Math.round(state.fx?.usdKrw || fallbackFx.usdKrw).toLocaleString()}원`, delta: state.fx?.delta ?? fallbackFx.delta },
+    ];
+    homeRightTicker.innerHTML = tickerRows.map((item) => {
+      const delta = toNumSafe(item.delta);
+      const toneValue = item.invert && typeof delta === "number" ? -delta : delta;
+      return `
+        <p>
+          <span><i>${item.icon}</i>${item.label}</span>
+          <b>${item.value}</b>
+          <em class="${toneClass(toneValue)}">${formatPct(delta, 2)}</em>
+        </p>
+      `;
+    }).join("");
   }
 }
 

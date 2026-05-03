@@ -7465,3 +7465,97 @@ body:not(.crypto-portal-body) .mono,
 .crypto-portal-body .mono {
   font-family: var(--ui-mono) !important;
 }
+
+/* v20260503g focused layout refinements */
+.data-ops-details {
+  border: 1px solid var(--ui-line);
+  border-radius: 16px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.data-ops-details summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 15px;
+  cursor: pointer;
+  color: var(--ui-ink);
+  font-weight: 950;
+  list-style: none;
+}
+
+.data-ops-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.data-ops-details summary::after {
+  content: "펼치기";
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: #eef4ff;
+  color: var(--ui-blue);
+  font-size: 12px;
+  font-weight: 950;
+}
+
+.data-ops-details[open] summary::after {
+  content: "접기";
+}
+
+.data-ops-details summary b {
+  margin-left: auto;
+  color: var(--ui-muted);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.data-ops-details .data-ops-table {
+  border: 0;
+  border-top: 1px solid var(--ui-line);
+  border-radius: 0;
+}
+
+.command-mini-tickers p {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 5px 10px;
+}
+
+.command-mini-tickers span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.command-mini-tickers span i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: #eef4ff;
+  color: var(--ui-blue);
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 950;
+}
+
+.command-mini-tickers b {
+  text-align: right;
+  font-family: var(--ui-mono) !important;
+}
+
+.command-mini-tickers em {
+  grid-column: 2;
+  text-align: right;
+  font-family: var(--ui-mono) !important;
+  font-size: 12px;
+}
+
+.home-command-body .global-data-health {
+  margin-bottom: 20px;
+}
