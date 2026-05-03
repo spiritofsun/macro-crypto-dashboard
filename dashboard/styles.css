@@ -7217,3 +7217,251 @@ body:not(.crypto-portal-body) .macro-read-card span {
   font-weight: 800;
   line-height: 1.5;
 }
+
+/* v20260503f unified current layout layer */
+:root {
+  --ui-font: "IBM Plex Sans KR", sans-serif;
+  --ui-mono: "JetBrains Mono", monospace;
+  --ui-bg: #f6f8fb;
+  --ui-surface: #ffffff;
+  --ui-surface-soft: #f8fbff;
+  --ui-line: #dfe7f2;
+  --ui-ink: #101828;
+  --ui-text: #344054;
+  --ui-muted: #667085;
+  --ui-faint: #98a2b3;
+  --ui-green: #008a62;
+  --ui-red: #dc2626;
+  --ui-amber: #a16207;
+  --ui-blue: #355cff;
+}
+
+body,
+button,
+input,
+select,
+textarea,
+table {
+  font-family: var(--ui-font) !important;
+  font-variant-numeric: tabular-nums;
+}
+
+body:not(.crypto-portal-body),
+.command-portal-body,
+.home-command-body {
+  color: var(--ui-ink) !important;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(72, 185, 173, 0.08), transparent 28%),
+    linear-gradient(135deg, #f8fbff 0%, #ffffff 46%, #f5f8ff 100%) !important;
+}
+
+.crypto-portal-body {
+  font-family: var(--ui-font) !important;
+}
+
+body:not(.crypto-portal-body) h1,
+body:not(.crypto-portal-body) h2,
+body:not(.crypto-portal-body) h3,
+body:not(.crypto-portal-body) h4,
+body:not(.crypto-portal-body) strong,
+body:not(.crypto-portal-body) b,
+.crypto-portal-body h1,
+.crypto-portal-body h2,
+.crypto-portal-body h3,
+.crypto-portal-body h4,
+.crypto-portal-body strong,
+.crypto-portal-body b {
+  font-family: var(--ui-font) !important;
+  color: var(--ui-ink);
+  letter-spacing: -0.045em;
+}
+
+body:not(.crypto-portal-body) p,
+body:not(.crypto-portal-body) span,
+body:not(.crypto-portal-body) small,
+body:not(.crypto-portal-body) em,
+body:not(.crypto-portal-body) li,
+body:not(.crypto-portal-body) td,
+body:not(.crypto-portal-body) a,
+.crypto-portal-body p,
+.crypto-portal-body span,
+.crypto-portal-body small,
+.crypto-portal-body em,
+.crypto-portal-body li,
+.crypto-portal-body td,
+.crypto-portal-body a {
+  font-family: var(--ui-font) !important;
+}
+
+body:not(.crypto-portal-body) .num,
+body:not(.crypto-portal-body) time,
+body:not(.crypto-portal-body) .asof,
+body:not(.crypto-portal-body) .data-ops-summary-row b,
+body:not(.crypto-portal-body) .data-ops-table-row time,
+.crypto-portal-body .num,
+.crypto-portal-body time,
+.crypto-portal-body .rank-badge,
+.crypto-portal-body .ticker-badge,
+.crypto-portal-body #cryptoCustomTable td.num,
+.crypto-portal-body .data-ops-summary-row b,
+.crypto-portal-body .data-ops-table-row time {
+  font-family: var(--ui-mono) !important;
+  letter-spacing: -0.025em;
+}
+
+body:not(.crypto-portal-body) .panel,
+body:not(.crypto-portal-body) .briefing-panel,
+body:not(.crypto-portal-body) .page-lead-card,
+body:not(.crypto-portal-body) .macro-lead-card,
+body:not(.crypto-portal-body) .market-metric-card,
+body:not(.crypto-portal-body) .metric-card,
+body:not(.crypto-portal-body) .macro-read-card,
+body:not(.crypto-portal-body) .page-quick-card,
+body:not(.crypto-portal-body) .flow-card,
+body:not(.crypto-portal-body) .brief-preview,
+body:not(.crypto-portal-body) .health-pill,
+body:not(.crypto-portal-body) .health-overview,
+body:not(.crypto-portal-body) .snapshot-pill,
+body:not(.crypto-portal-body) .command-widget,
+body:not(.crypto-portal-body) .site-command-grid a,
+.crypto-portal-body .portal-card,
+.crypto-portal-body .crypto-market-section,
+.crypto-portal-body .market-metric-card,
+.crypto-portal-body .page-quick-card,
+.crypto-portal-body .data-ops-panel {
+  border: 1px solid var(--ui-line) !important;
+  background: linear-gradient(135deg, var(--ui-surface), var(--ui-surface-soft)) !important;
+  color: var(--ui-ink) !important;
+  box-shadow: 0 10px 24px rgba(24, 36, 58, 0.05) !important;
+}
+
+body:not(.crypto-portal-body) .site-command-hero {
+  background:
+    radial-gradient(circle at 100% 0%, rgba(72, 185, 173, 0.26), transparent 36%),
+    linear-gradient(135deg, #111827, #1f2937 54%, #0f766e) !important;
+  color: #ffffff !important;
+}
+
+body:not(.crypto-portal-body) .site-command-hero h2,
+body:not(.crypto-portal-body) .site-command-hero p,
+body:not(.crypto-portal-body) .site-command-hero span {
+  color: #ffffff !important;
+}
+
+body:not(.crypto-portal-body) .site-command-hero p {
+  color: #a7f3d0 !important;
+}
+
+body:not(.crypto-portal-body) .site-command-hero span {
+  color: #d6e4e8 !important;
+}
+
+body:not(.crypto-portal-body) .panel-head h2,
+body:not(.crypto-portal-body) .portal-section-title h2,
+body:not(.crypto-portal-body) .page-lead-card h2,
+body:not(.crypto-portal-body) .macro-lead-card h2,
+.crypto-portal-body .portal-section-title h2,
+.crypto-portal-body .panel-head h2 {
+  color: var(--ui-ink) !important;
+  font-size: clamp(22px, 2vw, 30px);
+  font-weight: 950;
+  letter-spacing: -0.055em;
+}
+
+body:not(.crypto-portal-body) .kicker,
+body:not(.crypto-portal-body) .asof,
+body:not(.crypto-portal-body) .subhead,
+body:not(.crypto-portal-body) .macro-read-label,
+body:not(.crypto-portal-body) .metric-label,
+body:not(.crypto-portal-body) .flow-title,
+body:not(.crypto-portal-body) .flow-meta,
+body:not(.crypto-portal-body) .page-quick-card p,
+body:not(.crypto-portal-body) .market-metric-card p,
+body:not(.crypto-portal-body) .command-widget-head span,
+.crypto-portal-body .portal-card-head span,
+.crypto-portal-body .portal-section-title span,
+.crypto-portal-body .page-quick-card p,
+.crypto-portal-body .market-metric-card p {
+  color: var(--ui-muted) !important;
+  opacity: 1 !important;
+  text-transform: none !important;
+  letter-spacing: -0.01em !important;
+}
+
+body:not(.crypto-portal-body) .macro-read-card span,
+body:not(.crypto-portal-body) .page-quick-card span,
+body:not(.crypto-portal-body) .market-metric-card span,
+body:not(.crypto-portal-body) .metric-card span,
+body:not(.crypto-portal-body) .brief-preview p,
+body:not(.crypto-portal-body) .brief-preview span,
+.crypto-portal-body .portal-explainer span,
+.crypto-portal-body .page-quick-card span,
+.crypto-portal-body .market-metric-card span {
+  color: var(--ui-text) !important;
+  line-height: 1.55;
+}
+
+body:not(.crypto-portal-body) .up,
+.crypto-portal-body .up { color: var(--ui-green) !important; }
+body:not(.crypto-portal-body) .down,
+.crypto-portal-body .down { color: var(--ui-red) !important; }
+body:not(.crypto-portal-body) .flat,
+.crypto-portal-body .flat { color: var(--ui-amber) !important; }
+
+body:not(.crypto-portal-body) .data-table,
+.crypto-portal-body .data-table {
+  color: var(--ui-ink) !important;
+}
+
+body:not(.crypto-portal-body) .data-table th,
+.crypto-portal-body .data-table th {
+  color: var(--ui-muted) !important;
+  background: #f8fbff !important;
+  font-family: var(--ui-font) !important;
+  font-weight: 950;
+}
+
+body:not(.crypto-portal-body) .data-table td,
+.crypto-portal-body .data-table td {
+  color: var(--ui-text) !important;
+  background: #ffffff !important;
+}
+
+body:not(.crypto-portal-body) .data-table tr:hover td,
+.crypto-portal-body .data-table tr:hover td {
+  background: #f3faf8 !important;
+}
+
+body:not(.crypto-portal-body) .left-sidebar,
+body:not(.crypto-portal-body) .command-left-rail,
+body:not(.crypto-portal-body) .command-right-rail,
+.crypto-portal-body .crypto-side-rail,
+.crypto-portal-body .crypto-right-rail {
+  color: var(--ui-ink) !important;
+}
+
+body:not(.crypto-portal-body) .side-link,
+body:not(.crypto-portal-body) .command-side-nav a,
+.crypto-portal-body .crypto-side-nav a {
+  color: var(--ui-muted) !important;
+  font-family: var(--ui-font) !important;
+  font-weight: 900;
+}
+
+body:not(.crypto-portal-body) .side-link.active,
+body:not(.crypto-portal-body) .command-side-nav a.active,
+.crypto-portal-body .crypto-side-nav a.active {
+  color: var(--ui-green) !important;
+  background: #eefdf7 !important;
+}
+
+body:not(.crypto-portal-body) .top-snapshot-inner,
+body:not(.crypto-portal-body) .global-snapshot-text,
+.crypto-portal-body .crypto-article-meta {
+  color: var(--ui-muted) !important;
+}
+
+body:not(.crypto-portal-body) .mono,
+.crypto-portal-body .mono {
+  font-family: var(--ui-mono) !important;
+}
