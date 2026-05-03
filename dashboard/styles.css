@@ -6260,8 +6260,8 @@ body:not(.home-body) .flat {
 
 .data-ops-panel {
   display: grid;
-  gap: 16px;
-  padding: 20px;
+  gap: 18px;
+  padding: clamp(18px, 2vw, 26px);
   border: 1px solid #dfe7f2;
   border-radius: 24px;
   background:
@@ -6288,8 +6288,8 @@ body:not(.home-body) .flat {
 
 .data-ops-head {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(180px, auto);
-  gap: 16px;
+  grid-template-columns: minmax(260px, 1fr) minmax(280px, auto);
+  gap: 18px;
   align-items: start;
 }
 
@@ -6302,8 +6302,8 @@ body:not(.home-body) .flat {
 .data-ops-build span,
 .data-ops-metrics span,
 .data-ops-item span {
-  color: #667085;
-  font-size: 12px;
+  color: #475467;
+  font-size: 13px;
   font-weight: 900;
   letter-spacing: 0.02em;
 }
@@ -6339,9 +6339,11 @@ body:not(.home-body) .flat {
 
 .data-ops-build {
   display: grid;
-  gap: 6px;
-  justify-items: end;
-  padding: 12px 14px;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px 14px;
+  align-items: baseline;
+  justify-items: stretch;
+  padding: 14px 16px;
   border: 1px solid #e6ecf5;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.72);
@@ -6350,8 +6352,10 @@ body:not(.home-body) .flat {
 .data-ops-build b {
   color: #1f2937;
   font-family: "JetBrains Mono", monospace;
-  font-size: 12px;
-  text-align: right;
+  font-size: clamp(12px, 0.9vw, 14px);
+  font-weight: 900;
+  text-align: left;
+  white-space: nowrap;
 }
 
 .data-ops-metrics {
@@ -6400,15 +6404,16 @@ body:not(.home-body) .flat {
 
 .data-ops-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
 }
 
 .data-ops-item {
   display: grid;
-  gap: 8px;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 10px;
   min-width: 0;
-  padding: 14px;
+  padding: 16px;
   border: 1px solid #e6ecf5;
   border-radius: 17px;
   background: rgba(255, 255, 255, 0.82);
@@ -6444,21 +6449,27 @@ body:not(.home-body) .flat {
   margin: 0;
   color: #101828;
   font-family: "JetBrains Mono", monospace;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 900;
 }
 
 .data-ops-item small,
 .data-ops-item em {
   min-width: 0;
-  overflow: hidden;
   color: #667085;
-  font-size: 12px;
+  font-size: 13px;
   font-style: normal;
   font-weight: 800;
-  line-height: 1.35;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.data-ops-item em {
+  color: #344054;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 900;
 }
 
 .crypto-portal-body .data-ops-panel {
@@ -6504,6 +6515,7 @@ body:not(.home-body) .flat {
   }
 
   .data-ops-build {
+    grid-template-columns: 1fr;
     justify-items: start;
   }
 

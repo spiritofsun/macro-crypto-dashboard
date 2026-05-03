@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-05-02T23:56:51.346071+00:00",
+  "as_of": "2026-05-03T00:03:13.081248+00:00",
   "global": {
     "source": "CoinGecko global",
     "total_market_cap_usd": 2693622717041.498,
@@ -9,15 +9,15 @@
   },
   "fear_greed": {
     "source": "alternative.me",
-    "value": 39.0,
-    "classification": "Fear",
-    "timestamp": "1777680000"
+    "value": 47.0,
+    "classification": "Neutral",
+    "timestamp": "1777766400"
   },
   "coinbase_premium": {
     "source": "Coinbase BTC spot vs CoinGecko BTC",
-    "pct": 0.016480443376675067,
-    "coinbase_btc_usd": 78681.965,
-    "coingecko_btc_usd": 78669.0
+    "pct": 0.03179877506416196,
+    "coinbase_btc_usd": 78723.025,
+    "coingecko_btc_usd": 78698.0
   },
   "stablecoins": {
     "source": "DefiLlama stablecoins",

@@ -483,10 +483,10 @@ function renderGlobalDataHealth() {
 
   const entryDetail = (entry) => {
     const details = [];
-    if (entry.carried_metrics?.length) details.push(`carry ${entry.carried_metrics.slice(0, 2).join(", ")}${entry.carried_metrics.length > 2 ? "..." : ""}`);
-    if (entry.critical_metrics?.length) details.push(`critical ${entry.critical_metrics.slice(0, 2).join(", ")}${entry.critical_metrics.length > 2 ? "..." : ""}`);
+    if (entry.carried_metrics?.length) details.push(`보류: ${entry.carried_metrics.slice(0, 3).join(", ")}${entry.carried_metrics.length > 3 ? " 외" : ""}`);
+    if (entry.critical_metrics?.length) details.push(`위험: ${entry.critical_metrics.slice(0, 3).join(", ")}${entry.critical_metrics.length > 3 ? " 외" : ""}`);
     if (entry.market_date) details.push(`시장일 ${entry.market_date}`);
-    if (entry.source) details.push(`source ${entry.source}`);
+    if (entry.source) details.push(`소스 ${entry.source}`);
     if (entry.universe) details.push(entry.universe);
     if (entry.asset_count) details.push(`${entry.asset_count} assets`);
     if (typeof entry.macro_count === "number" || typeof entry.crypto_count === "number") details.push(`뉴스 ${entry.macro_count || 0}/${entry.crypto_count || 0}`);
@@ -532,7 +532,7 @@ function renderGlobalDataHealth() {
             <article class="data-ops-item ${statusLabel(entry.level)}">
               <div><span>${entry.label}</span><strong>${statusText(entry.level)}</strong></div>
               <p>${note}</p>
-              <small>${entryDetail(entry)}</small>
+              <small title="${escapeHtml(entryDetail(entry))}">${entryDetail(entry)}</small>
               <em>${formatKstDateTime(entry.timestamp, "timestamp n/a")}</em>
             </article>
           `;
