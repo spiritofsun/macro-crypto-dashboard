@@ -689,9 +689,9 @@ function renderHomeHub() {
   const riskText = typeof fg === "number" && fg < 25 ? "경고" : "정상";
 
   snapshotStrip.innerHTML = `
-    <article class="snapshot-pill"><span class="label">오늘 바이어스</span><span class="value">중립</span></article>
-    <article class="snapshot-pill"><span class="label">변동성 상태</span><span class="value">${volText}</span></article>
-    <article class="snapshot-pill"><span class="label">리스크 경고</span><span class="value ${toneClass(typeof fg === "number" && fg < 25 ? -1 : 0)}">${riskText}</span></article>
+    <article class="snapshot-pill"><span class="label">시장 방향</span><span class="value flat">중립</span><small>강한 추세보다 확인 구간</small></article>
+    <article class="snapshot-pill"><span class="label">변동성</span><span class="value ${volText === "높음" ? "down" : volText === "보통" ? "flat" : "up"}">${volText}</span><small>BTC/ETH 24H 변동 합산</small></article>
+    <article class="snapshot-pill"><span class="label">리스크</span><span class="value ${toneClass(typeof fg === "number" && fg < 25 ? -1 : 0)}">${riskText}</span><small>공포·탐욕 ${typeof fg === "number" ? Math.round(fg) : "대기"}</small></article>
   `;
 
   const pulseRows = document.getElementById("pulseRows");
