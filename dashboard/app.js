@@ -485,6 +485,7 @@ function renderGlobalDataHealth() {
     .sort((a, b) => b.getTime() - a.getTime())[0];
   const lastDataUpdate = lastDataTs ? formatKstDateTime(lastDataTs.toISOString(), "데이터 시각 대기") : "데이터 시각 대기";
   const issueText = dangerCount ? `${dangerCount}개 지연/누락` : warnCount ? `${warnCount}개 주의` : "정상 갱신";
+  const isHome = document.body.classList.contains("home-command-body");
 
   const entryDetail = (entry) => {
     const details = [];
@@ -499,6 +500,25 @@ function renderGlobalDataHealth() {
   };
 
   host.hidden = false;
+  if (!isHome) {
+    host.innerHTML = `
+      <article class="data-ops-mini ${overallTone} ${overallClass}">
+        <div>
+          <span class="data-ops-kicker">DATA OPS</span>
+          <strong>데이터 갱신 상태</strong>
+          <p>${summary}</p>
+        </div>
+        <dl>
+          <div><dt>최근 데이터</dt><dd>${lastDataUpdate}</dd></div>
+          <div><dt>최대 지연</dt><dd>${formatAgeHours(maxAge)}</dd></div>
+          <div><dt>상태</dt><dd>${issueText}</dd></div>
+        </dl>
+        <span class="data-ops-status-pill ${overallClass}">${statusText(state.status?.overall)}</span>
+      </article>
+    `;
+    return;
+  }
+
   host.innerHTML = `
     <article class="data-ops-panel data-ops-compact ${overallTone} ${overallClass}">
       <header class="data-ops-topline">
@@ -557,6 +577,35 @@ function renderGlobalDataHealth() {
       </details>
     </article>
   `;
+}
+
+function renderCommandRightTicker() {
+  const targets = document.querySelectorAll(".command-ticker-card .command-mini-tickers, #homeRightTicker");
+  if (!targets.length) return;
+
+  const macro = state.macroSnapshot || fallbackMacro;
+  const btcKrw = state.live?.upbitBtcKrw || ((state.live?.BTC?.price || 0) * (state.fx?.usdKrw || fallbackFx.usdKrw));
+  const tickerRows = [
+    { label: "비트코인", icon: "₿", value: formatKrw(btcKrw), delta: state.live?.BTC?.change },
+    { label: "나스닥", icon: "US", value: macro.indices?.nasdaq?.display || "—", delta: macro.indices?.nasdaq?.delta },
+    { label: "VIX", icon: "VX", value: macro.indices?.vix?.display || "—", delta: macro.indices?.vix?.delta, invert: true },
+    { label: "달러 환율", icon: "FX", value: `${Math.round(state.fx?.usdKrw || fallbackFx.usdKrw).toLocaleString()}원`, delta: state.fx?.delta ?? fallbackFx.delta },
+  ];
+  const html = tickerRows.map((item) => {
+    const delta = toNumSafe(item.delta);
+    const toneValue = item.invert && typeof delta === "number" ? -delta : delta;
+    return `
+      <p>
+        <span><i>${item.icon}</i>${item.label}</span>
+        <b>${item.value}</b>
+        <em class="${toneClass(toneValue)}">${formatPct(delta, 2)}</em>
+      </p>
+    `;
+  }).join("");
+
+  targets.forEach((target) => {
+    target.innerHTML = html;
+  });
 }
 
 function renderCommandShellClock() {
@@ -737,28 +786,6 @@ function renderHomeHub() {
     `;
   }
 
-  const homeRightTicker = document.getElementById("homeRightTicker");
-  if (homeRightTicker) {
-    const macro = state.macroSnapshot || fallbackMacro;
-    const btcKrw = state.live?.upbitBtcKrw || ((state.live?.BTC?.price || 0) * (state.fx?.usdKrw || fallbackFx.usdKrw));
-    const tickerRows = [
-      { label: "비트코인", icon: "₿", value: formatKrw(btcKrw), delta: state.live?.BTC?.change },
-      { label: "나스닥", icon: "US", value: macro.indices?.nasdaq?.display || "—", delta: macro.indices?.nasdaq?.delta },
-      { label: "VIX", icon: "VX", value: macro.indices?.vix?.display || "—", delta: macro.indices?.vix?.delta, invert: true },
-      { label: "달러 환율", icon: "FX", value: `${Math.round(state.fx?.usdKrw || fallbackFx.usdKrw).toLocaleString()}원`, delta: state.fx?.delta ?? fallbackFx.delta },
-    ];
-    homeRightTicker.innerHTML = tickerRows.map((item) => {
-      const delta = toNumSafe(item.delta);
-      const toneValue = item.invert && typeof delta === "number" ? -delta : delta;
-      return `
-        <p>
-          <span><i>${item.icon}</i>${item.label}</span>
-          <b>${item.value}</b>
-          <em class="${toneClass(toneValue)}">${formatPct(delta, 2)}</em>
-        </p>
-      `;
-    }).join("");
-  }
 }
 
 function renderNewsPage() {
@@ -2175,6 +2202,7 @@ function renderAll() {
   setAsOf();
   renderCommandShellClock();
   renderGlobalDataHealth();
+  renderCommandRightTicker();
   renderHomeHub();
   renderNewsPage();
   renderNewsOverview();
