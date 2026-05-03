@@ -7109,3 +7109,111 @@ body:not(.home-body) .flat {
     min-height: 220px;
   }
 }
+
+/* v20260503e white-theme legibility guard */
+body:not(.crypto-portal-body) .macro-read-card,
+body:not(.crypto-portal-body) .health-pill,
+body:not(.crypto-portal-body) .health-overview,
+body:not(.crypto-portal-body) .page-quick-card,
+body:not(.crypto-portal-body) .macro-mini-card,
+body:not(.crypto-portal-body) .market-metric-card,
+body:not(.crypto-portal-body) .metric-card,
+body:not(.crypto-portal-body) .flow-card,
+body:not(.crypto-portal-body) .brief-preview {
+  border: 1px solid #dfe7f2 !important;
+  background: linear-gradient(135deg, #ffffff, #f8fbff) !important;
+  color: #172033 !important;
+  box-shadow: 0 10px 24px rgba(24, 36, 58, 0.05) !important;
+}
+
+body:not(.crypto-portal-body) .macro-read-label,
+body:not(.crypto-portal-body) .health-pill span,
+body:not(.crypto-portal-body) .health-overview span,
+body:not(.crypto-portal-body) .health-overview em,
+body:not(.crypto-portal-body) .page-quick-card p,
+body:not(.crypto-portal-body) .macro-mini-card p,
+body:not(.crypto-portal-body) .market-metric-card p,
+body:not(.crypto-portal-body) .metric-label,
+body:not(.crypto-portal-body) .flow-title,
+body:not(.crypto-portal-body) .flow-meta,
+body:not(.crypto-portal-body) .subhead,
+body:not(.crypto-portal-body) .asof,
+body:not(.crypto-portal-body) .kicker {
+  color: #667085 !important;
+  opacity: 1 !important;
+}
+
+body:not(.crypto-portal-body) .macro-read-card strong,
+body:not(.crypto-portal-body) .health-pill strong,
+body:not(.crypto-portal-body) .health-overview strong,
+body:not(.crypto-portal-body) .page-quick-card strong,
+body:not(.crypto-portal-body) .macro-mini-card strong,
+body:not(.crypto-portal-body) .market-metric-card strong,
+body:not(.crypto-portal-body) .metric-value,
+body:not(.crypto-portal-body) .flow-main,
+body:not(.crypto-portal-body) .brief-preview strong {
+  color: #101828 !important;
+}
+
+body:not(.crypto-portal-body) .macro-read-card span,
+body:not(.crypto-portal-body) .page-quick-card span,
+body:not(.crypto-portal-body) .macro-mini-card span,
+body:not(.crypto-portal-body) .market-metric-card span,
+body:not(.crypto-portal-body) .metric-card span,
+body:not(.crypto-portal-body) .brief-preview p,
+body:not(.crypto-portal-body) .brief-preview span {
+  color: #475467 !important;
+}
+
+body:not(.crypto-portal-body) .macro-read-card strong.flat,
+body:not(.crypto-portal-body) .page-quick-card strong.flat,
+body:not(.crypto-portal-body) .macro-mini-card strong.flat,
+body:not(.crypto-portal-body) .metric-delta.flat {
+  color: #a16207 !important;
+}
+
+body:not(.crypto-portal-body) .macro-read-card strong.up,
+body:not(.crypto-portal-body) .page-quick-card strong.up,
+body:not(.crypto-portal-body) .macro-mini-card strong.up,
+body:not(.crypto-portal-body) .metric-delta.up {
+  color: #008a62 !important;
+}
+
+body:not(.crypto-portal-body) .macro-read-card strong.down,
+body:not(.crypto-portal-body) .page-quick-card strong.down,
+body:not(.crypto-portal-body) .macro-mini-card strong.down,
+body:not(.crypto-portal-body) .metric-delta.down {
+  color: #dc2626 !important;
+}
+
+body:not(.crypto-portal-body) .macro-read-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+body:not(.crypto-portal-body) .macro-read-card {
+  min-height: 128px;
+  padding: 18px 20px !important;
+}
+
+body:not(.crypto-portal-body) .macro-read-label {
+  margin-bottom: 8px;
+  font-size: 12px !important;
+  font-family: "IBM Plex Sans KR", sans-serif !important;
+  font-weight: 950;
+  letter-spacing: -0.01em !important;
+  text-transform: none !important;
+}
+
+body:not(.crypto-portal-body) .macro-read-card strong {
+  font-size: 22px !important;
+  font-family: "IBM Plex Sans KR", sans-serif !important;
+  font-weight: 950 !important;
+  letter-spacing: -0.04em !important;
+}
+
+body:not(.crypto-portal-body) .macro-read-card span {
+  font-size: 13px !important;
+  font-family: "IBM Plex Sans KR", sans-serif !important;
+  font-weight: 800;
+  line-height: 1.5;
+}
