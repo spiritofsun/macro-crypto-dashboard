@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-05-04T03:59:57.827322+00:00",
+  "updated_at": "2026-05-04T06:49:46.455857+00:00",
   "overall": "warn",
   "datasets": {
     "macro": {
       "label": "매크로",
-      "timestamp": "2026-05-04 12:59 KST",
-      "age_hours": 0.02,
+      "timestamp": "2026-05-04 15:49 KST",
+      "age_hours": 0.01,
       "level": "warn",
       "issue_count": 2,
       "critical_issue_count": 0,
@@ -17,27 +17,27 @@
     },
     "stocks": {
       "label": "주식 워치",
-      "timestamp": "2026-05-04 12:59 KST",
-      "age_hours": 0.02,
+      "timestamp": "2026-05-04 15:49 KST",
+      "age_hours": 0.01,
       "level": "ok"
     },
     "snapshot": {
       "label": "스냅샷",
-      "timestamp": "2026-05-04 12:59 KST",
-      "age_hours": 0.02,
+      "timestamp": "2026-05-04 15:49 KST",
+      "age_hours": 0.01,
       "level": "ok"
     },
     "news": {
       "label": "뉴스",
       "timestamp": "2026-05-03T20:34:40.913878+00:00",
-      "age_hours": 7.42,
+      "age_hours": 10.25,
       "level": "warn",
       "macro_count": 8,
       "crypto_count": 8
     },
     "etf": {
       "label": "ETF",
-      "timestamp": "2026-05-04T03:59:51.527009+00:00",
+      "timestamp": "2026-05-04T06:49:39.856983+00:00",
       "age_hours": 0.0,
       "level": "ok",
       "market_date": "01 May 2026",
@@ -46,16 +46,16 @@
     },
     "crypto_market": {
       "label": "크립토 마켓",
-      "timestamp": "2026-05-04T03:59:52.308418+00:00",
+      "timestamp": "2026-05-04T06:49:40.901530+00:00",
       "age_hours": 0.0,
       "level": "ok",
-      "btc_dominance": 58.598443439338574,
-      "stablecoin_market_cap": 319042316576.0759
+      "btc_dominance": 58.52742844725809,
+      "stablecoin_market_cap": 319066525728.94336
     },
     "crypto_universe": {
       "label": "크립토 유니버스",
-      "timestamp": "2026-05-04T12:59+09:00",
-      "age_hours": 0.02,
+      "timestamp": "2026-05-04T15:49+09:00",
+      "age_hours": 0.01,
       "level": "warn",
       "universe": "market_cap_top_200",
       "asset_count": 200,
