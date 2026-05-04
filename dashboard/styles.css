@@ -8333,3 +8333,191 @@ body:not(.home-command-body) .global-data-health {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 }
+
+/* v20260505b master pass: clearer ETF flow lanes and single AI sentiment position */
+.etf-flow-card-v2 {
+  padding: 28px !important;
+  border-radius: 28px !important;
+}
+
+.etf-flow-card-v2 .flow-head {
+  align-items: flex-start !important;
+  margin-bottom: 20px !important;
+}
+
+.etf-flow-card-v2 .flow-title {
+  margin: 0 0 6px !important;
+  color: #344054 !important;
+  font-family: var(--ui-font) !important;
+  font-size: clamp(28px, 2.7vw, 44px) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.055em !important;
+}
+
+.etf-flow-card-v2 .flow-subtitle,
+.etf-flow-card-v2 .flow-card-summary span,
+.etf-flow-card-v2 .flow-scale span {
+  color: #667085 !important;
+  font-family: var(--ui-font) !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+}
+
+.etf-flow-card-v2 .flow-status {
+  padding: 8px 12px !important;
+  border-radius: 999px !important;
+  background: #fff7e6 !important;
+  color: #a16207 !important;
+  font-family: var(--ui-font) !important;
+  font-size: 13px !important;
+  font-weight: 950 !important;
+}
+
+.etf-flow-card-v2 .flow-status.up {
+  background: #eafff6 !important;
+  color: #009b72 !important;
+}
+
+.etf-flow-card-v2 .flow-status.down {
+  background: #fff0f0 !important;
+  color: #dc2626 !important;
+}
+
+.etf-flow-card-v2 .flow-card-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 14px;
+  align-items: end;
+  margin-bottom: 18px;
+}
+
+.etf-flow-card-v2 .flow-card-summary .flow-main {
+  grid-column: 1;
+  margin: 0 !important;
+  font-size: clamp(34px, 3.4vw, 58px) !important;
+  letter-spacing: -0.06em !important;
+}
+
+.etf-flow-card-v2 .flow-card-summary span {
+  grid-column: 1;
+}
+
+.etf-flow-card-v2 .flow-card-summary em {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  justify-self: end;
+  font-family: var(--ui-mono) !important;
+  font-size: 18px !important;
+  font-style: normal !important;
+  font-weight: 950 !important;
+}
+
+.etf-flow-card-v2 .flow-scale {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  margin: 0 0 8px 60px;
+}
+
+.etf-flow-card-v2 .flow-scale span:nth-child(2) {
+  padding-inline: 10px;
+  color: #98a2b3 !important;
+}
+
+.etf-flow-card-v2 .flow-scale span:last-child {
+  text-align: right;
+}
+
+.etf-flow-card-v2 .flow-bars {
+  gap: 10px !important;
+}
+
+.flow-row-v2 {
+  display: grid;
+  grid-template-columns: 52px minmax(180px, 1fr) 92px;
+  gap: 12px;
+  align-items: center;
+  font-family: var(--ui-mono) !important;
+}
+
+.flow-row-v2 .flow-date {
+  color: #344054 !important;
+  font-size: 14px !important;
+  font-weight: 850 !important;
+}
+
+.flow-diverge {
+  position: relative;
+  height: 18px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255, 99, 99, 0.10), #f7f9fc 49.5%, #d0d5dd 49.5%, #d0d5dd 50.5%, #f7f9fc 50.5%, rgba(0, 194, 137, 0.10));
+  overflow: hidden;
+}
+
+.flow-diverge .flow-zero {
+  position: absolute;
+  inset-block: 0;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: #98a2b3;
+  opacity: 0.75;
+  z-index: 2;
+}
+
+.flow-diverge b {
+  position: absolute;
+  top: 50%;
+  height: 10px;
+  width: var(--w);
+  transform: translateY(-50%);
+  border-radius: 999px;
+}
+
+.flow-diverge b.right {
+  left: 50%;
+  background: linear-gradient(90deg, #34d399, #009b72);
+}
+
+.flow-diverge b.left {
+  right: 50%;
+  background: linear-gradient(90deg, #dc2626, #fb7185);
+}
+
+.flow-amount {
+  text-align: right;
+  font-size: 14px !important;
+  font-weight: 950 !important;
+}
+
+.flow-amount.up,
+.etf-flow-card-v2 .flow-card-summary em.up {
+  color: #009b72 !important;
+}
+
+.flow-amount.down,
+.etf-flow-card-v2 .flow-card-summary em.down {
+  color: #dc2626 !important;
+}
+
+.flow-amount.flat,
+.etf-flow-card-v2 .flow-card-summary em.flat {
+  color: #a16207 !important;
+}
+
+.ai-brief-page .ai-summary-hub {
+  align-items: stretch !important;
+}
+
+.ai-brief-page .ai-hub-grid article:first-child {
+  border-color: #b7f7df !important;
+  background: linear-gradient(135deg, #f0fff8, #ffffff) !important;
+}
+
+.ai-brief-page .ai-hub-grid article:first-child strong {
+  color: #a16207 !important;
+}
+
+.ai-brief-page .ai-brief-lead,
+.ai-brief-page #aiSentimentGauge {
+  display: none !important;
+}

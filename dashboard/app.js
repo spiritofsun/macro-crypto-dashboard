@@ -978,8 +978,8 @@ function renderAiBriefPage() {
         <span>${marketRead}</span>
       </article>
       <div class="ai-hub-grid">
+        <article><p>크립토 심리</p><strong>${typeof fearGreed === "number" ? Math.round(fearGreed) : "—"}</strong><span>Fear & Greed</span></article>
         <article><p>핵심 뉴스</p><strong>${topNews ? escapeHtml(localizeNewsTitle(topNews.title, topNews.type)) : "뉴스 수집 대기"}</strong><span>${topNews ? escapeHtml(newsImpactText(topNews.title, topNews.type)) : "다음 업데이트를 기다립니다."}</span></article>
-        <article><p>심리</p><strong>${typeof fearGreed === "number" ? Math.round(fearGreed) : "—"}</strong><span>Fear & Greed</span></article>
         <article><p>BTC 주도권</p><strong>${typeof btcDom === "number" ? `${btcDom.toFixed(2)}%` : "—"}</strong><span>도미넌스 확인</span></article>
         <article><p>프리미엄</p><strong>${formatPct(premium, 2)}</strong><span>Coinbase BTC</span></article>
       </div>
@@ -2191,12 +2191,44 @@ function renderEtfFlows() {
     const maxAbs = Math.max(...history.map((h) => Math.abs(h.flow)), 1);
     const bars = history
       .map((h) => {
-        const width = Math.max(6, (Math.abs(h.flow) / maxAbs) * 100);
-        return `<div class="flow-row"><span>${h.date}</span><div class="flow-track"><div class="flow-fill ${toneClass(h.flow)}" style="width:${width}%"></div></div><span class="${toneClass(h.flow)}">${h.flow >= 0 ? "+" : ""}$${h.flow.toFixed(1)}M</span></div>`;
+        const magnitude = Math.min(100, (Math.abs(h.flow) / maxAbs) * 100);
+        const width = Math.max(Math.abs(h.flow) > 0 ? 4 : 0, magnitude * 0.5);
+        const tone = toneClass(h.flow, 0.01);
+        const signed = h.flow === 0 ? "$0.0M" : `${h.flow > 0 ? "+" : "-"}$${Math.abs(h.flow).toFixed(1)}M`;
+        return `
+          <div class="flow-row-v2 ${tone}">
+            <span class="flow-date">${h.date}</span>
+            <div class="flow-diverge" aria-label="${h.date} ${signed}">
+              <i class="flow-zero"></i>
+              <b class="${h.flow >= 0 ? "right" : "left"}" style="--w:${width.toFixed(1)}%"></b>
+            </div>
+            <span class="flow-amount ${tone}">${signed}</span>
+          </div>
+        `;
       })
       .join("");
 
-    return `<article class="flow-card"><div class="flow-head"><p class="flow-title">${title}</p><p class="flow-status ${toneClass(flow)}">${flow < 0 ? "순유출" : "순유입"}</p></div><p class="flow-main ${toneClass(flow)}">${flow >= 0 ? "+" : ""}$${flow.toFixed(1)}M</p><p class="flow-meta">${date} | Assets: ${assets}</p><div class="flow-bars">${bars}</div></article>`;
+    const total7d = history.reduce((sum, h) => sum + (toNumSafe(h.flow) || 0), 0);
+    const flowTone = toneClass(flow, 0.01);
+    const flowText = flow === 0 ? "$0.0M" : `${flow > 0 ? "+" : "-"}$${Math.abs(flow).toFixed(1)}M`;
+    return `
+      <article class="flow-card etf-flow-card-v2">
+        <div class="flow-head">
+          <div>
+            <p class="flow-title">${title}</p>
+            <span class="flow-subtitle">최근 7거래일 자금 방향</span>
+          </div>
+          <p class="flow-status ${flowTone}">${flow < 0 ? "순유출" : flow > 0 ? "순유입" : "보합"}</p>
+        </div>
+        <div class="flow-card-summary">
+          <p class="flow-main ${flowTone}">${flowText}</p>
+          <span>${date} · Assets ${assets}</span>
+          <em class="${toneClass(total7d, 0.01)}">7D ${total7d >= 0 ? "+" : "-"}$${Math.abs(total7d).toFixed(1)}M</em>
+        </div>
+        <div class="flow-scale"><span>유출</span><span>0</span><span>유입</span></div>
+        <div class="flow-bars">${bars}</div>
+      </article>
+    `;
   };
 
   el.innerHTML = [
