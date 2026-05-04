@@ -2007,17 +2007,9 @@ function renderStockMarketPage() {
 
   const dataHealth = document.getElementById("macroDataHealth");
   if (dataHealth) {
-    if (typeof macroAgeHours === "number" && macroAgeHours >= 24) {
-      const severity = macroAgeHours >= 24 ? "danger" : "warn";
-      const ageText = macroAgeHours >= 48 ? `${Math.round(macroAgeHours / 24)}일` : `${Math.round(macroAgeHours)}시간`;
-      dataHealth.className = `data-health ${severity}`;
-      dataHealth.hidden = false;
-      dataHealth.innerHTML = `<strong>데이터 갱신 지연</strong><span>마지막 매크로 스냅샷은 ${macro.as_of} 기준입니다. 현재 시점 대비 약 ${ageText} 지연되어 보일 수 있습니다.</span>`;
-    } else {
-      dataHealth.hidden = true;
-      dataHealth.className = "data-health";
-      dataHealth.textContent = "";
-    }
+    dataHealth.hidden = true;
+    dataHealth.className = "data-health";
+    dataHealth.textContent = "";
   }
 
   const strip = document.getElementById("macroTopStrip");

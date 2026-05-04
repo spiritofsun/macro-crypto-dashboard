@@ -8165,3 +8165,171 @@ body:not(.home-command-body) .global-data-health {
     justify-self: start;
   }
 }
+
+/* v20260505a clarity pass: move ops lower, center crypto, remove legacy dark panels */
+.home-command-body .global-data-health:not([hidden]) {
+  margin-top: 22px !important;
+  order: 20;
+}
+
+#macroDataHealth,
+.command-main-brief .data-health#macroDataHealth {
+  display: none !important;
+}
+
+.crypto-portal-body .crypto-main-brief {
+  width: min(100%, 1180px) !important;
+  margin-inline: auto !important;
+  justify-self: center !important;
+}
+
+.crypto-portal-body .crypto-article-head {
+  justify-items: center !important;
+  text-align: center !important;
+  margin-inline: auto !important;
+  padding: 12px 12px 18px !important;
+}
+
+.crypto-portal-body .crypto-article-head h1 {
+  max-width: 860px !important;
+  margin-inline: auto !important;
+}
+
+.crypto-portal-body .crypto-article-meta,
+.crypto-portal-body .crypto-tabs {
+  justify-content: center !important;
+  width: 100% !important;
+}
+
+.crypto-portal-body .portal-metric-grid,
+.crypto-portal-body .crypto-focus-cta,
+.crypto-portal-body .crypto-market-section,
+.crypto-portal-body .portal-insight,
+.crypto-portal-body .panel,
+.crypto-portal-body .chain-flow-board,
+.crypto-portal-body .smart-money-board,
+.crypto-portal-body .universe-panel,
+.crypto-portal-body .rsi-panel {
+  width: 100% !important;
+  margin-inline: auto !important;
+}
+
+.crypto-portal-body .portal-metric-grid .page-quick-card,
+.crypto-portal-body .crypto-cta-card,
+.crypto-portal-body .crypto-market-section,
+.crypto-portal-body .portal-insight,
+.crypto-portal-body .chain-flow-board,
+.crypto-portal-body .smart-money-board,
+.crypto-portal-body .universe-panel,
+.crypto-portal-body .rsi-panel,
+.crypto-portal-body .panel {
+  border: 1px solid #dce6f3 !important;
+  background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(248,251,255,0.98)) !important;
+  box-shadow: 0 18px 46px rgba(29, 41, 57, 0.06) !important;
+}
+
+.crypto-portal-body .portal-metric-grid .page-quick-card {
+  min-height: 122px !important;
+  padding: 22px !important;
+}
+
+.crypto-portal-body .portal-metric-grid .page-quick-card + .page-quick-card,
+.crypto-portal-body .crypto-cta-card + .crypto-cta-card {
+  position: relative;
+}
+
+.crypto-portal-body .crypto-focus-cta {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+}
+
+.crypto-portal-body .crypto-cta-card {
+  min-height: 120px !important;
+  border-radius: 24px !important;
+  padding: 20px !important;
+}
+
+.crypto-portal-body .crypto-article-head + .portal-metric-grid {
+  margin-top: 18px !important;
+}
+
+.ai-brief-page,
+.ai-brief-page .panel,
+.ai-brief-page .page-lead-card,
+.ai-brief-page .ai-summary-hub,
+.ai-brief-page .ai-news-panel,
+.ai-brief-page .ai-news-feature,
+.ai-brief-page .ai-news-brief-grid article,
+.ai-brief-page .command-news-card article {
+  background: linear-gradient(135deg, #ffffff, #f8fbff) !important;
+  color: var(--ui-ink) !important;
+  border-color: #dce6f3 !important;
+}
+
+.ai-brief-page .ai-news-feature,
+.ai-brief-page .ai-news-brief-grid article {
+  border: 1px solid #dce6f3 !important;
+  border-radius: 24px !important;
+  box-shadow: 0 16px 36px rgba(29, 41, 57, 0.06) !important;
+}
+
+.ai-brief-page h1,
+.ai-brief-page h2,
+.ai-brief-page h3,
+.ai-brief-page strong,
+.ai-brief-page b,
+.ai-brief-page .ai-news-feature strong,
+.ai-brief-page .ai-news-brief-grid strong {
+  color: #101828 !important;
+}
+
+.ai-brief-page p,
+.ai-brief-page li,
+.ai-brief-page span,
+.ai-brief-page small,
+.ai-brief-page .macro-lead-body,
+.ai-brief-page .ai-catalyst-list small {
+  color: #475467 !important;
+}
+
+.ai-brief-page .ai-gauge-card {
+  border: 1px solid #dce6f3 !important;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(46, 204, 113, 0.11), transparent 42%),
+    linear-gradient(180deg, #ffffff, #f8fbff) !important;
+  box-shadow: 0 18px 46px rgba(29, 41, 57, 0.08) !important;
+}
+
+.ai-brief-page .ai-gauge-value,
+.ai-brief-page .ai-gauge-label,
+.ai-brief-page .ai-gauge-caption,
+.ai-brief-page .ai-gauge-scale span {
+  color: #101828 !important;
+}
+
+.command-news-card article,
+.right-news-card #cryptoRightNews article {
+  background: linear-gradient(135deg, #ffffff, #f4f7ff) !important;
+  color: var(--ui-ink) !important;
+  border: 1px solid #dce6f3 !important;
+}
+
+.command-news-card b,
+.command-news-card p,
+.command-news-card small,
+.right-news-card #cryptoRightNews b,
+.right-news-card #cryptoRightNews p,
+.right-news-card #cryptoRightNews small {
+  color: #344054 !important;
+}
+
+@media (max-width: 1280px) {
+  .crypto-portal-body .crypto-main-brief {
+    width: 100% !important;
+  }
+
+  .crypto-portal-body .crypto-focus-cta {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
