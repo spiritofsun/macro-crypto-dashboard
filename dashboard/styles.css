@@ -7563,7 +7563,7 @@ body:not(.crypto-portal-body) .mono,
 /* v20260503h unified desktop shell and detail-page data status */
 .command-dashboard-shell,
 .crypto-portal-shell {
-  grid-template-columns: 260px minmax(760px, 1fr) 300px !important;
+  grid-template-columns: minmax(190px, 240px) minmax(0, 1fr) minmax(220px, 280px) !important;
   gap: 26px !important;
   width: min(1760px, calc(100% - 56px)) !important;
   align-items: start !important;
@@ -7959,7 +7959,209 @@ body:not(.home-command-body) .global-data-health {
     grid-template-columns: 1fr !important;
   }
 
+  .command-main-brief,
+  .crypto-main-brief {
+    order: 1;
+  }
+
+  .command-left-rail,
+  .crypto-side-rail {
+    order: 2;
+    display: none !important;
+  }
+
+  .command-right-rail,
+  .crypto-right-rail {
+    order: 3;
+  }
+
   .data-ops-mini dl {
     grid-template-columns: 1fr !important;
+  }
+}
+
+/* v20260503k shell cleanup: home-only data ops, compact rail, unified status badge */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden !important;
+}
+
+.command-left-rail,
+.crypto-side-rail {
+  gap: 16px !important;
+}
+
+.command-left-rail .command-nav-card,
+.crypto-side-rail .command-nav-card {
+  border-left: 0 !important;
+}
+
+.command-nav-card h3,
+.command-tag-card h3,
+.portal-card-head h3 {
+  font-size: 17px !important;
+  letter-spacing: -0.04em !important;
+}
+
+.command-tag-card {
+  padding-top: 18px !important;
+}
+
+.command-main-brief .hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  column-gap: 14px;
+}
+
+.command-main-brief .hero .kicker,
+.command-main-brief .hero h1,
+.command-main-brief .hero .asof {
+  grid-column: 1;
+}
+
+.header-status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  grid-column: 2;
+  grid-row: 2 / span 2;
+  align-self: center;
+  min-height: 34px;
+  padding: 8px 12px;
+  border: 1px solid #dfe7f2;
+  border-radius: 999px;
+  background: #eefdf7;
+  color: #009b72;
+  font-family: var(--ui-font) !important;
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.header-status-badge.warn,
+.header-status-badge.flat {
+  border-color: #fdecc8;
+  background: #fff7e6;
+  color: #a16207;
+}
+
+.header-status-badge.danger,
+.header-status-badge.down {
+  border-color: #ffd7d7;
+  background: #fff0f0;
+  color: #dc2626;
+}
+
+.crypto-portal-body .crypto-main-brief {
+  align-content: start !important;
+}
+
+.crypto-portal-body .crypto-article-head {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  align-items: end !important;
+  gap: 12px 14px !important;
+  width: 100% !important;
+  padding: 8px 6px 10px !important;
+  margin: 0 !important;
+}
+
+.crypto-portal-body .crypto-article-head > p,
+.crypto-portal-body .crypto-article-head h1,
+.crypto-portal-body .crypto-article-meta,
+.crypto-portal-body .crypto-tabs {
+  grid-column: 1 / -1;
+}
+
+.crypto-portal-body .crypto-article-head > p {
+  color: #7c83ff !important;
+  font-size: 13px !important;
+  letter-spacing: 0.13em !important;
+}
+
+.crypto-portal-body .crypto-article-head h1 {
+  max-width: 760px !important;
+  font-size: clamp(36px, 3.2vw, 50px) !important;
+  line-height: 1.08 !important;
+}
+
+.crypto-portal-body .crypto-article-meta {
+  gap: 10px !important;
+}
+
+.crypto-portal-body .crypto-article-meta .header-status-badge {
+  position: static;
+  grid-column: auto;
+  grid-row: auto;
+}
+
+.crypto-portal-body .crypto-tabs {
+  gap: 10px !important;
+  padding-top: 6px;
+}
+
+.crypto-portal-body .crypto-tabs a {
+  padding: 10px 16px !important;
+  font-size: 14px !important;
+  font-weight: 900 !important;
+}
+
+.crypto-portal-body .crypto-focus-cta {
+  margin-top: 2px;
+}
+
+.home-command-body .global-data-health {
+  margin: 0 !important;
+}
+
+body:not(.home-command-body) .global-data-health {
+  display: none !important;
+}
+
+@media (max-width: 1280px) {
+  .command-dashboard-shell,
+  .crypto-portal-shell {
+    grid-template-columns: 1fr !important;
+    width: min(100% - 32px, 980px) !important;
+    margin-top: 24px !important;
+  }
+
+  .command-main-brief,
+  .crypto-main-brief {
+    order: 1;
+  }
+
+  .command-left-rail,
+  .crypto-side-rail {
+    order: 2;
+  }
+
+  .command-right-rail,
+  .crypto-right-rail {
+    order: 3;
+  }
+
+  .command-left-rail,
+  .crypto-side-rail,
+  .command-right-rail,
+  .crypto-right-rail {
+    position: static !important;
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 980px) {
+  .command-main-brief .hero,
+  .crypto-portal-body .crypto-article-head {
+    grid-template-columns: 1fr !important;
+  }
+
+  .header-status-badge {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+    justify-self: start;
   }
 }

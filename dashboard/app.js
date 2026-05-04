@@ -363,6 +363,17 @@ function formatKstDateTime(input, fallback = "수집 대기") {
   return `${text} KST`;
 }
 
+function formatKstShortTime(input, fallback = "대기") {
+  const parsed = parseDashboardDate(input);
+  if (!parsed) return fallback;
+  return new Intl.DateTimeFormat("ko-KR", {
+    timeZone: "Asia/Seoul",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).format(parsed);
+}
+
 function statusText(level) {
   if (level === "danger") return "지연";
   if (level === "warn") return "주의";
@@ -442,9 +453,10 @@ function setAsOf() {
   const etfAsOf = etfAsOfRaw.startsWith("1970-01-01") || !etfAsOfRaw ? "수집 대기" : formatKstDateTime(etfAsOfRaw);
   const liveTs = formatKstDateTime(new Date().toISOString(), "n/a");
   const text = `SNAPSHOT ${snapshotAsOf} | NEWS ${newsAsOf} | ETF ${etfAsOf} | LIVE ${liveTs}`;
+  const compactText = `최근 ${snapshotAsOf} · 뉴스 ${formatKstShortTime(newsAsOfRaw)} · ETF ${formatKstShortTime(etfAsOfRaw)} · LIVE ${formatKstShortTime(new Date().toISOString())}`;
 
   const asOf = document.getElementById("asOfText");
-  if (asOf) asOf.textContent = text;
+  if (asOf) asOf.textContent = compactText;
 
   const homeAsOf = document.getElementById("homeAsOf");
   if (homeAsOf) homeAsOf.textContent = text;
@@ -453,6 +465,33 @@ function setAsOf() {
   if (top) {
     top.innerHTML = `Snapshot ${snapshotAsOf} · News ${newsAsOf} · ETF ${etfAsOf} · <span class="live-dot">●</span> Live ${liveTs}`;
   }
+}
+
+function getGlobalDataHealthSummary() {
+  const datasets = state.status?.datasets || {};
+  const entries = ["macro", "stocks", "snapshot", "news", "etf", "crypto_market", "crypto_universe"].map((key) => datasets[key]).filter(Boolean);
+  const warnCount = entries.filter((entry) => entry.level === "warn").length;
+  const dangerCount = entries.filter((entry) => entry.level === "danger" || entry.level === "missing").length;
+  const maxAge = Math.max(0, ...entries.map((entry) => (typeof entry.age_hours === "number" ? entry.age_hours : 0)));
+  const level = dangerCount ? "danger" : warnCount ? "warn" : "ok";
+  const text = dangerCount ? `${dangerCount} 지연` : warnCount ? `${warnCount} 주의` : "정상";
+  return { level, text, maxAge };
+}
+
+function renderHeaderStatusBadge() {
+  const target = document.getElementById("homeAsOf")
+    || document.getElementById("asOfText")
+    || document.querySelector(".hero .asof")
+    || document.querySelector(".crypto-article-meta");
+  if (!target) return;
+
+  const existing = target.parentElement?.querySelector(":scope > .header-status-badge");
+  const badge = existing || document.createElement("span");
+  const summary = getGlobalDataHealthSummary();
+  badge.className = `header-status-badge ${statusLabel(summary.level)}`;
+  badge.textContent = `${summary.text} · 최대 ${formatAgeHours(summary.maxAge)}`;
+  badge.title = "전체 데이터 상태 요약";
+  if (!existing) target.insertAdjacentElement("afterend", badge);
 }
 
 function renderGlobalDataHealth() {
@@ -484,7 +523,6 @@ function renderGlobalDataHealth() {
     .filter(Boolean)
     .sort((a, b) => b.getTime() - a.getTime())[0];
   const lastDataUpdate = lastDataTs ? formatKstDateTime(lastDataTs.toISOString(), "데이터 시각 대기") : "데이터 시각 대기";
-  const issueText = dangerCount ? `${dangerCount}개 지연/누락` : warnCount ? `${warnCount}개 주의` : "정상 갱신";
   const isHome = document.body.classList.contains("home-command-body");
 
   const entryDetail = (entry) => {
@@ -499,26 +537,13 @@ function renderGlobalDataHealth() {
     return details.length ? details.join(" · ") : entry.timestamp || "timestamp n/a";
   };
 
-  host.hidden = false;
   if (!isHome) {
-    host.innerHTML = `
-      <article class="data-ops-mini ${overallTone} ${overallClass}">
-        <div>
-          <span class="data-ops-kicker">DATA OPS</span>
-          <strong>데이터 갱신 상태</strong>
-          <p>${summary}</p>
-        </div>
-        <dl>
-          <div><dt>최근 데이터</dt><dd>${lastDataUpdate}</dd></div>
-          <div><dt>최대 지연</dt><dd>${formatAgeHours(maxAge)}</dd></div>
-          <div><dt>상태</dt><dd>${issueText}</dd></div>
-        </dl>
-        <span class="data-ops-status-pill ${overallClass}">${statusText(state.status?.overall)}</span>
-      </article>
-    `;
+    host.hidden = true;
+    host.innerHTML = "";
     return;
   }
 
+  host.hidden = false;
   host.innerHTML = `
     <article class="data-ops-panel data-ops-compact ${overallTone} ${overallClass}">
       <header class="data-ops-topline">
@@ -2192,6 +2217,7 @@ function renderAll() {
   setAsOf();
   renderCommandShellClock();
   renderGlobalDataHealth();
+  renderHeaderStatusBadge();
   renderCommandRightTicker();
   renderHomeHub();
   renderNewsPage();

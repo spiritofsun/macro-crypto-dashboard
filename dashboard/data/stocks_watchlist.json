@@ -1,113 +1,113 @@
 {
-  "as_of": "2026-05-04 15:49 KST",
+  "as_of": "2026-05-05 07:59 KST",
   "rows": [
     {
       "group": "Big Tech",
       "name": "Apple",
       "ticker": "AAPL",
-      "price": 280.14,
-      "change": 0.46,
+      "price": 276.87,
+      "change": -0.99,
       "source": "stooq",
-      "source_as_of": "20260501 220021"
+      "source_as_of": "20260504 220021"
     },
     {
       "group": "Big Tech",
       "name": "Microsoft",
       "ticker": "MSFT",
-      "price": 414.44,
-      "change": 0.4,
+      "price": 413.69,
+      "change": 0.52,
       "source": "stooq",
-      "source_as_of": "20260501 220022"
+      "source_as_of": "20260504 220019"
     },
     {
       "group": "Big Tech",
       "name": "NVIDIA",
       "ticker": "NVDA",
-      "price": 198.45,
-      "change": -1.41,
+      "price": 198.54,
+      "change": -0.48,
       "source": "stooq",
-      "source_as_of": "20260501 220019"
+      "source_as_of": "20260504 220021"
     },
     {
       "group": "Big Tech",
       "name": "Amazon",
       "ticker": "AMZN",
-      "price": 268.26,
-      "change": 1.01,
+      "price": 272.07,
+      "change": 1.22,
       "source": "stooq",
-      "source_as_of": "20260501 220020"
+      "source_as_of": "20260504 220021"
     },
     {
       "group": "Big Tech",
       "name": "Alphabet",
       "ticker": "GOOGL",
-      "price": 385.69,
-      "change": 1.06,
+      "price": 383.25,
+      "change": -0.62,
       "source": "stooq",
-      "source_as_of": "20260501 220019"
+      "source_as_of": "20260504 220019"
     },
     {
       "group": "Big Tech",
       "name": "Meta",
       "ticker": "META",
-      "price": 608.75,
-      "change": -0.97,
+      "price": 610.46,
+      "change": 0.42,
       "source": "stooq",
-      "source_as_of": "20260501 220019"
+      "source_as_of": "20260504 220021"
     },
     {
       "group": "Big Tech",
       "name": "Tesla",
       "ticker": "TSLA",
-      "price": 390.82,
-      "change": 2.18,
+      "price": 392.55,
+      "change": 0.59,
       "source": "stooq",
-      "source_as_of": "20260501 220019"
+      "source_as_of": "20260504 220021"
     },
     {
       "group": "Crypto Related",
       "name": "Robinhood",
       "ticker": "HOOD",
-      "price": 73.66,
-      "change": -0.16,
+      "price": 76.57,
+      "change": 2.5,
       "source": "stooq",
-      "source_as_of": "20260501 220019"
+      "source_as_of": "20260504 220018"
     },
     {
       "group": "Crypto Related",
       "name": "Coinbase",
       "ticker": "COIN",
-      "price": 191.25,
-      "change": -0.33,
+      "price": 202.9,
+      "change": 1.75,
       "source": "stooq",
-      "source_as_of": "20260501 220019"
+      "source_as_of": "20260504 220018"
     },
     {
       "group": "Crypto Related",
       "name": "MicroStrategy/Strategy",
       "ticker": "MSTR",
-      "price": 177.17,
-      "change": 3.73,
+      "price": 183.83,
+      "change": 1.62,
       "source": "stooq",
-      "source_as_of": "20260501 220019"
+      "source_as_of": "20260504 220018"
     },
     {
       "group": "Crypto Related",
       "name": "Marathon Digital",
       "ticker": "MARA",
-      "price": 11.46,
-      "change": -6.68,
+      "price": 11.83,
+      "change": 3.5,
       "source": "stooq",
-      "source_as_of": "20260501 220019"
+      "source_as_of": "20260504 220019"
     },
     {
       "group": "Crypto Related",
       "name": "Riot Platforms",
       "ticker": "RIOT",
-      "price": 18.5,
-      "change": -0.05,
+      "price": 18.68,
+      "change": 0.32,
       "source": "stooq",
-      "source_as_of": "20260501 220019"
+      "source_as_of": "20260504 220019"
     },
     {
       "group": "Crypto Related",
@@ -122,19 +122,19 @@
       "group": "Crypto Related",
       "name": "PayPal",
       "ticker": "PYPL",
-      "price": 50.44,
-      "change": -0.26,
+      "price": 50.41,
+      "change": -0.17,
       "source": "stooq",
-      "source_as_of": "20260501 220018"
+      "source_as_of": "20260504 220019"
     },
     {
       "group": "Crypto Related",
       "name": "CME Group",
       "ticker": "CME",
-      "price": 289.54,
-      "change": 0.07,
+      "price": 290.29,
+      "change": 0.91,
       "source": "stooq",
-      "source_as_of": "20260501 220019"
+      "source_as_of": "20260504 220020"
     }
   ]
 }

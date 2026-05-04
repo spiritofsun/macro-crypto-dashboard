@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-05-04T06:49:46.455857+00:00",
+  "updated_at": "2026-05-04T23:00:50.151390+00:00",
   "overall": "warn",
   "datasets": {
     "macro": {
       "label": "매크로",
-      "timestamp": "2026-05-04 15:49 KST",
-      "age_hours": 0.01,
+      "timestamp": "2026-05-05 07:59 KST",
+      "age_hours": 0.03,
       "level": "warn",
       "issue_count": 2,
       "critical_issue_count": 0,
@@ -17,51 +17,51 @@
     },
     "stocks": {
       "label": "주식 워치",
-      "timestamp": "2026-05-04 15:49 KST",
-      "age_hours": 0.01,
+      "timestamp": "2026-05-05 07:59 KST",
+      "age_hours": 0.03,
       "level": "ok"
     },
     "snapshot": {
       "label": "스냅샷",
-      "timestamp": "2026-05-04 15:49 KST",
-      "age_hours": 0.01,
+      "timestamp": "2026-05-05 07:59 KST",
+      "age_hours": 0.03,
       "level": "ok"
     },
     "news": {
       "label": "뉴스",
-      "timestamp": "2026-05-03T20:34:40.913878+00:00",
-      "age_hours": 10.25,
-      "level": "warn",
+      "timestamp": "2026-05-04T22:59:34.609315+00:00",
+      "age_hours": 0.02,
+      "level": "ok",
       "macro_count": 8,
       "crypto_count": 8
     },
     "etf": {
       "label": "ETF",
-      "timestamp": "2026-05-04T06:49:39.856983+00:00",
-      "age_hours": 0.0,
+      "timestamp": "2026-05-04T22:59:35.545811+00:00",
+      "age_hours": 0.02,
       "level": "ok",
-      "market_date": "01 May 2026",
+      "market_date": "04 May 2026",
       "freshness": "latest",
       "has_history": true
     },
     "crypto_market": {
       "label": "크립토 마켓",
-      "timestamp": "2026-05-04T06:49:40.901530+00:00",
-      "age_hours": 0.0,
+      "timestamp": "2026-05-04T22:59:34.442769+00:00",
+      "age_hours": 0.02,
       "level": "ok",
-      "btc_dominance": 58.52742844725809,
-      "stablecoin_market_cap": 319066525728.94336
+      "btc_dominance": 58.70044550808292,
+      "stablecoin_market_cap": 320908550196.12415
     },
     "crypto_universe": {
       "label": "크립토 유니버스",
-      "timestamp": "2026-05-04T15:49+09:00",
+      "timestamp": "2026-05-05T08:00+09:00",
       "age_hours": 0.01,
-      "level": "warn",
+      "level": "ok",
       "universe": "market_cap_top_200",
       "asset_count": 200,
       "target_asset_count": 200,
       "source": "coingecko_top200",
-      "health": "warn"
+      "health": "ok"
     }
   }
 }
