@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-05-05 09:01 KST",
+  "as_of": "2026-05-05 12:57 KST",
   "rates": {
     "us10y": {
       "value": 4.39,
@@ -32,18 +32,18 @@
   },
   "fx": {
     "dxy": {
-      "value": 98.34,
-      "delta": 0.4494382022471886,
-      "display": "98.34",
+      "value": 98.262,
+      "delta": 0.26734693877551063,
+      "display": "98.26",
       "source": "stooq",
-      "source_as_of": "20260504 225958"
+      "source_as_of": "20260504 230000"
     },
     "usdkrw": {
-      "value": 1473.266122,
+      "value": 1473.854485,
       "delta": 0.0,
-      "display": "1,473",
+      "display": "1,474",
       "source": "live",
-      "source_as_of": "2026-05-05 09:01 KST"
+      "source_as_of": "2026-05-05 12:57 KST"
     }
   },
   "indices": {
@@ -99,32 +99,32 @@
   },
   "commodities": {
     "gold": {
-      "value": 4527.51,
-      "delta": -0.12309484259081392,
-      "display": "$4,528/oz",
+      "value": 4544.2,
+      "delta": 0.24508668479998574,
+      "display": "$4,544/oz",
       "source": "stooq",
-      "source_as_of": "20260505 020106"
+      "source_as_of": "20260505 055705"
     },
     "silver": {
-      "value": 73.11,
-      "delta": -0.16114054733162425,
-      "display": "$73.11/oz",
+      "value": 73.15,
+      "delta": -0.10651663298192196,
+      "display": "$73.15/oz",
       "source": "stooq",
-      "source_as_of": "20260505 020106"
+      "source_as_of": "20260505 055705"
     },
     "wti": {
-      "value": 104.88,
-      "delta": -0.3988603988604005,
-      "display": "$104.88",
+      "value": 104.41,
+      "delta": -0.8452041785375125,
+      "display": "$104.41",
       "source": "stooq",
-      "source_as_of": "20260505 020108"
+      "source_as_of": "20260505 055703"
     },
     "copper": {
-      "value": 5.878500000000001,
-      "delta": 0.2643697765649102,
-      "display": "$5.88/lb",
+      "value": 5.888,
+      "delta": 0.4264028654272557,
+      "display": "$5.89/lb",
       "source": "stooq",
-      "source_as_of": "20260505 020108"
+      "source_as_of": "20260505 055700"
     }
   },
   "liquidity": {
