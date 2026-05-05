@@ -8521,3 +8521,179 @@ body:not(.home-command-body) .global-data-health {
 .ai-brief-page #aiSentimentGauge {
   display: none !important;
 }
+
+/* v20260505c master system: shared cards, ETF note, AI scenario hub */
+:root {
+  --master-card-bg: linear-gradient(135deg, #ffffff, #f8fbff);
+  --master-card-line: #dce6f3;
+  --master-text: #101828;
+  --master-muted: #667085;
+  --master-soft-shadow: 0 18px 44px rgba(29, 41, 57, 0.07);
+}
+
+.command-widget,
+.portal-card,
+.command-main-brief .panel,
+.page-lead-card,
+.page-quick-card,
+.metric-card,
+.market-metric-card,
+.flow-card,
+.ai-scenario-card,
+.insight-note {
+  border-color: var(--master-card-line) !important;
+  background: var(--master-card-bg) !important;
+  color: var(--master-text) !important;
+  box-shadow: var(--master-soft-shadow) !important;
+}
+
+.command-main-brief h1,
+.command-main-brief h2,
+.command-main-brief h3,
+.command-main-brief strong,
+.command-main-brief b {
+  color: var(--master-text) !important;
+}
+
+.command-main-brief p,
+.command-main-brief span,
+.command-main-brief small,
+.command-main-brief .subhead,
+.command-main-brief .asof {
+  color: var(--master-muted) !important;
+}
+
+.insight-note {
+  display: grid;
+  gap: 8px;
+  padding: 18px 20px;
+  border: 1px solid var(--master-card-line);
+  border-radius: 22px;
+}
+
+.insight-note strong {
+  font-size: 16px;
+  font-weight: 950;
+}
+
+.insight-note p {
+  margin: 0;
+  max-width: 92ch;
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1.65;
+}
+
+.insight-note b {
+  font-family: var(--ui-mono);
+}
+
+.etf-flow-note {
+  border-color: #fdecc8 !important;
+  background: linear-gradient(135deg, #fffaf0, #ffffff) !important;
+}
+
+.ai-brief-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
+  gap: 18px;
+}
+
+.ai-scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.ai-scenario-card {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-height: 190px;
+  padding: 20px;
+  border: 1px solid var(--master-card-line);
+  border-radius: 24px;
+}
+
+.ai-scenario-card span {
+  width: fit-content;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #eef4ff;
+  color: #3538cd !important;
+  font-size: 12px;
+  font-weight: 950;
+}
+
+.ai-scenario-card strong {
+  font-size: 22px;
+  font-weight: 950;
+  letter-spacing: -0.05em;
+}
+
+.ai-scenario-card p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1.62;
+}
+
+.ai-scenario-card.up span {
+  background: #eafff6;
+  color: #009b72 !important;
+}
+
+.ai-scenario-card.down span {
+  background: #fff0f0;
+  color: #dc2626 !important;
+}
+
+.ai-scenario-card.flat span {
+  background: #fff7e6;
+  color: #a16207 !important;
+}
+
+.ai-action-checklist {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: ai-check;
+}
+
+.ai-action-checklist li {
+  counter-increment: ai-check;
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding: 14px;
+  border: 1px solid #e4eaf4;
+  border-radius: 18px;
+  background: #ffffff;
+  color: #344054 !important;
+  font-size: 14px;
+  font-weight: 850;
+  line-height: 1.55;
+}
+
+.ai-action-checklist li::before {
+  content: counter(ai-check);
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  background: #111827;
+  color: #ffffff;
+  font-family: var(--ui-mono);
+  font-weight: 950;
+}
+
+@media (max-width: 1280px) {
+  .ai-brief-grid,
+  .ai-scenario-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

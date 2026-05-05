@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260505b" />
+    <link rel="stylesheet" href="./styles.css?v=20260505c" />
   </head>
   <body class="command-portal-body">
     <header class="command-topbar">
@@ -75,6 +75,17 @@
             <li>뉴스 데이터 로딩 중입니다.</li>
           </ul>
         </section>
+
+        <section class="ai-brief-grid">
+          <article class="panel ai-scenario-panel">
+            <div class="panel-head"><h2>시장 시나리오</h2><p class="subhead">뉴스 · 심리 · ETF 수급 연결</p></div>
+            <div class="ai-scenario-grid" id="aiScenarioGrid"></div>
+          </article>
+          <article class="panel ai-checklist-panel">
+            <div class="panel-head"><h2>오늘 체크리스트</h2><p class="subhead">먼저 확인할 순서</p></div>
+            <ol class="ai-action-checklist" id="aiActionChecklist"></ol>
+          </article>
+        </section>
       </main>
 
 
@@ -100,7 +111,7 @@
       </aside>
     </div>
 
-    <script src="./data/dashboard-data.js?v=20260505b"></script>
-    <script src="./app.js?v=20260505b"></script>
+    <script src="./data/dashboard-data.js?v=20260505c"></script>
+    <script src="./app.js?v=20260505c"></script>
   </body>
 </html>

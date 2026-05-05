@@ -881,11 +881,12 @@ function renderNewsOverview() {
 
 function renderAiBriefPage() {
   const statusHost = document.getElementById("aiBriefStatus");
-  const sentimentHost = document.getElementById("aiSentimentGauge");
   const newsBriefHost = document.getElementById("aiNewsBriefGrid");
   const catalystHost = document.getElementById("aiCatalystList");
   const hubHost = document.getElementById("aiSummaryHub");
-  if (!statusHost && !sentimentHost && !newsBriefHost && !catalystHost && !hubHost) return;
+  const scenarioHost = document.getElementById("aiScenarioGrid");
+  const checklistHost = document.getElementById("aiActionChecklist");
+  if (!statusHost && !newsBriefHost && !catalystHost && !hubHost && !scenarioHost && !checklistHost) return;
 
   if (statusHost) {
     const datasets = state.status?.datasets || {};
@@ -927,30 +928,6 @@ function renderAiBriefPage() {
         `,
       )
       .join("");
-  }
-
-  if (sentimentHost) {
-    const value = getFearGreedValue();
-    const meta = sentimentMeta(value);
-    const displayValue = typeof value === "number" ? Math.round(value) : "—";
-    const needle = Math.max(0, Math.min(100, meta.position));
-    sentimentHost.innerHTML = `
-      <div class="ai-gauge-card">
-        <div class="ai-gauge-arc" style="--score:${needle}">
-          <span class="ai-gauge-dot"></span>
-          <div class="ai-gauge-center">
-            <strong>${displayValue}</strong>
-            <span class="${meta.tone}">${meta.label}</span>
-          </div>
-        </div>
-        <p>${meta.summary}</p>
-        <div class="ai-gauge-scale">
-          <span>공포</span>
-          <span>중립</span>
-          <span>탐욕</span>
-        </div>
-      </div>
-    `;
   }
 
   const macro = Array.isArray(state.news?.macro) ? state.news.macro.map((n) => ({ ...n, type: "매크로" })) : [];
@@ -1024,6 +1001,49 @@ function renderAiBriefPage() {
             )
             .join("")
         : "<li>뉴스 데이터 수집 대기 중입니다.</li>";
+  }
+
+  if (scenarioHost) {
+    const scenarios = [
+      {
+        label: "기본",
+        title: typeof fearGreed === "number" && fearGreed < 45 ? "방어적 중립" : "선별 위험선호",
+        body: marketRead,
+        tone: hubTone,
+      },
+      {
+        label: "상방 확인",
+        title: "ETF 유입 + BTC.D 안정",
+        body: "현물 ETF 순유입이 이어지고 BTC 도미넌스가 급등하지 않으면 알트 확산 가능성을 확인합니다.",
+        tone: "up",
+      },
+      {
+        label: "하방 경계",
+        title: "뉴스 충격 + 프리미엄 약화",
+        body: "매크로 악재가 반복되고 Coinbase 프리미엄이 음수로 확대되면 추격보다 방어가 우선입니다.",
+        tone: "down",
+      },
+    ];
+    scenarioHost.innerHTML = scenarios
+      .map((item) => `
+        <article class="ai-scenario-card ${item.tone}">
+          <span>${item.label}</span>
+          <strong>${item.title}</strong>
+          <p>${item.body}</p>
+        </article>
+      `)
+      .join("");
+  }
+
+  if (checklistHost) {
+    const checklist = [
+      `크립토 심리 ${typeof fearGreed === "number" ? Math.round(fearGreed) : "—"}가 과매도/과열인지 먼저 확인`,
+      `BTC 도미넌스 ${typeof btcDom === "number" ? `${btcDom.toFixed(2)}%` : "—"} 변화가 알트 확산을 막는지 확인`,
+      `Coinbase 프리미엄 ${formatPct(premium, 2)}로 미국 현물 매수 압력 확인`,
+      "ETF Flow 페이지에서 BTC/ETH 7D 합산 흐름과 당일 보합 여부 확인",
+      "뉴스 목록에서 같은 이슈가 여러 소스에서 반복되는지 확인",
+    ];
+    checklistHost.innerHTML = checklist.map((item) => `<li>${item}</li>`).join("");
   }
 }
 
@@ -2117,7 +2137,8 @@ function renderStockMarketPage() {
 function renderEtfOverview() {
   const lead = document.getElementById("etfLeadCard");
   const quick = document.getElementById("etfQuickStrip");
-  if (!lead && !quick) return;
+  const note = document.getElementById("etfFlowNote");
+  if (!lead && !quick && !note) return;
 
   const btc = typeof state.etf?.btc_us_spot_etf_net_inflow_usd_m === "number" ? state.etf.btc_us_spot_etf_net_inflow_usd_m : -410.4;
   const eth = typeof state.etf?.eth_us_spot_etf_net_inflow_usd_m === "number" ? state.etf.eth_us_spot_etf_net_inflow_usd_m : -113.1;
@@ -2145,6 +2166,13 @@ function renderEtfOverview() {
       { label: "상태", value: state.etf?.freshness === "latest" ? "최신" : "보강값", meta: state.etf?.source || "source" },
     ];
     quick.innerHTML = items.map((item) => `<article class="page-quick-card"><p>${item.label}</p><strong>${item.value}</strong><span>${item.meta}</span></article>`).join("");
+  }
+
+  if (note) {
+    note.innerHTML = `
+      <strong>ETF Flow 읽는 법</strong>
+      <p>중앙선 기준 왼쪽은 유출, 오른쪽은 유입입니다. 당일 값이 <b>$0.0M</b>이면 휴장·미보고·집계 대기일 수 있으므로 7D 합계와 전일 흐름을 같이 봅니다.</p>
+    `;
   }
 }
 
