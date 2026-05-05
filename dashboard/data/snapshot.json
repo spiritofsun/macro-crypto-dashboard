@@ -1,19 +1,19 @@
 {
-  "asOf": "2026-05-06 01:47 KST",
+  "asOf": "2026-05-06 03:17 KST",
   "liquidity_checklist": [
-    "S&P500 +0.21% / NASDAQ +0.17%",
+    "S&P500 +0.34% / NASDAQ +0.35%",
     "US10Y 4.39 (-0.01%) / US2Y 3.88 (+0.00%)"
   ],
   "indices": [
     {
       "label": "S&P 500 🇺🇸",
-      "value": "7,259",
-      "delta": 0.2056903049462382
+      "value": "7,269",
+      "delta": 0.34097654578335884
     },
     {
       "label": "NASDAQ 🇺🇸",
-      "value": "25,303",
-      "delta": 0.17383985354853362
+      "value": "25,348",
+      "delta": 0.35193563610104817
     },
     {
       "label": "VIX 🇺🇸",
@@ -34,45 +34,45 @@
   "crypto_equities": [
     {
       "label": "COIN",
-      "value": "195.20",
-      "delta": -6.55
+      "value": "195.46",
+      "delta": -6.42
     },
     {
       "label": "MSTR",
-      "value": "185.80",
-      "delta": -1.98
+      "value": "184.23",
+      "delta": -2.81
     },
     {
       "label": "MARA",
-      "value": "11.95",
-      "delta": -0.75
+      "value": "11.82",
+      "delta": -1.79
     },
     {
       "label": "RIOT",
-      "value": "19.61",
-      "delta": 2.14
+      "value": "19.48",
+      "delta": 1.48
     },
     {
       "label": "HOOD",
-      "value": "76.97",
-      "delta": -0.83
+      "value": "77.28",
+      "delta": -0.43
     }
   ],
   "commodities": [
     {
       "label": "Gold 🥇",
-      "value": "$4,568/oz",
-      "delta": 0.7610702633303111
+      "value": "$4,574/oz",
+      "delta": 0.8971805104244581
     },
     {
       "label": "Silver 🥈",
-      "value": "$73.59/oz",
-      "delta": 0.48751843557109054
+      "value": "$73.63/oz",
+      "delta": 0.5489703392145057
     },
     {
       "label": "Copper 🟤",
       "value": "$5.99/lb",
-      "delta": 2.2172949002217295
+      "delta": 2.188299505372683
     }
   ]
 }
