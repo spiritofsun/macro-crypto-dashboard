@@ -1,10 +1,28 @@
 {
-  "updated_at": "2026-05-04T22:59:34.609315+00:00",
+  "updated_at": "2026-05-05T02:07:14.141652+00:00",
   "macro": [
+    {
+      "title": "Weekly market commentary - blackrock.com",
+      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxQLWJDTjBBalYwVHVpc0VxV1BwRE1xeUt1RWlLQ1VJdnJQRXNnb3p6MnFNbjRBV0s0TnlldW4wSVIycFRQeVNISWJ3VV9wMWdjX1ZndE1Tc24tNzc0anNYWjl0SVBsRDhSa0dVTWlyVVYxX0w5b2JhTFB0Tm9Vb2FwYVZubTU1SVJlcy0zMEpXOEM4ZlhiSU1QazdVQVlldw?oc=5",
+      "pubDate": "Mon, 04 May 2026 17:46:47 GMT",
+      "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
+    },
     {
       "title": "S&P 500 falls from record high on Middle East worries - Reuters",
       "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQMFZzU0o4cVloeVB2Q3hOb0wzeHhFMDlGMkxsT3FFZDhLdjJnei1qcFp1NDFFaXhyZzRtTTRoVFBWbzZHSUo0aXZIQkV3b2pfMUloTUliaWg3RXBlSTVlN3daSHhQNEdqWDNXb1Uwa2prVXMtdFVOZ0EzMk5sLWlzSTFEa0JoNGt6LXJiRWRmUVRYbVVhTzNhZ3pNbnMwd0E?oc=5",
-      "pubDate": "Mon, 04 May 2026 20:18:14 GMT",
+      "pubDate": "Mon, 04 May 2026 23:24:13 GMT",
+      "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
+    },
+    {
+      "title": "U.S. Stock market prediction for Tuesday: Will S&P 500, Dow Jones, Nasdaq trade in green? These factors wi - The Economic Times",
+      "link": "https://news.google.com/rss/articles/CBMikwJBVV95cUxQX2lqY1VrX2RvcXd0Uy0xZ3FwY2lPb2t2R2kyRmctZnM0NHFrUlB0WnU1V1pJWmtlR3NVQkdEclBkcjRWLWpZQzhTV1E1Z084WjZ3N2xXdG95Y1g3MXdKUWtSQ1JfdmgwQnlIUXNJR3dMZ3JYc1hnNHY2RXpKSUU1aXk3d2lhSFVqU0Q0aFd5a2JRamVmaVNzcFlfbjRQMl9UNm5MdGw2Q0pnazNaNUJTUVFFWWp3VW9pSHhrXzhjM2NiVzQwZlc4MHNHN2JQX1IwU19zY2J4R0dSSm5NLUl2TUp5WUViUWJJV2laV1FNM3pCN1FjM2E0V3M5SnFxUWYxNW8yNTVEZjNWNzlCLXRGMnJBQdIBmAJBVV95cUxOMUg5NDFsWDZCVzUzWUdWdTdndGdfYUxFVkhHM0RxMWJrdUtDb1JjM21Kd0Rja0JfV3hZeEg0N21wN2IzNXdVd2gwWkt2N1FLQXM0MXRNenB1MmY0ck5qcG9zUzJOeng1ZGxNbmZyMUpzdjRGT0pRVUhnUUM2LW44dm1FTWNsWENJZ0ljb3ZFc2ZoWjl3NUJnYWhxdE9SSGZFUEptdUpJeUVXRU5ENWRRejdwVGlhbE1nc0NQejhkV2lWOS1KWk8wZWFTbGhLM1hyUTVxbUlxODQ0Xy1ZckxqYzFVZk5FdkxWeHBMTDFCZnFQdm5ZTDFlXzQ2NEMtbWt2Vi1Wc0QxZi1lWlRYYlB5NDF4WENKNndo?oc=5",
+      "pubDate": "Tue, 05 May 2026 01:16:27 GMT",
+      "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
+    },
+    {
+      "title": "How major US stock indexes fared Monday 5/4/2026 - The Washington Post",
+      "link": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQTjlKanFGLWo2UlRMUEJvdmVGSGJPVlJzUkpQcDJ0ZjU4djlMd0lhS1JPck5CcEszR2s1SjFOMk5jWnNjb2ZqNmZ5M0lrcVdQWlV5MFFpOThnOVJnTzFmTjNhLWN0d05Za1l1X05uU1N5WUJtUWhIa3pUbVdaWGU4MTdVY1JrTDBWNzRtOUZnLUl0XzdBNzlHTXk2M1Q5cmhQdWhjVVAxMnNWNnNlbldBMGJwTFB6NWJNZi1UenJnM0VjTjZ4YUE?oc=5",
+      "pubDate": "Tue, 05 May 2026 00:22:40 GMT",
       "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
     },
     {
@@ -14,53 +32,35 @@
       "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
     },
     {
-      "title": "Wall Street drops from its records and oil prices jump after fighting flares in the Middle East - ABC7 New York",
-      "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQeXJteVQ2QWRhNGw0RkotWXBUVmNqbTRrSl8tTkNUTk1wVVBKVUtRTmQ0NU14dmJJRTN1U2JfZ3Z4XzNVLVFiQUhuOVJiOVh2Tkl0WkUwaExOUVg2a0ZhMzE2QlpXNUpqd3NvUjAzRUZfLXA4OU1LWnhfR2ZKRW1MY2dJSnc0XzBXcGZDSW11TDBfalhEeUhQR1h0UFhfQW90TTE5eFFQWG0zOVXSAasBQVVfeXFMUHlybXlUNkFkYTRsNEZKLVlwVFZjam00a0pfLU5DVE5NcFVQSlVLUU5kNDVNeHZiSUUzdVNiX2d2eF8zVS1RYkFIbjlSYjlYdk5JdFpFMGhMTlFYNmtGYTMxNkJaVzVKandzb1IwM0VGXy1wODlNS1p4X0dmSkVtTGNnSUp3NF8wV3BmQ0ltdUwwX2pYRHlIUEdYdFBYX0FvdE0xOXhRUFhtMzlV?oc=5",
-      "pubDate": "Mon, 04 May 2026 19:48:55 GMT",
+      "title": "Stock market today: S&P 500, Nasdaq, Dow futures trade flat with investors holding for Iran war developments - Yahoo Finance",
+      "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQMEhib0lrZi1IRmp3bGlJRFgzWWNVUWdxZ1h3QlZhOVMyVEpES192UjRjN3FjZEl4YnpSc1d5M2pZdlh2RTRXeVBmYmxCYW5uV045Sy1VVHJaTm42OE90TVJtWjBiODJfZkJkdHREajFna0ZvVEREQ2tNZTZXMWF2dmtRdGppdGJKaDYwa1RLQ1Etc2JXNTJfbW9QbWVibDcwX1FZOWNEX1FRWkxi?oc=5",
+      "pubDate": "Mon, 04 May 2026 23:31:25 GMT",
       "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
     },
     {
-      "title": "S&P 500 falls from record high on Middle East worries - The Spokesman-Review",
-      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxNTlF0Uld4WHRFNmRRdjR4blo1RktFdm55czVJT1NqOGo3c0FzNmlkN0dmOTZ3eE5VNFJhc3JPdzdQemR0cGRyTFZUN19nTGliSlJ1WGd1Q243bVdYaTZ2UURMLTRick9FdEdoUXNjU1BhYnBJWHV1UFk2WEEyRFp2R0hRendyci1WSGY3TjlwUTU1ck1EOWtodXFYN0JNdw?oc=5",
-      "pubDate": "Mon, 04 May 2026 18:47:35 GMT",
+      "title": "Stock Market Today: Stock Market News And Analysis - Investor's Business Daily",
+      "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE8zdGl1MmxTM2JJa2pLNlFSWVhuZUd1ekRIeVpDcGVqckVJcloxaWlnRHJ3b0hqb291NXk4dlo0SmRQNlhDaGpubDh6ZWNTUHZiYVhjOVJINUxSYXE0NHRiNVE2OW51R2h4N1daaXRIdzVBR1UxT0g4?oc=5",
+      "pubDate": "Mon, 04 May 2026 17:16:00 GMT",
       "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
     },
     {
-      "title": "Stock Markets stumble from renewed Iran tensions – Dow Jones, Nasdaq and S&P 500 Intraday Outlook - marketpulse.com",
-      "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQNC1jSTFkUjFXcXVEZ091LTd4MFRVb1hvc0taMHFaVF9sSzFmOXJ2cWEtanp1bk1wU3NMalJiWmNjN01RbVZCX0VKYXFyWUxnYnRSbGV2eW9jeUJvX0FOTWxDRWUwenZWWHFOaWdIY01XY1N5MGR4Umx3Wmhwa0hFRjBrRTIxalVXYVJOU1JRQkw1LWlrTHVoNA?oc=5",
-      "pubDate": "Mon, 04 May 2026 15:54:00 GMT",
-      "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
-    },
-    {
-      "title": "Dow Jones futures rise as Apple climbs on earnings, SanDisk skids; stock market at high - MSN",
-      "link": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOVTRrVzZrbnNkYUlLSkt6eWxuenNCRS15dnI2MlZMdnV0Y2ZROWNRWWxKNzNnd0VJbVkyTEU0dF9Fb0lvNGp2SkJPTGFESnVBT2pDTnFoMVJndEZubVd2d3NYUUs2WUZDLUVQSklnVk53TXpBZE0zY1F4WExpVUlMZ2NaQm5pMENVMjV0OVVIN1JnX2VuN1FXRXlJWnlyYXpaM0dEMTB4Y0p5WGxFM0tUODltMVZaQ1hoMEhmbHBsSGN1ME5LN3RFY2JiUk9xOThzWXVaYg?oc=5",
-      "pubDate": "Mon, 04 May 2026 20:31:27 GMT",
-      "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
-    },
-    {
-      "title": "S&P 500 falls from record high on Middle East worries - Virginia Business",
-      "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNYTcxTFFPamQ2S2xIOUhBOFl2amx2LUxqVk4yZjhZOEdkQjNlT2FaV0t5c1pROGdKX0dCYm1JZV9vNmZoaXM5NlMtUzBSY1lTTFRrZ1dKTnNzV2JjX3ppWTAyR0xWekhOU3hrN2NhUDc4Ni0xRUVfQXppSXlIY3Jpaw?oc=5",
-      "pubDate": "Mon, 04 May 2026 20:34:56 GMT",
-      "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
-    },
-    {
-      "title": "April stock advance: Markets reflect resiliency - invesco.com",
-      "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQUjUwaUFrbkJYdHF2WG90YmwxWVUzSl9qcTdNM1ZTelB0Rl9TbW03MlY4YTNnXzlnTTBENUlFalpESG9xM2FtX1RuWW1MSmZzbmkzSXdYUUN1RmVHRUVzNHlCZnk4Vm9ZRUdrc1o1b2xNTDVSQ1JYb25oQVJzc2xrTTlHUjUwUTJYbmdNRlZrakdRU1lE?oc=5",
-      "pubDate": "Mon, 04 May 2026 15:12:35 GMT",
+      "title": "US stock market today: Why Dow Jones is down while S&P 500 and Nasdaq rise today — Dow crashes over 160 po - The Economic Times",
+      "link": "https://news.google.com/rss/articles/CBMi5wJBVV95cUxOZnZVbjdSemt3QzhCSS0yNnpVSno3SXNia0FOSlpHdUpjY18yd0VabVJsWWgtMGpHYU5pdFl2dDRBQ2RQeXBUd1YxRFBKODBtZkxXM2Nld0lyOFoxVWFodlBwTHFUN3hqZFd5ckdJbnI4cjJXV3ExZWxMYWxfTVE3RG55bGRVNnlPTFEzdDhIUVZDWDIyelZwQWx5SUZxSW8zTVJkcjd1QjN0S3dQWHlvMDBuYXBKTENUbUd2dlMzajJuR19ET1pHNHM1RGNzN0d5Q0JmemgwZDNfYXl6c1AxU0pEcnZhVE5NblU2Y1Q2RWxBaVFYQVQzai0yeFBabENaLV85Mk5tQUdPQy1XWmhTbEQ0Wm5YZG4xVXZjRmZNcllpa1ZHbUFWYXFRbHR0X2dqMjNSMXdRb19UU296cDdmeVZMTFFBMXZNOGw1T29Dd0hsTTF2OWdBRXJ0LWZSTUZSdEp0X0ZsUdIB7AJBVV95cUxQczBVaVRRV090ZmRTWXF0bkJfWnJRdi1lYTJMLWNtWnBlbXZ6SkRjS01sNWk3R3hBQkN3UmhBYldLdFY2M3I5ZVQydFRUTmx6aUQ1LXNfYktqLWZtMUZjbnozc0ZDZlprWnpJblAtUnZlQVlKQjRXLTFFdFdKZ1RORWM4UHdoZGE1X1gtb0ZiNVpJZTJmOGlKU2ZfMm5wNDlEdnBWeVJtNXlBcGwxeTJIN1lPckZiUFRMUktQejRpdGRGLVRVVVhobnAxQ1pDYnVKZWJHZkY0NFFhR1VDQVJvVFNhZmFtQ3plcmI2enhHd3U2Z20wNkdWUlFTd2NyYmtmVHQyTVE0VXBWSE1Jc04yVEY0M0E0RWl5SUZqMkVvbU9xWHdwcGpOSzJvUTFwd1UwNDNxLXZleHBXRG9rOUZ2bFd3alBYdHBGaV9xWTJXSzQ4MnJSQWRCTGtZbGtXWlZqVVVjQXJFRHZxZlN5?oc=5",
+      "pubDate": "Mon, 04 May 2026 14:57:36 GMT",
       "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
     }
   ],
   "crypto": [
     {
-      "title": "Wall Street’s Move to 5% Bitcoin Allocations - ETF Trends",
-      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPNVhvenNySEN2Q0FndHpjQm1lQUg0T0o1WVhELTNMMjNHVnRIUTZfdDg1OGt5MklweVA3TVp2d3lPOVo0enFfaGpreHFlYXoweFg0WE12OXhReW9wcEtzMXBTN1NNUjFzR1N4SHNOS1pheml6RlowdzAxX01PcmZUU1phZzI2al9FQkJtZC01MWY3V0plN2Vz0gGcAUFVX3lxTE9MNlRNaG9ZTC03YlRDa0NPbUxYU1BfNjVnX0NoMXM0RENlbzAyNzNyc3Rmd2pyTThxdVUwMU4za2hwcVJ0Wk9TOEpBVnotTFB6WmFLY091SjNlZ09XaFc0dERUUWlwUG5tVHVsLWwtdjQtZGhmNlQxVFRJZUdMRlU5bkprcG9FNmpIZ19Sa1otWFRneTlCUl9Ja2Y3dw?oc=5",
-      "pubDate": "Mon, 04 May 2026 20:04:32 GMT",
-      "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
-    },
-    {
       "title": "Bitcoin Price Reclaims $80,000 Amid Surging ETF Demand, Positive Iran News - Bitcoin Magazine",
       "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTE51bGhLMG91TEZaX1BRWTZuTGRkZEo1ZGlqUC1zbngxSGJYclhhazFXT1BGR2hsdWg1VWxyUWU3Wm42cmhldFVBNi1xOFJEc3RNTmlTT3hhdVdNSldPZ3R3cFdnUkNHSGhOR01nd1Yzaw?oc=5",
       "pubDate": "Mon, 04 May 2026 20:20:14 GMT",
+      "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
+    },
+    {
+      "title": "Wall Street’s Move to 5% Bitcoin Allocations - ETF Trends",
+      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPNVhvenNySEN2Q0FndHpjQm1lQUg0T0o1WVhELTNMMjNHVnRIUTZfdDg1OGt5MklweVA3TVp2d3lPOVo0enFfaGpreHFlYXoweFg0WE12OXhReW9wcEtzMXBTN1NNUjFzR1N4SHNOS1pheml6RlowdzAxX01PcmZUU1phZzI2al9FQkJtZC01MWY3V0plN2Vz0gGcAUFVX3lxTE9MNlRNaG9ZTC03YlRDa0NPbUxYU1BfNjVnX0NoMXM0RENlbzAyNzNyc3Rmd2pyTThxdVUwMU4za2hwcVJ0Wk9TOEpBVnotTFB6WmFLY091SjNlZ09XaFc0dERUUWlwUG5tVHVsLWwtdjQtZGhmNlQxVFRJZUdMRlU5bkprcG9FNmpIZ19Sa1otWFRneTlCUl9Ja2Y3dw?oc=5",
+      "pubDate": "Mon, 04 May 2026 20:04:32 GMT",
       "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
     },
     {
@@ -76,7 +76,7 @@
       "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
     },
     {
-      "title": "Bitwise Shuts BTC, Ethereum ETFs As Bitcoin Rally Fails To Lift Niche Crypto Strategies - Benzinga",
+      "title": "Bitwise To Close Thematic Crypto ETFs Tied To Bitcoin, Ethereum - Bitwise Trendwise BTC/ETH and Treasurie - Benzinga",
       "link": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxNNnMzUml1dzRZSFBZN3R4TEhtbFpwR1F4MVZfSGZoUFpUTVZtWjVzaE5hMXQ1WllkUFFEN0JQX2lpRldyODU3cFVhVk9melhkOUI4Umh6ZUJXTEZNRHVyS2RQUzJVRWFKa2wtamhSWDFpTkt5ZU5ScUpneDVqcVZxa2RoOTJ2TVhjd0pmTUdPbmg3MlJ6bzhsSmU1eVZoZEFScThOM21tVjkzeGx2bmNZcjBweFhzVGdDUEZVNDVFYlNvZ1Z2dlZXQkhhTG5ic0p0ZV9yb21tcUdtWEZnQTZZ?oc=5",
       "pubDate": "Mon, 04 May 2026 19:08:21 GMT",
       "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
@@ -88,15 +88,15 @@
       "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
     },
     {
-      "title": "Bitcoin Hits $80K: Tracking ETF Inflows and Leverage Ratios - Investing.com",
-      "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxORDBEN3BaVjU4SWpIdnkzMzRUSnd0R0RHT0I5eEZxYVRuZUhheXdjQ3JQajRaR0hPQ0pzaUN0bVgyZ243RXZPN2k5VXlxMG1ZcmQyeld1dEFuRFo2VU1OeEtDMEhjcW92ZzV4LTFoOF8yb3NXRVZpeExhLWxfS3drS3ZOX29xOTI1cVRkT25FYzZRZUUwcjJRQnpLeThSRHJCc0J2cA?oc=5",
-      "pubDate": "Mon, 04 May 2026 15:48:16 GMT",
+      "title": "U.S. ETF Monthly Summary: April 2026 Results - FactSet Insight",
+      "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE9KZl91QkdieVFkNWRWdzJNRXBWa3VlOHpjUXJtd19kZzQ5bDZsdjl5djFWcURYOXZXWnhHLU91UE5SOEI5dFpwUTFCMGtsNFlDYUxWU0lLcGFHR2E4ZXlCVWZzMlNUV01XUS1CM1g5dFNGSGVJWk9hOTA4RdIBiwFBVV95cUxOOGJmSThVd0g0cGozUVFYbTR6ZVEtdGVUYnN0ZG1PbTktWk5qQlJMMkZEWGtSM09saldrdlRaaDRsTzRDZnNxZXVxX0NyV2EzWlBZQ1pJdkx5NFI3NWJlSmpjbUY0ekE1b1N4UndWdHZNSWl0dHVYODdxdlBtQVYwSUFfTzVKc2U1RElB?oc=5",
+      "pubDate": "Mon, 04 May 2026 20:43:09 GMT",
       "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
     },
     {
-      "title": "Cathie Wood's Ark bets on Google, Meta and CoreWeave; cuts AMD and Bitcoin ETF (ARKK:BATS) - Seeking Alpha",
-      "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNLXRVVElDTGRzc2h5dDdnY3pwSzBicXJVbFFLYUs0OWtFWnFlcjNuakFXbWg1anRRR3JfR1luMHo2RjBlU1FLTzhjUjk2WXEwNFBVWEtJVFZ3ZUhsSTVnZDQ0VnVyc2FWaV9rLUt6d0tSUWY3dUx0MThuWGQxN0xUeUxGM2M2U2JMNnNObnBNdWpPUFJTZXFmb2JocWpIa1Btc1psQ2o3dG54Y1htSzEzRTNWdw?oc=5",
-      "pubDate": "Mon, 04 May 2026 12:00:48 GMT",
+      "title": "Top 3 Cryptos to Buy Now: Bitcoin ETF Inflows Hit $2.44B as Pepeto Presale Reaches $9.2M Ahead of Binance Listing - openPR.com",
+      "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOUk1EVFhjZWdqUmNhQUR1NHRMa1ZUUUtEYnRuNnBjZVVMeGJUenMxbEtPMWI2UERWeE1KNk9mZE1fMFNXbnhxaG1IN3JXVm5STGkzZEJ2M1YwMElaNklfN0VkQmdUV1dnUm03cE5fTy1OeXU1M0pPSUJJTVJGZWpXWEpWdzhpUjUyaFp3VzZ3VFhVbzF1WEpjUHRiUUlUc1FBa2c?oc=5",
+      "pubDate": "Mon, 04 May 2026 23:27:30 GMT",
       "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
     }
   ]
