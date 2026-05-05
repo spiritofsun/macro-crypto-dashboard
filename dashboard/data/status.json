@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-05-04T23:00:50.151390+00:00",
+  "updated_at": "2026-05-05T00:01:31.575716+00:00",
   "overall": "warn",
   "datasets": {
     "macro": {
       "label": "매크로",
-      "timestamp": "2026-05-05 07:59 KST",
-      "age_hours": 0.03,
+      "timestamp": "2026-05-05 09:01 KST",
+      "age_hours": 0.01,
       "level": "warn",
       "issue_count": 2,
       "critical_issue_count": 0,
@@ -17,28 +17,28 @@
     },
     "stocks": {
       "label": "주식 워치",
-      "timestamp": "2026-05-05 07:59 KST",
-      "age_hours": 0.03,
+      "timestamp": "2026-05-05 09:01 KST",
+      "age_hours": 0.01,
       "level": "ok"
     },
     "snapshot": {
       "label": "스냅샷",
-      "timestamp": "2026-05-05 07:59 KST",
-      "age_hours": 0.03,
+      "timestamp": "2026-05-05 09:01 KST",
+      "age_hours": 0.01,
       "level": "ok"
     },
     "news": {
       "label": "뉴스",
       "timestamp": "2026-05-04T22:59:34.609315+00:00",
-      "age_hours": 0.02,
+      "age_hours": 1.03,
       "level": "ok",
       "macro_count": 8,
       "crypto_count": 8
     },
     "etf": {
       "label": "ETF",
-      "timestamp": "2026-05-04T22:59:35.545811+00:00",
-      "age_hours": 0.02,
+      "timestamp": "2026-05-05T00:01:25.804338+00:00",
+      "age_hours": 0.0,
       "level": "ok",
       "market_date": "04 May 2026",
       "freshness": "latest",
@@ -46,22 +46,22 @@
     },
     "crypto_market": {
       "label": "크립토 마켓",
-      "timestamp": "2026-05-04T22:59:34.442769+00:00",
-      "age_hours": 0.02,
+      "timestamp": "2026-05-05T00:01:26.409879+00:00",
+      "age_hours": 0.0,
       "level": "ok",
-      "btc_dominance": 58.70044550808292,
-      "stablecoin_market_cap": 320908550196.12415
+      "btc_dominance": 58.66836996005883,
+      "stablecoin_market_cap": 319960886625.4237
     },
     "crypto_universe": {
       "label": "크립토 유니버스",
-      "timestamp": "2026-05-05T08:00+09:00",
+      "timestamp": "2026-05-05T09:01+09:00",
       "age_hours": 0.01,
-      "level": "ok",
+      "level": "warn",
       "universe": "market_cap_top_200",
       "asset_count": 200,
       "target_asset_count": 200,
       "source": "coingecko_top200",
-      "health": "ok"
+      "health": "warn"
     }
   }
 }
