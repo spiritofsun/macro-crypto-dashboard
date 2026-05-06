@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-05-06T05:54:56.616770+00:00",
+  "updated_at": "2026-05-06T06:38:47.112032+00:00",
   "overall": "warn",
   "datasets": {
     "macro": {
       "label": "매크로",
-      "timestamp": "2026-05-06 12:56 KST",
-      "age_hours": 1.98,
+      "timestamp": "2026-05-06 15:38 KST",
+      "age_hours": 0.01,
       "level": "warn",
       "issue_count": 2,
       "critical_issue_count": 0,
@@ -17,27 +17,27 @@
     },
     "stocks": {
       "label": "주식 워치",
-      "timestamp": "2026-05-06 12:56 KST",
-      "age_hours": 1.98,
+      "timestamp": "2026-05-06 15:38 KST",
+      "age_hours": 0.01,
       "level": "ok"
     },
     "snapshot": {
       "label": "스냅샷",
-      "timestamp": "2026-05-06 12:56 KST",
-      "age_hours": 1.98,
+      "timestamp": "2026-05-06 15:38 KST",
+      "age_hours": 0.01,
       "level": "ok"
     },
     "news": {
       "label": "뉴스",
       "timestamp": "2026-05-05T20:55:58.410966+00:00",
-      "age_hours": 8.98,
+      "age_hours": 9.71,
       "level": "warn",
       "macro_count": 8,
       "crypto_count": 8
     },
     "etf": {
       "label": "ETF",
-      "timestamp": "2026-05-06T05:54:56.514083+00:00",
+      "timestamp": "2026-05-06T06:38:40.907716+00:00",
       "age_hours": 0.0,
       "level": "ok",
       "market_date": "05 May 2026",
@@ -46,16 +46,16 @@
     },
     "crypto_market": {
       "label": "크립토 마켓",
-      "timestamp": "2026-05-06T03:56:31.354235+00:00",
-      "age_hours": 1.97,
+      "timestamp": "2026-05-06T06:38:41.881446+00:00",
+      "age_hours": 0.0,
       "level": "ok",
-      "btc_dominance": 58.72981723806269,
-      "stablecoin_market_cap": 320337922339.3907
+      "btc_dominance": 58.683567299610694,
+      "stablecoin_market_cap": 321568631344.9151
     },
     "crypto_universe": {
       "label": "크립토 유니버스",
-      "timestamp": "2026-05-06T12:56+09:00",
-      "age_hours": 1.98,
+      "timestamp": "2026-05-06T15:38+09:00",
+      "age_hours": 0.01,
       "level": "warn",
       "universe": "market_cap_top_200",
       "asset_count": 200,
