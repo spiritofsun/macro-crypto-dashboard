@@ -1,12 +1,12 @@
 {
-  "updated_at": "2026-05-05T23:56:29.946998+00:00",
+  "updated_at": "2026-05-06T03:56:30.770961+00:00",
   "date": "05 May 2026",
-  "btc_us_spot_etf_net_inflow_usd_m": 88.5,
-  "eth_us_spot_etf_net_inflow_usd_m": 1.4,
+  "btc_us_spot_etf_net_inflow_usd_m": 467.3,
+  "eth_us_spot_etf_net_inflow_usd_m": 97.5,
   "btc_history_7d_usd_m": [
     {
       "date": "05-05",
-      "flow": 88.5
+      "flow": 467.3
     },
     {
       "date": "05-04",
@@ -36,7 +36,7 @@
   "eth_history_7d_usd_m": [
     {
       "date": "05-05",
-      "flow": 1.4
+      "flow": 97.5
     },
     {
       "date": "05-04",
