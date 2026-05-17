@@ -197,6 +197,20 @@ def audit_crypto_live(rows: list[dict[str, str]], crypto_market: dict[str, Any])
     else:
         add(rows, "OK", "crypto", "stablecoin market cap", f"file={stable_file:.0f}, live={stable_live:.0f}")
 
+    kimchi = to_num((crypto_market.get("krw_market") or {}).get("kimchi_premium_pct"))
+    if kimchi is None:
+        add(rows, "WARN", "crypto", "Kimchi Premium", "missing Upbit/Bithumb KRW premium")
+    else:
+        add(rows, "OK", "crypto", "Kimchi Premium", f"value={kimchi:.4f}%")
+
+    chain_payload = crypto_market.get("defillama_chains") if isinstance(crypto_market.get("defillama_chains"), dict) else {}
+    chain_count = int(chain_payload.get("chain_count") or 0)
+    top_chains = chain_payload.get("top_chains") if isinstance(chain_payload.get("top_chains"), list) else []
+    if chain_count < 6 or not top_chains:
+        add(rows, "WARN", "crypto", "DefiLlama chain TVL", f"chain_count={chain_count}, top_rows={len(top_chains)}")
+    else:
+        add(rows, "OK", "crypto", "DefiLlama chain TVL", f"chain_count={chain_count}, top_rows={len(top_chains)}")
+
 
 def audit_crypto_universe(rows: list[dict[str, str]], custom: dict[str, Any], top20: dict[str, Any]) -> None:
     assets = custom.get("assets") if isinstance(custom.get("assets"), list) else []

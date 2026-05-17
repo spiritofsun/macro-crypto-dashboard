@@ -13,7 +13,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 DASHBOARD = ROOT / "dashboard"
-CACHE_VERSION = "20260505c"
+CACHE_VERSION = "20260517a"
 
 FAILURES: list[str] = []
 
@@ -65,7 +65,7 @@ require("ai-action-checklist" in styles, "styles.css: AI checklist styles are mi
 require("--master-card-bg" in styles, "styles.css: shared master component tokens are missing")
 
 # Guard against obvious old dark card patterns being reintroduced after the master override.
-last_master = styles.rfind("v20260505c master system")
+last_master = styles.rfind("v20260517a master system")
 require(last_master >= 0, "styles.css: master system override block missing")
 if last_master >= 0:
     after_master = styles[last_master:]

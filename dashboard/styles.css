@@ -8522,7 +8522,7 @@ body:not(.home-command-body) .global-data-health {
   display: none !important;
 }
 
-/* v20260505c master system: shared cards, ETF note, AI scenario hub */
+/* v20260517a master system: shared cards, ETF note, AI scenario hub */
 :root {
   --master-card-bg: linear-gradient(135deg, #ffffff, #f8fbff);
   --master-card-line: #dce6f3;

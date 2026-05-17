@@ -345,6 +345,10 @@ function getCoinbasePremiumPct() {
   return toNumSafe(state.live?.coinbasePremiumPct) ?? getCryptoMarketValue(["coinbase_premium", "pct"]);
 }
 
+function getKimchiPremiumPct() {
+  return getCryptoMarketValue(["krw_market", "kimchi_premium_pct"]);
+}
+
 function formatKstDateTime(input, fallback = "수집 대기") {
   if (!input) return fallback;
   if (typeof input === "string" && input.includes("KST")) return input;
@@ -936,6 +940,7 @@ function renderAiBriefPage() {
   const btcDom = getBtcDominance();
   const fearGreed = getFearGreedValue();
   const premium = getCoinbasePremiumPct();
+  const kimchiPremium = getKimchiPremiumPct();
   const status = state.status?.overall || "warn";
   const hubTone = status === "ok" ? "up" : status === "danger" ? "down" : "flat";
   const briefingMode = status === "ok" ? "요약 생성 가능" : "데이터 점검 병행";
@@ -958,7 +963,7 @@ function renderAiBriefPage() {
         <article><p>크립토 심리</p><strong>${typeof fearGreed === "number" ? Math.round(fearGreed) : "—"}</strong><span>Fear & Greed</span></article>
         <article><p>핵심 뉴스</p><strong>${topNews ? escapeHtml(localizeNewsTitle(topNews.title, topNews.type)) : "뉴스 수집 대기"}</strong><span>${topNews ? escapeHtml(newsImpactText(topNews.title, topNews.type)) : "다음 업데이트를 기다립니다."}</span></article>
         <article><p>BTC 주도권</p><strong>${typeof btcDom === "number" ? `${btcDom.toFixed(2)}%` : "—"}</strong><span>도미넌스 확인</span></article>
-        <article><p>프리미엄</p><strong>${formatPct(premium, 2)}</strong><span>Coinbase BTC</span></article>
+        <article><p>프리미엄</p><strong>${formatPct(premium, 2)}</strong><span>김프 ${formatPct(kimchiPremium, 2)}</span></article>
       </div>
     `;
   }
@@ -1039,7 +1044,7 @@ function renderAiBriefPage() {
     const checklist = [
       `크립토 심리 ${typeof fearGreed === "number" ? Math.round(fearGreed) : "—"}가 과매도/과열인지 먼저 확인`,
       `BTC 도미넌스 ${typeof btcDom === "number" ? `${btcDom.toFixed(2)}%` : "—"} 변화가 알트 확산을 막는지 확인`,
-      `Coinbase 프리미엄 ${formatPct(premium, 2)}로 미국 현물 매수 압력 확인`,
+      `Coinbase ${formatPct(premium, 2)} / 김프 ${formatPct(kimchiPremium, 2)}로 미국·한국 현물 압력 확인`,
       "ETF Flow 페이지에서 BTC/ETH 7D 합산 흐름과 당일 보합 여부 확인",
       "뉴스 목록에서 같은 이슈가 여러 소스에서 반복되는지 확인",
     ];
@@ -1123,6 +1128,7 @@ function renderCryptoSummary() {
       ? total * (ethDominance / 100)
       : rows.find((r) => r.ticker === "ETH")?.market_cap || 0;
   const coinbasePremium = getCoinbasePremiumPct();
+  const kimchiPremium = getKimchiPremiumPct();
   const btcExcludedShare = typeof btcDominance === "number" ? 100 - btcDominance : null;
   const exStableAltShare =
     typeof total === "number" && typeof stable === "number" && typeof btcMcap === "number" && total > stable
@@ -1144,6 +1150,7 @@ function renderCryptoSummary() {
     ["BTC 제외 비중", typeof btcExcludedShare === "number" ? `${btcExcludedShare.toFixed(2)}%` : "—", "100 - BTC.D, 스테이블 포함"],
     ["스테이블 제외 알트 비중", typeof exStableAltShare === "number" ? `${exStableAltShare.toFixed(2)}%` : "—", "(TOTAL - BTC - Stable) / (TOTAL - Stable)"],
     ["Coinbase Premium", typeof coinbasePremium === "number" ? formatPct(coinbasePremium, 2) : "—", "Coinbase BTC spot vs CoinGecko BTC"],
+    ["김프", typeof kimchiPremium === "number" ? formatPct(kimchiPremium, 2) : "—", "Upbit/Bithumb BTC vs 글로벌 BTC"],
     ["TOTAL", formatBigNumber(totals.TOTAL), toNumSafe(state.live?.totalMarketCapUsd) ? "CoinGecko global" : "유니버스 합계"],
     ["TOTALES", formatBigNumber(totals.TOTALES), "CoinGecko TOTAL - DefiLlama Stable"],
     ["TOTAL2", formatBigNumber(totals.TOTAL2), "CoinGecko TOTAL - BTC 추정 시총"],
@@ -1582,6 +1589,7 @@ function renderCryptoOverview() {
   const fearGreed = getFearGreedValue();
   const total = getTotalMarketCapUsd();
   const premium = getCoinbasePremiumPct();
+  const kimchiPremium = getKimchiPremiumPct();
   const regime = typeof fearGreed === "number" && fearGreed < 30 ? "방어적 심리 우세" : typeof fearGreed === "number" && fearGreed > 60 ? "위험 선호 우세" : "중립 구간";
   const regimeBody = typeof fearGreed === "number" && fearGreed < 30
     ? "심리 지표는 방어 구간입니다. 반등 신호보다 유동성, ETF 수급, BTC 도미넌스 변화를 먼저 확인하는 구간입니다."
@@ -1607,7 +1615,7 @@ function renderCryptoOverview() {
       { label: "TOTAL", value: formatBigNumber(total), meta: "CoinGecko global" },
       { label: "심리 지수", value: typeof fearGreed === "number" ? `${fearGreed}` : "—", meta: "Fear & Greed" },
       { label: "BTC 도미넌스", value: typeof btcDom === "number" ? `${btcDom.toFixed(2)}%` : "—", meta: `ETH.D ${typeof ethDom === "number" ? `${ethDom.toFixed(2)}%` : "—"}` },
-      { label: "코인베이스 프리미엄", value: formatPct(premium, 2), meta: "BTC 기준" },
+      { label: "프리미엄", value: formatPct(premium, 2), meta: `김프 ${formatPct(kimchiPremium, 2)}` },
     ];
     quick.innerHTML = items.map((item) => `<article class="page-quick-card"><p>${item.label}</p><strong>${item.value}</strong><span>${item.meta}</span></article>`).join("");
   }

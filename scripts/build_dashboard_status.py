@@ -98,6 +98,7 @@ def main() -> int:
       "news": build_entry("뉴스", news.get("updated_at"), warn_h=6, fail_h=18, extra={
           "macro_count": len(news.get("macro") or []),
           "crypto_count": len(news.get("crypto") or []),
+          "free_sources": ((news.get("_health") or {}).get("free_sources") if isinstance(news.get("_health"), dict) else []),
       }),
       "etf": build_entry("ETF", etf.get("updated_at"), warn_h=18, fail_h=48, extra={
           "market_date": etf.get("date"),
@@ -107,6 +108,9 @@ def main() -> int:
       "crypto_market": build_entry("크립토 마켓", crypto_market.get("as_of"), warn_h=2, fail_h=6, extra={
           "btc_dominance": ((crypto_market.get("global") or {}).get("btc_dominance")),
           "stablecoin_market_cap": ((crypto_market.get("stablecoins") or {}).get("total_market_cap_usd")),
+          "kimchi_premium_pct": ((crypto_market.get("krw_market") or {}).get("kimchi_premium_pct")),
+          "defillama_chain_count": ((crypto_market.get("defillama_chains") or {}).get("chain_count")),
+          "free_sources": ((crypto_market.get("_health") or {}).get("free_sources") if isinstance(crypto_market.get("_health"), dict) else []),
       }),
       "crypto_universe": build_entry("크립토 유니버스", crypto_custom.get("as_of"), warn_h=2, fail_h=6, extra={
           "universe": crypto_custom.get("universe"),
