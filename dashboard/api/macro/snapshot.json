@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-05-18 06:28 KST",
+  "as_of": "2026-05-18 07:29 KST",
   "rates": {
     "us10y": {
       "value": 4.47,
@@ -32,18 +32,18 @@
   },
   "fx": {
     "dxy": {
-      "value": 99.208,
-      "delta": 0.3824749569968634,
+      "value": 99.21,
+      "delta": 0.010080645161281154,
       "display": "99.21",
       "source": "stooq",
-      "source_as_of": "20260515 230000"
+      "source_as_of": "20260518 001748"
     },
     "usdkrw": {
       "value": 1497.840406,
       "delta": 0.0,
       "display": "1,498",
       "source": "live",
-      "source_as_of": "2026-05-18 06:28 KST"
+      "source_as_of": "2026-05-18 07:29 KST"
     }
   },
   "indices": {
@@ -52,7 +52,7 @@
       "delta": -5.7669066557675945,
       "display": "7,493",
       "source": "stooq",
-      "source_as_of": "20260515 230000"
+      "source_as_of": "20260515 110540"
     },
     "kosdaq": {
       "value": null,
@@ -99,32 +99,32 @@
   },
   "commodities": {
     "gold": {
-      "value": 4561.9,
-      "delta": -1.9894725534429125,
-      "display": "$4,562/oz",
+      "value": 4546.6,
+      "delta": 0.1078891164101668,
+      "display": "$4,547/oz",
       "source": "stooq",
-      "source_as_of": "20260515 230000"
+      "source_as_of": "20260518 002920"
     },
     "silver": {
-      "value": 77.547,
-      "delta": -7.68214285714286,
-      "display": "$77.55/oz",
+      "value": 76.69500000000001,
+      "delta": 0.755386232264845,
+      "display": "$76.70/oz",
       "source": "stooq",
-      "source_as_of": "20260515 230000"
+      "source_as_of": "20260518 002920"
     },
     "wti": {
-      "value": 105.42,
-      "delta": 3.2921810699588474,
-      "display": "$105.42",
+      "value": 102.46,
+      "delta": 0.7076862590918016,
+      "display": "$102.46",
       "source": "stooq",
-      "source_as_of": "20260515 230000"
+      "source_as_of": "20260518 002919"
     },
     "copper": {
-      "value": 6.295,
-      "delta": -4.331306990881459,
+      "value": 6.289,
+      "delta": -0.060386473429950974,
       "display": "$6.29/lb",
       "source": "stooq",
-      "source_as_of": "20260515 230000"
+      "source_as_of": "20260518 002917"
     }
   },
   "liquidity": {
