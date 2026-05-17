@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-17T06:21:01.832144+00:00",
-  "date": "May 15, 2026",
+  "updated_at": "2026-05-17T07:22:10.278619+00:00",
+  "date": "15 May 2026",
   "btc_us_spot_etf_net_inflow_usd_m": -290.4,
   "eth_us_spot_etf_net_inflow_usd_m": -65.7,
   "btc_history_7d_usd_m": [
@@ -63,6 +63,6 @@
       "flow": -103.6
     }
   ],
-  "source": "defillama.com (source: farside)",
+  "source": "farside.co.uk",
   "freshness": "latest"
 }

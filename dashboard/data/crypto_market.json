@@ -1,11 +1,11 @@
 {
-  "as_of": "2026-05-17T04:32:41.894743+00:00",
+  "as_of": "2026-05-17T07:22:12.468425+00:00",
   "global": {
     "source": "CoinGecko global",
-    "total_market_cap_usd": 2685305742878.2197,
-    "btc_dominance": 58.24807976654668,
-    "eth_dominance": 9.822778378775574,
-    "usdt_dominance_market": 7.066153822550521
+    "total_market_cap_usd": 2684439501606.941,
+    "btc_dominance": 58.23428624760485,
+    "eth_dominance": 9.81121017801419,
+    "usdt_dominance_market": 7.068562717958369
   },
   "fear_greed": {
     "source": "alternative.me",
@@ -15,89 +15,89 @@
   },
   "coinbase_premium": {
     "source": "Coinbase BTC spot vs global BTC reference",
-    "pct": -0.01716515454406181,
-    "coinbase_btc_usd": 78022.605,
-    "coingecko_btc_usd": 78036.0,
-    "reference_btc_usd": 78036.0
+    "pct": -0.0033896784611296468,
+    "coinbase_btc_usd": 78028.355,
+    "coingecko_btc_usd": 78031.0,
+    "reference_btc_usd": 78031.0
   },
   "krw_market": {
     "source": "Upbit/Bithumb public + open.er-api",
-    "kimchi_premium_pct": -0.31353247783263394,
-    "upbit_btc_krw": 116519000.0,
-    "bithumb_btc_krw": 116423000.0,
+    "kimchi_premium_pct": -0.409816033131546,
+    "upbit_btc_krw": 116399000.0,
+    "bithumb_btc_krw": 116482000.0,
     "usdkrw": 1497.840406,
-    "global_btc_usd": 78036.0
+    "global_btc_usd": 78031.0
   },
   "stablecoins": {
     "source": "DefiLlama stablecoins",
-    "total_market_cap_usd": 321421878042.29694,
-    "usdt_market_cap_usd": 189695158632.48904,
-    "usdc_market_cap_usd": 77018176787.10625,
-    "usdt_dominance": 59.0175005472174,
-    "usdc_dominance": 23.96170953147476
+    "total_market_cap_usd": 321426056526.17926,
+    "usdt_market_cap_usd": 189694576357.644,
+    "usdc_market_cap_usd": 77015613607.98746,
+    "usdt_dominance": 59.01655217619045,
+    "usdc_dominance": 23.9606005935971
   },
   "defillama_chains": {
     "source": "DefiLlama chains",
-    "chain_count": 372,
-    "total_tvl_usd": 84212776285.37996,
+    "chain_count": 371,
+    "total_tvl_usd": 84458772385.86104,
     "top_chains": [
       {
         "name": "Ethereum",
-        "tvl_usd": 44099180983.59119,
+        "tvl_usd": 44230825854.08914,
         "change_1d": null,
         "change_7d": null
       },
       {
         "name": "Solana",
-        "tvl_usd": 5973312916.589871,
+        "tvl_usd": 5999247179.087044,
         "change_1d": null,
         "change_7d": null
       },
       {
         "name": "BSC",
-        "tvl_usd": 5537073120.625978,
+        "tvl_usd": 5554936851.7856865,
         "change_1d": null,
         "change_7d": null
       },
       {
         "name": "Bitcoin",
-        "tvl_usd": 5163244268.99442,
+        "tvl_usd": 5179493417.312841,
         "change_1d": null,
         "change_7d": null
       },
       {
         "name": "Tron",
-        "tvl_usd": 5125649871.491482,
+        "tvl_usd": 5131086036.181796,
         "change_1d": null,
         "change_7d": null
       },
       {
         "name": "Base",
-        "tvl_usd": 4819025368.057939,
+        "tvl_usd": 4835532156.71628,
         "change_1d": null,
         "change_7d": null
       },
       {
         "name": "Arbitrum",
-        "tvl_usd": 1566169028.0711327,
+        "tvl_usd": 1573299197.46823,
         "change_1d": null,
         "change_7d": null
       },
       {
         "name": "Hyperliquid L1",
-        "tvl_usd": 1466427837.5550735,
+        "tvl_usd": 1488455481.582418,
         "change_1d": null,
         "change_7d": null
       },
       {
         "name": "Provenance",
-        "tvl_usd": 1332133761.58847,
+        "tvl_usd": 1332308813.2363307,
         "change_1d": null,
         "change_7d": null
       },
       {
         "name": "Polygon",
-        "tvl_usd": 1176666212.3808784,
+        "tvl_usd": 1166307290.574953,
         "change_1d": null,
         "change_7d": null
       }
