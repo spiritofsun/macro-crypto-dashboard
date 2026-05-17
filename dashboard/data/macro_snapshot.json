@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-05-17 23:06 KST",
+  "as_of": "2026-05-18 00:39 KST",
   "rates": {
     "us10y": {
       "value": 4.47,
@@ -27,7 +27,7 @@
       "delta": 0.0,
       "display": "3.65",
       "source": "fred:IORB",
-      "source_as_of": "2026-05-17"
+      "source_as_of": "2026-05-18"
     }
   },
   "fx": {
@@ -43,7 +43,7 @@
       "delta": 0.0,
       "display": "1,498",
       "source": "live",
-      "source_as_of": "2026-05-17 23:06 KST"
+      "source_as_of": "2026-05-18 00:39 KST"
     }
   },
   "indices": {
