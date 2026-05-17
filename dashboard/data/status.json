@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-05-17T04:26:54.334774+00:00",
+  "updated_at": "2026-05-17T04:33:41.845964+00:00",
   "overall": "warn",
   "datasets": {
     "macro": {
       "label": "매크로",
-      "timestamp": "2026-05-17 13:17 KST",
-      "age_hours": 0.17,
+      "timestamp": "2026-05-17 13:32 KST",
+      "age_hours": 0.03,
       "level": "warn",
       "issue_count": 2,
       "critical_issue_count": 0,
@@ -17,20 +17,20 @@
     },
     "stocks": {
       "label": "주식 워치",
-      "timestamp": "2026-05-17 13:17 KST",
-      "age_hours": 0.17,
+      "timestamp": "2026-05-17 13:32 KST",
+      "age_hours": 0.03,
       "level": "ok"
     },
     "snapshot": {
       "label": "스냅샷",
-      "timestamp": "2026-05-17 13:17 KST",
-      "age_hours": 0.17,
+      "timestamp": "2026-05-17 13:32 KST",
+      "age_hours": 0.03,
       "level": "ok"
     },
     "news": {
       "label": "뉴스",
-      "timestamp": "2026-05-17T04:15:28.823278+00:00",
-      "age_hours": 0.19,
+      "timestamp": "2026-05-17T04:32:41.321525+00:00",
+      "age_hours": 0.02,
       "level": "ok",
       "macro_count": 8,
       "crypto_count": 8,
@@ -41,8 +41,8 @@
     },
     "etf": {
       "label": "ETF",
-      "timestamp": "2026-05-17T04:17:49.590032+00:00",
-      "age_hours": 0.15,
+      "timestamp": "2026-05-17T04:32:42.206355+00:00",
+      "age_hours": 0.02,
       "level": "ok",
       "market_date": "15 May 2026",
       "freshness": "latest",
@@ -50,12 +50,12 @@
     },
     "crypto_market": {
       "label": "크립토 마켓",
-      "timestamp": "2026-05-17T04:26:54.250904+00:00",
-      "age_hours": 0.0,
+      "timestamp": "2026-05-17T04:32:41.894743+00:00",
+      "age_hours": 0.02,
       "level": "ok",
-      "btc_dominance": 58.25295996068899,
+      "btc_dominance": 58.24807976654668,
       "stablecoin_market_cap": 321421878042.29694,
-      "kimchi_premium_pct": -0.33035135899357343,
+      "kimchi_premium_pct": -0.31353247783263394,
       "defillama_chain_count": 372,
       "free_sources": [
         "CoinGecko",
@@ -70,8 +70,8 @@
     },
     "crypto_universe": {
       "label": "크립토 유니버스",
-      "timestamp": "2026-05-17T13:17+09:00",
-      "age_hours": 0.17,
+      "timestamp": "2026-05-17T13:33+09:00",
+      "age_hours": 0.01,
       "level": "ok",
       "universe": "market_cap_top_200",
       "asset_count": 200,

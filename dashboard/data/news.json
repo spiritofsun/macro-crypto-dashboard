@@ -1,10 +1,17 @@
 {
-  "updated_at": "2026-05-17T04:15:28.823278+00:00",
+  "updated_at": "2026-05-17T04:32:41.321525+00:00",
   "macro": [
     {
       "title": "3 S&P 500 Stocks That Concern Us - Yahoo Finance",
       "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQZkVpLWR0bFNwZWYyWkhpLVFScGQzWk5NQWY2STlJQVNxNFBzNGJMVUNpZkgwaVZianBBVE51Q0JOaWFXNDU4cXpEUHFXbzZueW9HZFVaeGp1WkVTakhpclBWemNMMGFvb3llSWJoS2NzQVh6eVpZVGxVYlI4RENVaXhWUFhmUDAxa25EUnBISV8?oc=5",
       "pubDate": "Sun, 17 May 2026 03:56:00 GMT",
+      "source": "Google News",
+      "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
+    },
+    {
+      "title": "S&P 500 Snapshot: 7-Week Win Streak Survives Friday Slump - Seeking Alpha",
+      "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPUmNQM0U2VnhSbHUyME1wZE9YSGNVZGZLS0ViQ1VqQXhiOFFvQmdGSGlUdGdILTk5TWFrRzhBMzhmMUdkWXkyeFgzRUpnYnZqbS1PWUtkWnR5Z2ZFeTY1RWtLVE5RWW9pTU9XSEVBSmNoazctR0JPS0w3U2JqczRNZ3QxWVlRQ0tLb3l6WjliQ2x2ZDlYZ3ZfVTZHN3RLSFFxSXF1U09POTVKaTJnY0dya1JzMGNUdw?oc=5",
+      "pubDate": "Sun, 17 May 2026 04:30:00 GMT",
       "source": "Google News",
       "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
     },
@@ -23,16 +30,16 @@
       "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
     },
     {
-      "title": "US stock market jumps sharply today with Dow hitting 50,000 for first time since Iran war - AOL.com",
-      "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1Ybm80NlJSaXFKSFd2N0ZDaGVySUZqVjYwT0R0Znh3a25GVTBESVI5R0JDdEhQOVgyc0tWU1d1c0ZrdTRaTkVsSkVURWVrc0prNnFWVWk2ZU9wUXl6ZVFwZnM1eTlQNVJOSktQWU5JTkV1SXJGdDdxSzhCZmdlUQ?oc=5",
-      "pubDate": "Sat, 16 May 2026 20:45:14 GMT",
+      "title": "Should You Invest in an S&P 500 ETF or a Tech-Focused Growth Fund? Here's How IVV and QQQ Stack Up - The Motley Fool",
+      "link": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxNNzZDRzB6Y2E3UlRnVWo5eUplR2E5c3BMb0N6WmVNOHZ5ZVJXbGJRb3AyTWlVVlotT1dyV1QyUzFmZFlzNDdoUFBucjgwNkFaS0FWSWZORm5sS3BnRmdkZUJwYmFEVlNuSnZZYlc1V0R3ZndiSnZwWTYyanU1V1I4cnViU2l5b1IzMkFYeGpGNFpIZXlYVDlDTW5GZ3hCN2Q2TVh4aGZ3UURxZUUtOXl3eHRuM0dBUmR1dzBDQjc4a3lJSFQxODNaQ1hjc3E2NC1OUXF0dU9LRFJ5b0R6VEdUVDhB?oc=5",
+      "pubDate": "Sat, 16 May 2026 23:00:00 GMT",
       "source": "Google News",
       "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
     },
     {
-      "title": "Should You Invest in an S&P 500 ETF or a Tech-Focused Growth Fund? Here's How IVV and QQQ Stack Up - The Motley Fool",
-      "link": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxNNzZDRzB6Y2E3UlRnVWo5eUplR2E5c3BMb0N6WmVNOHZ5ZVJXbGJRb3AyTWlVVlotT1dyV1QyUzFmZFlzNDdoUFBucjgwNkFaS0FWSWZORm5sS3BnRmdkZUJwYmFEVlNuSnZZYlc1V0R3ZndiSnZwWTYyanU1V1I4cnViU2l5b1IzMkFYeGpGNFpIZXlYVDlDTW5GZ3hCN2Q2TVh4aGZ3UURxZUUtOXl3eHRuM0dBUmR1dzBDQjc4a3lJSFQxODNaQ1hjc3E2NC1OUXF0dU9LRFJ5b0R6VEdUVDhB?oc=5",
-      "pubDate": "Sat, 16 May 2026 22:31:55 GMT",
+      "title": "US stock market jumps sharply today with Dow hitting 50,000 for first time since Iran war - AOL.com",
+      "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1Ybm80NlJSaXFKSFd2N0ZDaGVySUZqVjYwT0R0Znh3a25GVTBESVI5R0JDdEhQOVgyc0tWU1d1c0ZrdTRaTkVsSkVURWVrc0prNnFWVWk2ZU9wUXl6ZVFwZnM1eTlQNVJOSktQWU5JTkV1SXJGdDdxSzhCZmdlUQ?oc=5",
+      "pubDate": "Sat, 16 May 2026 20:45:14 GMT",
       "source": "Google News",
       "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
     },
@@ -47,13 +54,6 @@
       "title": "Nasdaq, S&P 500 Futures Pull Back But SPY, QQQ Sentiment Holds Bullish: Why MU, CBRS, FIG, GEMI, ONDS Are Keeping Traders Engaged Today - Stocktwits",
       "link": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPd2Q0YmpkOFM2U2dqbmpDRVk4emtfLUVrajNVdFVTTFBSOWxRdHV6a0cxLXFEUWxIYTlaa3BuSjFzZV9YMVB0SFpzM29DTmgzY2xDOEdlQmk3bnp1ekFWMnpQT1lESDJsdnFyd3ZWM2pRa3NjV3VfcWs5UFkxcnVEVWl1aHJTNTZ5c1YxRVBxajlMMFFIcnR2T1dWbmhOcGZxZUsyR1lpbGJZdmtUbWJqOVJKQkRnVnlhcnhHWlpfaVNDY2xSNWgzZmxuRTc?oc=5",
       "pubDate": "Sat, 16 May 2026 19:22:44 GMT",
-      "source": "Google News",
-      "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
-    },
-    {
-      "title": "S&P 500 momentum rallies near highs may signal weaker returns ahead: Goldman - Investing.com",
-      "link": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQZmZmZ0lKMS1MOTlvSG80TFZjN1haVV9NZHNBXzNMMWh1c3Q2cjZqazIzQXBaeHdLQ05qUm5EZUFMS3VleEV2ZG1WbmszRjVQQUdKZHdIcllHTXY2RC1sMk1HNDdXa2ZyYWxZWHVEc2lkZ3hNZWI1SFV2MmpxWUU5Y3R0RzlYOHZpbE1hWll2bjFlaUtoWE9BN3ZWWWZBLVcxQ3VLNEJsdFF6VDBEaHBOZGw2dGJ3LTQ5NURPNmtQS25yTUVTdGdFNGdYdw?oc=5",
-      "pubDate": "Sat, 16 May 2026 14:37:58 GMT",
       "source": "Google News",
       "query": "US stock market OR S&P 500 OR Nasdaq when:1d"
     }
@@ -74,9 +74,9 @@
       "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
     },
     {
-      "title": "Best Crypto To Buy Now: Bitcoin, Ethereum and AlphaPepe Lead Watchlists as ETF Flows Rebuild Risk Appetite - StreetInsider",
-      "link": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxNTUVqaDEwZEtDdG1OTEVLeUFWckdYM3d1X0VTQ1B3LUZ1b04wZ3kyZ24tcVNvaXI5SGJDbzhuUXVNemNta1JTbFRkakRxR2tUM0FWM1VBNnhZM1FFLUlZS2pkRGhlTTlNRC0xR2x2RWdsd21EYWlxeE83WlBOQ2kzc3o3X3VWRkFKQ3ZQT2EwQXo4dTRySDZuQnYyeW1iWlZRU2dMSTdCOG5OQ1dMLXp3R3prdl9ZcmNjblpDX1BoTzJrTFd1ek5vbDVtZHlqTFFCYlQyUk52VWs2Szd3NlFETUw4Q1BTN3J2Zk9ZbFBHSWwwWHVtc2c1V0xscGJpcE0?oc=5",
-      "pubDate": "Sun, 17 May 2026 00:10:24 GMT",
+      "title": "UAE’s Mubadala Raises Bitcoin ETF Stake 16% to $566 Million in Q1 2026 - Bitcoin News",
+      "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQZ292VFVjMXAzY2ZmMkEyeGFya1FRWTQ2WC1uUXVpeF9paEJ4b0sxb3BBNWpuS3JDdWVTMlNSVDJWeTRaRllPRHFhWmllaDc4YS03cXFzVDJpRU00WmRaSElTcHI5Q05uWGZpdGVycUgyNWdVZzVYUV9TZDdUSmRxQVN3?oc=5",
+      "pubDate": "Sun, 17 May 2026 03:37:10 GMT",
       "source": "Google News",
       "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
     },
@@ -88,6 +88,13 @@
       "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
     },
     {
+      "title": "Best Crypto To Buy Now: Bitcoin, Ethereum and AlphaPepe Lead Watchlists as ETF Flows Rebuild Risk Appetite - StreetInsider",
+      "link": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxNTUVqaDEwZEtDdG1OTEVLeUFWckdYM3d1X0VTQ1B3LUZ1b04wZ3kyZ24tcVNvaXI5SGJDbzhuUXVNemNta1JTbFRkakRxR2tUM0FWM1VBNnhZM1FFLUlZS2pkRGhlTTlNRC0xR2x2RWdsd21EYWlxeE83WlBOQ2kzc3o3X3VWRkFKQ3ZQT2EwQXo4dTRySDZuQnYyeW1iWlZRU2dMSTdCOG5OQ1dMLXp3R3prdl9ZcmNjblpDX1BoTzJrTFd1ek5vbDVtZHlqTFFCYlQyUk52VWs2Szd3NlFETUw4Q1BTN3J2Zk9ZbFBHSWwwWHVtc2c1V0xscGJpcE0?oc=5",
+      "pubDate": "Sun, 17 May 2026 00:10:24 GMT",
+      "source": "Google News",
+      "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
+    },
+    {
       "title": "Bitcoin ETF flows reverse as US funds shed $1B amid inflation fears - CryptoSlate",
       "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPbFk0SGw5TkVLZ0ViNnYxcnpJUENGWlZWOE9aenJrUnFfN1lWUS1WMFhzci1hc3U5cHgtdXNrcFhtWjRWajZpdDMzaF9oTmhMV0RQN1ZZaDNVXzZSNy1iRm1TNXluY0kyYlF2dndIeDl2U080S3cza0hTRFpVYU9SWVdDM2Y?oc=5",
       "pubDate": "Sat, 16 May 2026 14:00:52 GMT",
@@ -95,9 +102,9 @@
       "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
     },
     {
-      "title": "This Week, the US Bitcoin Spot ETF Saw a Net Outflow of $995.5 Million, While the Ethereum ETF Saw a Net Outflow of $255.2 Million. - Moomoo",
-      "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNdElwaUpyLVB0Uzh0U0wtNnluNFVHWmdZVWdzN3EzOGt3M2tMOXU5OTQ3Q2dKQVZ6THVBVERkUGtNRG9qdEV4TEF5UHBmYTNqWXZ2TzdhMHQ5aTE2ckZjXzAwSEcwQTNMdzdtaFhKcmtRd3Zha0JCVzV5Nm55RDgxVU00M3YxSVZ3cWVDLUtTTQ?oc=5",
-      "pubDate": "Sat, 16 May 2026 13:53:49 GMT",
+      "title": "Learn All Crypto Topics | Phemex Blog - Phemex",
+      "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTFB5bTNyelp4ZFh1LVlFREM3V1JuUDlBb3Bkc1MzTGEwUzMzd0RDaGlHUUpXcFl2XzFJUk9rV2RXem9KMDhKV0ZKVFV4c190QnhWemhfYjNjTWwyblRjR190dGV2V1lmNlQwRFBMLWdveklBQjZ6UUtFaHpVdHM?oc=5",
+      "pubDate": "Sun, 17 May 2026 03:26:41 GMT",
       "source": "Google News",
       "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
     },
@@ -105,13 +112,6 @@
       "title": "Bitcoin and Ethereum fall as ETF outflows and rising yields pressure crypto markets - Pluang",
       "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPS09FdjJfOU9OVzFGZ2dvTUpqUG5LUm5iSEhnVi1DdWEtZVQ3c3FqQlU2ZTJmSmhxV0d6bmltX1RxV0R1YkJRemE5dldBdl90dlpzS3FlQ2U1aDk1REM0cFVYblJUa1RJWE84YWRJdUduS2JiWVg0UUhtY1d4ZWFuRmNNUjVVQ2tyTkluVElHa1puOEFac1ZSbnJJUjQ4TTFzVWRCMmpScFFmREZRb0V4OWl3?oc=5",
       "pubDate": "Sat, 16 May 2026 23:29:31 GMT",
-      "source": "Google News",
-      "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
-    },
-    {
-      "title": "Bitcoin ETF: Morgan Stanley’s MSBT Just Hit $233M AUM — Here’s Why It’s Climbing Fast - AOL.com",
-      "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPYk84ZTZMSVNuYWZ2OF9DQkdPNFFJZnZZZWlWQXR2dUpZUXdxVWNGeHRjWnBFNjZfeHdyUVhlLW80MXI4VlNyZzlyV1lhQ3lPdFVwbW5IbldkUkVyZjlzOF9kVGxzLVlhMVpFNEVST0NHejU3ZnRaSnB6WHZIa19YVA?oc=5",
-      "pubDate": "Sat, 16 May 2026 11:50:47 GMT",
       "source": "Google News",
       "query": "bitcoin ETF OR ethereum ETF OR crypto ETF when:1d"
     }

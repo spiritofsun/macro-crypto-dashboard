@@ -1,11 +1,11 @@
 {
-  "as_of": "2026-05-17T04:26:54.250904+00:00",
+  "as_of": "2026-05-17T04:32:41.894743+00:00",
   "global": {
     "source": "CoinGecko global",
-    "total_market_cap_usd": 2683772116550.842,
-    "btc_dominance": 58.25295996068899,
-    "eth_dominance": 9.813904892523615,
-    "usdt_dominance_market": 7.071641719444885
+    "total_market_cap_usd": 2685305742878.2197,
+    "btc_dominance": 58.24807976654668,
+    "eth_dominance": 9.822778378775574,
+    "usdt_dominance_market": 7.066153822550521
   },
   "fear_greed": {
     "source": "alternative.me",
@@ -15,18 +15,18 @@
   },
   "coinbase_premium": {
     "source": "Coinbase BTC spot vs global BTC reference",
-    "pct": 0.02609369397059577,
-    "coinbase_btc_usd": 78104.375,
-    "coingecko_btc_usd": 78084.0,
-    "reference_btc_usd": 78084.0
+    "pct": -0.01716515454406181,
+    "coinbase_btc_usd": 78022.605,
+    "coingecko_btc_usd": 78036.0,
+    "reference_btc_usd": 78036.0
   },
   "krw_market": {
     "source": "Upbit/Bithumb public + open.er-api",
-    "kimchi_premium_pct": -0.33035135899357343,
-    "upbit_btc_krw": 116571000.0,
-    "bithumb_btc_krw": 116461000.0,
+    "kimchi_premium_pct": -0.31353247783263394,
+    "upbit_btc_krw": 116519000.0,
+    "bithumb_btc_krw": 116423000.0,
     "usdkrw": 1497.840406,
-    "global_btc_usd": 78084.0
+    "global_btc_usd": 78036.0
   },
   "stablecoins": {
     "source": "DefiLlama stablecoins",
